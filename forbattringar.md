@@ -41,10 +41,11 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
 ## 🟠 Hög prio — SEO & förtroende (nästa 1-2 veckor)
 
 - [x] **OG-bild 1200×630** ✅ 2026-05-15
-  - Dynamisk via [api/og.tsx](api/og.tsx) (`@vercel/og`, Satori-renderad) — ingen statisk PNG
-  - Indigo gradient + dot-grid + "Aikostnad.se" logotyp + tagline
-  - Cachad 24h edge-side
-  - Refererad i [src/components/SEO.tsx](src/components/SEO.tsx) och statisk [index.html](index.html) (för JS-fria crawlers)
+  - **Första försöket** (`@vercel/og`) failade på Vercel — paketet är Next.js-bundlat, inkompatibelt med Vite-projekt (Vercel markerade det som "unsupported module" vid deploy)
+  - **Lösning**: statisk PNG ([public/og-image.png](public/og-image.png), 179 KB) genererad via [scripts/build-og.mjs](scripts/build-og.mjs) med `@resvg/resvg-js` (devDep) från en inline-SVG
+  - Indigo gradient + dot-grid + AI-badge + "Aikostnad.se" + tagline + modell-rad
+  - Refererad från [SEO.tsx](src/components/SEO.tsx) och [index.html](index.html) (för JS-fria crawlers)
+  - Kör om scriptet (`node scripts/build-og.mjs`) när designen ändras
 
 - [ ] **URL-state i kalkylatorn**
   - Lägg till query params: `?model=gpt-4o&words=100&output=200&users=5&days=22`

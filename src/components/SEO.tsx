@@ -21,7 +21,7 @@ export function SEO({ title, description, canonical, children }: SEOProps) {
   const fullTitle = title ? `${title} | Aikostnad.se` : defaultTitle;
   const desc = description ?? defaultDesc;
   const url = canonical ? `${siteUrl}${canonical}` : siteUrl;
-  const ogImage = `${siteUrl}/api/og`;
+  const ogImage = `${siteUrl}/og-image.png`;
 
   return (
     <Helmet>
