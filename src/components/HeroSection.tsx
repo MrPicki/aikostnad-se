@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import type { AnalyzeResult } from "../../api/analyze-prompt";
+
+interface AnalyzeResult {
+  wordsPerRequest: number;
+  outputWordsPerRequest: number;
+  requestsPerDay: number;
+  users: number;
+  daysPerMonth: number;
+  modelId: string;
+}
 
 const ROTATE_MS = 10_000;
 const FADE_MS = 300;
