@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SEOProvider } from "./components/SEO";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { CookieBanner } from "./components/CookieBanner";
 import { Home } from "./pages/Home";
 import { TokenCalculatorPage } from "./pages/TokenCalculatorPage";
 import { Privacy } from "./pages/Privacy";
@@ -20,6 +21,7 @@ function App() {
             </Routes>
           </div>
           <Footer />
+          <CookieBanner />
         </div>
       </BrowserRouter>
     </SEOProvider>

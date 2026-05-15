@@ -1,6 +1,7 @@
 # Aikostnad.se — Produktplan
 **Skapad:** 2026-05-15  
-**Status:** MVP-fas
+**Senast uppdaterad:** 2026-05-15  
+**Status:** MVP live ✅
 
 ---
 
@@ -89,49 +90,50 @@ Aikostnad.se är en svensk AI-kostnadskalkylator riktad till privatpersoner, fö
 
 ---
 
-## Del 4: Reviderad MVP-prioriteringslista (Dag 1–30)
+## Del 4: MVP-status (2026-05-15)
 
-### Dag 1–5 — Grund
-- [ ] Repo: Vite + React + TypeScript + Tailwind, ESLint, Prettier
-- [ ] `siteConfig.ts` med `languageFactor`, `usdToSekRate`, `leadCaptureEnabled`
-- [ ] `modelPricing.ts` — priser med `lastUpdated` per modell (15–20 modeller)
-- [ ] Beräkningslogik i `src/utils/calculateCost.ts` (med Swedish language factor)
-- [ ] Vercel-projekt kopplat, preview-deploy fungerar
+### Grund ✅
+- [x] Repo: Vite + React + TypeScript + Tailwind
+- [x] `siteConfig.ts` med `languageFactor: 1.3`, `fallbackRate`, `leadCaptureEnabled`, `pricesLastVerified`
+- [x] `modelPricing.ts` — 11 modeller med `lastUpdated` per modell, `defaultModelId = "gpt-4o-mini"`
+- [x] Beräkningslogik i `src/utils/calculateCost.ts`
+- [x] Vercel-projekt kopplat, auto-deploy på push till `main`
 
-### Dag 6–12 — Kärna
-- [ ] Kalkylatorn: alla fält, validering, felmeddelanden
-- [ ] Resultatsektion: kostnad/fråga, dag, månad, år (SEK + USD)
-- [ ] Tokenräknare (`/token-kalkylator`) med textarea + resultat
-- [ ] Responsiv layout (mobile-first), testad på iOS Safari + Chrome Android
+### Kärna ✅
+- [x] Kalkylatorn: alla fält, validering, felmeddelanden på svenska
+- [x] Resultatsektion: "Total kostnad / år" (highlight) → Per månad → Per dag → Per fråga
+- [x] Tokenräknare (`/token-kalkylator`) med textarea + resultat
+- [x] Responsiv layout — `overflow-x: hidden` på html/body/root, mobile-first
 
-### Dag 13–18 — SEO-grund
-- [ ] `sitemap.xml` (auto-genererad via plugin)
-- [ ] `robots.txt`
-- [ ] Meta tags: title, description, canonical, og:title, og:description, og:image
-- [ ] FAQ-sektion med JSON-LD schema markup
-- [ ] H1: *"Vad kostar AI? Räkna ut din AI-kostnad direkt"*
-- [ ] `/integritet` — GDPR-korrekt integritetspolicy
+### SEO-grund ✅
+- [x] Meta tags: title, description, canonical, og:title, og:description
+- [x] FAQ-sektion med JSON-LD FAQ schema
+- [x] JSON-LD WebSite + SoftwareApplication schema
+- [x] `/integritet` — GDPR-korrekt integritetspolicy
+- [ ] `sitemap.xml` — saknas
+- [ ] `robots.txt` — saknas
+- [ ] OG-bild 1200×630 — saknas
 
-### Dag 19–23 — Värdeförstärkning
-- [ ] Modell-jämförelsetabell
-- [ ] USD/SEK live-kurs (Edge Function + fallback)
-- [ ] "Senast uppdaterade priser: [DATUM]" synlig i UI
-- [ ] Email capture (Resend) — PDF-export eller prisnotis
-- [ ] OG-bild (statisk, 1200×630, snygg och brandad)
+### Värdeförstärkning ✅
+- [x] Modell-jämförelsetabell (sorterbar, med open source-filter)
+- [x] USD/SEK live-kurs via `frankfurter.app` (Vercel Edge Function, 24h cache, fallback 10.50)
+- [x] "Priser synkade {lastUpdated} · Manuellt verifierade" synlig i UI
+- [x] Hero-sektion med 6 roterande rubriker + AI-analys av fri text → förifylld kalkylator
+- [x] AI väljer optimal modell automatiskt (modelId returneras från analyze-prompt)
+- [x] Cookie-banner (GDPR, fixed bottom, localStorage-baserad)
+- [x] Rate limiting på AI-analys: max 3 anrop/webbläsare (localStorage `aikostnad_analyze_count`)
+- [ ] Email capture UI — `submitLead()` finns i `src/lib/supabase.ts`, Supabase-tabell klar. UI saknas.
+- [ ] OG-bild — saknas
 
-### Dag 24–27 — Analytics & Launch prep
-- [ ] GA4 + Vercel Analytics installerat
-- [ ] Custom events definierade och testade
-- [ ] Core Web Vitals audit (Lighthouse score > 90)
-- [ ] Custom domain DNS-konfigurerad (aikostnad.se)
+### DNS & Domäner
+- [x] `aikostnad.com` → 308 redirect till `aikostnad.se` (Vercel REST API)
+- [ ] DNS `aikostnad.se`: A-record `76.76.21.21` hos Strato — **OEJ GJORT**
+- [ ] DNS `aikostnad.com`: A-record `76.76.21.21` hos Strato — **EJ GJORT**
 
-### Dag 28–30 — Launch
-- [ ] ProductHunt-draft klar (tagline, gallery, länk)
-- [ ] Reddit-poster formulerade: r/ChatGPT, r/artificial, r/sverigeDigitalt
-- [ ] LinkedIn-inlägg (personligt + professionellt)
-- [ ] Soft launch: dela med 10 personer, samla feedback
-- [ ] Full launch
-- [ ] Reviewera analytics dag 30 → prioritera sprint 2
+### Analytics & Launch prep
+- [ ] GA4 / Vercel Analytics — saknas
+- [ ] Core Web Vitals audit (Lighthouse)
+- [ ] ProductHunt + Reddit + LinkedIn launch
 
 ---
 

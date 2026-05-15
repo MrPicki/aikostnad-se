@@ -129,22 +129,30 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
 
   return (
     <section className="card" aria-label="AI-kostnadskalkylator">
-      {/* Exchange rate banner */}
-      <div className="mb-6 flex items-center gap-2 text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2">
-        <span className="text-green-500">●</span>
-        {loading ? (
-          <span>Hämtar valutakurs…</span>
-        ) : rateError ? (
+      {/* Info banners */}
+      <div className="mb-6 flex flex-col sm:flex-row gap-2">
+        <div className="flex items-center gap-2 text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 flex-1">
+          <span className="text-green-500">●</span>
+          {loading ? (
+            <span>Hämtar valutakurs…</span>
+          ) : rateError ? (
+            <span>
+              Valutakurs: 1 USD = {rate.toFixed(2)} SEK (fallback — live-hämtning
+              misslyckades)
+            </span>
+          ) : (
+            <span>
+              1 USD = {rate.toFixed(2)} SEK
+              {date && ` · Kurs hämtad ${date}`}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2 text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 flex-1">
+          <span className="text-blue-400">●</span>
           <span>
-            Valutakurs: 1 USD = {rate.toFixed(2)} SEK (fallback — live-hämtning
-            misslyckades)
+            Priser synkade {selectedModel.lastUpdated} · Manuellt verifierade
           </span>
-        ) : (
-          <span>
-            1 USD = {rate.toFixed(2)} SEK
-            {date && ` · Kurs hämtad ${date}`}
-          </span>
-        )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -239,15 +247,10 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
 
               <div className="grid grid-cols-2 gap-3">
                 <ResultCard
-                  label="Per fråga"
-                  sek={result.costPerRequestSek}
-                  usd={result.costPerRequestUsd}
+                  label="Total kostnad / år"
+                  sek={result.yearlyCostSek}
+                  usd={result.yearlyCostUsd}
                   highlight
-                />
-                <ResultCard
-                  label="Per dag"
-                  sek={result.dailyCostSek}
-                  usd={result.dailyCostUsd}
                 />
                 <ResultCard
                   label="Per månad"
@@ -255,9 +258,14 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                   usd={result.monthlyCostUsd}
                 />
                 <ResultCard
-                  label="Per år"
-                  sek={result.yearlyCostSek}
-                  usd={result.yearlyCostUsd}
+                  label="Per dag"
+                  sek={result.dailyCostSek}
+                  usd={result.dailyCostUsd}
+                />
+                <ResultCard
+                  label="Per fråga"
+                  sek={result.costPerRequestSek}
+                  usd={result.costPerRequestUsd}
                 />
               </div>
 
@@ -317,19 +325,19 @@ interface ResultCardProps {
 function ResultCard({ label, sek, usd, highlight }: ResultCardProps) {
   return (
     <div
-      className={`rounded-xl p-4 ${highlight ? "bg-indigo-600 text-white" : "bg-gray-50"}`}
+      className={`rounded-xl p-3 sm:p-4 min-w-0 ${highlight ? "bg-indigo-600 text-white" : "bg-gray-50"}`}
     >
       <p
-        className={`text-xs font-medium mb-1 ${highlight ? "text-indigo-200" : "text-gray-500"}`}
+        className={`text-xs font-medium mb-1 truncate ${highlight ? "text-indigo-200" : "text-gray-500"}`}
       >
         {label}
       </p>
       <p
-        className={`text-xl font-bold ${highlight ? "text-white" : "text-gray-900"}`}
+        className={`text-lg sm:text-xl font-bold break-words ${highlight ? "text-white" : "text-gray-900"}`}
       >
         {formatSek(sek)}
       </p>
-      <p className={`text-xs ${highlight ? "text-indigo-200" : "text-gray-400"}`}>
+      <p className={`text-xs truncate ${highlight ? "text-indigo-200" : "text-gray-400"}`}>
         {formatUsd(usd)}
       </p>
     </div>
