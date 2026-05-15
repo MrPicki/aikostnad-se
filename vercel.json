@@ -1,4 +1,18 @@
 {
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://aikostnad.se/:path*",
+      "permanent": true,
+      "has": [{ "type": "host", "value": "aikostnad.com" }]
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://aikostnad.se/:path*",
+      "permanent": true,
+      "has": [{ "type": "host", "value": "www.aikostnad.com" }]
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
