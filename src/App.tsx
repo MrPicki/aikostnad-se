@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import { SEOProvider } from "./components/SEO";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
@@ -23,6 +24,7 @@ function App() {
           <Footer />
           <CookieBanner />
         </div>
+        <Analytics />
       </BrowserRouter>
     </SEOProvider>
   );
