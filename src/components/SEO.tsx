@@ -21,6 +21,7 @@ export function SEO({ title, description, canonical, children }: SEOProps) {
   const fullTitle = title ? `${title} | Aikostnad.se` : defaultTitle;
   const desc = description ?? defaultDesc;
   const url = canonical ? `${siteUrl}${canonical}` : siteUrl;
+  const ogImage = `${siteUrl}/api/og`;
 
   return (
     <Helmet>
@@ -32,9 +33,14 @@ export function SEO({ title, description, canonical, children }: SEOProps) {
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Aikostnad.se" />
+      <meta property="og:image" content={ogImage} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Aikostnad.se — räkna ut vad AI kostar" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
+      <meta name="twitter:image" content={ogImage} />
       {children}
     </Helmet>
   );

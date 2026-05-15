@@ -40,10 +40,11 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
 
 ## 🟠 Hög prio — SEO & förtroende (nästa 1-2 veckor)
 
-- [ ] **OG-bild 1200×630**
-  - Lägg till `public/og-image.png` (under 200 KB)
-  - Referera i [src/components/SEO.tsx](src/components/SEO.tsx) (`og:image`, `twitter:image`)
-  - **Varför:** Varje delning på LinkedIn/X visas idag utan preview → noll viralitet.
+- [x] **OG-bild 1200×630** ✅ 2026-05-15
+  - Dynamisk via [api/og.tsx](api/og.tsx) (`@vercel/og`, Satori-renderad) — ingen statisk PNG
+  - Indigo gradient + dot-grid + "Aikostnad.se" logotyp + tagline
+  - Cachad 24h edge-side
+  - Refererad i [src/components/SEO.tsx](src/components/SEO.tsx) och statisk [index.html](index.html) (för JS-fria crawlers)
 
 - [ ] **URL-state i kalkylatorn**
   - Lägg till query params: `?model=gpt-4o&words=100&output=200&users=5&days=22`
