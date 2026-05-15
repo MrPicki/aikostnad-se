@@ -12,7 +12,7 @@ export const siteConfig = {
   fallbackUsdToSekRate: 10.5,
 
   // Set to true to enable email lead capture form (Supabase integration prepared)
-  leadCaptureEnabled: false,
+  leadCaptureEnabled: true,
 
   pricesLastVerified: "2026-05-15",
 };
