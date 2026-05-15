@@ -93,8 +93,9 @@ export default async function handler(req: Request): Promise<Response> {
       },
     });
   } catch (err) {
-    console.error("analyze-prompt error:", err);
-    return new Response(JSON.stringify({ error: "Analys misslyckades" }), {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("analyze-prompt error:", msg);
+    return new Response(JSON.stringify({ error: "Analys misslyckades", detail: msg }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
