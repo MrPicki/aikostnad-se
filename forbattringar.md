@@ -47,10 +47,11 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
   - Refererad från [SEO.tsx](src/components/SEO.tsx) och [index.html](index.html) (för JS-fria crawlers)
   - Kör om scriptet (`node scripts/build-og.mjs`) när designen ändras
 
-- [ ] **URL-state i kalkylatorn**
-  - Lägg till query params: `?model=gpt-4o&words=100&output=200&users=5&days=22`
-  - Synka via `useSearchParams` från react-router
-  - **Varför:** Delningsbara kalkyler → organisk trafik, backlinks, lägre bounce rate.
+- [x] **URL-state i kalkylatorn** ✅ 2026-05-15
+  - Query params: `?model=&input=&output=&req=&users=&days=` (endast non-default-värden skrivs ut)
+  - Synkas via `useSearchParams` med `replace: true` — fyller inte historien
+  - URL-värden vinner över hero-defaults vid första render
+  - Bonus: "Kopiera länk"-knapp under resultatet (skriver `window.location.href` till urklipp, visar bekräftelse 2s)
 
 - [ ] **SEO-landningssida `/vad-kostar-chatgpt`**
   - Skapa `src/pages/VadKostarChatGPT.tsx` — återanvänd `Calculator` med förvalt `modelId=gpt-4o`

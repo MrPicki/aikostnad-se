@@ -1,4 +1,5 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { models, defaultModelId } from "../data/modelPricing";
 import { siteConfig } from "../config/siteConfig";
 import {
@@ -8,6 +9,26 @@ import {
   validateInputs,
 } from "../utils/calculateCost";
 import { useExchangeRate } from "../hooks/useExchangeRate";
+
+const DEFAULTS = {
+  wordsPerRequest: 100,
+  outputWordsPerRequest: 200,
+  requestsPerDay: 50,
+  users: 1,
+  daysPerMonth: 22,
+} as const;
+
+function clampInt(raw: string | null, fallback: number, min: number, max: number): number {
+  if (!raw) return fallback;
+  const n = parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < min || n > max) return fallback;
+  return n;
+}
+
+function readModelIdFromUrl(params: URLSearchParams): string {
+  const m = params.get("model");
+  return m && models.some((x) => x.id === m) ? m : defaultModelId;
+}
 
 interface FieldProps {
   label: string;
@@ -69,14 +90,27 @@ export interface CalcInitialValues {
 
 export function Calculator({ initialValues }: { initialValues?: CalcInitialValues } = {}) {
   const { rate, date, loading, error: rateError } = useExchangeRate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [modelId, setModelId] = useState(defaultModelId);
-  const [wordsPerRequest, setWordsPerRequest] = useState(100);
-  const [outputWordsPerRequest, setOutputWordsPerRequest] = useState(200);
-  const [requestsPerDay, setRequestsPerDay] = useState(50);
-  const [users, setUsers] = useState(1);
-  const [daysPerMonth, setDaysPerMonth] = useState(22);
+  // Initial state: URL params win over defaults. Read once at first render.
+  const [modelId, setModelId] = useState(() => readModelIdFromUrl(searchParams));
+  const [wordsPerRequest, setWordsPerRequest] = useState(() =>
+    clampInt(searchParams.get("input"), DEFAULTS.wordsPerRequest, 1, 100_000)
+  );
+  const [outputWordsPerRequest, setOutputWordsPerRequest] = useState(() =>
+    clampInt(searchParams.get("output"), DEFAULTS.outputWordsPerRequest, 1, 100_000)
+  );
+  const [requestsPerDay, setRequestsPerDay] = useState(() =>
+    clampInt(searchParams.get("req"), DEFAULTS.requestsPerDay, 1, 1_000_000)
+  );
+  const [users, setUsers] = useState(() =>
+    clampInt(searchParams.get("users"), DEFAULTS.users, 1, 10_000_000)
+  );
+  const [daysPerMonth, setDaysPerMonth] = useState(() =>
+    clampInt(searchParams.get("days"), DEFAULTS.daysPerMonth, 1, 31)
+  );
 
+  // Hero-click values override current state (later user intent wins).
   useEffect(() => {
     if (!initialValues) return;
     if (initialValues.wordsPerRequest !== undefined) setWordsPerRequest(initialValues.wordsPerRequest);
@@ -86,6 +120,34 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
     if (initialValues.daysPerMonth !== undefined) setDaysPerMonth(initialValues.daysPerMonth);
     if (initialValues.modelId !== undefined) setModelId(initialValues.modelId);
   }, [initialValues]);
+
+  const [copied, setCopied] = useState(false);
+  async function copyShareLink() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard may be unavailable (insecure context, old browser) — ignore
+    }
+  }
+
+  // Sync URL: only include non-default values to keep links short.
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    const next = new URLSearchParams();
+    if (modelId !== defaultModelId) next.set("model", modelId);
+    if (wordsPerRequest !== DEFAULTS.wordsPerRequest) next.set("input", String(wordsPerRequest));
+    if (outputWordsPerRequest !== DEFAULTS.outputWordsPerRequest) next.set("output", String(outputWordsPerRequest));
+    if (requestsPerDay !== DEFAULTS.requestsPerDay) next.set("req", String(requestsPerDay));
+    if (users !== DEFAULTS.users) next.set("users", String(users));
+    if (daysPerMonth !== DEFAULTS.daysPerMonth) next.set("days", String(daysPerMonth));
+    setSearchParams(next, { replace: true });
+  }, [modelId, wordsPerRequest, outputWordsPerRequest, requestsPerDay, users, daysPerMonth, setSearchParams]);
 
   const errors = useMemo(
     () =>
@@ -303,6 +365,29 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 {daysPerMonth} dagar. Priser i USD konverterade till SEK med
                 kursen 1 USD = {rate.toFixed(2)} SEK.
               </p>
+
+              <button
+                onClick={copyShareLink}
+                className="text-xs text-indigo-600 hover:text-indigo-700 inline-flex items-center gap-1.5 mt-1 focus:outline-none focus:underline"
+                aria-label="Kopiera länk till denna kalkyl"
+              >
+                {copied ? (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    Länk kopierad
+                  </>
+                ) : (
+                  <>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                    </svg>
+                    Kopiera länk till denna kalkyl
+                  </>
+                )}
+              </button>
             </div>
           ) : (
             <div className="flex items-center justify-center h-full min-h-40 text-gray-400 text-sm">
