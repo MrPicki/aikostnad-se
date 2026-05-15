@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { models, defaultModelId } from "../data/modelPricing";
 import { siteConfig } from "../config/siteConfig";
 import {
@@ -58,7 +58,15 @@ function NumberField({
   );
 }
 
-export function Calculator() {
+export interface CalcInitialValues {
+  wordsPerRequest?: number;
+  outputWordsPerRequest?: number;
+  requestsPerDay?: number;
+  users?: number;
+  daysPerMonth?: number;
+}
+
+export function Calculator({ initialValues }: { initialValues?: CalcInitialValues } = {}) {
   const { rate, date, loading, error: rateError } = useExchangeRate();
 
   const [modelId, setModelId] = useState(defaultModelId);
@@ -67,6 +75,15 @@ export function Calculator() {
   const [requestsPerDay, setRequestsPerDay] = useState(50);
   const [users, setUsers] = useState(1);
   const [daysPerMonth, setDaysPerMonth] = useState(22);
+
+  useEffect(() => {
+    if (!initialValues) return;
+    if (initialValues.wordsPerRequest !== undefined) setWordsPerRequest(initialValues.wordsPerRequest);
+    if (initialValues.outputWordsPerRequest !== undefined) setOutputWordsPerRequest(initialValues.outputWordsPerRequest);
+    if (initialValues.requestsPerDay !== undefined) setRequestsPerDay(initialValues.requestsPerDay);
+    if (initialValues.users !== undefined) setUsers(initialValues.users);
+    if (initialValues.daysPerMonth !== undefined) setDaysPerMonth(initialValues.daysPerMonth);
+  }, [initialValues]);
 
   const errors = useMemo(
     () =>

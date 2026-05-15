@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { models, defaultModelId } from "../data/modelPricing";
 import { siteConfig } from "../config/siteConfig";
 import { estimateTokens, formatSek, formatUsd } from "../utils/calculateCost";
@@ -6,10 +6,15 @@ import { useExchangeRate } from "../hooks/useExchangeRate";
 
 interface TokenCounterProps {
   compact?: boolean;
+  initialText?: string;
 }
 
-export function TokenCounter({ compact = false }: TokenCounterProps) {
-  const [text, setText] = useState("");
+export function TokenCounter({ compact = false, initialText }: TokenCounterProps) {
+  const [text, setText] = useState(initialText ?? "");
+
+  useEffect(() => {
+    if (initialText !== undefined) setText(initialText);
+  }, [initialText]);
   const [modelId, setModelId] = useState(defaultModelId);
   const { rate } = useExchangeRate();
 

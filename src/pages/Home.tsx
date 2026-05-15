@@ -1,9 +1,11 @@
+import { useCallback, useState } from "react";
 import { SEO } from "../components/SEO";
 import { Calculator } from "../components/Calculator";
 import { TokenCounter } from "../components/TokenCounter";
 import { ModelComparisonTable } from "../components/ModelComparisonTable";
 import { FAQ } from "../components/FAQ";
 import { Helmet } from "react-helmet-async";
+import { HeroSection, type CalcValues, type HeroDest } from "../components/HeroSection";
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -30,6 +32,23 @@ const toolSchema = {
 };
 
 export function Home() {
+  const [calcValues, setCalcValues] = useState<CalcValues | undefined>();
+  const [tokenText, setTokenText] = useState<string | undefined>();
+
+  const handleHeroNavigate = useCallback((dest: HeroDest, values?: CalcValues, text?: string) => {
+    if (dest === "calculator") {
+      setCalcValues(values ? { ...values } : undefined);
+      setTimeout(() => {
+        document.getElementById("kalkylator")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 80);
+    } else {
+      setTokenText(text ?? "");
+      setTimeout(() => {
+        document.getElementById("tokenraknare")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 80);
+    }
+  }, []);
+
   return (
     <>
       <SEO canonical="/" />
@@ -40,24 +59,12 @@ export function Home() {
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
         {/* Hero */}
-        <section className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
-            <span>🇸🇪</span> Gjord för svenska texter
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-4">
-            Vad kostar AI? Räkna ut din AI-kostnad direkt
-          </h1>
-          <p className="text-lg text-gray-500 leading-relaxed">
-            Jämför priser för ChatGPT, Claude, Gemini och fler. Beräkna kostnad
-            per fråga, månad och år — anpassat för svenska texter med korrekt
-            tokenuppskattning.
-          </p>
-        </section>
+        <HeroSection onNavigate={handleHeroNavigate} />
 
         {/* Main calculator */}
         <section id="kalkylator">
           <h2 className="sr-only">AI-kostnadskalkylator</h2>
-          <Calculator />
+          <Calculator initialValues={calcValues} />
         </section>
 
         {/* Token counter */}
@@ -65,7 +72,7 @@ export function Home() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
             Tokenräknare — klistra in din text
           </h2>
-          <TokenCounter />
+          <TokenCounter initialText={tokenText} />
         </section>
 
         {/* Comparison table */}
