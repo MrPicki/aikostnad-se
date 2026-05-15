@@ -1,6 +1,6 @@
 # Aikostnad.se — Produktplan
 **Skapad:** 2026-05-15  
-**Senast uppdaterad:** 2026-05-15  
+**Senast uppdaterad:** 2026-05-15 (session 2)  
 **Status:** MVP live ✅
 
 ---
@@ -122,6 +122,11 @@ Aikostnad.se är en svensk AI-kostnadskalkylator riktad till privatpersoner, fö
 - [x] AI väljer optimal modell automatiskt (modelId returneras från analyze-prompt)
 - [x] Cookie-banner (GDPR, fixed bottom, localStorage-baserad)
 - [x] Rate limiting på AI-analys: max 3 anrop/webbläsare (localStorage `aikostnad_analyze_count`)
+- [x] Animerad dot-bakgrund (DotBackground canvas, position fixed, indigo prickar med slumpmässig flimmer)
+- [x] Hero: osynlig spacer + absolut overlay för att eliminera layout-shift vid rubrikbyte
+- [x] Hero: shimmer-linje (CSS `::after`, `12s linear infinite`) separerar rubrik från idéchatt
+- [x] Hero: "Vad vill du bygga med AI?" rubrik + ny placeholder, textarea `font-size: 16px` (ingen iOS-zoom)
+- [x] Alla rubriker och underrubriker centrerade (Hero, Kalkylator, Tokenräknare, FAQ, Jämförelsetabell)
 - [ ] Email capture UI — `submitLead()` finns i `src/lib/supabase.ts`, Supabase-tabell klar. UI saknas.
 - [ ] OG-bild — saknas
 
@@ -131,7 +136,8 @@ Aikostnad.se är en svensk AI-kostnadskalkylator riktad till privatpersoner, fö
 - [ ] DNS `aikostnad.com`: A-record `76.76.21.21` hos Strato — **EJ GJORT**
 
 ### Analytics & Launch prep
-- [ ] GA4 / Vercel Analytics — saknas
+- [x] Vercel Analytics installerat (`@vercel/analytics/react`, `<Analytics />` i App.tsx)
+- [ ] GA4 — saknas (custom events `calculator_submit`, `model_selected` etc.)
 - [ ] Core Web Vitals audit (Lighthouse)
 - [ ] ProductHunt + Reddit + LinkedIn launch
 
