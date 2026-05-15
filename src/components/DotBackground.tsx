@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 
-const GRID = 34;
+const GRID = 24;
 const RADIUS = 1.1;
-const BASE_OPACITY = 0.05;
-const PEAK_OPACITY = 0.28;
+const BASE_OPACITY = 0.25;
+const PEAK_OPACITY = 0.52;
 
 interface Dot {
   x: number;
@@ -55,7 +55,7 @@ export function DotBackground() {
     function scheduleFlicker() {
       const dot = dots[Math.floor(Math.random() * dots.length)];
       if (dot) {
-        dot.target = 0.12 + Math.random() * (PEAK_OPACITY - 0.12);
+        dot.target = BASE_OPACITY + 0.1 + Math.random() * (PEAK_OPACITY - BASE_OPACITY - 0.1);
         dot.speed = 0.001 + Math.random() * 0.003;
       }
       setTimeout(scheduleFlicker, 60 + Math.random() * 120);
