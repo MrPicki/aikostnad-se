@@ -69,7 +69,7 @@ export function Home() {
 
         {/* Token counter */}
         <section id="tokenraknare">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">
             Tokenräknare — klistra in din text
           </h2>
           <TokenCounter initialText={tokenText} />

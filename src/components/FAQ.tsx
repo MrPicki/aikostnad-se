@@ -102,7 +102,7 @@ export function FAQ() {
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
 
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">
+      <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
         Vanliga frågor om AI-kostnader
       </h2>
 

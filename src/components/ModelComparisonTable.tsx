@@ -107,17 +107,17 @@ export function ModelComparisonTable() {
 
   return (
     <section aria-label="Modell-jämförelsetabell">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-        <div>
-          <h2 className="text-2xl font-bold text-gray-900">
-            Vilken AI-modell är billigast?
-          </h2>
-          <p className="text-sm text-gray-500 mt-1">
-            Standardscenario: {SCENARIO_INPUT_TOKENS} input-tokens +{" "}
-            {SCENARIO_OUTPUT_TOKENS} output-tokens per fråga (ca 100 + 200 ord
-            på svenska)
-          </p>
-        </div>
+      <div className="mb-4">
+        <h2 className="text-2xl font-bold text-gray-900 text-center">
+          Vilken AI-modell är billigast?
+        </h2>
+        <p className="text-sm text-gray-500 mt-1 text-center">
+          Standardscenario: {SCENARIO_INPUT_TOKENS} input-tokens +{" "}
+          {SCENARIO_OUTPUT_TOKENS} output-tokens per fråga (ca 100 + 200 ord
+          på svenska)
+        </p>
+      </div>
+      <div className="flex justify-end mb-4">
         <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer whitespace-nowrap">
           <input
             type="checkbox"

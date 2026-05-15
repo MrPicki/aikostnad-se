@@ -59,6 +59,26 @@
   animation-delay: 300ms;
 }
 
+@keyframes shimmerLine {
+  0% { background-position: -150% center; }
+  100% { background-position: 250% center; }
+}
+
+.hero-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #c7d2fe 40%, #e0e7ff 50%, #c7d2fe 60%, transparent 100%);
+}
+
+.hero-divider::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 10%, #818cf8 40%, #a78bfa 50%, #818cf8 60%, transparent 90%);
+  background-size: 60% 100%;
+  animation: shimmerLine 3.5s ease-in-out infinite;
+}
+
 @layer components {
   .card {
     @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6;

@@ -191,12 +191,6 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
       )}
 
       <section className="text-center max-w-3xl mx-auto w-full animate-fade-in-up overflow-hidden">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
-          <span>🇸🇪</span>
-          <span>Gjord för svenska texter</span>
-        </div>
-
         {/* Rotating headline — fixed height to prevent layout shift */}
         <div className="min-h-[9rem] sm:min-h-[10rem] lg:min-h-[11rem] flex flex-col justify-center">
           <div
@@ -212,7 +206,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
         </div>
 
         {/* Progress dots */}
-        <div className="flex justify-center items-center gap-2 mt-6 mb-8">
+        <div className="flex justify-center items-center gap-2 mt-6 mb-10">
           {HEADLINES.map((h, i) => (
             <button
               key={i}
@@ -228,9 +222,12 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           ))}
         </div>
 
+        {/* Animated divider */}
+        <div className="hero-divider mx-4 sm:mx-8 mb-10" aria-hidden="true" />
+
         {/* Idea input section */}
-        <div className="text-left mb-3">
-          <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
+        <div className="mb-5">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
             Vad vill du bygga med AI?
           </h2>
           <p className="text-sm text-gray-500">
