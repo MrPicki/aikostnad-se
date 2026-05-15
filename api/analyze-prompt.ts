@@ -55,8 +55,8 @@ export default async function handler(req: Request): Promise<Response> {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 120,
+        model: "claude-haiku-4-5",
+        max_tokens: 256,
         system: SYSTEM,
         messages: [
           {
@@ -68,14 +68,16 @@ export default async function handler(req: Request): Promise<Response> {
     });
 
     if (!anthropicRes.ok) {
-      throw new Error(`Anthropic API error: ${anthropicRes.status}`);
+      const errBody = await anthropicRes.text();
+      throw new Error(`Anthropic API error: ${anthropicRes.status} — ${errBody}`);
     }
 
     const data = (await anthropicRes.json()) as {
       content: Array<{ type: string; text: string }>;
     };
 
-    const text = data.content[0]?.type === "text" ? data.content[0].text.trim() : "";
+    const raw = data.content[0]?.type === "text" ? data.content[0].text.trim() : "";
+    const text = raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "").trim();
     const values = JSON.parse(text) as AnalyzeResult;
 
     const clamped: AnalyzeResult = {
