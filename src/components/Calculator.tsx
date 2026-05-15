@@ -64,6 +64,7 @@ export interface CalcInitialValues {
   requestsPerDay?: number;
   users?: number;
   daysPerMonth?: number;
+  modelId?: string;
 }
 
 export function Calculator({ initialValues }: { initialValues?: CalcInitialValues } = {}) {
@@ -83,6 +84,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
     if (initialValues.requestsPerDay !== undefined) setRequestsPerDay(initialValues.requestsPerDay);
     if (initialValues.users !== undefined) setUsers(initialValues.users);
     if (initialValues.daysPerMonth !== undefined) setDaysPerMonth(initialValues.daysPerMonth);
+    if (initialValues.modelId !== undefined) setModelId(initialValues.modelId);
   }, [initialValues]);
 
   const errors = useMemo(

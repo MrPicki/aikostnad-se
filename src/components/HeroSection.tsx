@@ -9,6 +9,7 @@ export interface CalcValues {
   requestsPerDay: number;
   users: number;
   daysPerMonth: number;
+  modelId?: string;
 }
 
 export type HeroDest = "calculator" | "tokenraknare";
