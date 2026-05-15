@@ -191,17 +191,25 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
       )}
 
       <section className="text-center max-w-3xl mx-auto w-full animate-fade-in-up overflow-hidden">
-        {/* Rotating headline — fixed height to prevent layout shift */}
-        <div className="min-h-[9rem] sm:min-h-[10rem] lg:min-h-[11rem] flex flex-col justify-center">
-          <div
-            className={`transition-all duration-300 ease-in-out ${
-              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-            }`}
-          >
+        {/* Rotating headline — spacer locks height to longest possible headline */}
+        <div className="relative">
+          {/* Invisible spacer: always takes up space of the longest headline+sub */}
+          <div className="invisible" aria-hidden="true">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
-              {current.text}
+              Vad kostar det att analysera avtal och dokument med AI?
             </h1>
-            <p className="text-lg text-gray-500 leading-relaxed">{current.sub}</p>
+            <p className="text-lg text-gray-500 leading-relaxed">
+              Uppskatta månads- och årskostnad för din kundtjänst eller interna assistent
+            </p>
+          </div>
+          {/* Actual content overlaid */}
+          <div className="absolute inset-0 flex flex-col justify-center">
+            <div className={`transition-opacity duration-300 ${visible ? "opacity-100" : "opacity-0"}`}>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
+                {current.text}
+              </h1>
+              <p className="text-lg text-gray-500 leading-relaxed">{current.sub}</p>
+            </div>
           </div>
         </div>
 

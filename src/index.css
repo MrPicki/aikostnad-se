@@ -60,8 +60,8 @@
 }
 
 @keyframes shimmerLine {
-  0% { background-position: -150% center; }
-  100% { background-position: 250% center; }
+  0% { background-position: -80% center; }
+  100% { background-position: 180% center; }
 }
 
 .hero-divider {
@@ -76,7 +76,7 @@
   inset: 0;
   background: linear-gradient(90deg, transparent 10%, #818cf8 40%, #a78bfa 50%, #818cf8 60%, transparent 90%);
   background-size: 60% 100%;
-  animation: shimmerLine 3.5s ease-in-out infinite;
+  animation: shimmerLine 12s linear infinite;
 }
 
 @layer components {
