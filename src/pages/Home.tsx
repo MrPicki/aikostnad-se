@@ -6,7 +6,6 @@ import { ModelComparisonTable } from "../components/ModelComparisonTable";
 import { FAQ } from "../components/FAQ";
 import { Helmet } from "react-helmet-async";
 import { HeroSection, type CalcValues, type HeroDest } from "../components/HeroSection";
-import { ChatSection } from "../components/ChatSection";
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -61,11 +60,6 @@ export function Home() {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
         {/* Hero */}
         <HeroSection onNavigate={handleHeroNavigate} />
-
-        {/* AI cost advisor chat */}
-        <section id="radgivare">
-          <ChatSection />
-        </section>
 
         {/* Main calculator */}
         <section id="kalkylator">

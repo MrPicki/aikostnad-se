@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import type { AnalyzeResult } from "../../api/analyze-prompt";
 
 const ROTATE_MS = 10_000;
 const FADE_MS = 300;
@@ -69,6 +70,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
   const [input, setInput] = useState("");
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const pausedRef = useRef(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -108,10 +110,35 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
     pausedRef.current = e.target.value.length > 0;
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(async () => {
     const h = HEADLINES[index];
-    onNavigate(h.dest, h.values, h.initialText ?? (input.trim() || undefined));
-  };
+    const trimmed = input.trim();
+
+    if (!trimmed) {
+      onNavigate(h.dest, h.values, h.initialText);
+      return;
+    }
+
+    setIsAnalyzing(true);
+    try {
+      const res = await fetch("/api/analyze-prompt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: trimmed }),
+      });
+
+      if (res.ok) {
+        const values = (await res.json()) as AnalyzeResult;
+        onNavigate("calculator", values);
+      } else {
+        onNavigate(h.dest, h.values);
+      }
+    } catch {
+      onNavigate(h.dest, h.values);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  }, [index, input, onNavigate]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -121,81 +148,101 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
   };
 
   const current = HEADLINES[index];
+  const hasInput = input.trim().length > 0;
 
   return (
-    <section className="text-center max-w-3xl mx-auto animate-fade-in-up">
-      {/* Badge */}
-      <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
-        <span>🇸🇪</span>
-        <span>Gjord för svenska texter</span>
-      </div>
-
-      {/* Rotating headline */}
-      <div
-        className={`transition-all duration-300 ease-in-out ${
-          visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-        }`}
-      >
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
-          {current.text}
-        </h1>
-        <p className="text-lg text-gray-500 leading-relaxed">{current.sub}</p>
-      </div>
-
-      {/* Progress dots */}
-      <div className="flex justify-center items-center gap-2 mt-6 mb-8">
-        {HEADLINES.map((h, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            title={h.text}
-            aria-label={`Gå till: ${h.text}`}
-            className={`h-1.5 rounded-full transition-all duration-300 focus:outline-none ${
-              i === index
-                ? "w-6 bg-indigo-500"
-                : "w-1.5 bg-gray-300 hover:bg-gray-400"
-            }`}
-          />
-        ))}
-      </div>
-
-      {/* Chat input card */}
-      <div className="card text-left animate-fade-in-up animation-delay-300">
-        <textarea
-          value={input}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          placeholder={current.text}
-          rows={2}
-          className="input-field resize-none text-sm"
-          aria-label="Beskriv ditt användningsfall"
-        />
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mt-4">
-          <p className="text-xs text-gray-400 leading-relaxed">
-            Referensvärden används för snabb överblick — justera parametrarna
-            nedan för exakta siffror.
+    <>
+      {/* Analyzing overlay */}
+      {isAnalyzing && (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/90 backdrop-blur-sm animate-fade-in">
+          <p className="text-lg font-semibold text-gray-800 mb-6">
+            Analyserar din förfrågan…
           </p>
-          <button
-            onClick={handleSubmit}
-            className="btn-primary flex items-center gap-2 text-sm shrink-0"
-          >
-            Beräkna
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </button>
+          <div className="flex gap-2">
+            <span className="bounce-dot w-3 h-3 rounded-full bg-indigo-500" style={{ animationDelay: "0ms" }} />
+            <span className="bounce-dot w-3 h-3 rounded-full bg-indigo-500" style={{ animationDelay: "150ms" }} />
+            <span className="bounce-dot w-3 h-3 rounded-full bg-indigo-500" style={{ animationDelay: "300ms" }} />
+          </div>
         </div>
-      </div>
-    </section>
+      )}
+
+      <section className="text-center max-w-3xl mx-auto animate-fade-in-up">
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
+          <span>🇸🇪</span>
+          <span>Gjord för svenska texter</span>
+        </div>
+
+        {/* Rotating headline */}
+        <div
+          className={`transition-all duration-300 ease-in-out ${
+            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+          }`}
+        >
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
+            {current.text}
+          </h1>
+          <p className="text-lg text-gray-500 leading-relaxed">{current.sub}</p>
+        </div>
+
+        {/* Progress dots */}
+        <div className="flex justify-center items-center gap-2 mt-6 mb-8">
+          {HEADLINES.map((h, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              title={h.text}
+              aria-label={`Gå till: ${h.text}`}
+              className={`h-1.5 rounded-full transition-all duration-300 focus:outline-none ${
+                i === index
+                  ? "w-6 bg-indigo-500"
+                  : "w-1.5 bg-gray-300 hover:bg-gray-400"
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Chat input card */}
+        <div className="card text-left animate-fade-in-up animation-delay-300">
+          <textarea
+            value={input}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            placeholder={current.text}
+            rows={2}
+            disabled={isAnalyzing}
+            className="input-field resize-none text-sm disabled:opacity-50"
+            aria-label="Beskriv ditt användningsfall"
+          />
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mt-4">
+            <p className="text-xs text-gray-400 leading-relaxed">
+              {hasInput
+                ? "AI analyserar din text och förifylller kalkylatorn med rimliga värden."
+                : "Referensvärden används för snabb överblick — justera parametrarna nedan för exakta siffror."}
+            </p>
+            <button
+              onClick={handleSubmit}
+              disabled={isAnalyzing}
+              className="btn-primary flex items-center gap-2 text-sm shrink-0 disabled:opacity-50"
+            >
+              {hasInput ? "Analysera" : "Beräkna"}
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
