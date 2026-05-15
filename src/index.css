@@ -37,6 +37,28 @@
   animation-delay: 300ms;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out both;
+}
+
+@keyframes bounceDot {
+  0%, 80%, 100% { transform: translateY(0); }
+  40%           { transform: translateY(-10px); }
+}
+
+.bounce-dot {
+  animation: bounceDot 1.2s ease-in-out infinite both;
+}
+
+.bounce-dot:nth-child(1) { animation-delay: 0ms; }
+.bounce-dot:nth-child(2) { animation-delay: 160ms; }
+.bounce-dot:nth-child(3) { animation-delay: 320ms; }
+
 @layer components {
   .card {
     @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6;
