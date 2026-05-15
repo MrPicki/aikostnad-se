@@ -4,6 +4,7 @@ import { SEOProvider } from "./components/SEO";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { CookieBanner } from "./components/CookieBanner";
+import { DotBackground } from "./components/DotBackground";
 import { Home } from "./pages/Home";
 import { TokenCalculatorPage } from "./pages/TokenCalculatorPage";
 import { Privacy } from "./pages/Privacy";
@@ -12,7 +13,8 @@ function App() {
   return (
     <SEOProvider>
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col bg-gray-50 w-full overflow-x-hidden">
+        <DotBackground />
+        <div className="relative min-h-screen flex flex-col w-full overflow-x-hidden" style={{ zIndex: 1 }}>
           <Header />
           <div className="flex-1">
             <Routes>
