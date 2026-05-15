@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aikostnad.se/sitemap.xml
