@@ -197,16 +197,18 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           <span>Gjord för svenska texter</span>
         </div>
 
-        {/* Rotating headline */}
-        <div
-          className={`transition-all duration-300 ease-in-out ${
-            visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-          }`}
-        >
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
-            {current.text}
-          </h1>
-          <p className="text-lg text-gray-500 leading-relaxed">{current.sub}</p>
+        {/* Rotating headline — fixed height to prevent layout shift */}
+        <div className="min-h-[9rem] sm:min-h-[10rem] lg:min-h-[11rem] flex flex-col justify-center">
+          <div
+            className={`transition-all duration-300 ease-in-out ${
+              visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+            }`}
+          >
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
+              {current.text}
+            </h1>
+            <p className="text-lg text-gray-500 leading-relaxed">{current.sub}</p>
+          </div>
         </div>
 
         {/* Progress dots */}
@@ -226,16 +228,25 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
           ))}
         </div>
 
-        {/* Chat input card */}
+        {/* Idea input section */}
+        <div className="text-left mb-3">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-1">
+            Vad vill du bygga med AI?
+          </h2>
+          <p className="text-sm text-gray-500">
+            Beskriv din idé — vi räknar ut direkt vad det skulle kosta att bygga med AI.
+          </p>
+        </div>
+
         <div className="card text-left animate-fade-in-up animation-delay-300">
           <textarea
             value={input}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
-            placeholder={current.text}
-            rows={2}
+            placeholder="T.ex. en intern HR-chatbot för 20 anställda, ett verktyg som sammanfattar avtal, eller en kundtjänst-assistent..."
+            rows={3}
             disabled={isAnalyzing}
-            className="input-field resize-none text-sm disabled:opacity-50"
+            className="input-field resize-none text-base disabled:opacity-50"
             aria-label="Beskriv ditt användningsfall"
           />
           {rateLimited ? (
