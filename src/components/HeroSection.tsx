@@ -66,11 +66,19 @@ interface HeroSectionProps {
   onNavigate: (dest: HeroDest, values?: CalcValues, text?: string) => void;
 }
 
+const ANALYZE_COUNT_KEY = "aikostnad_analyze_count";
+const ANALYZE_MAX = 3;
+
+function getAnalyzeCount(): number {
+  return parseInt(localStorage.getItem(ANALYZE_COUNT_KEY) ?? "0", 10);
+}
+
 export function HeroSection({ onNavigate }: HeroSectionProps) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
   const [input, setInput] = useState("");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [rateLimited, setRateLimited] = useState(false);
   const pausedRef = useRef(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -119,6 +127,14 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
       return;
     }
 
+    const count = getAnalyzeCount();
+    if (count >= ANALYZE_MAX) {
+      setRateLimited(true);
+      return;
+    }
+
+    localStorage.setItem(ANALYZE_COUNT_KEY, String(count + 1));
+    setRateLimited(false);
     setIsAnalyzing(true);
     try {
       const res = await fetch("/api/analyze-prompt", {
@@ -166,7 +182,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
         </div>
       )}
 
-      <section className="text-center max-w-3xl mx-auto animate-fade-in-up">
+      <section className="text-center max-w-3xl mx-auto w-full animate-fade-in-up overflow-hidden">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 text-sm font-medium px-4 py-1.5 rounded-full mb-8">
           <span>🇸🇪</span>
@@ -179,7 +195,7 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
           }`}
         >
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-3">
             {current.text}
           </h1>
           <p className="text-lg text-gray-500 leading-relaxed">{current.sub}</p>
@@ -214,33 +230,37 @@ export function HeroSection({ onNavigate }: HeroSectionProps) {
             className="input-field resize-none text-sm disabled:opacity-50"
             aria-label="Beskriv ditt användningsfall"
           />
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mt-4">
-            <p className="text-xs text-gray-400 leading-relaxed">
+          {rateLimited ? (
+            <p className="mt-4 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3">
+              Verkar som du har många idéer, vi kan inte hantera alla dessa just nu.
+            </p>
+          ) : (
+            <p className="text-xs text-gray-400 leading-relaxed mt-4">
               {hasInput
                 ? "AI analyserar din text och förifylller kalkylatorn med rimliga värden."
                 : "Referensvärden används för snabb överblick — justera parametrarna nedan för exakta siffror."}
             </p>
-            <button
-              onClick={handleSubmit}
-              disabled={isAnalyzing}
-              className="btn-primary flex items-center gap-2 text-sm shrink-0 disabled:opacity-50"
+          )}
+          <button
+            onClick={handleSubmit}
+            disabled={isAnalyzing || rateLimited}
+            className="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 text-sm mt-3 disabled:opacity-50"
+          >
+            {hasInput ? "Analysera" : "Beräkna"}
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
             >
-              {hasInput ? "Analysera" : "Beräkna"}
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
       </section>
     </>
