@@ -1,8 +1,4 @@
-import Anthropic from "@anthropic-ai/sdk";
-
 export const config = { runtime: "edge" };
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 const SYSTEM = `Du är en AI-kostnadsanalysator för svenska företag.
 Givet en beskrivning av ett AI-användningsfall, estimera rimliga parametrar.
@@ -51,19 +47,35 @@ export default async function handler(req: Request): Promise<Response> {
       });
     }
 
-    const message = await client.messages.create({
-      model: "claude-haiku-4-5-20251001",
-      max_tokens: 120,
-      system: SYSTEM,
-      messages: [
-        {
-          role: "user",
-          content: `Estimera kalkylatorparametrar för detta användningsfall: "${prompt.slice(0, 500)}"`,
-        },
-      ],
+    const anthropicRes = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "x-api-key": process.env.ANTHROPIC_API_KEY ?? "",
+        "anthropic-version": "2023-06-01",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "claude-haiku-4-5-20251001",
+        max_tokens: 120,
+        system: SYSTEM,
+        messages: [
+          {
+            role: "user",
+            content: `Estimera kalkylatorparametrar för detta användningsfall: "${prompt.slice(0, 500)}"`,
+          },
+        ],
+      }),
     });
 
-    const text = message.content[0].type === "text" ? message.content[0].text.trim() : "";
+    if (!anthropicRes.ok) {
+      throw new Error(`Anthropic API error: ${anthropicRes.status}`);
+    }
+
+    const data = (await anthropicRes.json()) as {
+      content: Array<{ type: string; text: string }>;
+    };
+
+    const text = data.content[0]?.type === "text" ? data.content[0].text.trim() : "";
     const values = JSON.parse(text) as AnalyzeResult;
 
     const clamped: AnalyzeResult = {
