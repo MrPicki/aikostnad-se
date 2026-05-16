@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
+import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 
@@ -41,6 +42,10 @@ export function ClaudePris() {
         description="Se vad Claude Sonnet 4.6 kostar per token och per månad. Jämför med ChatGPT och beräkna din AI-budget med live-kurs i SEK."
         canonical="/claude-pris"
       />
+      <BreadcrumbSchema items={[
+        { name: "Hem", url: "https://aikostnad.se/" },
+        { name: "Claude pris", url: "https://aikostnad.se/claude-pris" },
+      ]} />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">

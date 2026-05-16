@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
+import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 
@@ -41,6 +42,10 @@ export function Gpt4Pris() {
         description="Räkna ut vad GPT-4.1 kostar per token och per månad. Jämför med GPT-4o och Claude med live-valutakurs i SEK."
         canonical="/gpt-4-pris"
       />
+      <BreadcrumbSchema items={[
+        { name: "Hem", url: "https://aikostnad.se/" },
+        { name: "GPT-4.1 pris", url: "https://aikostnad.se/gpt-4-pris" },
+      ]} />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">

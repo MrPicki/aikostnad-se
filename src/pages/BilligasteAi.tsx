@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
+import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 
@@ -41,6 +42,10 @@ export function BilligasteAi() {
         description="Vilket AI är billigast 2026? Jämför GPT-4o mini, Claude Haiku 4.5 och Gemini 2.5 Flash. Räkna ut exakt kostnad i SEK med vår gratis kalkylator."
         canonical="/billigaste-ai"
       />
+      <BreadcrumbSchema items={[
+        { name: "Hem", url: "https://aikostnad.se/" },
+        { name: "Billigaste AI 2026", url: "https://aikostnad.se/billigaste-ai" },
+      ]} />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">

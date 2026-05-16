@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
+import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { SubscriptionTable } from "../components/SubscriptionTable";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 
@@ -39,6 +40,10 @@ export function VadKostarAi() {
         description="Komplett guide till AI-kostnader 2026. Jämför ChatGPT Plus, Claude Pro och Gemini Advanced. Se vad AI kostar per månad för privatpersoner, team och företag."
         canonical="/vad-kostar-ai"
       />
+      <BreadcrumbSchema items={[
+        { name: "Hem", url: "https://aikostnad.se/" },
+        { name: "Vad kostar AI?", url: "https://aikostnad.se/vad-kostar-ai" },
+      ]} />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">

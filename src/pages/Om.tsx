@@ -1,4 +1,5 @@
 import { SEO } from "../components/SEO";
+import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { siteConfig } from "../config/siteConfig";
@@ -36,6 +37,10 @@ export function Om() {
         description="Aikostnad.se är en svensk AI-kostnadskalkylator. Läs om hur vi verifierar modellpriser månadsvis, vilka modeller vi täcker och varför sajten finns."
         canonical="/om"
       />
+      <BreadcrumbSchema items={[
+        { name: "Hem", url: "https://aikostnad.se/" },
+        { name: "Om Aikostnad.se", url: "https://aikostnad.se/om" },
+      ]} />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(aboutSchema)}</script>
       </Helmet>

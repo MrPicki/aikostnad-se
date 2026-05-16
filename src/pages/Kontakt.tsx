@@ -1,4 +1,5 @@
 import { SEO } from "../components/SEO";
+import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Link } from "react-router-dom";
 import { siteConfig } from "../config/siteConfig";
 
@@ -10,6 +11,10 @@ export function Kontakt() {
         description="Frågor om AI-priser, felaktiga modellpriser eller samarbeten? Hör av dig till oss på hej@aikostnad.se."
         canonical="/kontakt"
       />
+      <BreadcrumbSchema items={[
+        { name: "Hem", url: "https://aikostnad.se/" },
+        { name: "Kontakta oss", url: "https://aikostnad.se/kontakt" },
+      ]} />
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
