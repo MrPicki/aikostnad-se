@@ -216,6 +216,68 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
 
 ---
 
+## 🟣 Sprint E — UX för ovetande/normal användare (2026-05-16)
+
+**Bakgrund:** UX-analys 2026-05-16 från perspektivet av "Lena" (35, marknadschef, ingen API-erfarenhet) och "Mikael" (42, småföretagare, ChatGPT Plus-användare). Sajten är idag byggd för utvecklare, men majoriteten av trafiken kommer troligen från icke-tekniska köpare. Punkterna nedan breddar appellen utan att förstöra utvecklarspåret.
+
+### Snabba vinster (1-2 h vardera)
+
+- [x] **Differentiera GuideCard mellan "använd" och "bygg"** ✅ 2026-05-16
+  - Två tydliga vägar i kortet: 📱 "Bara använda" (→ scrollar till #abonnemang) och 💻 "Bygga med API" (→ befintlig modal med email capture)
+  - Rubriken bytt till neutral "Vill du börja använda [modell]?" + förklaring "Det finns två vägar — välj den som passar dig."
+
+- [x] **TOP-PICK-badge i SubscriptionTable** ✅ 2026-05-16
+  - ChatGPT Plus-raden markerad med "Bäst för nybörjare"-badge (vit text på indigo, uppercase pill)
+  - Raden får subtil indigo-50/40-bakgrund (desktop) / indigo border + ring (mobil) för att sticka ut
+  - Tidigare "Populärast"-badge ersatt — tydligare guidning för osäker besökare
+
+- [x] **Konkretisera SimpleEstimator-textrutan** ✅ 2026-05-16
+  - Label bytt till konkret fråga: "Vad skulle du vilja använda AI till?"
+  - 4 klickbara chips ovanför textrutan: Kundsupport-bot, Skriva texter, Analysera dokument, Intern AI-assistent — klick fyller textarean med färdig prompt
+  - Placeholder bytt till "…eller skriv själv" så chips/textarea framstår som komplement
+
+- [x] **Byt "Per fråga" → "Per AI-svar" i kalkylatorns resultatkort** ✅ 2026-05-16
+  - Resultatkortet visar nu "Per AI-svar" istället för det tvetydiga "Per fråga"
+
+- [x] **Mini-FAQ direkt under hero** ✅ 2026-05-16
+  - Ny komponent `HeroQuickFaq.tsx` placerad mellan Hero och Kalkylator
+  - 3 accordion-items: "Vad kostar ChatGPT Plus?", "Skillnad mellan Plus och API?", "Behöver jag betala?"
+  - Möter ovetande besökaren med konkret prissvar innan kalkylatorn dyker upp
+
+### Medel (en eftermiddag vardera)
+
+- [x] **"Är du ny här?"-spår direkt under hero** ✅ 2026-05-16
+  - Ny komponent `PathSelector.tsx` med två stora cards: 📱 "Jag vill använda AI" → #abonnemang, 💻 "Jag vill bygga med AI" → #kalkylator
+  - Placerad mellan HeroQuickFaq och Calculator i Home.tsx
+  - Smooth-scroll till respektive sektion vid klick
+
+- [x] **Förenkla modelldropdown till 3 nivåer** ✅ 2026-05-16
+  - 3 tier-knappar primärt: 💰 Billig OK (gpt-4o-mini), ⚖️ Bra balans (gpt-4o), ✨ Premium (claude-opus-4-7)
+  - Vald tier highlightas med indigo border + ring
+  - Befintlig 14-modellsdropdown bakom `<details>`-toggle "Avancerat — välj specifik modell"
+
+- [x] **Tooltips på tekniska termer i kalkylatorn** ✅ 2026-05-16
+  - Tooltips tillagda på alla 5 NumberFields: input/output förklaras, requests/users/days kontextualiseras
+  - Mtok-förklaring som ⓘ-ikon under modell-info: "Pris per 1 miljon tokens. Ett token är ~0,75 svenska ord."
+  - Befintlig tooltip på "Ord per fråga" uppdaterad med ny formulering
+
+### Större omtag (en dag+)
+
+- [x] **Hero med tydliga två huvudvägar** ✅ 2026-05-16
+  - Hero-subtitel uppdaterad: "Jämför månadsabonnemang som ChatGPT Plus eller räkna ut API-kostnader för din egen app — på svenska, i kronor."
+  - PathSelector (item #6) under hero ger interaktiv navigering till båda spåren
+  - Tillsammans täcker hero + PathSelector båda målgrupperna direkt över viklinjen
+
+- [x] **Iterera hero-rubrik mot Google-trafik — telemetri på plats** ✅ 2026-05-16
+  - Hero-rubrik och subtitel kvar i nuvarande version
+  - Custom Vercel Analytics-events tillagda för iteration:
+    - `path_selector_click` med `{ path: "use" | "build" }` — vilken väg dominerar?
+    - `calc_mode_switch` med `{ mode: "simple" | "advanced" }` — Beskriv idé vs Räkna manuellt
+    - `hero_quick_faq_open` med `{ index, question }` — vilka frågor söks svar på?
+  - **Nästa:** Vänta 1–2 veckor på data, beslut om rubrikvariant baserat på `path_selector_click`-ratio.
+
+---
+
 ## Rekommenderad sprint-ordning
 
 **Sprint A (1 vecka)** — Fixa faktarisken så sajten är trovärdig:
