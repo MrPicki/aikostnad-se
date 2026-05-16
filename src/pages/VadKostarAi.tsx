@@ -114,6 +114,77 @@ export function VadKostarAi() {
           </div>
         </div>
 
+        <section className="mt-12 prose prose-gray max-w-none">
+          <h2 className="text-2xl font-bold text-gray-900">AI-kostnad per användarprofil</h2>
+          <p>
+            Generella siffror är svåra att tolka utan kontext. Här är vad olika typer av
+            användare i Sverige faktiskt betalar för AI per månad 2026:
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6">Privatperson — 50–200 kr/mån</h3>
+          <p>
+            Vanligaste valet är ett konsumentabonnemang: <strong>ChatGPT Plus</strong>,{" "}
+            <strong>Claude Pro</strong> eller <strong>Gemini Advanced</strong> (alla
+            ca 209 kr/mån) ger tillgång till deras toppmodell, webbsökning och
+            bildgenerering. För enstaka frågor räcker gratisversionerna långt — de
+            har begränsningar i hastighet men inte i kvalitet.
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6">Frilansare och soloprenörer — 200–500 kr/mån</h3>
+          <p>
+            En frilansare som skriver texter, analyserar dokument och svarar på mejl
+            med AI-stöd kommer ut på 200–500 kr/mån. Ofta lägre via API än via
+            abonnemang om volymen är låg. GPT-4o eller Claude Sonnet räcker för 95 %
+            av uppgifterna. Tips: prova en månad abonnemang först — om du upptäcker
+            att du sällan slår taket är API troligen billigare.
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6">Småföretag (5–10 personer) — 1 000–2 000 kr/mån</h3>
+          <p>
+            Här lönar abonnemang sig fortfarande för individuell användning. Lägg till
+            en intern AI-assistent via API (chatbot, dokumentassistent) och den totala
+            AI-budgeten landar i spannet 1 000–2 000 kr/mån. Se vår{" "}
+            <Link to="/ai-chatbot-kostnad" className="text-indigo-600 hover:underline">chatbot-kostnadsguide</Link>{" "}
+            för konkreta API-exempel.
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6">Mellanstort företag (50–100 personer) — 3 000–10 000 kr/mån</h3>
+          <p>
+            Avancerad användning kräver kombinationen abonnemang + API + eventuellt
+            enterprise-avtal. Företagsversioner av ChatGPT och Claude (ca 25 USD/användare
+            /månad) erbjuder admin-funktioner och säkerhetscertifieringar — SOC 2, GDPR-DPA
+            etc. Räkna med att 60–70 % av budgeten går till abonnemang och resten till
+            API-driven automation.
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6">Stort företag — 10 000+ kr/mån</h3>
+          <p>
+            Enterprise-avtal med volymrabatter, eventuell custom training, och dedikerad
+            support. Här lönar det sig att förhandla direkt med leverantörerna — listpriser
+            är ofta 30–50 % över verkligt avtalspris vid stora volymer.
+          </p>
+
+          <h2 className="text-2xl font-bold text-gray-900 mt-10">Tre faktorer som äter AI-budgeten</h2>
+          <ol>
+            <li>
+              <strong>Långa svar.</strong> Output är 4× dyrare än input per token. En bot
+              som svarar i 500 ord när 150 räcker dubblar din output-kostnad. Be modellen
+              vara koncis — det är gratis besparing.
+            </li>
+            <li>
+              <strong>Onödig kontext.</strong> Att klistra in hela PDF:en när bara två
+              sidor behövs är slöseri. Använd RAG (retrieval) för att hämta in bara den
+              relevanta delen — kan sänka kostnaden med 70–90 % för dokumentanalys.
+            </li>
+            <li>
+              <strong>Fel modell för uppgiften.</strong> Att använda Claude Opus eller
+              GPT-4.1 för att klassificera supportärenden är som att hyra Formula 1-bil
+              för pendling. Använd <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">mini-modeller</Link>{" "}
+              där de räcker.
+            </li>
+          </ol>
+        </section>
+
         <LandingFAQ items={faqs} heading="Vanliga frågor om AI-kostnader" />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">

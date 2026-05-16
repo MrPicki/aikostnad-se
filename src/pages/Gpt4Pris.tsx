@@ -94,6 +94,86 @@ export function Gpt4Pris() {
 
         <Calculator initialValues={INITIAL_VALUES} />
 
+        <section className="mt-12 prose prose-gray max-w-none">
+          <h2 className="text-2xl font-bold text-gray-900">GPT-4.1 vs GPT-4o vs GPT-4o mini — vilken passar?</h2>
+          <p>
+            OpenAI har idag tre tunga modeller med tydligt olika roller. Här är när du
+            behöver vilken:
+          </p>
+
+          <div className="space-y-4 not-prose">
+            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-indigo-900 mb-2">GPT-4.1 — $2/$8 per Mtok, 1M kontext</h3>
+              <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
+                <li>Långa kodbas-analyser (hela repon i en prompt)</li>
+                <li>Strategisk planering över många dokument</li>
+                <li>Forskningsuppgifter med stora datamängder</li>
+                <li>Det bästa kodningsresultatet bland OpenAI:s modeller</li>
+              </ul>
+            </div>
+
+            <div className="bg-green-50 border border-green-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-green-900 mb-2">GPT-4o — $2,50/$10 per Mtok, 128K kontext</h3>
+              <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
+                <li>Bredast modell — multimodalt (bild, ljud, text)</li>
+                <li>Default-val för chatbots och webbappar</li>
+                <li>När du behöver webbsökning eller DALL·E-integration</li>
+                <li>Real-time röstkonversation</li>
+              </ul>
+            </div>
+
+            <div className="bg-purple-50 border border-purple-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-purple-900 mb-2">GPT-4o mini — $0,15/$0,60 per Mtok, 128K kontext</h3>
+              <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
+                <li>Hög volym till låg kostnad</li>
+                <li>Klassificering och extraktion</li>
+                <li>Routing-modell i hybrid-arkitektur</li>
+                <li>17× billigare än GPT-4o per token</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-bold text-gray-900 mt-10">När är GPT-4.1 värt extrakostnaden?</h2>
+          <p>
+            GPT-4.1 har lägre input-pris än GPT-4o ($2 vs $2,50) men något lägre
+            output-pris ($8 vs $10). Den stora skillnaden är kontextfönstret —{" "}
+            <strong>1 miljon tokens mot 128K hos GPT-4o</strong>. Värt extrakostnaden när:
+          </p>
+          <ul>
+            <li>
+              <strong>Du behöver 200K+ tokens kontext</strong> — GPT-4.1 är ofta enda
+              kommersiella alternativet för riktigt långa dokument.
+            </li>
+            <li>
+              <strong>Kodningsuppgifter över hela kodbasen</strong> — GPT-4.1 ligger topp
+              eller näst topp på SWE-bench Verified från månad till månad.
+            </li>
+            <li>
+              <strong>Multi-dokument-analys</strong> — resonemang över flera långa filer
+              samtidigt utan att splitta upp dem i mindre delar.
+            </li>
+          </ul>
+          <p>
+            För 80 % av andra användningsfall är GPT-4o eller mini bättre val. Vill du
+            jämföra GPT-4.1 mot Claude Opus 4.7 (motsvarande flaggskepp hos Anthropic)?
+            Se vår <Link to="/chatgpt-vs-claude" className="text-indigo-600 hover:underline">jämförelse mellan ChatGPT och Claude</Link>.
+          </p>
+
+          <h2 className="text-2xl font-bold text-gray-900 mt-10">Hybrid-routing — sänk kostnaden 70 %</h2>
+          <p>
+            Den vanligaste optimeringen i produktion: skicka 80–90 % av trafiken till
+            GPT-4o mini och eskalera till GPT-4.1 endast när mini-modellen flaggar att
+            den är osäker (via confidence-score eller fail-detection). Implementationen
+            är typiskt 50 rader kod och besparingen är 70–80 % jämfört med att köra allt
+            på GPT-4.1.
+          </p>
+          <p>
+            Konkret exempel: en chatbot med 1 000 frågor/dag som körs helt på GPT-4.1
+            kostar ~700 kr/mån. Samma chatbot med hybrid-routing (90 % mini, 10 % GPT-4.1)
+            kostar ~150 kr/mån — utan märkbar kvalitetsförlust.
+          </p>
+        </section>
+
         <LandingFAQ items={faqs} heading="Vanliga frågor om GPT-4.1-priser" />
 
         <div className="mt-12 card bg-indigo-50 border-indigo-100">

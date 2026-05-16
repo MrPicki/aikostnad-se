@@ -97,6 +97,87 @@ export function ClaudePris() {
 
         <Calculator initialValues={INITIAL_VALUES} />
 
+        <section className="mt-12 prose prose-gray max-w-none">
+          <h2 className="text-2xl font-bold text-gray-900">Claude-prisexempel för vanliga scenarier</h2>
+          <p>
+            Tre scenarier som visar verkliga månadskostnader för Claude på svenska. Räknat
+            med 100 ord input + 200 ord output per fråga och 22 arbetsdagar.
+          </p>
+          <div className="space-y-4 not-prose">
+            <div className="bg-green-50 border border-green-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-green-900 mb-2">Personlig användning — 50 frågor/dag</h3>
+              <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
+                <li>Claude Pro-abonnemang: <strong>210 kr/mån</strong></li>
+                <li>Claude Haiku 4.5 API: <strong>~17 kr/mån</strong></li>
+                <li>Claude Sonnet 4.6 API: <strong>~50 kr/mån</strong></li>
+              </ul>
+              <p className="text-xs text-gray-600 mt-2">
+                Pro-abonnemanget inkluderar Projects (delade kontexter) och högre
+                prioritetslimits — lönsamt om du använder Claude dagligen.
+              </p>
+            </div>
+            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-indigo-900 mb-2">Småföretag — 500 frågor/dag</h3>
+              <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
+                <li>Claude Haiku 4.5: <strong>~165 kr/mån</strong></li>
+                <li>Claude Sonnet 4.6: <strong>~496 kr/mån</strong></li>
+                <li>Sonnet + prompt caching: <strong>~280 kr/mån</strong></li>
+              </ul>
+            </div>
+            <div className="bg-purple-50 border border-purple-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-purple-900 mb-2">Mellanstort B2C — 5 000 frågor/dag</h3>
+              <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
+                <li>Claude Haiku: <strong>~1 650 kr/mån</strong></li>
+                <li>Claude Sonnet: <strong>~4 960 kr/mån</strong></li>
+                <li>Sonnet + caching: <strong>~2 800 kr/mån</strong> (besparing 43 %)</li>
+              </ul>
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-bold text-gray-900 mt-10">När räcker Haiku — och när är Sonnet värt det?</h2>
+          <p>
+            Den vanligaste frågan bland Claude-användare. Här är vår heuristik från
+            verkliga produktionsapplikationer:
+          </p>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6">Välj Haiku 4.5 för:</h3>
+          <ul>
+            <li>Klassificering ("är denna kommentar positiv eller negativ?")</li>
+            <li>FAQ-svar baserat på en kort kunskapsbas</li>
+            <li>Snabba enkla skrivuppgifter (titlar, sammanfattningar)</li>
+            <li>Routing-beslut — vilken modell ska få frågan?</li>
+            <li>Höga volymer där kostnaden måste minimeras</li>
+          </ul>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6">Välj Sonnet 4.6 för:</h3>
+          <ul>
+            <li>Komplexa kundkommentarer med flera frågor i en</li>
+            <li>Längre dokumentanalyser (kontrakt, rapporter, PDF:er)</li>
+            <li>Skrivande där tonen är viktig (kundkommunikation, marknadsföring)</li>
+            <li>Resonemang över flera steg innan svar</li>
+          </ul>
+
+          <h3 className="text-lg font-bold text-gray-900 mt-6">Välj Opus 4.7 för:</h3>
+          <ul>
+            <li>Avancerad kodning och agentic workflows</li>
+            <li>Strategisk analys där fel är dyrt</li>
+            <li>Forskningsuppgifter med stora datamängder</li>
+          </ul>
+
+          <h2 className="text-2xl font-bold text-gray-900 mt-10">Prompt caching — Anthropics hemliga prisvapen</h2>
+          <p>
+            Claude erbjuder prompt caching med ca <strong>90 % rabatt på återanvänd input</strong>.
+            För en chatbot med 2 000 ord lång system-prompt och hög volym kan caching
+            halvera totalkostnaden. Den vanligaste rekommendationen vi ger till
+            Claude-användare som inte redan har caching aktiverat: aktivera det idag.
+          </p>
+          <p>
+            Se vår <Link to="/prompt-caching" className="text-indigo-600 hover:underline">djupguide om prompt caching</Link>{" "}
+            för konkreta räkneexempel, implementation-tips och jämförelse med OpenAI:s
+            automatiska caching.
+          </p>
+        </section>
+
         <LandingFAQ items={faqs} heading="Vanliga frågor om Claude-priser" />
 
         <div className="mt-12 card bg-indigo-50 border-indigo-100">
