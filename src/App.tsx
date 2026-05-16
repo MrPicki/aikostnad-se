@@ -39,6 +39,9 @@ const ChatGPTvsClaude = lazy(() =>
 const AiChatbotKostnad = lazy(() =>
   import("./pages/AiChatbotKostnad").then((m) => ({ default: m.AiChatbotKostnad }))
 );
+const PromptCaching = lazy(() =>
+  import("./pages/PromptCaching").then((m) => ({ default: m.PromptCaching }))
+);
 
 function App() {
   return (
@@ -61,6 +64,7 @@ function App() {
                 <Route path="/om" element={<Om />} />
                 <Route path="/chatgpt-vs-claude" element={<ChatGPTvsClaude />} />
                 <Route path="/ai-chatbot-kostnad" element={<AiChatbotKostnad />} />
+                <Route path="/prompt-caching" element={<PromptCaching />} />
               </Routes>
             </Suspense>
           </div>

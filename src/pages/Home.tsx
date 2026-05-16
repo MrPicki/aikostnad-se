@@ -112,6 +112,13 @@ export function Home() {
                 Plus fyra sätt att sänka notan.
               </p>
             </Link>
+            <Link to="/prompt-caching" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Prompt caching — halvera AI-notan</p>
+              <p className="text-sm text-gray-500">
+                Hur du sparar 40–60 % på Claude och GPT-4o med rätt
+                cache-strategi. Teknisk djupguide.
+              </p>
+            </Link>
             <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
               <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Räkna på ChatGPT API-kostnader</p>
               <p className="text-sm text-gray-500">
