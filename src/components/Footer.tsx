@@ -50,6 +50,16 @@ export function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
+                <Link to="/vad-kostar-ai" className="text-xs text-gray-500 hover:text-indigo-600">
+                  Vad kostar AI?
+                </Link>
+              </li>
+              <li>
+                <Link to="/billigaste-ai" className="text-xs text-gray-500 hover:text-indigo-600">
+                  Billigaste AI 2026
+                </Link>
+              </li>
+              <li>
                 <Link to="/vad-kostar-chatgpt" className="text-xs text-gray-500 hover:text-indigo-600">
                   Vad kostar ChatGPT?
                 </Link>

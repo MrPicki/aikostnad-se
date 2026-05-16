@@ -4,66 +4,67 @@ import { siteConfig } from "../config/siteConfig";
 interface Plan {
   service: string;
   provider: string;
-  plan: string;
   priceUsd: number;
+  freeVersion: string;
   includes: string;
   bestFor: string;
+  popular?: boolean;
 }
 
 const PLANS: Plan[] = [
   {
     service: "ChatGPT Plus",
     provider: "OpenAI",
-    plan: "Plus",
     priceUsd: 20,
+    freeVersion: "Ja (begränsat)",
     includes: "GPT-4o, DALL·E, kodkörning, webbsökning",
     bestFor: "Allround, privatanvändare, kodning",
+    popular: true,
   },
   {
     service: "Claude Pro",
     provider: "Anthropic",
-    plan: "Pro",
     priceUsd: 20,
+    freeVersion: "Ja (begränsat)",
     includes: "Claude Sonnet, prioritet, längre konversationer",
     bestFor: "Skrivande, analys, juridik",
   },
   {
     service: "Gemini Advanced",
     provider: "Google",
-    plan: "Google One AI Premium",
     priceUsd: 19.99,
+    freeVersion: "Ja (begränsat)",
     includes: "Gemini 2.5 Pro, Google Workspace-integration",
     bestFor: "Google-ekosystem, dokument, kalkylblad",
   },
   {
     service: "Perplexity Pro",
     provider: "Perplexity",
-    plan: "Pro",
     priceUsd: 20,
+    freeVersion: "Ja (begränsat)",
     includes: "Obegränsad AI-sökning, GPT-4o & Claude-tillgång",
     bestFor: "Research, faktakoll, källhänvisningar",
   },
   {
     service: "GitHub Copilot",
     provider: "GitHub (Microsoft)",
-    plan: "Individual",
     priceUsd: 10,
+    freeVersion: "Ja (studenter/open source)",
     includes: "Kodkomplettering i IDE, chatbot för kod",
     bestFor: "Utvecklare, kodassistent",
   },
   {
     service: "Midjourney Standard",
     provider: "Midjourney",
-    plan: "Standard",
     priceUsd: 30,
+    freeVersion: "Nej",
     includes: "15 GPU-timmar/mån, kommersiell licens",
     bestFor: "Bildgenerering, design, kreativitet",
   },
 ];
 
 function formatSek(usd: number, rate: number): string {
-  const sek = usd * rate;
-  return `${Math.round(sek)} kr`;
+  return `${Math.round(usd * rate)} kr`;
 }
 
 export function SubscriptionTable() {
@@ -71,17 +72,18 @@ export function SubscriptionTable() {
 
   return (
     <section aria-label="AI-abonnemang jämförelse">
-      <div className="mb-4">
+      <div className="mb-5">
         <h2 className="text-2xl font-bold text-gray-900">
-          Vad kostar AI per månad? Fasta abonnemang
+          Vad kostar AI per månad?
         </h2>
         <p className="text-sm text-gray-500 mt-1">
-          Fasta månadspriser för privatpersoner och team — ingen token-räkning.
+          Fasta månadspriser — ingen token-räkning, ingen teknisk kunskap krävs.
           Kursen 1 USD = {rate.toFixed(2)} SEK.
         </p>
       </div>
 
-      <div className="card p-0 overflow-hidden">
+      {/* Desktop-tabell */}
+      <div className="card p-0 overflow-hidden hidden sm:block">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-gray-50 border-b border-gray-200">
@@ -92,8 +94,8 @@ export function SubscriptionTable() {
                 <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide whitespace-nowrap">
                   Pris / mån
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">
-                  Ingår
+                <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                  Gratis version?
                 </th>
                 <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide hidden md:table-cell">
                   Passar bäst för
@@ -104,8 +106,17 @@ export function SubscriptionTable() {
               {PLANS.map((plan) => (
                 <tr key={plan.service} className="hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3">
-                    <p className="font-medium text-gray-900 text-sm">{plan.service}</p>
-                    <p className="text-xs text-gray-400">{plan.provider}</p>
+                    <div className="flex items-center gap-2">
+                      {plan.popular && (
+                        <span className="inline-block px-1.5 py-0.5 bg-indigo-50 text-indigo-700 text-xs rounded font-medium whitespace-nowrap">
+                          Populärast
+                        </span>
+                      )}
+                      <div>
+                        <p className="font-medium text-gray-900 text-sm">{plan.service}</p>
+                        <p className="text-xs text-gray-400">{plan.provider}</p>
+                      </div>
+                    </div>
                   </td>
                   <td className="px-4 py-3 whitespace-nowrap">
                     <p className="text-sm font-semibold text-gray-900">
@@ -113,8 +124,8 @@ export function SubscriptionTable() {
                     </p>
                     <p className="text-xs text-gray-400">${plan.priceUsd}/mån</p>
                   </td>
-                  <td className="px-4 py-3 text-xs text-gray-500 hidden sm:table-cell max-w-xs">
-                    {plan.includes}
+                  <td className="px-4 py-3 text-sm text-gray-600">
+                    {plan.freeVersion}
                   </td>
                   <td className="px-4 py-3 text-xs text-gray-500 hidden md:table-cell">
                     {plan.bestFor}
@@ -125,17 +136,48 @@ export function SubscriptionTable() {
           </table>
         </div>
         <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 text-xs text-gray-400">
-          Priser i USD per månad. Senast verifierade {siteConfig.pricesLastVerified}.
-          Konverterade till SEK med live-valutakurs.
+          Priser i USD per månad. Senast verifierade {siteConfig.pricesLastVerified}. Konverterade med live-valutakurs.
         </div>
       </div>
 
+      {/* Mobil-cards */}
+      <div className="sm:hidden space-y-3">
+        {PLANS.map((plan) => (
+          <div key={plan.service} className="card py-4 px-4">
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <p className="font-semibold text-gray-900 text-sm">{plan.service}</p>
+                  {plan.popular && (
+                    <span className="inline-block px-1.5 py-0.5 bg-indigo-50 text-indigo-700 text-xs rounded font-medium shrink-0">
+                      Populärast
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-gray-400 mb-2">{plan.provider}</p>
+                <p className="text-xs text-gray-500">{plan.bestFor}</p>
+                <p className="text-xs text-gray-400 mt-1">Gratis version: {plan.freeVersion}</p>
+              </div>
+              <div className="text-right shrink-0">
+                <p className="text-base font-bold text-gray-900">
+                  {formatSek(plan.priceUsd, rate)}
+                </p>
+                <p className="text-xs text-gray-400">/mån</p>
+              </div>
+            </div>
+          </div>
+        ))}
+        <p className="text-xs text-gray-400 pt-1">
+          Senast verifierade {siteConfig.pricesLastVerified}.
+        </p>
+      </div>
+
       <p className="mt-3 text-xs text-gray-400">
-        Behöver du ett API-abonnemang för att bygga egna applikationer?{" "}
+        Bygger du en app och behöver räkna per token?{" "}
         <a href="#kalkylator" className="text-indigo-600 hover:underline">
-          Använd kalkylatorn ovan
+          Se API-kalkylatorn
         </a>{" "}
-        för token-baserad prissättning.
+        längre ner.
       </p>
     </section>
   );
