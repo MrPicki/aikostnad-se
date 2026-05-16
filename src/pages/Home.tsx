@@ -80,6 +80,34 @@ export function Home() {
           <ModelComparisonTable />
         </section>
 
+        {/* 5b. Tokenräknare-CTA */}
+        <section className="mb-24">
+          <Link
+            to="/token-kalkylator"
+            className="block rounded-2xl border border-indigo-100 bg-indigo-50/50 hover:bg-indigo-50 transition-all p-6 sm:p-8 group"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+              <div className="text-3xl">📝</div>
+              <div className="flex-1">
+                <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-1">
+                  Bonus-verktyg
+                </p>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 group-hover:text-indigo-700 transition-colors">
+                  Klistra in din text — räkna tokens exakt
+                </h2>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Vet du exakt hur lång din prompt är i tokens? Klistra in text
+                  och få token-antal + kostnad per modell direkt — perfekt innan
+                  du anropar API:t.
+                </p>
+              </div>
+              <div className="text-indigo-600 group-hover:translate-x-1 transition-transform shrink-0 hidden sm:block">
+                →
+              </div>
+            </div>
+          </Link>
+        </section>
+
         {/* 6. Fler guider */}
         <section className="mb-24">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Fler prisguider</h2>
