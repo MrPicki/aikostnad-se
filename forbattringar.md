@@ -53,27 +53,28 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
   - URL-värden vinner över hero-defaults vid första render
   - Bonus: "Kopiera länk"-knapp under resultatet (skriver `window.location.href` till urklipp, visar bekräftelse 2s)
 
-- [ ] **SEO-landningssida `/vad-kostar-chatgpt`**
-  - Skapa `src/pages/VadKostarChatGPT.tsx` — återanvänd `Calculator` med förvalt `modelId=gpt-4o`
-  - Skräddarsydd intro (200-300 ord), egen `<title>`, `<canonical>`, FAQ
-  - Lägg till i `sitemap.xml` och router
-  - **Varför:** Plan Sprint 2 — exakt-match keywords driver svenska Google. Hög intent.
+- [x] **SEO-landningssida `/vad-kostar-chatgpt`** ✅ 2026-05-16
+  - `src/pages/VadKostarChatGPT.tsx` — Calculator med förvalt `modelId=gpt-4o`
+  - Skräddarsydd intro 200-300 ord, egen `<title>`, `<canonical>`, FAQ (5 frågor)
+  - LandingFAQ-komponent med JSON-LD schema
+  - Lagd till i router (App.tsx) och sitemap.xml
 
-- [ ] **Fler SEO-landningssidor (samma mönster)**
-  - `/ai-chatbot-kostnad` — förvalt scenario "kundtjänst"
-  - `/claude-pris` — förvalt `modelId=claude-sonnet-4-6`
-  - `/gpt-4-pris` — förvalt `modelId=gpt-4.1`
+- [x] **Fler SEO-landningssidor** ✅ 2026-05-16
+  - `/claude-pris` — `src/pages/ClaudePris.tsx`, förvalt `modelId=claude-sonnet-4-6`
+  - `/gpt-4-pris` — `src/pages/Gpt4Pris.tsx`, förvalt `modelId=gpt-4.1`
+  - `/ai-chatbot-kostnad` — ej gjord än (låg prio, inga extra sidor specificerade i sprint B)
 
-- [x] **Lägg `<lastmod>` i [public/sitemap.xml](public/sitemap.xml)** ✅ 2026-05-15
-  - Alla tre URL:erna har nu `<lastmod>2026-05-15</lastmod>`
+- [x] **Lägg `<lastmod>` i [public/sitemap.xml](public/sitemap.xml)** ✅ 2026-05-16
+  - Hårdkodade `<lastmod>2026-05-16</lastmod>` på alla URL:er
+  - **Varför:** Google rankar uppdaterad content högre.
 
 - [x] **Utöka FAQ från 7 till 14 frågor** ✅ 2026-05-15
   - Nya: Claude vs ChatGPT-jämförelse, prompt caching, AI-assistent för företag, dokumentanalys, kontextfönster, open-source vs API, "bygga chatbot"
   - Långa beskrivande svar för bättre long-tail-SEO och AI-svar-snippets
 
-- [ ] **Cookie-banner: lös motsägelsen**
-  - Privacy säger "vi använder inga cookies", bannern säger "vi använder cookies"
-  - Två alternativ: **(a)** ta bort banneren helt (Vercel Analytics sätter inga cookies), eller **(b)** lägg till "Avvisa"-knapp (GDPR-kravet på lika lätt opt-out)
+- [x] **Cookie-banner: lös motsägelsen** ✅ 2026-05-16
+  - Tog bort CookieBanner-komponenten helt (Vercel Analytics sätter inga cookies)
+  - Privacy-sidan stämmer: "inga spårningscookies eller tredjepartscookies"
   - **Varför:** Juridisk konsistens + bättre UX.
 
 ---
@@ -104,8 +105,9 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
   - När första giltiga resultatet beräknas på mobil, smooth-scroll till resultatpanelen
   - Använd `IntersectionObserver` eller `window.matchMedia("(max-width: 1024px)")`
 
-- [ ] **Lazy-load routes**
-  - `React.lazy()` på `TokenCalculatorPage` och `Privacy` i [src/App.tsx](src/App.tsx)
+- [x] **Lazy-load routes** ✅ 2026-05-16
+  - `React.lazy()` på TokenCalculatorPage, Privacy, VadKostarChatGPT, ClaudePris, Gpt4Pris i [src/App.tsx](src/App.tsx)
+  - Home är eager-loaded (primär LCP-sida)
   - **Varför:** Mindre initial bundle → bättre LCP, bättre mobile Lighthouse.
 
 - [ ] **Self-host eller preload Google Fonts**
