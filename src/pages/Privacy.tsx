@@ -1,5 +1,15 @@
 import { SEO } from "../components/SEO";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Hem", item: "https://aikostnad.se" },
+    { "@type": "ListItem", position: 2, name: "Integritetspolicy", item: "https://aikostnad.se/integritet" },
+  ],
+};
 
 export function Privacy() {
   return (
@@ -9,6 +19,9 @@ export function Privacy() {
         description="Läs om hur Aikostnad.se hanterar dina personuppgifter enligt GDPR."
         canonical="/integritet"
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      </Helmet>
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">

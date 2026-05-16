@@ -64,17 +64,12 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
   - `/claude-pris` — förvalt `modelId=claude-sonnet-4-6`
   - `/gpt-4-pris` — förvalt `modelId=gpt-4.1`
 
-- [ ] **Lägg `<lastmod>` i [public/sitemap.xml](public/sitemap.xml)**
-  - Generera dynamiskt vid build (script i `package.json`) eller hårdkoda
-  - **Varför:** Google rankar uppdaterad content högre.
+- [x] **Lägg `<lastmod>` i [public/sitemap.xml](public/sitemap.xml)** ✅ 2026-05-15
+  - Alla tre URL:erna har nu `<lastmod>2026-05-15</lastmod>`
 
-- [ ] **Utöka FAQ från 7 till 12-15 frågor**
-  - "Vad kostar Claude vs ChatGPT?"
-  - "Hur räknar man tokens manuellt?"
-  - "Vad är prompt caching och hur sparar man?"
-  - "Skillnad input/output token-pris?"
-  - "Kan jag använda kalkylatorn för Azure OpenAI?"
-  - **Varför:** JSON-LD FAQ schema → Rich Results i Google. Long-tail SEO.
+- [x] **Utöka FAQ från 7 till 14 frågor** ✅ 2026-05-15
+  - Nya: Claude vs ChatGPT-jämförelse, prompt caching, AI-assistent för företag, dokumentanalys, kontextfönster, open-source vs API, "bygga chatbot"
+  - Långa beskrivande svar för bättre long-tail-SEO och AI-svar-snippets
 
 - [ ] **Cookie-banner: lös motsägelsen**
   - Privacy säger "vi använder inga cookies", bannern säger "vi använder cookies"

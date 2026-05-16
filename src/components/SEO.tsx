@@ -7,8 +7,27 @@ interface SEOProps {
   children?: React.ReactNode;
 }
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Aikostnad.se",
+  url: "https://aikostnad.se",
+  logo: "https://aikostnad.se/icon-512.png",
+  description:
+    "Svensk AI-kostnadskalkylator för företag, utvecklare och privatpersoner.",
+  inLanguage: "sv-SE",
+};
+
 export function SEOProvider({ children }: { children: React.ReactNode }) {
-  return <HelmetProvider>{children}</HelmetProvider>;
+  return (
+    <HelmetProvider>
+      <Helmet>
+        <html lang="sv" />
+        <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
+      </Helmet>
+      {children}
+    </HelmetProvider>
+  );
 }
 
 export function SEO({ title, description, canonical, children }: SEOProps) {

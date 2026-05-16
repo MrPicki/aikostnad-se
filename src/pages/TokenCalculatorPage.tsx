@@ -1,6 +1,16 @@
 import { SEO } from "../components/SEO";
 import { TokenCounter } from "../components/TokenCounter";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Hem", item: "https://aikostnad.se" },
+    { "@type": "ListItem", position: 2, name: "Tokenräknare", item: "https://aikostnad.se/token-kalkylator" },
+  ],
+};
 
 export function TokenCalculatorPage() {
   return (
@@ -10,6 +20,9 @@ export function TokenCalculatorPage() {
         description="Klistra in din text och se hur många tokens den innehåller, vad det kostar för olika AI-modeller, och hur svenska texter skiljer sig från engelska."
         canonical="/token-kalkylator"
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+      </Helmet>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
