@@ -33,6 +33,9 @@ const Kontakt = lazy(() =>
 const Om = lazy(() =>
   import("./pages/Om").then((m) => ({ default: m.Om }))
 );
+const ChatGPTvsClaude = lazy(() =>
+  import("./pages/ChatGPTvsClaude").then((m) => ({ default: m.ChatGPTvsClaude }))
+);
 
 function App() {
   return (
@@ -53,6 +56,7 @@ function App() {
                 <Route path="/billigaste-ai" element={<BilligasteAi />} />
                 <Route path="/kontakt" element={<Kontakt />} />
                 <Route path="/om" element={<Om />} />
+                <Route path="/chatgpt-vs-claude" element={<ChatGPTvsClaude />} />
               </Routes>
             </Suspense>
           </div>
