@@ -27,6 +27,21 @@ const VadKostarAi = lazy(() =>
 const BilligasteAi = lazy(() =>
   import("./pages/BilligasteAi").then((m) => ({ default: m.BilligasteAi }))
 );
+const Kontakt = lazy(() =>
+  import("./pages/Kontakt").then((m) => ({ default: m.Kontakt }))
+);
+const Om = lazy(() =>
+  import("./pages/Om").then((m) => ({ default: m.Om }))
+);
+const ChatGPTvsClaude = lazy(() =>
+  import("./pages/ChatGPTvsClaude").then((m) => ({ default: m.ChatGPTvsClaude }))
+);
+const AiChatbotKostnad = lazy(() =>
+  import("./pages/AiChatbotKostnad").then((m) => ({ default: m.AiChatbotKostnad }))
+);
+const PromptCaching = lazy(() =>
+  import("./pages/PromptCaching").then((m) => ({ default: m.PromptCaching }))
+);
 
 function App() {
   return (
@@ -45,6 +60,11 @@ function App() {
                 <Route path="/gpt-4-pris" element={<Gpt4Pris />} />
                 <Route path="/vad-kostar-ai" element={<VadKostarAi />} />
                 <Route path="/billigaste-ai" element={<BilligasteAi />} />
+                <Route path="/kontakt" element={<Kontakt />} />
+                <Route path="/om" element={<Om />} />
+                <Route path="/chatgpt-vs-claude" element={<ChatGPTvsClaude />} />
+                <Route path="/ai-chatbot-kostnad" element={<AiChatbotKostnad />} />
+                <Route path="/prompt-caching" element={<PromptCaching />} />
               </Routes>
             </Suspense>
           </div>

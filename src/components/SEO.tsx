@@ -1,4 +1,5 @@
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import { siteConfig } from "../config/siteConfig";
 
 interface SEOProps {
   title?: string;
@@ -12,10 +13,19 @@ const organizationSchema = {
   "@type": "Organization",
   name: "Aikostnad.se",
   url: "https://aikostnad.se",
-  logo: "https://aikostnad.se/icon-512.png",
+  logo: "https://aikostnad.se/og-image.png",
+  email: siteConfig.contactEmail,
   description:
-    "Svensk AI-kostnadskalkylator för företag, utvecklare och privatpersoner.",
-  inLanguage: "sv-SE",
+    "Svensk kalkylator för AI-kostnader. Vi översätter API-priser och abonnemang från ChatGPT, Claude, Gemini och fler till svenska kronor.",
+  areaServed: { "@type": "Country", name: "Sverige" },
+  knowsAbout: [
+    "AI-kostnader",
+    "ChatGPT-priser",
+    "Claude-priser",
+    "Gemini-priser",
+    "API-prissättning",
+    "Tokenisering",
+  ],
 };
 
 export function SEOProvider({ children }: { children: React.ReactNode }) {

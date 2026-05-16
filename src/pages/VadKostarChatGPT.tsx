@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
+import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 
@@ -41,6 +42,10 @@ export function VadKostarChatGPT() {
         description="Räkna ut exakt vad ChatGPT (GPT-4o) kostar per månad för din svenska applikation. Gratis kalkylator med live-valutakurs i SEK."
         canonical="/vad-kostar-chatgpt"
       />
+      <BreadcrumbSchema items={[
+        { name: "Hem", url: "https://aikostnad.se/" },
+        { name: "Vad kostar ChatGPT?", url: "https://aikostnad.se/vad-kostar-chatgpt" },
+      ]} />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -84,7 +89,9 @@ export function VadKostarChatGPT() {
               </li>
               <li>
                 <strong>Output-längd</strong> — GPT-4o:s output kostar 4× mer per token
-                än input. Kortare svar sparar direkt pengar.
+                än input. Kortare svar sparar direkt pengar. Behöver du ännu lägre kostnad?
+                Jämför med <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">de billigaste AI-modellerna</Link>{" "}
+                som GPT-4o mini och Claude Haiku.
               </li>
             </ul>
             <p>
@@ -96,6 +103,82 @@ export function VadKostarChatGPT() {
         </div>
 
         <Calculator initialValues={INITIAL_VALUES} />
+
+        <section className="mt-12 prose prose-gray max-w-none">
+          <h2 className="text-2xl font-bold text-gray-900">ChatGPT-kostnad per användningsfall</h2>
+          <p>
+            Tre vanliga scenarier som visar vad du kan förvänta dig per månad. Alla räknade
+            med 100 ord input + 200 ord output per fråga, 22 arbetsdagar och 1 USD = 10,50 SEK.
+          </p>
+          <div className="space-y-4 not-prose">
+            <div className="bg-green-50 border border-green-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-green-900 mb-2">Personlig användning — 50 frågor/dag</h3>
+              <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
+                <li>ChatGPT Plus-abonnemang: <strong>210 kr/mån</strong></li>
+                <li>GPT-4o API: <strong>~34 kr/mån</strong></li>
+                <li>GPT-4o mini API: <strong>~2 kr/mån</strong></li>
+              </ul>
+              <p className="text-xs text-gray-600 mt-2">
+                För enskild användning är abonnemang oftast enklast — du slipper koden och får
+                också webbsökning, bildgenerering och Custom GPTs.
+              </p>
+            </div>
+            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-indigo-900 mb-2">Småföretag — 500 frågor/dag</h3>
+              <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
+                <li>GPT-4o API: <strong>~338 kr/mån</strong></li>
+                <li>GPT-4o mini API: <strong>~20 kr/mån</strong></li>
+              </ul>
+              <p className="text-xs text-gray-600 mt-2">
+                För kundtjänst räcker mini-modellen vanligtvis, särskilt om svaren följer en
+                strukturerad mall.
+              </p>
+            </div>
+            <div className="bg-purple-50 border border-purple-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-purple-900 mb-2">SaaS — 5 000 frågor/dag</h3>
+              <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
+                <li>GPT-4o API: <strong>~3 380 kr/mån</strong></li>
+                <li>GPT-4o mini API: <strong>~200 kr/mån</strong></li>
+                <li>Hybrid (90 % mini, 10 % 4o): <strong>~520 kr/mån</strong></li>
+              </ul>
+              <p className="text-xs text-gray-600 mt-2">
+                På den här volymen är hybrid-routing nästan alltid lönsamt — se{" "}
+                <Link to="/ai-chatbot-kostnad" className="text-indigo-600 hover:underline">vår chatbot-kostnadsguide</Link>{" "}
+                för implementationsdetaljer.
+              </p>
+            </div>
+          </div>
+
+          <h2 className="text-2xl font-bold text-gray-900 mt-10">Fem sätt att sänka din ChatGPT API-kostnad</h2>
+          <ol>
+            <li>
+              <strong>Välj rätt modell för uppgiften.</strong> GPT-4o mini är 17× billigare
+              än GPT-4o per token. Använd den för klassificering, sentiment-analys och enkla
+              FAQ-svar — flaggskeppet bara där det krävs.
+            </li>
+            <li>
+              <strong>Begränsa max_tokens.</strong> Output kostar 4× mer än input. Att sätta
+              max_tokens på 200 istället för 500 sänker output-kostnaden med upp till 60 %
+              utan att kvaliteten påverkas för de flesta uppgifter.
+            </li>
+            <li>
+              <strong>Använd structured output.</strong> JSON-mode och function-calling tvingar
+              modellen till koncisa svar — vilket direkt sparar output-tokens jämfört med
+              "förklara mer i fri text".
+            </li>
+            <li>
+              <strong>Aktivera automatisk caching.</strong> OpenAI cachar prefix på minst
+              1 024 tokens automatiskt. Strukturera prompten med statisk del först
+              (system-prompt, dokument, exempel) för att maximera cache hit rate. Läs mer
+              i vår <Link to="/prompt-caching" className="text-indigo-600 hover:underline">guide om prompt caching</Link>.
+            </li>
+            <li>
+              <strong>Batcha icke-tidskritiska anrop.</strong> OpenAI:s Batch API ger 50 %
+              rabatt på asynkrona anrop som inte behöver svar inom 24 timmar — perfekt för
+              dagliga rapporter, massbearbetning av support-tickets eller embeddings i bulk.
+            </li>
+          </ol>
+        </section>
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om ChatGPT-kostnad" />
 

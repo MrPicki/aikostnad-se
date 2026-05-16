@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { models, type ModelPricing } from "../data/modelPricing";
 import { useExchangeRate } from "../hooks/useExchangeRate";
-import { formatSek, formatUsd } from "../utils/calculateCost";
+import { formatSek, formatUsd, humanSek } from "../utils/calculateCost";
 import { siteConfig } from "../config/siteConfig";
 
 type SortKey = "name" | "inputPrice" | "outputPrice" | "totalScenario" | "contextWindow";
@@ -181,7 +181,7 @@ export function ModelComparisonTable() {
   );
 }
 
-// ── Simple view ──────────────────────────────────────────────────────────────
+// ── Simple view (card grid) ───────────────────────────────────────────────────
 
 interface SimpleTableProps {
   sorted: ModelPricing[];
@@ -190,57 +190,34 @@ interface SimpleTableProps {
 
 function SimpleTable({ sorted, rate }: SimpleTableProps) {
   return (
-    <table className="w-full" role="grid">
-      <thead className="bg-gray-50 border-b border-gray-200">
-        <tr>
-          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide">
-            Modell
-          </th>
-          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide whitespace-nowrap">
-            Kostnad/fråga
-          </th>
-          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide hidden sm:table-cell">
-            Passar bäst för
-          </th>
-          <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide hidden md:table-cell">
-            Rekommendation
-          </th>
-        </tr>
-      </thead>
-      <tbody className="divide-y divide-gray-100">
-        {sorted.map((model) => {
-          const cost = scenarioCostUsd(model);
-          const badge = BADGES[model.id];
-          return (
-            <tr key={model.id} className={`hover:bg-gray-50 transition-colors ${badge ? "bg-white" : ""}`}>
-              <td className="px-4 py-3">
-                <p className="font-medium text-gray-900 text-sm">{model.name}</p>
-                <p className="text-xs text-gray-400">
-                  {model.provider}
-                  {model.category === "open-source" && (
-                    <span className="ml-1 text-blue-500">· open source</span>
-                  )}
-                </p>
-              </td>
-              <td className="px-4 py-3 whitespace-nowrap">
-                <p className="text-sm font-semibold text-gray-900">{formatSek(cost * rate)}</p>
-                <p className="text-xs text-gray-400">{formatUsd(cost)}</p>
-              </td>
-              <td className="px-4 py-3 text-xs text-gray-500 hidden sm:table-cell max-w-xs">
-                {model.bestFor}
-              </td>
-              <td className="px-4 py-3 hidden md:table-cell">
-                {badge && (
-                  <span className={`inline-block px-2 py-0.5 text-xs font-medium rounded-full ${badge.color}`}>
-                    {badge.label}
-                  </span>
-                )}
-              </td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+      {sorted.map((model) => {
+        const cost = scenarioCostUsd(model);
+        const badge = BADGES[model.id];
+        return (
+          <div
+            key={model.id}
+            className={`rounded-xl border p-4 bg-white ${badge ? "border-indigo-100 shadow-sm" : "border-gray-100"}`}
+          >
+            {badge && (
+              <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded-full mb-3 ${badge.color}`}>
+                {badge.label}
+              </span>
+            )}
+            <p className="font-semibold text-gray-900 text-sm leading-tight">{model.name}</p>
+            <p className="text-xs text-gray-400 mb-3">
+              {model.provider}
+              {model.category === "open-source" && (
+                <span className="ml-1 text-blue-500">· open source</span>
+              )}
+            </p>
+            <p className="text-xl font-bold text-gray-900">{humanSek(cost * rate)}</p>
+            <p className="text-xs text-gray-400 mb-3">/fråga</p>
+            <p className="text-xs text-gray-500 leading-relaxed">{model.bestFor}</p>
+          </div>
+        );
+      })}
+    </div>
   );
 }
 

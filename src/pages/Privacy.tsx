@@ -1,6 +1,7 @@
 import { SEO } from "../components/SEO";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { siteConfig } from "../config/siteConfig";
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -38,7 +39,7 @@ export function Privacy() {
             Integritetspolicy
           </h1>
           <p className="text-gray-500 text-sm">
-            Senast uppdaterad: 2026-05-15
+            Senast uppdaterad: 2026-05-16
           </p>
 
           <section className="card space-y-4">
@@ -46,10 +47,16 @@ export function Privacy() {
               1. Personuppgiftsansvarig
             </h2>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Aikostnad.se är en gratistjänst. Tjänsten tillhandahålls utan
-              organisationsnummer eller juridisk person just nu under MVP-fasen.
-              Om du har frågor om behandlingen av dina personuppgifter kan du
-              kontakta oss via e-post.
+              Aikostnad.se är en gratistjänst som drivs som ett oberoende
+              initiativ från Sverige. Läs mer om sajten på{" "}
+              <Link to="/om" className="text-indigo-600 hover:underline">
+                Om Aikostnad.se
+              </Link>
+              . Har du frågor om behandlingen av dina personuppgifter, kontakta
+              oss på{" "}
+              <a href={`mailto:${siteConfig.contactEmail}`} className="text-indigo-600 hover:underline">
+                {siteConfig.contactEmail}
+              </a>.
             </p>
           </section>
 
@@ -70,10 +77,17 @@ export function Privacy() {
                 personuppgifter lagras.
               </p>
               <p>
-                <strong>E-postadresser (ej aktivt):</strong> Om vi i framtiden
-                lägger till ett e-postformuläret (t.ex. för prisnotiser) kommer
-                du att ge ditt explicita samtycke, och vi kommer tydligt
-                informera om hur adressen används.
+                <strong>E-postadresser (guide-utskick):</strong> Om du väljer att
+                få en guide skickad till dig anger du din e-postadress i ett formulär
+                och ger ditt explicita samtycke. Din adress sparas i vår databas
+                (Supabase, se avsnitt 4) och används för att skicka den begärda
+                guiden via Resend. Om du också samtycker till marknadsföring kan vi
+                skicka enstaka uppdateringar om nya AI-priser och guider (max ~1/mån).
+                Du kan när som helst begära radering genom att skriva till{" "}
+                <a href={`mailto:${siteConfig.contactEmail}`} className="text-indigo-600 hover:underline">
+                  {siteConfig.contactEmail}
+                </a>{" "}
+                eller svara på ett av våra mail. Vi delar aldrig din adress med tredje part.
               </p>
             </div>
           </section>
@@ -110,6 +124,16 @@ export function Privacy() {
                 Vercel kan logga teknisk information om förfrågningar (IP,
                 user-agent) som en del av normal serverloggning.
               </p>
+              <p>
+                <strong>Supabase:</strong> Vi använder Supabase (EU-region) för att
+                spara e-postadresser som lämnats i guide-formuläret. Data lagras
+                krypterat och nås bara via vår backend med service-role-nyckel.
+              </p>
+              <p>
+                <strong>Resend:</strong> Guide-mail skickas via Resend (USA). Din
+                e-postadress och guideinnehållet skickas till Resend för leverans.
+                Resend&apos;s datapolicy finns på resend.com/legal/privacy-policy.
+              </p>
             </div>
           </section>
 
@@ -120,12 +144,15 @@ export function Privacy() {
             <div className="text-gray-600 text-sm leading-relaxed space-y-3">
               <p>
                 Enligt GDPR har du rätt att begära information om, rättelse av
-                och radering av dina personuppgifter. Eftersom vi i nuläget inte
-                samlar in identifieringsbara personuppgifter om besökare är
-                detta praktiskt sett inte tillämpligt för kalkylatortjänsten.
+                och radering av dina personuppgifter. Om du lämnat din
+                e-postadress i guide-formuläret kan du när som helst begära att
+                vi raderar den.
               </p>
               <p>
-                Har du frågor — kontakta oss via e-post.
+                Har du frågor — kontakta oss på{" "}
+              <a href={`mailto:${siteConfig.contactEmail}`} className="text-indigo-600 hover:underline">
+                {siteConfig.contactEmail}
+              </a>.
               </p>
             </div>
           </section>

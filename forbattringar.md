@@ -172,6 +172,50 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
 
 ---
 
+## 🔵 Sprint D — SEO-auktoritet & organisk trafik (2026-05-16)
+
+**Bakgrund:** SEO-audit 2026-05-16 gav övergripande 7,2/10. Tekniskt golv är solid men E-E-A-T är 3/10 och internlänkar 5/10. Detta blockerar ranking på huvudkeywords. Punkterna nedan är ordnade efter ROI.
+
+### Hög impact
+
+- [ ] **Bygg `/om`-sida med Person-schema + E-E-A-T-content**
+  - Sajten saknar helt auktorsignaler. Privacy säger "utan organisationsnummer" — direkt negativt
+  - Behöver: vem driver sajten, varför, hur priser verifieras, ev. LinkedIn-länk för Person-schema sameAs
+  - Lägg JSON-LD Person + sameAs (LinkedIn/GitHub)
+  - Justera Privacy.tsx så formuleringen "utan organisationsnummer" inte underminerar trovärdighet
+
+- [ ] **Variera anchor text i Home + Footer + lägg kontextuella länkar**
+  - Idag identisk anchor "Vad kostar ChatGPT?" från både Home och Footer → noll signal till Google
+  - Varianter: "Räkna på GPT-4o och Plus-abonnemang", "Claude Sonnet och Haiku-kostnader" etc.
+  - Lägg kontextuella länkar i brödtext på alla 5 landningssidor (inte bara i "Vill du jämföra"-box)
+
+- [ ] **Lägg `BreadcrumbList`-schema på alla 5 landningssidor**
+  - Bara `/token-kalkylator` har breadcrumb-schema idag
+  - Ger breadcrumb-rich-snippet i SERP
+
+- [ ] **Skriv 3 långa artiklar (1500+ ord) som hub-content**
+  - `/chatgpt-vs-claude` — hög intent, long-tail keyword
+  - `/ai-chatbot-kostnad` — listad i forbattringar.md sedan tidigare som ogjord
+  - `/prompt-caching` — låg konkurrens, hög teknisk auktoritet
+  - Varje artikel ska länka till alla relevanta landningssidor med varierad anchor text + citera primärkällor (Anthropic, OpenAI prislistor)
+
+### Medium impact
+
+- [ ] **Dubbla content på de 5 landningssidorna till 800–1500 ord**
+  - Idag 200–350 ord vardera → riskerar "thin content"-flagga
+  - Lägg till: prisexempel per scenario, "När ska du välja X?", citat med källänk
+
+- [ ] **Lägg `Product`/`OfferCatalog`-schema på SubscriptionTable**
+  - Kan ge price-rich-snippets för "ChatGPT Plus pris" osv.
+
+### Låg impact (men billigt)
+
+- [ ] **Lyft tokenräknaren till Home main-content med CTA-card**
+  - Idag bara länkad från Header + Footer
+  - Ett card mellan ModelComparisonTable och guide-links: "Klistra in din text — räkna tokens exakt"
+
+---
+
 ## Rekommenderad sprint-ordning
 
 **Sprint A (1 vecka)** — Fixa faktarisken så sajten är trovärdig:

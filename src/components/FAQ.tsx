@@ -73,6 +73,16 @@ const faqs: FAQItem[] = [
       "Vi hämtar live-valutakursen (USD/SEK) dagligen från Frankfurter API. Om hämtningen misslyckas används en fallback-kurs på 10,50 kr. Den aktuella kursen visas alltid i kalkylatorn och i abonnemangstabellen.",
   },
   {
+    question: "Hur ofta uppdateras AI-priserna?",
+    answer:
+      "Vi verifierar priserna månadsvis mot respektive leverantörs prissida. Datumet för senaste verifiering visas i kalkylatorn och i sidfoten. Om du hittar ett felaktigt pris, hör gärna av dig till hej@aikostnad.se.",
+  },
+  {
+    question: "Kan jag använda kalkylatorn för att beräkna kostnad för mitt SaaS?",
+    answer:
+      "Ja. Fyll i antal användare, genomsnittliga frågor per dag och typisk längd på input och output. Kalkylatorn ger dig månads- och årskostnad för hela din användarbas. Kopiera länken under resultatet för att spara och dela din kalkyl.",
+  },
+  {
     question: "Stöder kalkylatorn Gemini, DeepSeek och Llama?",
     answer:
       "Ja. Kalkylatorn täcker Gemini 2.5 Flash och Pro (Google), DeepSeek V3.2 och R1, Llama 3.3 70B (via Groq), Mistral Large och Small, samt alla stora OpenAI- och Anthropic-modeller — 14 modeller totalt.",

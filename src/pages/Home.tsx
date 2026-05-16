@@ -9,6 +9,7 @@ import { FAQ } from "../components/FAQ";
 import { HeroSection } from "../components/HeroSection";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { siteConfig } from "../config/siteConfig";
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -54,117 +55,161 @@ export function Home() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-        {/* 1. Hero */}
+        {/* 1. Hero — minimal, luftig */}
         <HeroSection />
 
-        {/* 2. Fasta abonnemang — konsumentens fråga */}
-        <section id="abonnemang" className="mb-16">
-          <SubscriptionTable />
-        </section>
-
-        {/* 3. Mänskliga scenarion */}
-        <section id="scenarion" className="mb-16">
-          <UseCaseScenarios onSelect={handleScenario} />
-        </section>
-
-        {/* 4. Divider */}
-        <div className="mb-10 border-t border-gray-200 pt-10">
-          <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
-            Räkna på din specifika idé
-          </p>
-          <h2 className="text-2xl font-bold text-gray-900 mb-1">
-            AI-kostnadskalkylator
-          </h2>
-          <p className="text-sm text-gray-500">
-            Beskriv vad du vill bygga — eller räkna manuellt med exakta siffror.
-          </p>
-        </div>
-
-        {/* 5. Kalkylator med enkelt/avancerat läge */}
-        <section id="kalkylator" className="mb-16">
+        {/* 2. Kalkylator — sidans primära funktion */}
+        <section id="kalkylator" className="mb-24">
           <CalculatorSection initialValues={calcValues} />
         </section>
 
-        {/* 6. Modell-jämförelse */}
-        <section id="jamforelse" className="mb-16">
+        {/* 3. Scenarion — inspiration och snabbval */}
+        <section id="scenarion" className="mb-24">
+          <UseCaseScenarios onSelect={handleScenario} />
+        </section>
+
+        {/* 4. Fasta abonnemang — i grå yta för visuell rytm */}
+        <div className="bg-gray-50 rounded-2xl px-6 py-8 mb-24">
+          <section id="abonnemang">
+            <SubscriptionTable />
+          </section>
+        </div>
+
+        {/* 5. Modell-jämförelse */}
+        <section id="jamforelse" className="mb-24">
           <ModelComparisonTable />
         </section>
 
-        {/* 7. Hur det räknas */}
-        <section className="mb-16 bg-gray-50 rounded-xl border border-gray-200 p-6">
-          <h2 className="text-base font-bold text-gray-900 mb-4">Hur kalkylatorn räknar</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
-            <div>
-              <p className="font-semibold text-gray-800 mb-1">Korrekt för svenska</p>
-              <p className="text-gray-500 leading-relaxed">
-                Svenska texter kräver 1,3 tokens/ord (engelska 0,75) p.g.a.
-                å/ä/ö och långa sammansatta ord.
-              </p>
+        {/* 5b. Tokenräknare-CTA */}
+        <section className="mb-24">
+          <Link
+            to="/token-kalkylator"
+            className="block rounded-2xl border border-indigo-100 bg-indigo-50/50 hover:bg-indigo-50 transition-all p-6 sm:p-8 group"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+              <div className="text-3xl">📝</div>
+              <div className="flex-1">
+                <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-1">
+                  Bonus-verktyg
+                </p>
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 group-hover:text-indigo-700 transition-colors">
+                  Klistra in din text — räkna tokens exakt
+                </h2>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  Vet du exakt hur lång din prompt är i tokens? Klistra in text
+                  och få token-antal + kostnad per modell direkt — perfekt innan
+                  du anropar API:t.
+                </p>
+              </div>
+              <div className="text-indigo-600 group-hover:translate-x-1 transition-transform shrink-0 hidden sm:block">
+                →
+              </div>
             </div>
-            <div>
-              <p className="font-semibold text-gray-800 mb-1">Live-valutakurs</p>
-              <p className="text-gray-500 leading-relaxed">
-                SEK/USD hämtas dagligen via Frankfurter API. Faller det bort
-                används fallback-kursen 10,50 kr.
-              </p>
-            </div>
-            <div>
-              <p className="font-semibold text-gray-800 mb-1">Verifierade priser</p>
-              <p className="text-gray-500 leading-relaxed">
-                Priser kontrolleras månadsvis mot leverantörernas prissidor och
-                datumstämplas per modell.
-              </p>
-            </div>
-          </div>
+          </Link>
         </section>
 
-        {/* 8. Fler guider */}
-        <section className="mb-16">
+        {/* 6. Fler guider */}
+        <section className="mb-24">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Fler prisguider</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link to="/vad-kostar-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vad kostar AI?</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Komplett prisguide för AI 2026</p>
               <p className="text-sm text-gray-500">
-                Komplett guide för privatpersoner och företag — abonnemang,
-                API och gratis alternativ.
+                Översikt för privatpersoner och företag — abonnemang,
+                API-priser och gratis alternativ.
               </p>
             </Link>
             <Link to="/billigaste-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Billigaste AI 2026</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vilken AI är billigast just nu?</p>
               <p className="text-sm text-gray-500">
-                Vilket AI-verktyg ger mest för pengarna? Jämförelse per
+                Jämför mini-modellerna från OpenAI, Anthropic och Google per
                 användningsfall.
               </p>
             </Link>
-            <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vad kostar ChatGPT?</p>
+            <Link to="/chatgpt-vs-claude" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">ChatGPT vs Claude — vilken passar?</p>
               <p className="text-sm text-gray-500">
-                Detaljguide och kalkylator för GPT-4o API-kostnader.
+                Pris, svenska språk, kodning och multimodalt — komplett
+                jämförelse med konkreta månadskostnader.
+              </p>
+            </Link>
+            <Link to="/ai-chatbot-kostnad" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vad kostar en AI-chatbot?</p>
+              <p className="text-sm text-gray-500">
+                Konkreta budgetexempel för hobby, småföretag och B2C — i SEK.
+                Plus fyra sätt att sänka notan.
+              </p>
+            </Link>
+            <Link to="/prompt-caching" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Prompt caching — halvera AI-notan</p>
+              <p className="text-sm text-gray-500">
+                Hur du sparar 40–60 % på Claude och GPT-4o med rätt
+                cache-strategi. Teknisk djupguide.
+              </p>
+            </Link>
+            <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Räkna på ChatGPT API-kostnader</p>
+              <p className="text-sm text-gray-500">
+                Detaljguide och kalkylator för GPT-4o och GPT-4o mini.
               </p>
             </Link>
             <Link to="/claude-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Claude pris</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Claude Sonnet och Haiku-kostnader</p>
               <p className="text-sm text-gray-500">
-                Vad kostar Claude Sonnet och Haiku? Kalkylera och jämför.
+                Vad kostar Anthropics modeller per månad? Kalkylera och
+                jämför med ChatGPT.
               </p>
             </Link>
             <Link to="/gpt-4-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">GPT-4.1 pris</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Jämför GPT-4.1, GPT-4o och mini</p>
               <p className="text-sm text-gray-500">
-                Räkna på GPT-4.1 och jämför med GPT-4o och Claude.
+                Räkna på alla GPT-4-varianter och se vilken som passar bäst.
               </p>
             </Link>
             <Link to="/token-kalkylator" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Tokenräknare</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Räkna tokens i valfri text</p>
               <p className="text-sm text-gray-500">
-                Klistra in valfri text och se exakt hur många tokens den
-                innehåller — och vad det kostar.
+                Klistra in en text och se exakt hur många tokens den
+                innehåller — och vad det kostar per modell.
               </p>
             </Link>
           </div>
         </section>
 
-        {/* 9. FAQ */}
+        {/* 7. Hur kalkylatorn räknar — kollapsad */}
+        <details className="mb-20 group">
+          <summary className="cursor-pointer text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors list-none flex items-center gap-2">
+            <span className="group-open:rotate-90 transition-transform inline-block">▶</span>
+            Hur kalkylatorn räknar
+          </summary>
+          <div className="mt-4 bg-gray-50 rounded-xl border border-gray-200 p-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
+              <div>
+                <p className="font-semibold text-gray-800 mb-1">Korrekt för svenska</p>
+                <p className="text-gray-500 leading-relaxed">
+                  Svenska texter kräver 1,3 tokens/ord (engelska 0,75) p.g.a.
+                  å/ä/ö och långa sammansatta ord.
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold text-gray-800 mb-1">Live-valutakurs</p>
+                <p className="text-gray-500 leading-relaxed">
+                  SEK/USD hämtas dagligen via Frankfurter API. Faller det bort
+                  används fallback-kursen 10,50 kr.
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold text-gray-800 mb-1">Verifierade priser</p>
+                <p className="text-gray-500 leading-relaxed">
+                  Priser kontrolleras månadsvis mot leverantörernas prissidor.
+                  Senast verifierade {siteConfig.pricesLastVerified}.
+                </p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        {/* 8. FAQ */}
         <section id="faq" className="mb-10">
           <FAQ />
         </section>

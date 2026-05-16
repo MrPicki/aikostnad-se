@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useExchangeRate } from "../hooks/useExchangeRate";
 import { siteConfig } from "../config/siteConfig";
 
@@ -70,8 +71,27 @@ function formatSek(usd: number, rate: number): string {
 export function SubscriptionTable() {
   const { rate } = useExchangeRate();
 
+  const offerCatalogSchema = {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    name: "AI-abonnemang jämförelse",
+    itemListElement: PLANS.map((p, i) => ({
+      "@type": "Offer",
+      position: i + 1,
+      name: p.service,
+      description: p.includes,
+      seller: { "@type": "Organization", name: p.provider },
+      price: Math.round(p.priceUsd * rate),
+      priceCurrency: "SEK",
+      category: p.bestFor,
+    })),
+  };
+
   return (
     <section aria-label="AI-abonnemang jämförelse">
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(offerCatalogSchema)}</script>
+      </Helmet>
       <div className="mb-5">
         <h2 className="text-2xl font-bold text-gray-900">
           Vad kostar AI per månad?
