@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { SEO } from "../components/SEO";
-import { Calculator, type CalcInitialValues } from "../components/Calculator";
+import { CalculatorSection } from "../components/CalculatorSection";
+import type { CalcInitialValues } from "../components/Calculator";
 import { ModelComparisonTable } from "../components/ModelComparisonTable";
 import { SubscriptionTable } from "../components/SubscriptionTable";
 import { UseCaseScenarios } from "../components/UseCaseScenarios";
@@ -66,23 +67,22 @@ export function Home() {
           <UseCaseScenarios onSelect={handleScenario} />
         </section>
 
-        {/* 4. Divider: nu börjar det tekniska */}
-        <div className="mb-12 border-t border-gray-200 pt-10">
+        {/* 4. Divider */}
+        <div className="mb-10 border-t border-gray-200 pt-10">
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-2">
-            För dig som bygger med AI
+            Räkna på din specifika idé
           </p>
           <h2 className="text-2xl font-bold text-gray-900 mb-1">
-            Räkna exakt — API-kostnadskalkylator
+            AI-kostnadskalkylator
           </h2>
           <p className="text-sm text-gray-500">
-            Välj modell, ange volym och se månadskostnad ned till öret. Optimalt för
-            utvecklare och tekniska beslutsfattare.
+            Beskriv vad du vill bygga — eller räkna manuellt med exakta siffror.
           </p>
         </div>
 
-        {/* 5. API-kalkylator */}
+        {/* 5. Kalkylator med enkelt/avancerat läge */}
         <section id="kalkylator" className="mb-16">
-          <Calculator initialValues={calcValues} />
+          <CalculatorSection initialValues={calcValues} />
         </section>
 
         {/* 6. Modell-jämförelse */}
