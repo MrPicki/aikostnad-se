@@ -21,6 +21,12 @@ const ClaudePris = lazy(() =>
 const Gpt4Pris = lazy(() =>
   import("./pages/Gpt4Pris").then((m) => ({ default: m.Gpt4Pris }))
 );
+const VadKostarAi = lazy(() =>
+  import("./pages/VadKostarAi").then((m) => ({ default: m.VadKostarAi }))
+);
+const BilligasteAi = lazy(() =>
+  import("./pages/BilligasteAi").then((m) => ({ default: m.BilligasteAi }))
+);
 
 function App() {
   return (
@@ -37,6 +43,8 @@ function App() {
                 <Route path="/vad-kostar-chatgpt" element={<VadKostarChatGPT />} />
                 <Route path="/claude-pris" element={<ClaudePris />} />
                 <Route path="/gpt-4-pris" element={<Gpt4Pris />} />
+                <Route path="/vad-kostar-ai" element={<VadKostarAi />} />
+                <Route path="/billigaste-ai" element={<BilligasteAi />} />
               </Routes>
             </Suspense>
           </div>
