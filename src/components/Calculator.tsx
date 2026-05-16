@@ -4,8 +4,8 @@ import { models, defaultModelId } from "../data/modelPricing";
 import { siteConfig } from "../config/siteConfig";
 import {
   calculateCost,
-  formatSek,
   formatUsd,
+  humanSek,
   validateInputs,
 } from "../utils/calculateCost";
 import { useExchangeRate } from "../hooks/useExchangeRate";
@@ -121,6 +121,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
     if (initialValues.modelId !== undefined) setModelId(initialValues.modelId);
   }, [initialValues]);
 
+  const [showTokenDetails, setShowTokenDetails] = useState(false);
   const [copied, setCopied] = useState(false);
   async function copyShareLink() {
     try {
@@ -311,53 +312,57 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 <ResultCard
                   label="Total kostnad / år"
                   sek={result.yearlyCostSek}
-                  usd={result.yearlyCostUsd}
                   highlight
                 />
                 <ResultCard
                   label="Per månad"
                   sek={result.monthlyCostSek}
-                  usd={result.monthlyCostUsd}
                 />
                 <ResultCard
                   label="Per dag"
                   sek={result.dailyCostSek}
-                  usd={result.dailyCostUsd}
                 />
                 <ResultCard
                   label="Per fråga"
                   sek={result.costPerRequestSek}
-                  usd={result.costPerRequestUsd}
                 />
               </div>
 
-              <div className="mt-4 bg-gray-50 rounded-xl p-4 text-sm space-y-2">
-                <h3 className="font-medium text-gray-700 text-xs uppercase tracking-wide">
-                  Tokendetaljer / månad
-                </h3>
-                <div className="flex justify-between text-gray-600">
-                  <span>Input-tokens</span>
-                  <span>{result.monthlyInputTokens.toLocaleString("sv-SE")}</span>
-                </div>
-                <div className="flex justify-between text-gray-600">
-                  <span>Output-tokens</span>
-                  <span>{result.monthlyOutputTokens.toLocaleString("sv-SE")}</span>
-                </div>
-                <div className="border-t border-gray-200 pt-2 flex justify-between text-gray-600">
-                  <span>Input-kostnad</span>
-                  <span>{formatUsd(result.inputCostUsd)}</span>
-                </div>
-                <div className="flex justify-between text-gray-600">
-                  <span>Output-kostnad</span>
-                  <span>{formatUsd(result.outputCostUsd)}</span>
-                </div>
-                <div className="flex justify-between font-medium text-gray-800">
-                  <span>Tokens per fråga</span>
-                  <span>
-                    {result.inputTokensPerRequest} in +{" "}
-                    {result.outputTokensPerRequest} out
-                  </span>
-                </div>
+              <div className="mt-4">
+                <button
+                  onClick={() => setShowTokenDetails((v) => !v)}
+                  className="text-xs text-gray-400 hover:text-gray-600 flex items-center gap-1.5 transition-colors"
+                >
+                  <span>{showTokenDetails ? "▲" : "▼"}</span>
+                  {showTokenDetails ? "Dölj tokendetaljer" : "Visa tokendetaljer"}
+                </button>
+                {showTokenDetails && (
+                  <div className="mt-3 bg-gray-50 rounded-xl p-4 text-sm space-y-2">
+                    <div className="flex justify-between text-gray-600">
+                      <span>Input-tokens/mån</span>
+                      <span>{result.monthlyInputTokens.toLocaleString("sv-SE")}</span>
+                    </div>
+                    <div className="flex justify-between text-gray-600">
+                      <span>Output-tokens/mån</span>
+                      <span>{result.monthlyOutputTokens.toLocaleString("sv-SE")}</span>
+                    </div>
+                    <div className="border-t border-gray-200 pt-2 flex justify-between text-gray-600">
+                      <span>Input-kostnad</span>
+                      <span>{formatUsd(result.inputCostUsd)}</span>
+                    </div>
+                    <div className="flex justify-between text-gray-600">
+                      <span>Output-kostnad</span>
+                      <span>{formatUsd(result.outputCostUsd)}</span>
+                    </div>
+                    <div className="flex justify-between font-medium text-gray-800">
+                      <span>Tokens per fråga</span>
+                      <span>
+                        {result.inputTokensPerRequest} in +{" "}
+                        {result.outputTokensPerRequest} out
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <p className="text-xs text-gray-400">
@@ -403,11 +408,10 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
 interface ResultCardProps {
   label: string;
   sek: number;
-  usd: number;
   highlight?: boolean;
 }
 
-function ResultCard({ label, sek, usd, highlight }: ResultCardProps) {
+function ResultCard({ label, sek, highlight }: ResultCardProps) {
   return (
     <div
       className={`rounded-xl p-3 sm:p-4 min-w-0 ${highlight ? "bg-indigo-600 text-white" : "bg-gray-50"}`}
@@ -420,10 +424,7 @@ function ResultCard({ label, sek, usd, highlight }: ResultCardProps) {
       <p
         className={`text-lg sm:text-xl font-bold break-words ${highlight ? "text-white" : "text-gray-900"}`}
       >
-        {formatSek(sek)}
-      </p>
-      <p className={`text-xs truncate ${highlight ? "text-indigo-200" : "text-gray-400"}`}>
-        {formatUsd(usd)}
+        {humanSek(sek)}
       </p>
     </div>
   );

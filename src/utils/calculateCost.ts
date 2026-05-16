@@ -84,6 +84,12 @@ export function calculateCost(inputs: CalculatorInputs): CalculationResult {
   };
 }
 
+export function humanSek(sek: number): string {
+  if (sek < 0.01) return "< 1 öre";
+  if (sek < 1) return `${Math.round(sek * 100)} öre`;
+  return formatSek(Math.round(sek));
+}
+
 export function formatSek(amount: number): string {
   if (amount < 0.01) {
     return `${(amount * 100).toFixed(4)} öre`;

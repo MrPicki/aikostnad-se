@@ -83,48 +83,44 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
   const sek = (usd: number) => formatSek(usd * rate);
 
   return (
-    <section className="card" aria-label="Enkel AI-kostnadsestimering">
+    <section aria-label="Enkel AI-kostnadsestimering">
       {(status === "idle" || status === "error") && (
-        <div>
-          <label htmlFor="estimate-input" className="block text-sm font-semibold text-gray-900 mb-1">
-            Vad vill du bygga med AI?
-          </label>
-          <p className="text-xs text-gray-500 mb-3">
-            Beskriv din idé kort — vi uppskattar ungefärlig kostnad per månad.
-          </p>
-          <textarea
-            id="estimate-input"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Exempel: Jag vill bygga en chatbot för min webbshop som svarar på cirka 500 kundfrågor per dag."
-            className="input-field resize-none"
-            rows={4}
-            maxLength={800}
-          />
-          <div className="flex items-center justify-between mt-1.5 mb-4">
-            <p className="text-xs text-gray-400">{text.length}/800 tecken</p>
-            <p className="text-xs text-gray-400 hidden sm:block">Ctrl+Enter för att skicka</p>
+        <div className="max-w-2xl mx-auto">
+          <div className="relative">
+            <textarea
+              id="estimate-input"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Beskriv din idé — t.ex. &ldquo;En chatbot för min webbshop som svarar på 500 kundfrågor per dag.&rdquo;"
+              className="w-full rounded-2xl border border-gray-200 shadow-sm bg-white px-5 pt-5 pb-16 text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+              rows={5}
+              maxLength={800}
+            />
+            <div className="absolute bottom-3 left-5 right-3 flex items-center justify-between">
+              <p className="text-xs text-gray-400">{text.length}/800</p>
+              <button
+                onClick={handleSubmit}
+                disabled={!text.trim()}
+                className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"
+              >
+                Beräkna →
+              </button>
+            </div>
           </div>
-
           {status === "error" && (
-            <p className="text-sm text-red-600 bg-red-50 rounded-lg px-3 py-2 mb-4">
+            <p className="text-sm text-red-600 bg-red-50 rounded-xl px-4 py-3 mt-3">
               {errorMsg}
             </p>
           )}
-
-          <button
-            onClick={handleSubmit}
-            disabled={!text.trim()}
-            className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed text-sm"
-          >
-            Beräkna ungefärlig kostnad
-          </button>
+          <p className="text-xs text-gray-400 text-center mt-3">
+            Ctrl+Enter för att skicka · Gratis · Ingen inloggning krävs
+          </p>
         </div>
       )}
 
       {status === "loading" && (
-        <div className="flex flex-col items-center justify-center py-14 text-gray-500">
+        <div className="flex flex-col items-center justify-center py-16 text-gray-500 max-w-2xl mx-auto">
           <div className="w-8 h-8 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin mb-4" />
           <p className="text-sm font-medium text-gray-700">Analyserar din idé…</p>
           <p className="text-xs text-gray-400 mt-1">Brukar ta 3–5 sekunder</p>
@@ -132,12 +128,14 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
       )}
 
       {status === "result" && result && (
-        <EstimateResult
-          result={result}
-          sek={sek}
-          onReset={handleReset}
-          onUseInCalculator={onUseInCalculator}
-        />
+        <div className="card">
+          <EstimateResultView
+            result={result}
+            sek={sek}
+            onReset={handleReset}
+            onUseInCalculator={onUseInCalculator}
+          />
+        </div>
       )}
     </section>
   );
@@ -150,7 +148,7 @@ interface ResultProps {
   onUseInCalculator: (values: CalcInitialValues) => void;
 }
 
-function EstimateResult({ result, sek, onReset, onUseInCalculator }: ResultProps) {
+function EstimateResultView({ result, sek, onReset, onUseInCalculator }: ResultProps) {
   const { assumptions } = result;
 
   const confidenceMap = {
@@ -176,7 +174,7 @@ function EstimateResult({ result, sek, onReset, onUseInCalculator }: ResultProps
 
   return (
     <div className="space-y-5 animate-fade-in-up">
-      {/* Header: scenario + confidence */}
+      {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-0.5">
@@ -189,7 +187,7 @@ function EstimateResult({ result, sek, onReset, onUseInCalculator }: ResultProps
         </span>
       </div>
 
-      {/* Cost range card */}
+      {/* Cost range */}
       <div className="bg-indigo-600 rounded-xl p-5 text-white">
         <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wide mb-2">
           Grovt uppskattad kostnad
