@@ -4,7 +4,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SEOProvider } from "./components/SEO";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { DotBackground } from "./components/DotBackground";
 import { Home } from "./pages/Home";
 
 const TokenCalculatorPage = lazy(() =>
@@ -27,8 +26,7 @@ function App() {
   return (
     <SEOProvider>
       <BrowserRouter>
-        <DotBackground />
-        <div className="relative min-h-screen flex flex-col w-full overflow-x-hidden" style={{ zIndex: 1 }}>
+        <div className="min-h-screen flex flex-col w-full overflow-x-hidden bg-white">
           <Header />
           <div className="flex-1">
             <Suspense fallback={<div className="flex-1 min-h-[60vh]" />}>
