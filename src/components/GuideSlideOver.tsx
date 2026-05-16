@@ -11,7 +11,6 @@ interface Props {
 }
 
 export function GuideSlideOver({ guide, open, onClose, modelName, source }: Props) {
-  // Esc-key closes
   useEffect(() => {
     if (!open) return;
     function onKey(e: KeyboardEvent) {
@@ -25,178 +24,76 @@ export function GuideSlideOver({ guide, open, onClose, modelName, source }: Prop
     };
   }, [open, onClose]);
 
+  if (!open) return null;
+
   return (
-    <div
-      className={`fixed inset-0 z-50 ${open ? "" : "pointer-events-none"}`}
-      aria-hidden={!open}
-    >
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
-        className={`absolute inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity duration-300 ${
-          open ? "opacity-100" : "opacity-0"
-        }`}
+        className="absolute inset-0 bg-gray-900/50 backdrop-blur-sm"
         onClick={onClose}
       />
 
-      {/* Panel */}
-      <aside
+      {/* Modal */}
+      <div
         role="dialog"
         aria-modal="true"
-        aria-labelledby="guide-title"
-        className={`absolute right-0 top-0 h-full w-full sm:w-[600px] lg:w-[680px] bg-white shadow-2xl transition-transform duration-300 ease-out ${
-          open ? "translate-x-0" : "translate-x-full"
-        }`}
+        aria-labelledby="guide-modal-title"
+        className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden animate-fade-in-up"
       >
-        <div className="h-full overflow-y-auto">
-          {/* Header */}
-          <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between z-10">
+        {/* Header */}
+        <div className="bg-indigo-600 px-6 py-5">
+          <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide">
-                Steg-för-steg guide
+              <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wide mb-1">
+                Steg-för-steg-guide — gratis
               </p>
-              <h2 id="guide-title" className="text-lg font-bold text-gray-900 leading-tight">
-                {guide.providerName}
+              <h2 id="guide-modal-title" className="text-lg font-bold text-white leading-tight">
+                Kom igång med {modelName || guide.providerName}
               </h2>
             </div>
             <button
               onClick={onClose}
-              className="p-2 rounded-lg hover:bg-gray-100 text-gray-500 hover:text-gray-700 transition-colors"
-              aria-label="Stäng guide"
+              className="p-1.5 rounded-lg text-indigo-300 hover:text-white hover:bg-indigo-500 transition-colors shrink-0"
+              aria-label="Stäng"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                 <path d="M18 6L6 18M6 6l12 12" />
               </svg>
             </button>
           </div>
+        </div>
 
-          {/* Body */}
-          <div className="px-6 py-6 space-y-8">
-            {/* Intro */}
-            <section>
-              <p className="text-base text-gray-700 leading-relaxed">{guide.intro}</p>
-            </section>
+        {/* What's in the guide */}
+        <div className="px-6 pt-5 pb-4">
+          <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+            Guiden innehåller
+          </p>
+          <ul className="space-y-2 mb-5">
+            {guide.whatYouLearn.slice(0, 4).map((item, i) => (
+              <li key={i} className="flex items-start gap-2.5 text-sm text-gray-700">
+                <span className="text-indigo-500 mt-0.5 shrink-0">✓</span>
+                <span className="leading-snug">{item}</span>
+              </li>
+            ))}
+          </ul>
 
-            {/* What you'll learn */}
-            <section>
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">
-                Vad du lär dig
-              </h3>
-              <ul className="space-y-2">
-                {guide.whatYouLearn.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2.5 text-sm text-gray-700">
-                    <span className="text-indigo-500 mt-0.5">✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Prerequisites */}
-            <section>
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">
-                Vad du behöver
-              </h3>
-              <ul className="space-y-1.5">
-                {guide.prerequisites.map((item, i) => (
-                  <li key={i} className="text-sm text-gray-700 leading-relaxed">
-                    • {item}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Steps */}
-            <section>
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-4">
-                Steg
-              </h3>
-              <ol className="space-y-5">
-                {guide.steps.map((step, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="flex-shrink-0 w-7 h-7 rounded-full bg-indigo-100 text-indigo-700 text-sm font-bold flex items-center justify-center">
-                      {i + 1}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-gray-900 text-sm mb-1">{step.title}</h4>
-                      <p className="text-sm text-gray-600 leading-relaxed mb-2">
-                        {step.description}
-                      </p>
-                      {step.code && (
-                        <pre className="text-xs bg-gray-900 text-gray-100 rounded-lg px-3 py-3 overflow-x-auto leading-relaxed font-mono">
-                          <code>{step.code}</code>
-                        </pre>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </section>
-
-            {/* Cost tips */}
-            <section className="bg-green-50 border border-green-100 rounded-xl p-5">
-              <h3 className="text-sm font-bold text-green-900 mb-3">💡 Spar pengar</h3>
-              <ul className="space-y-2">
-                {guide.costTips.map((tip, i) => (
-                  <li key={i} className="text-sm text-gray-700 leading-relaxed">
-                    <span className="text-green-600 mr-1.5">→</span>
-                    {tip}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Common mistakes */}
-            <section className="bg-amber-50 border border-amber-100 rounded-xl p-5">
-              <h3 className="text-sm font-bold text-amber-900 mb-3">⚠ Undvik vanliga misstag</h3>
-              <ul className="space-y-2">
-                {guide.commonMistakes.map((m, i) => (
-                  <li key={i} className="text-sm text-gray-700 leading-relaxed">
-                    <span className="text-amber-600 mr-1.5">→</span>
-                    {m}
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Resources */}
-            <section>
-              <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-3">
-                Officiella resurser
-              </h3>
-              <ul className="space-y-2">
-                {guide.resources.map((r, i) => (
-                  <li key={i}>
-                    <a
-                      href={r.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-indigo-600 hover:underline"
-                    >
-                      {r.label} ↗
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            {/* Email capture */}
-            <section className="bg-gray-50 border border-gray-200 rounded-xl p-5">
-              <h3 className="text-base font-bold text-gray-900 mb-1">
-                Få guiden som mail att spara
-              </h3>
-              <p className="text-sm text-gray-600 mb-4 leading-relaxed">
-                Skicka hela guiden till din inbox så du kan komma tillbaka till den
-                senare — eller dela den med en kollega.
-              </p>
-              <EmailCaptureForm
-                providerId={guide.providerId}
-                modelName={modelName}
-                source={source}
-              />
-            </section>
+          {/* Email form */}
+          <div className="border-t border-gray-100 pt-5">
+            <p className="text-sm font-semibold text-gray-800 mb-1">
+              Skicka guiden till min inbox
+            </p>
+            <p className="text-xs text-gray-500 mb-4 leading-relaxed">
+              Fyll i din e-postadress så skickar vi hela guiden direkt — inkl. kodexempel, kostnadstips och länkarna du behöver.
+            </p>
+            <EmailCaptureForm
+              providerId={guide.providerId}
+              modelName={modelName}
+              source={source}
+            />
           </div>
         </div>
-      </aside>
+      </div>
     </div>
   );
 }
