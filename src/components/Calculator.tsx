@@ -9,6 +9,7 @@ import {
   validateInputs,
 } from "../utils/calculateCost";
 import { useExchangeRate } from "../hooks/useExchangeRate";
+import { GuideCard } from "./GuideCard";
 
 const DEFAULTS = {
   wordsPerRequest: 100,
@@ -370,6 +371,13 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 {daysPerMonth} dagar. Priser i USD konverterade till SEK med
                 kursen 1 USD = {rate.toFixed(2)} SEK.
               </p>
+
+              <GuideCard
+                modelId={modelId}
+                modelName={selectedModel?.name}
+                source="calculator"
+                className="mt-2"
+              />
 
               <button
                 onClick={copyShareLink}

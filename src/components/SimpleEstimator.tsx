@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useExchangeRate } from "../hooks/useExchangeRate";
 import { formatSek } from "../utils/calculateCost";
 import type { CalcInitialValues } from "./Calculator";
+import { GuideCard } from "./GuideCard";
 
 // Mirrors EstimateCostResult from api/estimate-cost.ts (kept separate to avoid
 // pulling the edge-runtime file into the Vite compilation)
@@ -283,6 +284,12 @@ function EstimateResultView({ result, sek, onReset, onUseInCalculator }: ResultP
           Beskriv annat scenario
         </button>
       </div>
+
+      <GuideCard
+        modelId={result.modelId}
+        modelName={result.modelName}
+        source="estimator"
+      />
 
       {/* Disclaimer */}
       <p className="text-xs text-gray-400 bg-gray-50 rounded-lg px-3 py-2 leading-relaxed">
