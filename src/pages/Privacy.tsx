@@ -34,10 +34,13 @@ export function Privacy() {
               1. Personuppgiftsansvarig
             </h2>
             <p className="text-gray-600 text-sm leading-relaxed">
-              Aikostnad.se är en gratistjänst. Tjänsten tillhandahålls utan
-              organisationsnummer eller juridisk person just nu under MVP-fasen.
-              Om du har frågor om behandlingen av dina personuppgifter kan du
-              kontakta oss på{" "}
+              Aikostnad.se är en gratistjänst som drivs som ett oberoende
+              initiativ från Sverige. Läs mer om sajten på{" "}
+              <Link to="/om" className="text-indigo-600 hover:underline">
+                Om Aikostnad.se
+              </Link>
+              . Har du frågor om behandlingen av dina personuppgifter, kontakta
+              oss på{" "}
               <a href={`mailto:${siteConfig.contactEmail}`} className="text-indigo-600 hover:underline">
                 {siteConfig.contactEmail}
               </a>.

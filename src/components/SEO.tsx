@@ -1,4 +1,5 @@
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import { siteConfig } from "../config/siteConfig";
 
 interface SEOProps {
   title?: string;
@@ -7,8 +8,35 @@ interface SEOProps {
   children?: React.ReactNode;
 }
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Aikostnad.se",
+  url: "https://aikostnad.se",
+  logo: "https://aikostnad.se/og-image.png",
+  email: siteConfig.contactEmail,
+  description:
+    "Svensk kalkylator för AI-kostnader. Vi översätter API-priser och abonnemang från ChatGPT, Claude, Gemini och fler till svenska kronor.",
+  areaServed: { "@type": "Country", name: "Sverige" },
+  knowsAbout: [
+    "AI-kostnader",
+    "ChatGPT-priser",
+    "Claude-priser",
+    "Gemini-priser",
+    "API-prissättning",
+    "Tokenisering",
+  ],
+};
+
 export function SEOProvider({ children }: { children: React.ReactNode }) {
-  return <HelmetProvider>{children}</HelmetProvider>;
+  return (
+    <HelmetProvider>
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
+      </Helmet>
+      {children}
+    </HelmetProvider>
+  );
 }
 
 export function SEO({ title, description, canonical, children }: SEOProps) {

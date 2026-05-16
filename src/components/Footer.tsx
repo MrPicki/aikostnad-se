@@ -84,6 +84,11 @@ export function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
+                <Link to="/om" className="text-xs text-gray-500 hover:text-indigo-600">
+                  Om Aikostnad.se
+                </Link>
+              </li>
+              <li>
                 <Link to="/kontakt" className="text-xs text-gray-500 hover:text-indigo-600">
                   Kontakta oss
                 </Link>

@@ -30,6 +30,9 @@ const BilligasteAi = lazy(() =>
 const Kontakt = lazy(() =>
   import("./pages/Kontakt").then((m) => ({ default: m.Kontakt }))
 );
+const Om = lazy(() =>
+  import("./pages/Om").then((m) => ({ default: m.Om }))
+);
 
 function App() {
   return (
@@ -49,6 +52,7 @@ function App() {
                 <Route path="/vad-kostar-ai" element={<VadKostarAi />} />
                 <Route path="/billigaste-ai" element={<BilligasteAi />} />
                 <Route path="/kontakt" element={<Kontakt />} />
+                <Route path="/om" element={<Om />} />
               </Routes>
             </Suspense>
           </div>
