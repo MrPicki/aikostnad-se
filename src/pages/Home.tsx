@@ -105,6 +105,13 @@ export function Home() {
                 jämförelse med konkreta månadskostnader.
               </p>
             </Link>
+            <Link to="/ai-chatbot-kostnad" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vad kostar en AI-chatbot?</p>
+              <p className="text-sm text-gray-500">
+                Konkreta budgetexempel för hobby, småföretag och B2C — i SEK.
+                Plus fyra sätt att sänka notan.
+              </p>
+            </Link>
             <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
               <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Räkna på ChatGPT API-kostnader</p>
               <p className="text-sm text-gray-500">
