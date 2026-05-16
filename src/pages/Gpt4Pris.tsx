@@ -74,7 +74,9 @@ export function Gpt4Pris() {
               kapacitet), <strong>GPT-4.1 mini</strong> (5× billigare, för höga volymer)
               och <strong>GPT-4.1 nano</strong> (extremt låg latens och kostnad för enkla
               uppgifter). Kalkylatorn nedan låter dig byta mellan dem och se hur kostnaden
-              förändras.
+              förändras. För höga volymer där priset är primärt jämför vi alla{" "}
+              <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">billigaste mini-modellerna</Link>{" "}
+              sida vid sida.
             </p>
             <p>
               För <strong>svenska texter</strong> gäller fortfarande 73 %-regeln: svenska

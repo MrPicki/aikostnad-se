@@ -52,27 +52,27 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link to="/vad-kostar-ai" className="text-xs text-gray-500 hover:text-indigo-600">
-                  Vad kostar AI?
+                  AI-prisguide 2026
                 </Link>
               </li>
               <li>
                 <Link to="/billigaste-ai" className="text-xs text-gray-500 hover:text-indigo-600">
-                  Billigaste AI 2026
+                  Billigaste AI-modellen
                 </Link>
               </li>
               <li>
                 <Link to="/vad-kostar-chatgpt" className="text-xs text-gray-500 hover:text-indigo-600">
-                  Vad kostar ChatGPT?
+                  ChatGPT API-pris
                 </Link>
               </li>
               <li>
                 <Link to="/claude-pris" className="text-xs text-gray-500 hover:text-indigo-600">
-                  Claude pris
+                  Claude API-pris
                 </Link>
               </li>
               <li>
                 <Link to="/gpt-4-pris" className="text-xs text-gray-500 hover:text-indigo-600">
-                  GPT-4.1 pris
+                  GPT-4.1 API-pris
                 </Link>
               </li>
             </ul>

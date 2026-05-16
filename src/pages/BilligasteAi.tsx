@@ -67,7 +67,8 @@ export function BilligasteAi() {
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 <strong>GPT-4o mini</strong> — $0,15 input / $0,60 output per miljon tokens.
-                OpenAI:s lilla modell är exceptionellt billig och snabb.
+                OpenAI:s lilla modell är exceptionellt billig och snabb.{" "}
+                <Link to="/vad-kostar-chatgpt" className="text-indigo-600 hover:underline">Detaljerad ChatGPT-prisguide</Link>.
               </li>
               <li>
                 <strong>Gemini 2.5 Flash</strong> — $0,30 input / $2,50 output per miljon tokens.
@@ -75,7 +76,8 @@ export function BilligasteAi() {
               </li>
               <li>
                 <strong>Claude Haiku 4.5</strong> — $1,00 input / $5,00 output per miljon tokens.
-                Anthropics lilla modell är dyrare per token men ger ofta bättre svenska svar.
+                Anthropics lilla modell är dyrare per token men ger ofta bättre svenska svar.{" "}
+                <Link to="/claude-pris" className="text-indigo-600 hover:underline">Räkna på Claude i detalj</Link>.
               </li>
             </ul>
             <p>

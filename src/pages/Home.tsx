@@ -85,42 +85,43 @@ export function Home() {
           <h2 className="text-xl font-bold text-gray-900 mb-4">Fler prisguider</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link to="/vad-kostar-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vad kostar AI?</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Komplett prisguide för AI 2026</p>
               <p className="text-sm text-gray-500">
-                Komplett guide för privatpersoner och företag — abonnemang,
-                API och gratis alternativ.
+                Översikt för privatpersoner och företag — abonnemang,
+                API-priser och gratis alternativ.
               </p>
             </Link>
             <Link to="/billigaste-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Billigaste AI 2026</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vilken AI är billigast just nu?</p>
               <p className="text-sm text-gray-500">
-                Vilket AI-verktyg ger mest för pengarna? Jämförelse per
+                Jämför mini-modellerna från OpenAI, Anthropic och Google per
                 användningsfall.
               </p>
             </Link>
             <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vad kostar ChatGPT?</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Räkna på ChatGPT API-kostnader</p>
               <p className="text-sm text-gray-500">
-                Detaljguide och kalkylator för GPT-4o API-kostnader.
+                Detaljguide och kalkylator för GPT-4o och GPT-4o mini.
               </p>
             </Link>
             <Link to="/claude-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Claude pris</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Claude Sonnet och Haiku-kostnader</p>
               <p className="text-sm text-gray-500">
-                Vad kostar Claude Sonnet och Haiku? Kalkylera och jämför.
+                Vad kostar Anthropics modeller per månad? Kalkylera och
+                jämför med ChatGPT.
               </p>
             </Link>
             <Link to="/gpt-4-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">GPT-4.1 pris</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Jämför GPT-4.1, GPT-4o och mini</p>
               <p className="text-sm text-gray-500">
-                Räkna på GPT-4.1 och jämför med GPT-4o och Claude.
+                Räkna på alla GPT-4-varianter och se vilken som passar bäst.
               </p>
             </Link>
             <Link to="/token-kalkylator" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Tokenräknare</p>
+              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Räkna tokens i valfri text</p>
               <p className="text-sm text-gray-500">
-                Klistra in valfri text och se exakt hur många tokens den
-                innehåller — och vad det kostar.
+                Klistra in en text och se exakt hur många tokens den
+                innehåller — och vad det kostar per modell.
               </p>
             </Link>
           </div>

@@ -84,7 +84,9 @@ export function VadKostarChatGPT() {
               </li>
               <li>
                 <strong>Output-längd</strong> — GPT-4o:s output kostar 4× mer per token
-                än input. Kortare svar sparar direkt pengar.
+                än input. Kortare svar sparar direkt pengar. Behöver du ännu lägre kostnad?
+                Jämför med <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">de billigaste AI-modellerna</Link>{" "}
+                som GPT-4o mini och Claude Haiku.
               </li>
             </ul>
             <p>

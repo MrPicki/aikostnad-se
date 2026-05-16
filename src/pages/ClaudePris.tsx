@@ -65,7 +65,9 @@ export function ClaudePris() {
               Anthropic delar upp sitt sortiment i tre nivåer: <strong>Opus</strong> för de
               tyngsta resonemangsproblemen, <strong>Sonnet</strong> som balansen mellan
               förmåga och kostnad, och <strong>Haiku</strong> för snabba, höga volymer.
-              Sonnet är standardvalet för de flesta produktionsscenarion.
+              Sonnet är standardvalet för de flesta produktionsscenarion. Letar du efter
+              det allra billigaste alternativet finns Haiku med i vår{" "}
+              <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">jämförelse av billigaste AI-modellerna</Link>.
             </p>
             <p>
               För <strong>svenska texter</strong> gäller samma tokeniseringsöverhead som för
@@ -77,7 +79,9 @@ export function ClaudePris() {
               En annan Anthropic-fördel värd att känna till är <strong>prompt caching</strong>:
               om din applikation har en lång, återanvänd systemkontext (t.ex. instruktioner
               eller dokumentation) kan du cache:a den och betala bara 10 % av normalt
-              input-pris på den delen. Det kan halvera kostnaden i chatbot-scenarier.
+              input-pris på den delen. Det kan halvera kostnaden i chatbot-scenarier — läs
+              mer om hur du{" "}
+              <Link to="/vad-kostar-ai" className="text-indigo-600 hover:underline">påverkar din totala AI-kostnad</Link>.
             </p>
             <p>
               Kalkylatorn nedan är förinställd på Claude Sonnet 4.6. Byt till Haiku eller
