@@ -15,4 +15,6 @@ export const siteConfig = {
   leadCaptureEnabled: true,
 
   pricesLastVerified: "2026-05-15",
+
+  contactEmail: "hej@aikostnad.se",
 };

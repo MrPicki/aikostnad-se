@@ -1,5 +1,6 @@
 import { SEO } from "../components/SEO";
 import { Link } from "react-router-dom";
+import { siteConfig } from "../config/siteConfig";
 
 export function Privacy() {
   return (
@@ -36,7 +37,10 @@ export function Privacy() {
               Aikostnad.se är en gratistjänst. Tjänsten tillhandahålls utan
               organisationsnummer eller juridisk person just nu under MVP-fasen.
               Om du har frågor om behandlingen av dina personuppgifter kan du
-              kontakta oss via e-post.
+              kontakta oss på{" "}
+              <a href={`mailto:${siteConfig.contactEmail}`} className="text-indigo-600 hover:underline">
+                {siteConfig.contactEmail}
+              </a>.
             </p>
           </section>
 
@@ -112,7 +116,10 @@ export function Privacy() {
                 detta praktiskt sett inte tillämpligt för kalkylatortjänsten.
               </p>
               <p>
-                Har du frågor — kontakta oss via e-post.
+                Har du frågor — kontakta oss på{" "}
+              <a href={`mailto:${siteConfig.contactEmail}`} className="text-indigo-600 hover:underline">
+                {siteConfig.contactEmail}
+              </a>.
               </p>
             </div>
           </section>

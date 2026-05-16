@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { siteConfig } from "../config/siteConfig";
 
+
 export function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200 mt-16">
@@ -82,6 +83,19 @@ export function Footer() {
               Om sajten
             </h3>
             <ul className="space-y-2">
+              <li>
+                <Link to="/kontakt" className="text-xs text-gray-500 hover:text-indigo-600">
+                  Kontakta oss
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${siteConfig.contactEmail}`}
+                  className="text-xs text-gray-500 hover:text-indigo-600"
+                >
+                  {siteConfig.contactEmail}
+                </a>
+              </li>
               <li>
                 <Link to="/integritet" className="text-xs text-gray-500 hover:text-indigo-600">
                   Integritetspolicy

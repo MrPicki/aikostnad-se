@@ -60,7 +60,7 @@ const faqs: FAQItem[] = [
   {
     question: "Hur ofta uppdateras AI-priserna?",
     answer:
-      "Vi verifierar priserna månadsvis mot respektive leverantörs prissida. Datumet för senaste verifiering visas i kalkylatorn och i sidfoten. Om du hittar ett felaktigt pris, kontakta oss gärna.",
+      "Vi verifierar priserna månadsvis mot respektive leverantörs prissida. Datumet för senaste verifiering visas i kalkylatorn och i sidfoten. Om du hittar ett felaktigt pris, hör gärna av dig till hej@aikostnad.se.",
   },
   {
     question: "Kan jag använda kalkylatorn för att beräkna kostnad för mitt SaaS?",
