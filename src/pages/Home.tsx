@@ -7,6 +7,8 @@ import { SubscriptionTable } from "../components/SubscriptionTable";
 import { UseCaseScenarios } from "../components/UseCaseScenarios";
 import { FAQ } from "../components/FAQ";
 import { HeroSection } from "../components/HeroSection";
+import { HeroQuickFaq } from "../components/HeroQuickFaq";
+import { PathSelector } from "../components/PathSelector";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { siteConfig } from "../config/siteConfig";
@@ -57,6 +59,12 @@ export function Home() {
 
         {/* 1. Hero — minimal, luftig */}
         <HeroSection />
+
+        {/* 1b. Mini-FAQ — möter ovetande besökare direkt */}
+        <HeroQuickFaq />
+
+        {/* 1c. Två tydliga vägar — använd vs bygg */}
+        <PathSelector />
 
         {/* 2. Kalkylator — sidans primära funktion */}
         <section id="kalkylator" className="mb-24">

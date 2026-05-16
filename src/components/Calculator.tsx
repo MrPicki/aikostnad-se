@@ -19,6 +19,12 @@ const DEFAULTS = {
   daysPerMonth: 22,
 } as const;
 
+const TIERS: { id: string; emoji: string; label: string; hint: string; modelId: string }[] = [
+  { id: "cheap",   emoji: "💰", label: "Billig OK",  hint: "Räcker för det mesta", modelId: "gpt-4o-mini" },
+  { id: "balanced", emoji: "⚖️", label: "Bra balans", hint: "Standard-val",         modelId: "gpt-4o" },
+  { id: "premium", emoji: "✨", label: "Premium",    hint: "Bäst kvalitet",         modelId: "claude-opus-4-7" },
+];
+
 function clampInt(raw: string | null, fallback: number, min: number, max: number): number {
   if (!raw) return fallback;
   const n = parseInt(raw, 10);
@@ -224,35 +230,74 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
         <div className="space-y-5">
           {/* Model selector */}
           <div>
-            <label htmlFor="model" className="label">
-              AI-modell
-            </label>
-            <select
-              id="model"
-              value={modelId}
-              onChange={(e) => setModelId(e.target.value)}
-              className="input-field"
-            >
-              <optgroup label="Kommersiella API:er">
-                {commercialModels.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.name} ({m.provider})
-                  </option>
-                ))}
-              </optgroup>
-              <optgroup label="Open source / hosted">
-                {openSourceModels.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.name} ({m.provider})
-                  </option>
-                ))}
-              </optgroup>
-            </select>
+            <label className="label">AI-modell</label>
+
+            {/* Quick tier picker */}
+            <div className="grid grid-cols-3 gap-2 mb-3">
+              {TIERS.map((tier) => {
+                const active = tier.modelId === modelId;
+                return (
+                  <button
+                    key={tier.id}
+                    type="button"
+                    onClick={() => setModelId(tier.modelId)}
+                    className={`rounded-lg border px-2 py-2.5 text-center transition-all ${
+                      active
+                        ? "border-indigo-600 bg-indigo-50 ring-1 ring-indigo-200"
+                        : "border-gray-200 bg-white hover:border-indigo-300"
+                    }`}
+                    aria-pressed={active}
+                  >
+                    <div className="text-base leading-none mb-1">{tier.emoji}</div>
+                    <p className={`text-xs font-semibold ${active ? "text-indigo-700" : "text-gray-800"}`}>
+                      {tier.label}
+                    </p>
+                    <p className="text-[10px] text-gray-400 mt-0.5 leading-tight">{tier.hint}</p>
+                  </button>
+                );
+              })}
+            </div>
+
+            <details className="group">
+              <summary className="cursor-pointer text-xs text-gray-500 hover:text-gray-700 select-none list-none flex items-center gap-1.5">
+                <span className="group-open:rotate-90 transition-transform inline-block">▶</span>
+                Avancerat — välj specifik modell
+              </summary>
+              <select
+                id="model"
+                value={modelId}
+                onChange={(e) => setModelId(e.target.value)}
+                className="input-field mt-2"
+              >
+                <optgroup label="Kommersiella API:er">
+                  {commercialModels.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.name} ({m.provider})
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="Open source / hosted">
+                  {openSourceModels.map((m) => (
+                    <option key={m.id} value={m.id}>
+                      {m.name} ({m.provider})
+                    </option>
+                  ))}
+                </optgroup>
+              </select>
+            </details>
+
             {selectedModel && (
-              <p className="mt-1 text-xs text-gray-400">
-                ${selectedModel.inputPricePerMToken}/Mtok in ·{" "}
+              <p className="mt-2 text-xs text-gray-400">
+                <span className="font-medium text-gray-600">{selectedModel.name}</span> — ${selectedModel.inputPricePerMToken}/Mtok in ·{" "}
                 ${selectedModel.outputPricePerMToken}/Mtok out ·{" "}
                 {selectedModel.bestFor}
+                <span
+                  className="ml-1.5 text-gray-300 cursor-help"
+                  title="Mtok = pris per 1 miljon tokens. Ett token är ~0,75 svenska ord. Input = vad du skickar, output = vad AI:n svarar."
+                  aria-label="Mtok = pris per 1 miljon tokens. Ett token är ~0,75 svenska ord."
+                >
+                  ⓘ
+                </span>
               </p>
             )}
           </div>
@@ -263,7 +308,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             value={wordsPerRequest}
             onChange={setWordsPerRequest}
             error={errors.wordsPerRequest}
-            tooltip={`Svenska texter räknas med ${siteConfig.languageFactor} tokens/ord (p.g.a. å/ä/ö)`}
+            tooltip={`Vad användaren SKICKAR till AI:n — fråga, dokument, kontext. Svenska räknas med ${siteConfig.languageFactor} tokens/ord (p.g.a. å/ä/ö).`}
           />
           <NumberField
             label="Ord per svar (output)"
@@ -271,6 +316,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             value={outputWordsPerRequest}
             onChange={setOutputWordsPerRequest}
             error={errors.outputWordsPerRequest}
+            tooltip="Vad AI:n SVARAR med — typiskt 2-5× längre än frågan. Output är ofta 4× dyrare per token än input."
           />
           <NumberField
             label="Antal förfrågningar per dag"
@@ -278,6 +324,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             value={requestsPerDay}
             onChange={setRequestsPerDay}
             error={errors.requestsPerDay}
+            tooltip="Hur många AI-svar du behöver per dag — t.ex. kundärenden, prompts eller automatiska analyser."
           />
           <NumberField
             label="Antal användare"
@@ -285,6 +332,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             value={users}
             onChange={setUsers}
             error={errors.users}
+            tooltip="Personer eller slutkunder som genererar de förfrågningar du angav ovan."
           />
           <NumberField
             label="Dagar per månad"
@@ -293,6 +341,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             onChange={setDaysPerMonth}
             error={errors.daysPerMonth}
             max={31}
+            tooltip="Aktiva dagar — 22 är typiskt arbetsmånad, 30 om verktyget används dagligen även helger."
           />
 
           <div className="text-xs text-indigo-600 bg-indigo-50 rounded-lg px-3 py-2">
@@ -324,7 +373,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                   sek={result.dailyCostSek}
                 />
                 <ResultCard
-                  label="Per fråga"
+                  label="Per AI-svar"
                   sek={result.costPerRequestSek}
                 />
               </div>

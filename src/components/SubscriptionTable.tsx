@@ -124,12 +124,17 @@ export function SubscriptionTable() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {PLANS.map((plan) => (
-                <tr key={plan.service} className="hover:bg-gray-50 transition-colors">
+                <tr
+                  key={plan.service}
+                  className={`transition-colors ${
+                    plan.popular ? "bg-indigo-50/60 hover:bg-indigo-50" : "hover:bg-gray-50"
+                  }`}
+                >
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       {plan.popular && (
-                        <span className="inline-block px-1.5 py-0.5 bg-indigo-50 text-indigo-700 text-xs rounded font-medium whitespace-nowrap">
-                          Populärast
+                        <span className="inline-block px-2 py-0.5 bg-indigo-600 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide whitespace-nowrap shadow-sm">
+                          Bäst för nybörjare
                         </span>
                       )}
                       <div>
@@ -163,16 +168,19 @@ export function SubscriptionTable() {
       {/* Mobil-cards */}
       <div className="sm:hidden space-y-3">
         {PLANS.map((plan) => (
-          <div key={plan.service} className="card py-4 px-4">
+          <div
+            key={plan.service}
+            className={`card py-4 px-4 ${plan.popular ? "border-indigo-200 bg-indigo-50/40 ring-1 ring-indigo-100" : ""}`}
+          >
+            {plan.popular && (
+              <span className="inline-block px-2 py-0.5 bg-indigo-600 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide mb-2 shadow-sm">
+                Bäst för nybörjare
+              </span>
+            )}
             <div className="flex items-start justify-between gap-3">
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-0.5">
                   <p className="font-semibold text-gray-900 text-sm">{plan.service}</p>
-                  {plan.popular && (
-                    <span className="inline-block px-1.5 py-0.5 bg-indigo-50 text-indigo-700 text-xs rounded font-medium shrink-0">
-                      Populärast
-                    </span>
-                  )}
                 </div>
                 <p className="text-xs text-gray-400 mb-2">{plan.provider}</p>
                 <p className="text-xs text-gray-500">{plan.bestFor}</p>

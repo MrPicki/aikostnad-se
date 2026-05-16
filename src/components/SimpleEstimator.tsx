@@ -4,6 +4,29 @@ import { formatSek } from "../utils/calculateCost";
 import type { CalcInitialValues } from "./Calculator";
 import { GuideCard } from "./GuideCard";
 
+const EXAMPLE_CHIPS: { label: string; prompt: string }[] = [
+  {
+    label: "Kundsupport-bot",
+    prompt:
+      "En kundtjänst-chatbot för min webbshop som svarar på ca 300 frågor per dag.",
+  },
+  {
+    label: "Skriva texter",
+    prompt:
+      "Jag vill använda AI för att skriva produkttexter och nyhetsbrev — ca 20 texter per dag.",
+  },
+  {
+    label: "Analysera dokument",
+    prompt:
+      "Jag vill analysera och sammanfatta avtal och rapporter — ca 10 dokument per dag.",
+  },
+  {
+    label: "Intern AI-assistent",
+    prompt:
+      "Vår personal på 15 personer ska kunna fråga en intern AI-assistent dagligen.",
+  },
+];
+
 // Mirrors EstimateCostResult from api/estimate-cost.ts (kept separate to avoid
 // pulling the edge-runtime file into the Vite compilation)
 export interface EstimateResult {
@@ -87,13 +110,31 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
     <section aria-label="Enkel AI-kostnadsestimering">
       {(status === "idle" || status === "error") && (
         <div className="max-w-2xl mx-auto">
+          <label htmlFor="estimate-input" className="block text-sm font-semibold text-gray-700 mb-2 text-center">
+            Vad skulle du vilja använda AI till?
+          </label>
+
+          {/* Quick-start chips */}
+          <div className="flex flex-wrap justify-center gap-2 mb-3">
+            {EXAMPLE_CHIPS.map((chip) => (
+              <button
+                key={chip.label}
+                type="button"
+                onClick={() => setText(chip.prompt)}
+                className="text-xs font-medium px-3 py-1.5 bg-white border border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 text-gray-600 rounded-full transition-all"
+              >
+                {chip.label}
+              </button>
+            ))}
+          </div>
+
           <div className="relative">
             <textarea
               id="estimate-input"
               value={text}
               onChange={(e) => setText(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Beskriv din idé — t.ex. &ldquo;En chatbot för min webbshop som svarar på 500 kundfrågor per dag.&rdquo;"
+              placeholder="…eller skriv själv — t.ex. &ldquo;En chatbot för min webbshop som svarar på 500 kundfrågor per dag.&rdquo;"
               className="w-full rounded-2xl border border-gray-200 shadow-sm bg-white px-5 pt-5 pb-16 text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
               rows={5}
               maxLength={800}

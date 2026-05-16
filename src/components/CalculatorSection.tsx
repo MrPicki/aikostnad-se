@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { track } from "@vercel/analytics";
 import { Calculator, type CalcInitialValues } from "./Calculator";
 import { SimpleEstimator } from "./SimpleEstimator";
 
@@ -36,7 +37,10 @@ export function CalculatorSection({ initialValues }: Props) {
       {/* Mode toggle */}
       <div className="flex items-center border-b border-gray-100 mb-8">
         <button
-          onClick={() => setMode("simple")}
+          onClick={() => {
+            track("calc_mode_switch", { mode: "simple" });
+            setMode("simple");
+          }}
           className={`px-4 py-2.5 text-sm font-semibold border-b-2 -mb-px transition-all ${
             mode === "simple"
               ? "border-indigo-600 text-indigo-600"
@@ -47,7 +51,10 @@ export function CalculatorSection({ initialValues }: Props) {
           Beskriv din idé
         </button>
         <button
-          onClick={() => setMode("advanced")}
+          onClick={() => {
+            track("calc_mode_switch", { mode: "advanced" });
+            setMode("advanced");
+          }}
           className={`px-4 py-2.5 text-sm font-semibold border-b-2 -mb-px transition-all ${
             mode === "advanced"
               ? "border-indigo-600 text-indigo-600"

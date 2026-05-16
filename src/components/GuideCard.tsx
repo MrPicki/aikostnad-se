@@ -14,44 +14,64 @@ export function GuideCard({ modelId, modelName, source, className = "" }: Props)
   const guide = getGuideForModel(modelId);
   if (!guide) return null;
 
+  const displayName = modelName || guide.providerName;
+
+  function scrollToSubscriptions() {
+    const el = document.getElementById("abonnemang");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   return (
     <>
       <div
         className={`rounded-2xl border border-indigo-100 bg-indigo-50/40 p-5 sm:p-6 animate-fade-in-up ${className}`}
       >
-        <div className="flex items-start gap-4">
-          <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-white border border-indigo-100 flex items-center justify-center text-xl">
-            📘
+        <div className="mb-5">
+          <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-1">
+            Nästa steg
+          </p>
+          <h3 className="text-base sm:text-lg font-bold text-gray-900 leading-tight">
+            Vill du börja använda {displayName}?
+          </h3>
+          <p className="text-sm text-gray-600 leading-relaxed mt-1.5">
+            Det finns två vägar — välj den som passar dig.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {/* Path 1: Subscription / consumer */}
+          <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="text-lg">📱</span>
+              <p className="text-sm font-semibold text-gray-900">Bara använda</p>
+            </div>
+            <p className="text-xs text-gray-600 leading-relaxed mb-3 flex-1">
+              ChatGPT Plus, Claude Pro m.fl. — fasta månadspriser från ca 210 kr.
+              Inga API-nycklar, ingen kod.
+            </p>
+            <button
+              onClick={scrollToSubscriptions}
+              className="text-sm font-semibold text-indigo-700 hover:text-indigo-800 inline-flex items-center gap-1"
+            >
+              Se abonnemang ↓
+            </button>
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-1">
-              Nästa steg
-            </p>
-            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1.5 leading-tight">
-              Vill du veta hur du faktiskt bygger detta?
-            </h3>
-            <p className="text-sm text-gray-600 leading-relaxed mb-4">
-              Vi visar steg-för-steg hur du sätter upp {modelName || guide.providerName},
-              API-nycklar, kostnader och verktyg — anpassat efter ditt val.
-            </p>
 
-            <ul className="space-y-1.5 mb-5">
-              {guide.whatYouLearn.slice(0, 4).map((item, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                  <span className="text-indigo-500 mt-0.5 flex-shrink-0">✓</span>
-                  <span className="leading-snug">{item}</span>
-                </li>
-              ))}
-            </ul>
-
+          {/* Path 2: Build with API */}
+          <div className="bg-white border border-gray-200 rounded-xl p-4 flex flex-col">
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="text-lg">💻</span>
+              <p className="text-sm font-semibold text-gray-900">Bygga med API</p>
+            </div>
+            <p className="text-xs text-gray-600 leading-relaxed mb-3 flex-1">
+              Integrera {displayName} i din app eller webbsida — vi mejlar
+              en steg-för-steg-guide.
+            </p>
             <button
               onClick={() => setOpen(true)}
-              className="inline-flex items-center gap-1.5 bg-white border border-indigo-200 hover:border-indigo-300 hover:bg-indigo-50 text-indigo-700 text-sm font-semibold px-4 py-2 rounded-lg transition-all"
+              className="text-sm font-semibold text-indigo-700 hover:text-indigo-800 inline-flex items-center gap-1"
             >
-              Öppna guide
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
+              Öppna API-guide →
             </button>
           </div>
         </div>
