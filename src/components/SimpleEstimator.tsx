@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { useExchangeRate } from "../hooks/useExchangeRate";
 import { formatSek } from "../utils/calculateCost";
 import type { CalcInitialValues } from "./Calculator";
@@ -65,6 +65,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
   const [result, setResult] = useState<EstimateResult | null>(null);
   const [errorMsg, setErrorMsg] = useState("");
   const { rate } = useExchangeRate();
+  const resultRef = useRef<HTMLDivElement | null>(null);
 
   const handleSubmit = useCallback(async () => {
     const trimmed = text.trim();
@@ -86,6 +87,9 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
       const data = (await res.json()) as EstimateResult;
       setResult(data);
       setStatus("result");
+      // Two RAFs ensure React has committed DOM + layout is settled before
+      // we measure the freshly mounted element.
+      requestAnimationFrame(() => requestAnimationFrame(scrollResultToTop));
     } catch {
       setStatus("error");
       setErrorMsg(
@@ -93,6 +97,14 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
       );
     }
   }, [text]);
+
+  // Scroll helper called after the result commits.
+  function scrollResultToTop() {
+    const el = resultRef.current;
+    if (!el) return;
+    el.scrollIntoView({ block: "start", behavior: "auto" });
+    window.scrollBy(0, -4);
+  }
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) handleSubmit();
@@ -170,7 +182,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
       )}
 
       {status === "result" && result && (
-        <div className="card">
+        <div ref={resultRef} className="card scroll-mt-1">
           <EstimateResultView
             result={result}
             sek={sek}

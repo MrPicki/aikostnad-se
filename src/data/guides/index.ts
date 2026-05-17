@@ -26,12 +26,17 @@ export const MODEL_TO_PROVIDER: Record<string, Guide["providerId"]> = {
   "mistral-small": "mistral",
   "mistral-large": "mistral",
   "deepseek-v3.2": "deepseek",
+  "deepseek-v3": "deepseek",
   "deepseek-r1": "deepseek",
+  // Llama via Groq uses an OpenAI-compatible API — point to OpenAI guide as
+  // closest practical match so estimator results always show the GuideCard.
+  "llama-3.3-70b": "openai",
 };
 
-export function getGuideForModel(modelId: string): Guide | null {
-  const providerId = MODEL_TO_PROVIDER[modelId];
-  if (!providerId) return null;
+// Always returns a guide so the GuideCard / email capture is never silently
+// hidden. Unknown modelIds fall back to the OpenAI guide (most general).
+export function getGuideForModel(modelId: string): Guide {
+  const providerId = MODEL_TO_PROVIDER[modelId] ?? "openai";
   return guides[providerId];
 }
 
