@@ -171,6 +171,51 @@ function buildEmailHtml(guide: EmailGuide, modelName: string | undefined): strin
 </html>`;
 }
 
+function buildEmailText(guide: EmailGuide, modelName: string | undefined): string {
+  const safeModel = modelName ? ` (${modelName})` : "";
+  return `Aikostnad.se — Steg-för-steg-guide
+${guide.providerName}${safeModel}
+
+================================================================
+
+1. SKAPA KONTO
+${guide.signupSummary}
+Länk: ${guide.signupUrl}
+
+2. SKAPA API-NYCKEL
+Logga in i dashboarden, gå till "API Keys", skapa en ny nyckel.
+Kopiera och spara säkert — du ser nyckeln bara en gång.
+Länk: ${guide.apiKeyUrl}
+
+3. LADDA SALDO + SÄTT UTGIFTSGRÄNS
+Lägg in betalningsmetod och ladda saldo (de flesta leverantörer
+använder prepaid). Sätt alltid en månadsgräns — det är ditt
+säkerhetsnät mot buggar som genererar tusentals onödiga anrop.
+
+4. DITT FÖRSTA ANROP
+${guide.firstAnrop}
+
+5. TRE TIPS FÖR ATT SPARA PENGAR
+${guide.threeTopTips.map((t, i) => `   ${i + 1}. ${t}`).join("\n")}
+
+================================================================
+
+Officiella resurser:
+- Prislista: ${guide.pricingUrl}
+- API-dokumentation: ${guide.docsUrl}
+- Räkna på din egen volym: https://aikostnad.se/
+
+================================================================
+
+Du fick det här mailet för att du bad om en guide via Aikostnad.se.
+Vi sparar din e-postadress enligt vår integritetspolicy:
+https://aikostnad.se/integritet
+
+Avregistrera dig — svara på det här mailet med "unsubscribe" eller
+kontakta hej@aikostnad.se.
+`;
+}
+
 function escapeHtml(s: string): string {
   return s
     .replace(/&/g, "&amp;")
@@ -279,7 +324,8 @@ export default async function handler(req: Request): Promise<Response> {
   }
 
   const html = buildEmailHtml(guide, modelName);
-  const subject = `Din ${guide.providerName}-guide`;
+  const text = buildEmailText(guide, modelName);
+  const subject = `Din ${guide.providerName}-guide från Aikostnad.se`;
 
   try {
     const resendRes = await fetch("https://api.resend.com/emails", {
@@ -291,8 +337,16 @@ export default async function handler(req: Request): Promise<Response> {
       body: JSON.stringify({
         from: fromAddress,
         to: [email],
+        reply_to: "hej@aikostnad.se",
         subject,
         html,
+        text,
+        headers: {
+          // Required by Gmail/Outlook bulk-sender guidelines (Feb 2024).
+          // One-click unsubscribe via mailto.
+          "List-Unsubscribe": `<mailto:hej@aikostnad.se?subject=unsubscribe-${encodeURIComponent(email)}>`,
+          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        },
       }),
     });
 
