@@ -12,7 +12,6 @@ interface Props {
 export function GuideCard({ modelId, modelName, source, className = "" }: Props) {
   const [open, setOpen] = useState(false);
   const guide = getGuideForModel(modelId);
-  if (!guide) return null;
 
   const displayName = modelName || guide.providerName;
 
