@@ -3,6 +3,8 @@ import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
+import { RelatedArticles } from "../components/RelatedArticles";
+import { relatedArticles } from "../data/relatedArticles";
 
 const INITIAL_VALUES = { modelId: "gpt-4.1" } as const;
 
@@ -173,6 +175,8 @@ export function Gpt4Pris() {
             kostar ~150 kr/mån — utan märkbar kvalitetsförlust.
           </p>
         </section>
+
+        <RelatedArticles links={relatedArticles["gpt-4-pris"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om GPT-4.1-priser" />
 

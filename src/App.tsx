@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { SEOProvider } from "./components/SEO";
 import { Header } from "./components/Header";
@@ -42,34 +42,55 @@ const AiChatbotKostnad = lazy(() =>
 const PromptCaching = lazy(() =>
   import("./pages/PromptCaching").then((m) => ({ default: m.PromptCaching }))
 );
+const NotFound = lazy(() =>
+  import("./pages/NotFound").then((m) => ({ default: m.NotFound }))
+);
+const EmbedCalculator = lazy(() =>
+  import("./pages/EmbedCalculator").then((m) => ({ default: m.EmbedCalculator }))
+);
+const Press = lazy(() =>
+  import("./pages/Press").then((m) => ({ default: m.Press }))
+);
+
+function Shell() {
+  const location = useLocation();
+  const isEmbed = location.pathname.startsWith("/embed");
+
+  return (
+    <div className="min-h-screen flex flex-col w-full overflow-x-hidden bg-white">
+      {!isEmbed && <Header />}
+      <div className="flex-1">
+        <Suspense fallback={<div className="flex-1 min-h-[60vh]" />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/token-kalkylator" element={<TokenCalculatorPage />} />
+            <Route path="/integritet" element={<Privacy />} />
+            <Route path="/vad-kostar-chatgpt" element={<VadKostarChatGPT />} />
+            <Route path="/claude-pris" element={<ClaudePris />} />
+            <Route path="/gpt-4-pris" element={<Gpt4Pris />} />
+            <Route path="/vad-kostar-ai" element={<VadKostarAi />} />
+            <Route path="/billigaste-ai" element={<BilligasteAi />} />
+            <Route path="/kontakt" element={<Kontakt />} />
+            <Route path="/om" element={<Om />} />
+            <Route path="/chatgpt-vs-claude" element={<ChatGPTvsClaude />} />
+            <Route path="/ai-chatbot-kostnad" element={<AiChatbotKostnad />} />
+            <Route path="/prompt-caching" element={<PromptCaching />} />
+            <Route path="/embed" element={<EmbedCalculator />} />
+            <Route path="/press" element={<Press />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </div>
+      {!isEmbed && <Footer />}
+    </div>
+  );
+}
 
 function App() {
   return (
     <SEOProvider>
       <BrowserRouter>
-        <div className="min-h-screen flex flex-col w-full overflow-x-hidden bg-white">
-          <Header />
-          <div className="flex-1">
-            <Suspense fallback={<div className="flex-1 min-h-[60vh]" />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/token-kalkylator" element={<TokenCalculatorPage />} />
-                <Route path="/integritet" element={<Privacy />} />
-                <Route path="/vad-kostar-chatgpt" element={<VadKostarChatGPT />} />
-                <Route path="/claude-pris" element={<ClaudePris />} />
-                <Route path="/gpt-4-pris" element={<Gpt4Pris />} />
-                <Route path="/vad-kostar-ai" element={<VadKostarAi />} />
-                <Route path="/billigaste-ai" element={<BilligasteAi />} />
-                <Route path="/kontakt" element={<Kontakt />} />
-                <Route path="/om" element={<Om />} />
-                <Route path="/chatgpt-vs-claude" element={<ChatGPTvsClaude />} />
-                <Route path="/ai-chatbot-kostnad" element={<AiChatbotKostnad />} />
-                <Route path="/prompt-caching" element={<PromptCaching />} />
-              </Routes>
-            </Suspense>
-          </div>
-          <Footer />
-        </div>
+        <Shell />
         <Analytics />
       </BrowserRouter>
     </SEOProvider>

@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
+import { ArticleSchema } from "../components/ArticleSchema";
+import { ArticleByline } from "../components/ArticleByline";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
+import { RelatedArticles } from "../components/RelatedArticles";
+import { relatedArticles } from "../data/relatedArticles";
+import { articles } from "../data/articles";
+
+const article = articles["chatgpt-vs-claude"];
 
 const faqs: FAQItem[] = [
   {
@@ -43,6 +50,7 @@ export function ChatGPTvsClaude() {
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "ChatGPT vs Claude", url: "https://aikostnad.se/chatgpt-vs-claude" },
       ]} />
+      <ArticleSchema article={article} />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -55,6 +63,7 @@ export function ChatGPTvsClaude() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3 leading-tight">
             ChatGPT vs Claude — vilken passar dig?
           </h1>
+          <ArticleByline article={article} />
           <p className="text-lg text-gray-600 leading-relaxed mb-10">
             Båda är toppmodeller från USA:s ledande AI-bolag. För 8 av 10
             uppgifter är de utbytbara — det här är vad som skiljer dem på pris,
@@ -365,6 +374,8 @@ export function ChatGPTvsClaude() {
             </p>
           </section>
         </article>
+
+        <RelatedArticles links={relatedArticles["chatgpt-vs-claude"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om ChatGPT vs Claude" />
       </main>

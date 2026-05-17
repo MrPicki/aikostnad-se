@@ -3,6 +3,8 @@ import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
+import { RelatedArticles } from "../components/RelatedArticles";
+import { relatedArticles } from "../data/relatedArticles";
 
 const INITIAL_VALUES = { modelId: "gpt-4o" } as const;
 
@@ -179,6 +181,8 @@ export function VadKostarChatGPT() {
             </li>
           </ol>
         </section>
+
+        <RelatedArticles links={relatedArticles["vad-kostar-chatgpt"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om ChatGPT-kostnad" />
 

@@ -3,6 +3,8 @@ import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
+import { RelatedArticles } from "../components/RelatedArticles";
+import { relatedArticles } from "../data/relatedArticles";
 
 const INITIAL_VALUES = { modelId: "claude-sonnet-4-6" } as const;
 
@@ -177,6 +179,8 @@ export function ClaudePris() {
             automatiska caching.
           </p>
         </section>
+
+        <RelatedArticles links={relatedArticles["claude-pris"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om Claude-priser" />
 

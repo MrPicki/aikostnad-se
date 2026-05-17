@@ -3,6 +3,8 @@ import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
+import { RelatedArticles } from "../components/RelatedArticles";
+import { relatedArticles } from "../data/relatedArticles";
 
 const INITIAL_VALUES = { modelId: "claude-haiku-4-5" } as const;
 
@@ -224,26 +226,9 @@ export function BilligasteAi() {
           </p>
         </section>
 
-        <LandingFAQ items={faqs} heading="Vanliga frågor om billig AI" />
+        <RelatedArticles links={relatedArticles["billigaste-ai"]} />
 
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link to="/vad-kostar-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
-              Vad kostar AI? Komplett guide
-            </p>
-            <p className="text-xs text-gray-500">
-              Abonnemang, API och gratis alternativ — allt på ett ställe.
-            </p>
-          </Link>
-          <Link to="/claude-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
-              Claude pris
-            </p>
-            <p className="text-xs text-gray-500">
-              Vad kostar Claude Sonnet och Haiku? Kalkylera och jämför.
-            </p>
-          </Link>
-        </div>
+        <LandingFAQ items={faqs} heading="Vanliga frågor om billig AI" />
       </main>
     </>
   );

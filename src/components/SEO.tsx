@@ -48,7 +48,10 @@ export function SEO({ title, description, canonical, children }: SEOProps) {
 
   const fullTitle = title ? `${title} | Aikostnad.se` : defaultTitle;
   const desc = description ?? defaultDesc;
-  const url = canonical ? `${siteUrl}${canonical}` : siteUrl;
+  // Strip any accidental query/hash from canonical to prevent duplicate-content
+  // signals — the calculator generates ?model=, ?input= etc. share links.
+  const cleanPath = canonical?.split("?")[0]?.split("#")[0];
+  const url = cleanPath ? `${siteUrl}${cleanPath}` : siteUrl;
   const ogImage = `${siteUrl}/og-image.png`;
 
   return (

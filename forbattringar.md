@@ -282,6 +282,76 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
 
 ---
 
+## 🔵 Sprint F — SEO till >7/10 på alla områden (2026-05-17)
+
+**Bakgrund:** SEO-analys 2026-05-17 gav övergripande 6,5/10 med tre områden under 7: Technical (6), Content/E-E-A-T (4), Internal linking (6), Backlinks (2). Sprint F lyfter varje till 7+.
+
+### Technical SEO (6 → 8)
+
+- [x] **Pre-render alla routes till statisk HTML** ✅ 2026-05-17
+  - `scripts/seo-metadata.mjs` + `scripts/prerender-seo.mjs` injicerar korrekt `<title>`, meta, canonical, OG, Twitter cards i `dist/<route>/index.html` för 14 routes + 404.html post-build
+  - Hookat in i `npm run build`; Vercel `vercel.json` uppdaterad med `cleanUrls + trailingSlash` så filsystemet servas innan SPA-fallback
+  - Bing, Yandex, sociala bots ser nu rätt per-URL meta utan att köra JS
+
+- [x] **Proper 404-sida med korrekt HTTP-status** ✅ 2026-05-17
+  - `src/pages/NotFound.tsx` med `<Route path="*">` i App.tsx
+  - Prerender genererar `dist/404.html` med 404-meta — Vercel serverar med HTTP 404-status automatiskt
+
+- [x] **Strip query params från canonical** ✅ 2026-05-17
+  - SEO.tsx splittar canonical på `?` och `#` innan URL byggs
+  - Skyddar mot duplicate-content från share-links med `?model=...`
+
+- [x] **Avblockera Google Fonts** ✅ 2026-05-17
+  - `<link rel="preload" as="style">` + `media="print" onload="this.media='all'"`-mönster
+  - `<noscript>`-fallback för no-JS-användare
+
+### Content & E-E-A-T (4 → 7)
+
+- [x] **Namngiven författare med bio + LinkedIn på /om** ✅ 2026-05-17
+  - `src/config/author.ts` som single source of truth (Christoffer Nolét, grundare på Ncom)
+  - Ny "Vem driver Aikostnad.se?"-sektion överst på /om med bio + LinkedIn + Ncom-länk
+  - **TODO innan launch:** verifiera att `author.linkedIn` pekar på korrekt profil
+
+- [x] **Person-schema med sameAs** ✅ 2026-05-17
+  - AboutPage-schema utökat med `mainEntity.parentOrganization` (Ncom) och `mainEntity.founder` (Person Christoffer med sameAs)
+  - Inbäddat i AboutPage istället för separat dubblerat Person-objekt
+
+- [x] **Article-schema på 3 long-form-sidor** ✅ 2026-05-17
+  - Ny `ArticleSchema.tsx` + `src/data/articles.ts` (single source för publish/modified-datum + headline)
+  - Tillagd på `/prompt-caching`, `/ai-chatbot-kostnad`, `/chatgpt-vs-claude`
+  - Properties: headline, author (Person), publisher med parentOrganization, datePublished, dateModified, inLanguage sv-SE
+
+- [x] **"Skriven av {namn}, senast uppdaterad {datum}" på long-form** ✅ 2026-05-17
+  - Ny `ArticleByline.tsx`-komponent under H1 på alla 3 long-form-sidor
+  - Synlig: "Skriven av Christoffer Nolét, Grundare på Ncom · Publicerad X · Uppdaterad Y"
+
+### Internal linking (6 → 8)
+
+- [x] **Cross-linking-pass på 8 landningssidor** ✅ 2026-05-17
+  - Ny `RelatedArticles.tsx`-komponent + `src/data/relatedArticles.ts` (per-sida konfig)
+  - 4 reciproka länkar per sida med varierad anchor text + beskrivning
+  - Hub-and-spoke: `/vad-kostar-ai` får inkommande från alla, blir tydlig hub-page
+
+### Authority / Backlinks (2 → infrastruktur för 7)
+
+- [x] **Linkable asset: embed-widget för kalkylatorn** ✅ 2026-05-17
+  - Ny `/embed` route som visar Calculator utan Header/Footer + "Powered by Aikostnad.se"-länk
+  - `Shell`-wrapper i App.tsx hoppar Header/Footer för /embed-paths
+  - utm_source=embed på return-länken för attribuering
+
+- [x] **Press-/embedsida (/press)** ✅ 2026-05-17
+  - Innehåller: kort om sajten, kopierbar iframe-snippet, förhandsvisning, citation-mall, kontakt
+  - Tillagd i sitemap.xml med priority 0.4
+
+- [ ] **Externt arbete (kräver manuell outreach — kan ej göras via kod):**
+  - Submit till svenska AI-verktygslistor (FutureTools, AItoolnet, ai-verktyg.se)
+  - Outreach till Breakit / IDG.se / Computer Sweden / Dagens analys — pitcha "ny svensk AI-kostnadskalkylator"
+  - Reddit r/sweden + r/svenskpolitik teknik-trådar, ProductHunt SE
+  - Ncom.se: lägg "Projekt vi har byggt: Aikostnad.se" med backlink
+  - **OBS:** On-site groundwork är klar. Backlinks-score 4-5 just nu från embed-widget + press-sida. För 7+ krävs 5–10 verkliga backlinks från relevanta källor — manuell outreach 2-4 veckor.
+
+---
+
 ## Rekommenderad sprint-ordning
 
 **Sprint A (1 vecka)** — Fixa faktarisken så sajten är trovärdig:
