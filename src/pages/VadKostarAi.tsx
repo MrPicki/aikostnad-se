@@ -3,6 +3,8 @@ import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { SubscriptionTable } from "../components/SubscriptionTable";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
+import { RelatedArticles } from "../components/RelatedArticles";
+import { relatedArticles } from "../data/relatedArticles";
 
 const faqs: FAQItem[] = [
   {
@@ -184,6 +186,8 @@ export function VadKostarAi() {
             </li>
           </ol>
         </section>
+
+        <RelatedArticles links={relatedArticles["vad-kostar-ai"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om AI-kostnader" />
 

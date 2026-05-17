@@ -3,6 +3,7 @@ import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { siteConfig } from "../config/siteConfig";
+import { author, parentOrganization } from "../config/author";
 
 const aboutSchema = {
   "@context": "https://schema.org",
@@ -17,6 +18,23 @@ const aboutSchema = {
       "Svensk kalkylator för AI-kostnader. Vi översätter API-priser och abonnemang från ChatGPT, Claude, Gemini och fler till svenska kronor.",
     foundingDate: "2026-05",
     areaServed: { "@type": "Country", name: "Sverige" },
+    parentOrganization: {
+      "@type": "Organization",
+      name: parentOrganization.name,
+      url: parentOrganization.url,
+    },
+    founder: {
+      "@type": "Person",
+      name: author.name,
+      url: author.linkedIn || parentOrganization.url,
+      jobTitle: author.role,
+      sameAs: [author.linkedIn, parentOrganization.url].filter(Boolean),
+      worksFor: {
+        "@type": "Organization",
+        name: parentOrganization.name,
+        url: parentOrganization.url,
+      },
+    },
     knowsAbout: [
       "AI-kostnader",
       "ChatGPT-priser",
@@ -67,6 +85,45 @@ export function Om() {
               att räkna själva.
             </p>
           </header>
+
+          {/* Author / parent org */}
+          <section className="card space-y-3">
+            <h2 className="text-xl font-bold text-gray-900">Vem driver Aikostnad.se?</h2>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              Aikostnad.se är ett projekt drivet av{" "}
+              <a
+                href={parentOrganization.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-600 hover:underline font-medium"
+              >
+                {parentOrganization.name}
+              </a>{" "}
+              — {parentOrganization.description.toLowerCase()}
+            </p>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              <strong className="text-gray-800">{author.name}</strong>,{" "}
+              {author.role} på {parentOrganization.name}, är ansvarig redaktör.
+              {" "}{author.bio.replace("Christoffer driver Ncom — ett svenskt tech-bolag som bygger praktiska webbverktyg. ", "")}
+            </p>
+            <p className="text-xs text-gray-500">
+              <a
+                href={author.linkedIn}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-600 hover:underline"
+              >
+                LinkedIn ↗
+              </a>
+              {" · "}
+              <a
+                href={`mailto:${author.email}`}
+                className="text-indigo-600 hover:underline"
+              >
+                {author.email}
+              </a>
+            </p>
+          </section>
 
           {/* Mission */}
           <section className="card space-y-3">
