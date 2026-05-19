@@ -48,6 +48,19 @@ interface FieldProps {
   tooltip?: string;
 }
 
+function FieldLabel({ label, htmlFor, tooltip }: { label: string; htmlFor: string; tooltip?: string }) {
+  return (
+    <label htmlFor={htmlFor} className="label">
+      {label}
+      {tooltip && (
+        <span className="ml-1 text-gray-400 cursor-help" title={tooltip} aria-label={tooltip}>
+          ⓘ
+        </span>
+      )}
+    </label>
+  );
+}
+
 function NumberField({
   label,
   id,
@@ -60,18 +73,7 @@ function NumberField({
 }: FieldProps) {
   return (
     <div>
-      <label htmlFor={id} className="label">
-        {label}
-        {tooltip && (
-          <span
-            className="ml-1 text-gray-400 cursor-help"
-            title={tooltip}
-            aria-label={tooltip}
-          >
-            ⓘ
-          </span>
-        )}
-      </label>
+      <FieldLabel label={label} htmlFor={id} tooltip={tooltip} />
       <input
         id={id}
         type="number"
@@ -81,6 +83,128 @@ function NumberField({
         onChange={(e) => onChange(Number(e.target.value))}
         className={`input-field ${error ? "border-red-400 focus:ring-red-400" : ""}`}
       />
+      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+    </div>
+  );
+}
+
+interface ChipFieldProps extends FieldProps {
+  presets: number[];
+  unit?: string;
+}
+
+function ChipField({
+  label,
+  id,
+  value,
+  onChange,
+  error,
+  min = 1,
+  max,
+  tooltip,
+  presets,
+  unit,
+}: ChipFieldProps) {
+  const isPreset = presets.includes(value);
+  return (
+    <div>
+      <FieldLabel label={label} htmlFor={id} tooltip={tooltip} />
+      <div className="flex flex-wrap items-center gap-1.5">
+        {presets.map((p) => {
+          const active = value === p;
+          return (
+            <button
+              key={p}
+              type="button"
+              onClick={() => onChange(p)}
+              className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
+                active
+                  ? "bg-indigo-600 text-white"
+                  : "bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-700 border border-gray-200"
+              }`}
+              aria-pressed={active}
+            >
+              {p.toLocaleString("sv-SE")}
+              {unit && <span className="ml-0.5 opacity-70">{unit}</span>}
+            </button>
+          );
+        })}
+        <input
+          id={id}
+          type="number"
+          min={min}
+          max={max}
+          value={value}
+          onChange={(e) => {
+            const v = parseInt(e.target.value, 10);
+            if (Number.isFinite(v)) onChange(v);
+          }}
+          className={`w-20 px-2 py-1 text-xs rounded-md border bg-white focus:outline-none focus:ring-1 ${
+            isPreset
+              ? "border-gray-200 text-gray-400 focus:ring-indigo-400"
+              : "border-indigo-300 text-gray-900 ring-1 ring-indigo-100 focus:ring-indigo-400"
+          } ${error ? "border-red-400 focus:ring-red-400" : ""}`}
+          aria-label={`Egen ${label.toLowerCase()}`}
+        />
+      </div>
+      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+    </div>
+  );
+}
+
+interface SliderFieldProps extends FieldProps {
+  marks?: { value: number; label: string }[];
+}
+
+function SliderField({
+  label,
+  id,
+  value,
+  onChange,
+  error,
+  min = 1,
+  max = 31,
+  tooltip,
+  marks = [],
+}: SliderFieldProps) {
+  return (
+    <div>
+      <FieldLabel label={label} htmlFor={id} tooltip={tooltip} />
+      <div className="flex items-center gap-3">
+        <input
+          id={id}
+          type="range"
+          min={min}
+          max={max}
+          value={value}
+          onChange={(e) => onChange(Number(e.target.value))}
+          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+        />
+        <span className="text-sm font-semibold text-gray-900 min-w-[2.5rem] text-right tabular-nums">
+          {value}
+        </span>
+      </div>
+      {marks.length > 0 && (
+        <div className="mt-1 flex gap-2 flex-wrap">
+          {marks.map((m) => {
+            const active = value === m.value;
+            return (
+              <button
+                key={m.value}
+                type="button"
+                onClick={() => onChange(m.value)}
+                className={`text-[10px] px-2 py-0.5 rounded-md transition-colors ${
+                  active
+                    ? "bg-indigo-100 text-indigo-700 font-semibold"
+                    : "text-gray-400 hover:text-indigo-600"
+                }`}
+              >
+                {m.label}
+              </button>
+            );
+          })}
+        </div>
+      )}
       {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
     </div>
   );
@@ -318,29 +442,41 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             error={errors.outputWordsPerRequest}
             tooltip="Vad AI:n SVARAR med — typiskt 2-5× längre än frågan. Output är ofta 4× dyrare per token än input."
           />
-          <NumberField
+          <ChipField
             label="Antal förfrågningar per dag"
             id="requestsPerDay"
             value={requestsPerDay}
             onChange={setRequestsPerDay}
             error={errors.requestsPerDay}
+            presets={[10, 50, 100, 500, 1000]}
+            min={1}
+            max={1_000_000}
             tooltip="Hur många AI-svar du behöver per dag — t.ex. kundärenden, prompts eller automatiska analyser."
           />
-          <NumberField
+          <ChipField
             label="Antal användare"
             id="users"
             value={users}
             onChange={setUsers}
             error={errors.users}
+            presets={[1, 5, 10, 25, 50, 100]}
+            min={1}
+            max={10_000_000}
             tooltip="Personer eller slutkunder som genererar de förfrågningar du angav ovan."
           />
-          <NumberField
+          <SliderField
             label="Dagar per månad"
             id="daysPerMonth"
             value={daysPerMonth}
             onChange={setDaysPerMonth}
             error={errors.daysPerMonth}
+            min={1}
             max={31}
+            marks={[
+              { value: 5, label: "Helg" },
+              { value: 22, label: "Arbetsmånad" },
+              { value: 30, label: "Varje dag" },
+            ]}
             tooltip="Aktiva dagar — 22 är typiskt arbetsmånad, 30 om verktyget används dagligen även helger."
           />
 

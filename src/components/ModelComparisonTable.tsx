@@ -106,6 +106,17 @@ export function ModelComparisonTable() {
           Standardscenario: {SCENARIO_INPUT_TOKENS} input + {SCENARIO_OUTPUT_TOKENS} output-tokens per fråga
           (ca 100 + 200 ord på svenska)
         </p>
+        <details className="mt-2 group">
+          <summary className="cursor-pointer text-xs text-gray-400 hover:text-gray-600 select-none list-none inline-flex items-center gap-1.5">
+            <span className="group-open:rotate-90 transition-transform inline-block">▶</span>
+            Vad betyder "token", "input" och "output"?
+          </summary>
+          <p className="mt-2 text-xs text-gray-500 leading-relaxed max-w-2xl">
+            <strong className="text-gray-700">Token</strong> ≈ ett ord (svenska räknas {siteConfig.languageFactor}× pga å/ä/ö).{" "}
+            <strong className="text-gray-700">Input</strong> = vad du skickar till AI:n (din fråga).{" "}
+            <strong className="text-gray-700">Output</strong> = AI:ns svar — kostar ofta 3-5× mer per token än input.
+          </p>
+        </details>
       </div>
 
       {/* Controls */}

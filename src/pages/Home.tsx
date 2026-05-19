@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { SEO } from "../components/SEO";
 import { CalculatorSection } from "../components/CalculatorSection";
 import type { CalcInitialValues } from "../components/Calculator";
@@ -8,10 +8,90 @@ import { UseCaseScenarios } from "../components/UseCaseScenarios";
 import { FAQ } from "../components/FAQ";
 import { HeroSection } from "../components/HeroSection";
 import { HeroQuickFaq } from "../components/HeroQuickFaq";
-import { PathSelector } from "../components/PathSelector";
+import { PathSelector, getStoredPath, type UserPath } from "../components/PathSelector";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { siteConfig } from "../config/siteConfig";
+
+interface Guide {
+  to: string;
+  title: string;
+  body: string;
+  paths: UserPath[];
+}
+
+const GUIDES: Guide[] = [
+  {
+    to: "/vad-kostar-ai",
+    title: "Komplett prisguide för AI 2026",
+    body:
+      "Översikt för privatpersoner och företag — abonnemang, API-priser och gratis alternativ.",
+    paths: ["use", "build"],
+  },
+  {
+    to: "/billigaste-ai",
+    title: "Vilken AI är billigast just nu?",
+    body:
+      "Jämför mini-modellerna från OpenAI, Anthropic och Google per användningsfall.",
+    paths: ["build"],
+  },
+  {
+    to: "/chatgpt-vs-claude",
+    title: "ChatGPT vs Claude — vilken passar?",
+    body:
+      "Pris, svenska språk, kodning och multimodalt — komplett jämförelse med konkreta månadskostnader.",
+    paths: ["use", "build"],
+  },
+  {
+    to: "/ai-chatbot-kostnad",
+    title: "Vad kostar en AI-chatbot?",
+    body:
+      "Konkreta budgetexempel för hobby, småföretag och B2C — i SEK. Plus fyra sätt att sänka notan.",
+    paths: ["build"],
+  },
+  {
+    to: "/prompt-caching",
+    title: "Prompt caching — halvera AI-notan",
+    body:
+      "Hur du sparar 40–60 % på Claude och GPT-4o med rätt cache-strategi. Teknisk djupguide.",
+    paths: ["build"],
+  },
+  {
+    to: "/vad-kostar-chatgpt",
+    title: "Räkna på ChatGPT API-kostnader",
+    body: "Detaljguide och kalkylator för GPT-4o och GPT-4o mini.",
+    paths: ["use", "build"],
+  },
+  {
+    to: "/claude-pris",
+    title: "Claude Sonnet och Haiku-kostnader",
+    body:
+      "Vad kostar Anthropics modeller per månad? Kalkylera och jämför med ChatGPT.",
+    paths: ["use", "build"],
+  },
+  {
+    to: "/gpt-4-pris",
+    title: "Jämför GPT-4.1, GPT-4o och mini",
+    body: "Räkna på alla GPT-4-varianter och se vilken som passar bäst.",
+    paths: ["use", "build"],
+  },
+  {
+    to: "/token-kalkylator",
+    title: "Räkna tokens i valfri text",
+    body:
+      "Klistra in en text och se exakt hur många tokens den innehåller — och vad det kostar per modell.",
+    paths: ["build"],
+  },
+];
+
+function sortGuidesByPath(path: UserPath | null): Guide[] {
+  if (!path) return GUIDES;
+  return [...GUIDES].sort((a, b) => {
+    const aFit = a.paths.includes(path) ? 0 : 1;
+    const bFit = b.paths.includes(path) ? 0 : 1;
+    return aFit - bFit;
+  });
+}
 
 const websiteSchema = {
   "@context": "https://schema.org",
@@ -35,6 +115,11 @@ const toolSchema = {
 
 export function Home() {
   const [calcValues, setCalcValues] = useState<CalcInitialValues | undefined>();
+  const [userPath, setUserPath] = useState<UserPath | null>(null);
+
+  useEffect(() => {
+    setUserPath(getStoredPath());
+  }, []);
 
   const handleScenario = useCallback((values: CalcInitialValues) => {
     setCalcValues({ ...values });
@@ -42,6 +127,8 @@ export function Home() {
       document.getElementById("kalkylator")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 80);
   }, []);
+
+  const sortedGuides = sortGuidesByPath(userPath);
 
   return (
     <>
@@ -64,7 +151,7 @@ export function Home() {
         <HeroQuickFaq />
 
         {/* 1c. Två tydliga vägar — använd vs bygg */}
-        <PathSelector />
+        <PathSelector onPathChange={setUserPath} />
 
         {/* 2. Kalkylator — sidans primära funktion */}
         <section id="kalkylator" className="mb-24">
@@ -116,71 +203,44 @@ export function Home() {
           </Link>
         </section>
 
-        {/* 6. Fler guider */}
+        {/* 6. Fler guider — sorterade efter användarens väg */}
         <section className="mb-24">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Fler prisguider</h2>
+          <div className="flex items-baseline justify-between mb-4 gap-3 flex-wrap">
+            <h2 className="text-xl font-bold text-gray-900">Fler prisguider</h2>
+            {userPath && (
+              <p className="text-xs text-gray-400">
+                Sorterade efter dig som vill{" "}
+                <span className="font-semibold text-indigo-600">
+                  {userPath === "use" ? "använda AI" : "bygga med AI"}
+                </span>
+              </p>
+            )}
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Link to="/vad-kostar-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Komplett prisguide för AI 2026</p>
-              <p className="text-sm text-gray-500">
-                Översikt för privatpersoner och företag — abonnemang,
-                API-priser och gratis alternativ.
-              </p>
-            </Link>
-            <Link to="/billigaste-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vilken AI är billigast just nu?</p>
-              <p className="text-sm text-gray-500">
-                Jämför mini-modellerna från OpenAI, Anthropic och Google per
-                användningsfall.
-              </p>
-            </Link>
-            <Link to="/chatgpt-vs-claude" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">ChatGPT vs Claude — vilken passar?</p>
-              <p className="text-sm text-gray-500">
-                Pris, svenska språk, kodning och multimodalt — komplett
-                jämförelse med konkreta månadskostnader.
-              </p>
-            </Link>
-            <Link to="/ai-chatbot-kostnad" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Vad kostar en AI-chatbot?</p>
-              <p className="text-sm text-gray-500">
-                Konkreta budgetexempel för hobby, småföretag och B2C — i SEK.
-                Plus fyra sätt att sänka notan.
-              </p>
-            </Link>
-            <Link to="/prompt-caching" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Prompt caching — halvera AI-notan</p>
-              <p className="text-sm text-gray-500">
-                Hur du sparar 40–60 % på Claude och GPT-4o med rätt
-                cache-strategi. Teknisk djupguide.
-              </p>
-            </Link>
-            <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Räkna på ChatGPT API-kostnader</p>
-              <p className="text-sm text-gray-500">
-                Detaljguide och kalkylator för GPT-4o och GPT-4o mini.
-              </p>
-            </Link>
-            <Link to="/claude-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Claude Sonnet och Haiku-kostnader</p>
-              <p className="text-sm text-gray-500">
-                Vad kostar Anthropics modeller per månad? Kalkylera och
-                jämför med ChatGPT.
-              </p>
-            </Link>
-            <Link to="/gpt-4-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Jämför GPT-4.1, GPT-4o och mini</p>
-              <p className="text-sm text-gray-500">
-                Räkna på alla GPT-4-varianter och se vilken som passar bäst.
-              </p>
-            </Link>
-            <Link to="/token-kalkylator" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1">Räkna tokens i valfri text</p>
-              <p className="text-sm text-gray-500">
-                Klistra in en text och se exakt hur många tokens den
-                innehåller — och vad det kostar per modell.
-              </p>
-            </Link>
+            {sortedGuides.map((g) => {
+              const isMatch = userPath !== null && g.paths.includes(userPath);
+              return (
+                <Link
+                  key={g.to}
+                  to={g.to}
+                  className={`card hover:shadow-sm transition-all group relative ${
+                    isMatch
+                      ? "border-indigo-200 bg-indigo-50/30 hover:border-indigo-300"
+                      : "hover:border-indigo-200"
+                  }`}
+                >
+                  {isMatch && (
+                    <span className="absolute top-3 right-3 inline-block px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[10px] rounded-full font-semibold uppercase tracking-wide">
+                      Passar dig
+                    </span>
+                  )}
+                  <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 pr-20">
+                    {g.title}
+                  </p>
+                  <p className="text-sm text-gray-500">{g.body}</p>
+                </Link>
+              );
+            })}
           </div>
         </section>
 
