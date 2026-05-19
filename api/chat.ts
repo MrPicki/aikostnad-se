@@ -26,33 +26,148 @@ När du svarar:
 
 Håll svaret kort och konkret — max 150-200 ord.`;
 
+const CANONICAL_ORIGIN = "https://aikostnad.se";
+const ALLOWED_ORIGINS = new Set([
+  "https://aikostnad.se",
+  "https://www.aikostnad.se",
+  "https://aikostnad.com",
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
+]);
+
+function resolveCorsOrigin(req: Request): string {
+  const origin = req.headers.get("origin");
+  if (!origin) return CANONICAL_ORIGIN;
+  if (ALLOWED_ORIGINS.has(origin)) return origin;
+  if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin)) return origin;
+  return CANONICAL_ORIGIN;
+}
+
+// In-memory IP rate limiter: 20 req/IP/hour.
+// Resets per edge instance — best-effort protection for a small site.
+const ipRateMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkIpRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = ipRateMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    ipRateMap.set(ip, { count: 1, resetAt: now + 3_600_000 });
+    return true;
+  }
+  if (entry.count >= 20) return false;
+  entry.count++;
+  return true;
+}
+
+function parseCookies(header: string | null): Record<string, string> {
+  const result: Record<string, string> = {};
+  if (!header) return result;
+  for (const part of header.split(";")) {
+    const idx = part.indexOf("=");
+    if (idx === -1) continue;
+    const key = part.slice(0, idx).trim();
+    const val = part.slice(idx + 1).trim();
+    if (key) result[key] = val;
+  }
+  return result;
+}
+
+const USAGE_LIMIT = 4;
+const USAGE_COOKIE = "ai_usage";
+
 export default async function handler(req: Request): Promise<Response> {
+  const ALLOWED_ORIGIN = resolveCorsOrigin(req);
+  const reqOrigin = req.headers.get("origin");
+  const isBrowserCall = reqOrigin !== null;
+  const isAllowedOrigin = !isBrowserCall || ALLOWED_ORIGIN === reqOrigin;
+
+  const corsHeaders = {
+    "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
+    "Access-Control-Allow-Methods": "POST",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+
   if (req.method === "OPTIONS") {
-    return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST",
-        "Access-Control-Allow-Headers": "Content-Type",
-      },
-    });
+    return new Response(null, { headers: corsHeaders });
   }
 
   if (req.method !== "POST") {
     return new Response("Method not allowed", { status: 405 });
   }
 
+  if (!isAllowedOrigin) {
+    return new Response(JSON.stringify({ error: "Origin not allowed" }), {
+      status: 403,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // IP-based rate limit (20 req/IP/hour)
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anonymous";
+  if (!checkIpRateLimit(ip)) {
+    return new Response(
+      JSON.stringify({ error: "För många förfrågningar, försök igen senare." }),
+      {
+        status: 429,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      }
+    );
+  }
+
+  // Cookie-based usage limit (4 per 24h)
+  const cookies = parseCookies(req.headers.get("cookie"));
+  const usageCount = Math.max(
+    0,
+    parseInt(cookies[USAGE_COOKIE] ?? "0", 10) || 0
+  );
+
+  if (usageCount >= USAGE_LIMIT) {
+    return new Response(JSON.stringify({ limitReached: true }), {
+      status: 200,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  // Parse and validate body
+  let rawMessages: unknown;
   try {
-    const { messages } = (await req.json()) as {
-      messages: Array<{ role: "user" | "assistant"; content: string }>;
-    };
+    const body = (await req.json()) as { messages?: unknown };
+    rawMessages = body.messages;
+  } catch {
+    return new Response(JSON.stringify({ error: "Ogiltigt format" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
 
-    if (!messages?.length) {
-      return new Response(JSON.stringify({ error: "Inga meddelanden angavs" }), {
-        status: 400,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
+  if (!Array.isArray(rawMessages) || rawMessages.length === 0) {
+    return new Response(JSON.stringify({ error: "Inga meddelanden angavs" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
 
+  const validRoles = new Set(["user", "assistant"]);
+  const cleanMessages = (
+    rawMessages as Array<Record<string, unknown>>
+  )
+    .filter((m) => m && typeof m === "object" && validRoles.has(m.role as string))
+    .map((m) => ({
+      role: m.role as "user" | "assistant",
+      content: String(m.content ?? "").slice(0, 2000),
+    }))
+    .slice(-10);
+
+  if (!cleanMessages.length) {
+    return new Response(JSON.stringify({ error: "Inga giltiga meddelanden" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json", ...corsHeaders },
+    });
+  }
+
+  try {
     const anthropicRes = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -65,16 +180,18 @@ export default async function handler(req: Request): Promise<Response> {
         max_tokens: 1024,
         system: SYSTEM,
         stream: true,
-        messages: messages.slice(-10),
+        messages: cleanMessages,
       }),
     });
 
     if (!anthropicRes.ok) {
-      const errText = await anthropicRes.text();
-      console.error("Anthropic API error:", anthropicRes.status, errText);
+      console.error("Anthropic API error:", anthropicRes.status);
       return new Response(
         JSON.stringify({ error: "AI-anrop misslyckades" }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
+        {
+          status: 500,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
       );
     }
 
@@ -113,7 +230,7 @@ export default async function handler(req: Request): Promise<Response> {
                 await writer.write(encoder.encode(event.delta.text));
               }
             } catch {
-              // Hoppa över ogiltiga JSON-rader
+              // skip invalid JSON lines
             }
           }
         }
@@ -122,19 +239,24 @@ export default async function handler(req: Request): Promise<Response> {
       }
     })();
 
+    // Increment usage count only on successful Anthropic response
+    const newCount = usageCount + 1;
+    const setCookie = `${USAGE_COOKIE}=${newCount}; HttpOnly; SameSite=Strict; Max-Age=86400; Path=/`;
+
     return new Response(readable, {
       headers: {
         "Content-Type": "text/plain; charset=utf-8",
-        "Access-Control-Allow-Origin": "*",
-        "Cache-Control": "no-cache",
+        "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
+        "Cache-Control": "no-store",
         "X-Accel-Buffering": "no",
+        "Set-Cookie": setCookie,
       },
     });
   } catch (err) {
-    console.error("chat error:", err);
+    console.error("chat error:", err instanceof Error ? err.message : "unknown");
     return new Response(JSON.stringify({ error: "Serverfel" }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...corsHeaders },
     });
   }
 }

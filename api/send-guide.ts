@@ -316,7 +316,7 @@ export default async function handler(req: Request): Promise<Response> {
     // In dev / before Resend is configured we still return success so the UX
     // flow works end-to-end. The lead is captured; the email can be sent
     // manually until Resend is wired up.
-    console.warn("RESEND_API_KEY missing — email not sent for", email);
+    console.warn("RESEND_API_KEY missing — email not sent");
     return new Response(JSON.stringify({ success: true, emailSent: false }), {
       status: 200,
       headers,
