@@ -15,6 +15,17 @@
     overflow-x: hidden;
     max-width: 100vw;
   }
+
+  /* iOS Safari auto-zooms on focus when input font-size < 16px.
+     Force 16px on all form controls below the sm breakpoint to
+     prevent the layout from jumping when the user taps a field. */
+  @media (max-width: 639px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }
 }
 
 @keyframes fadeInUp {
