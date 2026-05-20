@@ -75,4 +75,46 @@ export const relatedArticles: Record<string, RelatedLink[]> = {
     { to: "/ai-for-foretag", title: "Gratis AI för företag", description: "Vad kan företag använda gratis och när krävs betalt?" },
     { to: "/chatgpt-vs-claude", title: "ChatGPT vs Claude — gratis jämförelse", description: "Vilken är bäst på sina gratisnivåer?" },
   ],
+  "ai-konsult-pris": [
+    { to: "/ai-for-foretag", title: "AI för företag — kostnader och val", description: "Bygg eller köpa? Pris per anställd i SEK." },
+    { to: "/ai-chatbot-kostnad", title: "Vad kostar en AI-chatbot?", description: "Konkreta budgetar för hobby, SME och B2C." },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Översikt över alla AI-leverantörer i SEK." },
+    { to: "/openai-api-kostnad", title: "OpenAI API-kostnad förklarad", description: "Bygger ni själva? Här är OpenAI-priserna." },
+  ],
+  "microsoft-copilot-pris": [
+    { to: "/vad-kostar-chatgpt", title: "ChatGPT vs Copilot", description: "Båda kör GPT-4 — jämför priset." },
+    { to: "/ai-for-foretag", title: "AI för företag i Sverige", description: "Copilot eller Claude för svenska SME?" },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Alla AI-abonnemang jämfört." },
+    { to: "/chatgpt-pro-vs-plus", title: "ChatGPT Pro vs Plus", description: "Är ChatGPT Pro värt 2 100 kr/mån?" },
+  ],
+  "openai-api-kostnad": [
+    { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT API?", description: "Detaljguide för GPT-4o och GPT-4o mini." },
+    { to: "/gpt-4-pris", title: "GPT-4.1 pris och varianter", description: "Jämför alla GPT-4-varianter." },
+    { to: "/billigaste-ai", title: "Billigaste AI 2026", description: "GPT-4o mini vs Claude Haiku vs Gemini Flash." },
+    { to: "/prompt-caching", title: "Halvera notan med prompt caching", description: "OpenAI:s automatiska caching förklarad." },
+  ],
+  "chatgpt-pro-vs-plus": [
+    { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT?", description: "Komplett prisöversikt för alla ChatGPT-nivåer." },
+    { to: "/openai-api-kostnad", title: "OpenAI API-kostnad", description: "Bygger du själv? Räkna på API:t." },
+    { to: "/microsoft-copilot-pris", title: "Microsoft Copilot pris", description: "Copilot är ofta billigare alternativet." },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Jämför med Claude, Gemini och fler." },
+  ],
+  "ai-bild-pris": [
+    { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT?", description: "DALL-E 3 ingår i ChatGPT Plus." },
+    { to: "/openai-api-kostnad", title: "OpenAI API — inkl. DALL-E", description: "Bygger du in bildgenerering i app?" },
+    { to: "/billigaste-ai", title: "Billigaste AI 2026", description: "Vill du ha både text och bild?" },
+    { to: "/ai-ordlista", title: "AI-ordlista", description: "Vad är diffusion, LoRA, ControlNet?" },
+  ],
+  "perplexity-pris": [
+    { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT?", description: "ChatGPT Plus är största konkurrenten." },
+    { to: "/claude-pris", title: "Claude pris", description: "Perplexity Pro ger tillgång till Claude." },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Alla AI-abonnemang jämförda." },
+    { to: "/ai-ordlista", title: "AI-ordlista", description: "Vad är RAG, embedding, vector database?" },
+  ],
+  "ai-ordlista": [
+    { to: "/vad-kostar-ai", title: "Vad kostar AI?", description: "Praktisk guide om priser efter att du läst termerna." },
+    { to: "/prompt-caching", title: "Prompt caching förklarat", description: "Djupguide för en av termerna i ordlistan." },
+    { to: "/token-kalkylator", title: "Tokenräknare", description: "Räkna tokens i din text — verktyget." },
+    { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT?", description: "Tillämpa kunskapen på ChatGPT-priser." },
+  ],
 };

@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
+import { ArticleSchema } from "../components/ArticleSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { PriceOfferSchema, SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
+import { articles } from "../data/articles";
+import { openAISources } from "../data/sources";
 
 const INITIAL_VALUES = { modelId: "gpt-4o" } as const;
 
@@ -48,6 +55,22 @@ export function VadKostarChatGPT() {
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "Vad kostar ChatGPT?", url: "https://aikostnad.se/vad-kostar-chatgpt" },
       ]} />
+      <ArticleSchema article={articles["vad-kostar-chatgpt"]} />
+      <SpeakableSchema />
+      <PriceOfferSchema
+        productName="ChatGPT (OpenAI) — abonnemang och API"
+        description="ChatGPT pris 2026: abonnemang (Free, Plus, Pro, Business) och API per token (GPT-4o, GPT-4o mini, o3) — i svenska kronor."
+        brand="OpenAI"
+        url="https://aikostnad.se/vad-kostar-chatgpt"
+        offers={[
+          { name: "ChatGPT Free", priceSek: 0, description: "Grundversion med GPT-4o mini, daglig limit" },
+          { name: "ChatGPT Plus", priceSek: 210, description: "GPT-4o, DALL-E, webbsökning, Custom GPTs" },
+          { name: "ChatGPT Pro", priceSek: 2100, description: "o3 unlimited, Sora video, GPT-4o utan limit" },
+          { name: "ChatGPT Business", priceSek: 263, description: "25 USD/användare/mån (årsbetalning)" },
+          { name: "GPT-4o API (per Mtok input)", priceSek: 26, description: "2,50 USD per miljon input-tokens" },
+          { name: "GPT-4o mini API (per Mtok input)", priceSek: 2, description: "0,15 USD per miljon input-tokens — billigast" },
+        ]}
+      />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -60,6 +83,25 @@ export function VadKostarChatGPT() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             Vad kostar ChatGPT? Räkna ut din API-kostnad
           </h1>
+
+          <LastUpdated date={articles["vad-kostar-chatgpt"].modifiedDate} />
+
+          <TLDR
+            question="Vad kostar ChatGPT?"
+            answer={
+              <>
+                ChatGPT kostar mellan <strong>0 kr (gratis)</strong> och <strong>2 100 kr/mån (Pro)</strong>. Vanligaste valet är <strong>ChatGPT Plus för 210 kr/mån</strong> (20 USD). Bygger du en applikation kostar GPT-4o API <strong>~26 kr per miljon input-tokens</strong>, vilket motsvarar ~3 öre per genomsnittsfråga på svenska.
+              </>
+            }
+            bullets={[
+              "ChatGPT Free: 0 kr/mån (GPT-4o mini, dagliga limits)",
+              "ChatGPT Plus: 210 kr/mån (GPT-4o full, DALL-E, sökning)",
+              "ChatGPT Pro: 2 100 kr/mån (o3 unlimited, Sora)",
+              "ChatGPT Business: 263 kr/användare/mån (årsbetalning)",
+              "GPT-4o API: 2,50 USD / 10 USD per Mtok (in/ut)",
+              "GPT-4o mini API: 0,15 USD / 0,60 USD per Mtok",
+            ]}
+          />
 
           <div className="prose text-gray-600 space-y-4 text-base leading-relaxed">
             <p>
@@ -185,6 +227,8 @@ export function VadKostarChatGPT() {
         <RelatedArticles links={relatedArticles["vad-kostar-chatgpt"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om ChatGPT-kostnad" />
+
+        <Sources items={openAISources} />
 
         <div className="mt-12 card bg-indigo-50 border-indigo-100">
           <p className="text-sm text-indigo-800">

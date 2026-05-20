@@ -60,6 +60,27 @@ const AiForForetag = lazy(() =>
 const GratisAi = lazy(() =>
   import("./pages/GratisAi").then((m) => ({ default: m.GratisAi }))
 );
+const AiKonsultPris = lazy(() =>
+  import("./pages/AiKonsultPris").then((m) => ({ default: m.AiKonsultPris }))
+);
+const MicrosoftCopilotPris = lazy(() =>
+  import("./pages/MicrosoftCopilotPris").then((m) => ({ default: m.MicrosoftCopilotPris }))
+);
+const OpenAiApiKostnad = lazy(() =>
+  import("./pages/OpenAiApiKostnad").then((m) => ({ default: m.OpenAiApiKostnad }))
+);
+const ChatGptProVsPlus = lazy(() =>
+  import("./pages/ChatGptProVsPlus").then((m) => ({ default: m.ChatGptProVsPlus }))
+);
+const AiBildPris = lazy(() =>
+  import("./pages/AiBildPris").then((m) => ({ default: m.AiBildPris }))
+);
+const PerplexityPris = lazy(() =>
+  import("./pages/PerplexityPris").then((m) => ({ default: m.PerplexityPris }))
+);
+const AiOrdlista = lazy(() =>
+  import("./pages/AiOrdlista").then((m) => ({ default: m.AiOrdlista }))
+);
 
 function Shell() {
   const location = useLocation();
@@ -89,6 +110,13 @@ function Shell() {
             <Route path="/gemini-pris" element={<GeminiPris />} />
             <Route path="/ai-for-foretag" element={<AiForForetag />} />
             <Route path="/gratis-ai" element={<GratisAi />} />
+            <Route path="/ai-konsult-pris" element={<AiKonsultPris />} />
+            <Route path="/microsoft-copilot-pris" element={<MicrosoftCopilotPris />} />
+            <Route path="/openai-api-kostnad" element={<OpenAiApiKostnad />} />
+            <Route path="/chatgpt-pro-vs-plus" element={<ChatGptProVsPlus />} />
+            <Route path="/ai-bild-pris" element={<AiBildPris />} />
+            <Route path="/perplexity-pris" element={<PerplexityPris />} />
+            <Route path="/ai-ordlista" element={<AiOrdlista />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

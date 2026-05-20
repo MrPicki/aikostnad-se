@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
+import { ArticleSchema } from "../components/ArticleSchema";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
+import { articles } from "../data/articles";
+import { officialPricingSources } from "../data/sources";
 
 const faqs: FAQItem[] = [
   {
@@ -45,6 +52,8 @@ export function GratisAi() {
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "Gratis AI", url: "https://aikostnad.se/gratis-ai" },
       ]} />
+      <ArticleSchema article={articles["gratis-ai"]} />
+      <SpeakableSchema />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -57,6 +66,26 @@ export function GratisAi() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             Gratis AI 2026 — komplett jämförelse
           </h1>
+
+          <LastUpdated date={articles["gratis-ai"].modifiedDate} />
+
+          <TLDR
+            question="Vilka AI-verktyg är helt gratis 2026?"
+            answer={
+              <>
+                <strong>ChatGPT (Free), Claude.ai (Free), Gemini och DeepSeek</strong> är alla gratis att använda i webbgränssnitt. För utvecklare har <strong>Gemini det generösaste gratis-API:t</strong>: 1 500 förfrågningar/dag mot Gemini 2.5 Flash. Begränsningarna är hastighet och dagliga limits — inte modellkvaliteten. Företagsbruk kräver oftast betalversioner för GDPR-DPA.
+              </>
+            }
+            bullets={[
+              "ChatGPT Free: GPT-4o mini, daglig limit",
+              "Claude Free: Claude Sonnet, ~30 meddelanden / 5h",
+              "Gemini: gratis via gemini.google.com",
+              "Google AI Studio: 1 500 free req/dag (Flash)",
+              "DeepSeek: gratis webbapp + generöst API-tier",
+              "GitHub Copilot: gratis för studenter och OSS",
+            ]}
+          />
+
           <p className="text-lg text-gray-600 leading-relaxed">
             De bästa AI-verktygen i världen är tillgängliga gratis — med begränsningar.
             Den här guiden går igenom vad de faktiskt ger dig gratis, var gränserna
@@ -283,6 +312,8 @@ export function GratisAi() {
         <RelatedArticles links={relatedArticles["gratis-ai"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om gratis AI" />
+
+        <Sources items={officialPricingSources} />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link to="/billigaste-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">

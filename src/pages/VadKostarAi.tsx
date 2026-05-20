@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
+import { ArticleSchema } from "../components/ArticleSchema";
 import { SubscriptionTable } from "../components/SubscriptionTable";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
+import { articles } from "../data/articles";
+import { officialPricingSources } from "../data/sources";
 
 const faqs: FAQItem[] = [
   {
@@ -46,6 +53,8 @@ export function VadKostarAi() {
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "Vad kostar AI?", url: "https://aikostnad.se/vad-kostar-ai" },
       ]} />
+      <ArticleSchema article={articles["vad-kostar-ai"]} />
+      <SpeakableSchema />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -58,6 +67,25 @@ export function VadKostarAi() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             Vad kostar AI? Prisguide 2026
           </h1>
+
+          <LastUpdated date={articles["vad-kostar-ai"].modifiedDate} />
+
+          <TLDR
+            question="Vad kostar AI i Sverige?"
+            answer={
+              <>
+                AI kostar från <strong>0 kr (gratisversioner)</strong> till <strong>50 000+ kr/mån (enterprise)</strong>. Vanligast: privatperson betalar <strong>0–210 kr/mån</strong> (abonnemang som ChatGPT Plus eller Claude Pro), småföretag <strong>1 000–2 000 kr/mån</strong>, och företag som bygger via API betalar <strong>50–500 kr per anställd/mån</strong>.
+              </>
+            }
+            bullets={[
+              "Gratis: ChatGPT Free, Claude Free, Gemini, Copilot Free",
+              "Privat: 210 kr/mån (ChatGPT Plus, Claude Pro, Gemini Advanced)",
+              "Frilans / soloprenör: 200–500 kr/mån",
+              "Småföretag 5–10 pers: 1 000–2 000 kr/mån",
+              "Mellanstort 50–100 pers: 3 000–10 000 kr/mån",
+              "API per token: GPT-4o mini ~0,15 USD/Mtok (billigast)",
+            ]}
+          />
 
           <div className="prose text-gray-600 space-y-4 text-base leading-relaxed">
             <p>
@@ -190,6 +218,8 @@ export function VadKostarAi() {
         <RelatedArticles links={relatedArticles["vad-kostar-ai"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om AI-kostnader" />
+
+        <Sources items={officialPricingSources} />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link to="/billigaste-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">

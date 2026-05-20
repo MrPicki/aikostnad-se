@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
+import { ArticleSchema } from "../components/ArticleSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
+import { articles } from "../data/articles";
+import { officialPricingSources } from "../data/sources";
 
 const INITIAL_VALUES = { modelId: "claude-haiku-4-5" } as const;
 
@@ -48,6 +55,8 @@ export function BilligasteAi() {
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "Billigaste AI 2026", url: "https://aikostnad.se/billigaste-ai" },
       ]} />
+      <ArticleSchema article={articles["billigaste-ai"]} />
+      <SpeakableSchema />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -60,6 +69,25 @@ export function BilligasteAi() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             Billigaste AI 2026 — komplett jämförelse
           </h1>
+
+          <LastUpdated date={articles["billigaste-ai"].modifiedDate} />
+
+          <TLDR
+            question="Vilket AI är billigast 2026?"
+            answer={
+              <>
+                Billigast totalt är <strong>GPT-4o mini</strong>: <strong>0,15 USD / 0,60 USD per miljon tokens</strong> (in/ut). Tätt följt av <strong>Gemini 2.5 Flash-Lite</strong> (0,10 / 0,40) och <strong>Claude Haiku 4.5</strong> (1 / 5). För hög volym med säkerhet inom EU väljer många <strong>Mistral Small</strong> (0,10 / 0,30). Open source: DeepSeek V3 är billigast men kinesisk.
+              </>
+            }
+            bullets={[
+              "GPT-4o mini: 0,15 / 0,60 USD per Mtok",
+              "Gemini 2.5 Flash-Lite: 0,10 / 0,40 USD per Mtok",
+              "Claude Haiku 4.5: 1 / 5 USD per Mtok",
+              "Mistral Small: 0,10 / 0,30 USD per Mtok (EU)",
+              "DeepSeek V3: 0,28 / 0,42 USD per Mtok (kinesisk)",
+              "Gratis: ChatGPT Free, Claude Free, Gemini, Copilot Free",
+            ]}
+          />
 
           <div className="prose text-gray-600 space-y-4 text-base leading-relaxed">
             <p>
@@ -229,6 +257,8 @@ export function BilligasteAi() {
         <RelatedArticles links={relatedArticles["billigaste-ai"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om billig AI" />
+
+        <Sources items={officialPricingSources} />
       </main>
     </>
   );

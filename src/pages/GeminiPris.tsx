@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
+import { ArticleSchema } from "../components/ArticleSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { PriceOfferSchema, SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
+import { articles } from "../data/articles";
+import { geminiSources } from "../data/sources";
 
 const INITIAL_VALUES = { modelId: "gemini-2.5-flash" } as const;
 
@@ -48,6 +55,21 @@ export function GeminiPris() {
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "Gemini pris", url: "https://aikostnad.se/gemini-pris" },
       ]} />
+      <ArticleSchema article={articles["gemini-pris"]} />
+      <SpeakableSchema />
+      <PriceOfferSchema
+        productName="Google Gemini — Advanced och API"
+        description="Gemini pris 2026: Gemini Advanced abonnemang (Google One AI Premium) och API per token (Gemini 2.5 Pro, Flash, Flash-Lite) i svenska kronor."
+        brand="Google"
+        url="https://aikostnad.se/gemini-pris"
+        offers={[
+          { name: "Gemini Free", priceSek: 0, description: "Gratis via gemini.google.com" },
+          { name: "Google One AI Premium (Gemini Advanced)", priceSek: 199, description: "Inkl. 2 TB lagring, Gemini i Gmail/Docs" },
+          { name: "Gemini 2.5 Flash-Lite API (per Mtok input)", priceSek: 1, description: "0,10 USD per miljon tokens" },
+          { name: "Gemini 2.5 Flash API (per Mtok input)", priceSek: 3, description: "0,30 USD per miljon tokens" },
+          { name: "Gemini 2.5 Pro API (per Mtok input)", priceSek: 13, description: "1,25 USD per miljon tokens (under 200K context)" },
+        ]}
+      />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -60,6 +82,25 @@ export function GeminiPris() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             Gemini pris — vad kostar Google Gemini API?
           </h1>
+
+          <LastUpdated date={articles["gemini-pris"].modifiedDate} />
+
+          <TLDR
+            question="Vad kostar Google Gemini?"
+            answer={
+              <>
+                Gemini finns i tre nivåer: <strong>gratis</strong> (gemini.google.com), <strong>Gemini Advanced 199 kr/mån</strong> (via Google One AI Premium med 2 TB lagring), och <strong>API per token</strong>. Gemini 2.5 Flash är ett av marknadens billigaste val: <strong>0,30 USD / 2,50 USD per miljon tokens</strong> — med 1 miljon tokens kontextfönster.
+              </>
+            }
+            bullets={[
+              "Gemini Free: 0 kr (gemini.google.com)",
+              "Gemini Advanced: 199 kr/mån (Google One AI Premium)",
+              "Gemini 2.5 Flash-Lite API: 0,10 / 0,40 USD per Mtok",
+              "Gemini 2.5 Flash API: 0,30 / 2,50 USD per Mtok",
+              "Gemini 2.5 Pro API: 1,25 / 10 USD per Mtok",
+              "1 miljon tokens kontextfönster (störst på marknaden)",
+            ]}
+          />
 
           <div className="prose text-gray-600 space-y-4 text-base leading-relaxed">
             <p>
@@ -277,6 +318,8 @@ export function GeminiPris() {
         <RelatedArticles links={relatedArticles["gemini-pris"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om Gemini-priser" />
+
+        <Sources items={geminiSources} />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">

@@ -5,8 +5,13 @@ import { ArticleSchema } from "../components/ArticleSchema";
 import { ArticleByline } from "../components/ArticleByline";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
 import { articles } from "../data/articles";
+import { officialPricingSources } from "../data/sources";
 
 const article = articles["ai-chatbot-kostnad"];
 
@@ -51,6 +56,7 @@ export function AiChatbotKostnad() {
         { name: "AI-chatbot kostnad", url: "https://aikostnad.se/ai-chatbot-kostnad" },
       ]} />
       <ArticleSchema article={article} />
+      <SpeakableSchema />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -64,6 +70,24 @@ export function AiChatbotKostnad() {
             Vad kostar en AI-chatbot? Praktisk guide 2026
           </h1>
           <ArticleByline article={article} />
+          <LastUpdated date={article.modifiedDate} />
+
+          <TLDR
+            question="Vad kostar en AI-chatbot?"
+            answer={
+              <>
+                Hobby-bot: <strong>under 20 kr/mån</strong>. Småföretag (500 frågor/dag): <strong>150–500 kr/mån</strong>. Medelstor B2C (5 000 frågor/dag): <strong>1 500–5 000 kr/mån</strong>. Hosting tillkommer (typiskt 0–200 kr/mån). Med rätt modellval (GPT-4o mini/Claude Haiku) och prompt caching kan du halvera notan jämfört med naiv implementering.
+              </>
+            }
+            bullets={[
+              "Hobby (50 frågor/dag): ~20 kr/mån",
+              "Småföretag (500 frågor/dag): 150–500 kr/mån",
+              "Medelstor B2C (5 000/dag): 1 500–5 000 kr/mån",
+              "Brytpunkt API vs Plus: ~10 användare / 200 frågor/dag",
+              "Prompt caching: -50 % på återanvänd input",
+              "Hosting: 0–200 kr/mån (Vercel/Render free tier)",
+            ]}
+          />
           <p className="text-lg text-gray-600 leading-relaxed mb-10">
             Det korta svaret: <strong>20 kr/mån</strong> för en hobby-bot,{" "}
             <strong>500 kr/mån</strong> för ett seriöst B2C-fall,{" "}
@@ -347,6 +371,8 @@ export function AiChatbotKostnad() {
         <RelatedArticles links={relatedArticles["ai-chatbot-kostnad"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om AI-chatbot-kostnad" />
+
+        <Sources items={officialPricingSources} />
       </main>
     </>
   );

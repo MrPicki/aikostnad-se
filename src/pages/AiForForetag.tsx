@@ -1,9 +1,16 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
+import { ArticleSchema } from "../components/ArticleSchema";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
+import { articles } from "../data/articles";
+import { officialPricingSources } from "../data/sources";
 import { Helmet } from "react-helmet-async";
 
 const faqSchema = {
@@ -69,6 +76,8 @@ export function AiForForetag() {
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "AI för företag", url: "https://aikostnad.se/ai-for-foretag" },
       ]} />
+      <ArticleSchema article={articles["ai-for-foretag"]} />
+      <SpeakableSchema />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
@@ -84,6 +93,26 @@ export function AiForForetag() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             AI för företag — guide och kostnader 2026
           </h1>
+
+          <LastUpdated date={articles["ai-for-foretag"].modifiedDate} />
+
+          <TLDR
+            question="Vad kostar AI för svenska företag?"
+            answer={
+              <>
+                Räkna med <strong>200–500 kr per anställd och månad</strong> för individuella abonnemang (ChatGPT Plus, Claude Pro, Copilot). Med team-/enterprise-avtal eller egenbyggda API-lösningar kan kostnaden pressas till <strong>50–100 kr/anställd</strong>. För GDPR-efterlevnad krävs DPA — som följer med Enterprise-versioner men inte gratisversioner.
+              </>
+            }
+            bullets={[
+              "Soloprenör: 200–500 kr/mån",
+              "Småföretag 5–10 pers: 1 000–2 000 kr/mån",
+              "Mellanstort 50–100 pers: 3 000–10 000 kr/mån",
+              "Storföretag: enterprise-avtal, 30–50 % rabatt över listpris",
+              "76 % av svenska org. med AI-tillgång använder Copilot",
+              "GDPR-DPA: krav för persondata, ingår i Enterprise",
+            ]}
+          />
+
           <p className="text-lg text-gray-600 leading-relaxed">
             Sverige är ett av Europas ledande AI-länder — 76 % av svenska organisationer
             med AI-åtkomst använder redan verktyg aktivt. Den här guiden hjälper dig
@@ -303,6 +332,8 @@ export function AiForForetag() {
         <RelatedArticles links={relatedArticles["ai-for-foretag"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om AI för företag" />
+
+        <Sources items={officialPricingSources} />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link to="/ai-chatbot-kostnad" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">

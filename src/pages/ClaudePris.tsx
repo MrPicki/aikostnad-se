@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
+import { ArticleSchema } from "../components/ArticleSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { PriceOfferSchema, SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
+import { articles } from "../data/articles";
+import { claudeSources } from "../data/sources";
 
 const INITIAL_VALUES = { modelId: "claude-sonnet-4-6" } as const;
 
@@ -48,6 +55,22 @@ export function ClaudePris() {
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "Claude pris", url: "https://aikostnad.se/claude-pris" },
       ]} />
+      <ArticleSchema article={articles["claude-pris"]} />
+      <SpeakableSchema />
+      <PriceOfferSchema
+        productName="Claude AI (Anthropic) — abonnemang och API"
+        description="Claude pris 2026: API per token (Sonnet 4.6, Haiku 4.5, Opus 4.7) och abonnemang Claude Pro, Team och Enterprise — i svenska kronor."
+        brand="Anthropic"
+        url="https://aikostnad.se/claude-pris"
+        offers={[
+          { name: "Claude Free", priceSek: 0, description: "Claude.ai utan inloggning — begränsad volym" },
+          { name: "Claude Pro", priceSek: 210, description: "Privatperson, 5x mer användning än Free, Projects" },
+          { name: "Claude Team", priceSek: 315, description: "Per användare/mån vid årsbetalning" },
+          { name: "Claude Haiku 4.5 API (per Mtok input)", priceSek: 11, description: "Snabb, billig modell — 1 USD ≈ 10,50 SEK" },
+          { name: "Claude Sonnet 4.6 API (per Mtok input)", priceSek: 32, description: "Standardmodell för produktion" },
+          { name: "Claude Opus 4.7 API (per Mtok input)", priceSek: 53, description: "Flaggskepp för komplexa uppgifter" },
+        ]}
+      />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -60,6 +83,26 @@ export function ClaudePris() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             Claude pris — räkna ut vad Claude API kostar
           </h1>
+
+          <LastUpdated date={articles["claude-pris"].modifiedDate} />
+
+          <TLDR
+            question="Vad kostar Claude?"
+            answer={
+              <>
+                Claude finns i tre prisnivåer: <strong>gratis</strong> (Claude.ai begränsad), <strong>Claude Pro 210 kr/mån</strong> för privatperson, och{" "}
+                <strong>API per token</strong> för utvecklare. Claude Sonnet 4.6 (standardmodellen) kostar <strong>~32 kr per miljon input-tokens</strong> och <strong>~158 kr per miljon output-tokens</strong>.
+              </>
+            }
+            bullets={[
+              "Claude Pro: 210 kr/mån (privat, 5× Free)",
+              "Claude Team: 315 kr/användare/mån (årsbetalning)",
+              "Claude Haiku 4.5 API: 1 USD / 5 USD per Mtok (in/ut)",
+              "Claude Sonnet 4.6 API: 3 USD / 15 USD per Mtok (in/ut)",
+              "Claude Opus 4.7 API: 5 USD / 25 USD per Mtok (in/ut)",
+              "Prompt caching: 90 % rabatt på cachad input",
+            ]}
+          />
 
           <div className="prose text-gray-600 space-y-4 text-base leading-relaxed">
             <p>
@@ -183,6 +226,8 @@ export function ClaudePris() {
         <RelatedArticles links={relatedArticles["claude-pris"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om Claude-priser" />
+
+        <Sources items={claudeSources} />
 
         <div className="mt-12 card bg-indigo-50 border-indigo-100">
           <p className="text-sm text-indigo-800">

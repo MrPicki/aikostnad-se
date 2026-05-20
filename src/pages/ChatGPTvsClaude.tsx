@@ -5,8 +5,13 @@ import { ArticleSchema } from "../components/ArticleSchema";
 import { ArticleByline } from "../components/ArticleByline";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
 import { articles } from "../data/articles";
+import { officialPricingSources } from "../data/sources";
 
 const article = articles["chatgpt-vs-claude"];
 
@@ -51,6 +56,7 @@ export function ChatGPTvsClaude() {
         { name: "ChatGPT vs Claude", url: "https://aikostnad.se/chatgpt-vs-claude" },
       ]} />
       <ArticleSchema article={article} />
+      <SpeakableSchema />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -64,6 +70,25 @@ export function ChatGPTvsClaude() {
             ChatGPT vs Claude — vilken passar dig?
           </h1>
           <ArticleByline article={article} />
+          <LastUpdated date={article.modifiedDate} />
+
+          <TLDR
+            question="ChatGPT eller Claude — vilken ska jag välja?"
+            answer={
+              <>
+                <strong>Claude</strong> vinner på <strong>svenska språk och prompt caching</strong> (90 % rabatt på cachad input). <strong>ChatGPT/OpenAI</strong> vinner på <strong>pris</strong> (GPT-4o mini billigast) och <strong>multimodalt</strong> (bild, ljud, video). För 8 av 10 uppgifter är de utbytbara. För svensk kundtjänst — Claude. För kostnadskänslig hög volym — GPT-4o mini.
+              </>
+            }
+            bullets={[
+              "Pris: ChatGPT mini billigast (0,15/0,60 USD/Mtok)",
+              "Svenska: Claude Sonnet är generellt naturligare",
+              "Kodning: jämbördigt — växlar månadsvis i benchmarks",
+              "Caching: Claude 90 % rabatt på cachad input",
+              "Multimodalt: ChatGPT (bild + ljud + video)",
+              "Båda har EU GDPR-DPA på Enterprise-nivå",
+            ]}
+          />
+
           <p className="text-lg text-gray-600 leading-relaxed mb-10">
             Båda är toppmodeller från USA:s ledande AI-bolag. För 8 av 10
             uppgifter är de utbytbara — det här är vad som skiljer dem på pris,
@@ -378,6 +403,8 @@ export function ChatGPTvsClaude() {
         <RelatedArticles links={relatedArticles["chatgpt-vs-claude"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om ChatGPT vs Claude" />
+
+        <Sources items={officialPricingSources} />
       </main>
     </>
   );

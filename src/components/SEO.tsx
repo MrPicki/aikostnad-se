@@ -1,5 +1,6 @@
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { siteConfig } from "../config/siteConfig";
+import { WebsiteSchema } from "./SchemaBlocks";
 
 interface SEOProps {
   title?: string;
@@ -43,6 +44,7 @@ export function SEOProvider({ children }: { children: React.ReactNode }) {
         <html lang="sv" />
         <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
       </Helmet>
+      <WebsiteSchema />
       {children}
     </HelmetProvider>
   );
@@ -68,8 +70,6 @@ export function SEO({ title, description, canonical, children }: SEOProps) {
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
       <link rel="canonical" href={url} />
-      <link rel="alternate" hrefLang="sv" href={url} />
-      <link rel="alternate" hrefLang="x-default" href={url} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={desc} />
       <meta property="og:url" content={url} />

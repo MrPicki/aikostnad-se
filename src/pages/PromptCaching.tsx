@@ -5,8 +5,13 @@ import { ArticleSchema } from "../components/ArticleSchema";
 import { ArticleByline } from "../components/ArticleByline";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { HowToSchema, SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
 import { articles } from "../data/articles";
+import { claudeSources } from "../data/sources";
 
 const article = articles["prompt-caching"];
 
@@ -51,6 +56,34 @@ export function PromptCaching() {
         { name: "Prompt caching", url: "https://aikostnad.se/prompt-caching" },
       ]} />
       <ArticleSchema article={article} />
+      <SpeakableSchema />
+      <HowToSchema
+        name="Så aktiverar du prompt caching och sänker AI-kostnaden"
+        description="Steg-för-steg-guide för att aktivera prompt caching i Claude och GPT-4o, mäta cache hit rate och verifiera besparingen."
+        totalTime="PT15M"
+        steps={[
+          {
+            name: "Identifiera oföränderlig prompt-del",
+            text: "Hitta den del av din prompt som inte ändras mellan anrop — typiskt system-prompt, instruktioner eller dokumentkontext. Det är denna del som ska cachas.",
+          },
+          {
+            name: "Strukturera prompten med statisk del först",
+            text: "Lägg den oföränderliga delen först i prompten. Cachning matchar prefix exakt, så även en bokstavs ändring i början bryter cachen för hela resten.",
+          },
+          {
+            name: "Markera cache-block (Anthropic)",
+            text: "Hos Anthropic: lägg till cache_control: { type: 'ephemeral' } på de meddelandeblock du vill cacha. Hos OpenAI sker caching automatiskt vid 1024+ tokens prefix.",
+          },
+          {
+            name: "Verifiera cache hit rate",
+            text: "Mät cache hit rate via usage.cache_read_input_tokens (Anthropic) eller usage.prompt_tokens_details.cached_tokens (OpenAI). Ser du 0 % hit rate är något fel med strukturen.",
+          },
+          {
+            name: "Jämför kostnad före och efter",
+            text: "Använd Aikostnad.se kalkylator för att räkna ut din typiska månadskostnad utan caching. Jämför med faktiska räkningar — caching ska ge 30–60 % lägre input-kostnad om setup är korrekt.",
+          },
+        ]}
+      />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -64,6 +97,25 @@ export function PromptCaching() {
             Prompt caching — så halverar du AI-kostnaden
           </h1>
           <ArticleByline article={article} />
+          <LastUpdated date={article.modifiedDate} />
+
+          <TLDR
+            question="Vad är prompt caching och hur mycket sparar jag?"
+            answer={
+              <>
+                Prompt caching låter LLM:en återanvända en bearbetad prompt-del istället för att läsa hela inputen på nytt. <strong>Anthropic Claude</strong> ger <strong>90 % rabatt</strong> på cachad input, <strong>OpenAI</strong> ger <strong>50 %</strong> automatiskt. För en chatbot med fast 2 000-ords system-prompt kan caching <strong>halvera den totala notan</strong>.
+              </>
+            }
+            bullets={[
+              "Anthropic: 90 % rabatt på cachad input (manuell)",
+              "OpenAI: 50 % rabatt automatiskt vid 1024+ token prefix",
+              "Google Gemini: 75 % rabatt (manuell)",
+              "Cache TTL: 5 min default, 1 timme opt-in (Anthropic)",
+              "Lönsamt över ~100 anrop/timme med samma prefix",
+              "Verifiera via usage.cache_read_input_tokens",
+            ]}
+          />
+
           <p className="text-lg text-gray-600 leading-relaxed mb-10">
             Prompt caching är den mest underutnyttjade prisoptimeringen i
             LLM-världen. För chatbots och RAG-applikationer kan rätt
@@ -358,6 +410,8 @@ export function PromptCaching() {
         <RelatedArticles links={relatedArticles["prompt-caching"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om prompt caching" />
+
+        <Sources items={claudeSources} />
       </main>
     </>
   );

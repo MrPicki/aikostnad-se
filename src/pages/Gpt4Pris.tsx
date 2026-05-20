@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
+import { ArticleSchema } from "../components/ArticleSchema";
 import { Calculator } from "../components/Calculator";
 import { LandingFAQ, type FAQItem } from "../components/LandingFAQ";
 import { RelatedArticles } from "../components/RelatedArticles";
+import { TLDR } from "../components/TLDR";
+import { LastUpdated } from "../components/LastUpdated";
+import { Sources } from "../components/Sources";
+import { PriceOfferSchema, SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
+import { articles } from "../data/articles";
+import { openAISources } from "../data/sources";
 
 const INITIAL_VALUES = { modelId: "gpt-4.1" } as const;
 
@@ -48,6 +55,21 @@ export function Gpt4Pris() {
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "GPT-4.1 pris", url: "https://aikostnad.se/gpt-4-pris" },
       ]} />
+      <ArticleSchema article={articles["gpt-4-pris"]} />
+      <SpeakableSchema />
+      <PriceOfferSchema
+        productName="GPT-4 (OpenAI) — API per token"
+        description="GPT-4 pris 2026: GPT-4.1, GPT-4.1 mini, GPT-4.1 nano, GPT-4o och GPT-4o mini — per miljon tokens i svenska kronor."
+        brand="OpenAI"
+        url="https://aikostnad.se/gpt-4-pris"
+        offers={[
+          { name: "GPT-4.1 nano (per Mtok input)", priceSek: 1, description: "Billigast i familjen — 0,10 USD" },
+          { name: "GPT-4.1 mini (per Mtok input)", priceSek: 4, description: "0,40 USD per miljon tokens" },
+          { name: "GPT-4o mini (per Mtok input)", priceSek: 2, description: "0,15 USD per miljon tokens" },
+          { name: "GPT-4o (per Mtok input)", priceSek: 26, description: "2,50 USD — multimodal standard" },
+          { name: "GPT-4.1 (per Mtok input)", priceSek: 21, description: "2,00 USD — kodfokus" },
+        ]}
+      />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
@@ -60,6 +82,25 @@ export function Gpt4Pris() {
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             GPT-4.1 pris — räkna ut vad GPT-4 API kostar
           </h1>
+
+          <LastUpdated date={articles["gpt-4-pris"].modifiedDate} />
+
+          <TLDR
+            question="Vad kostar GPT-4?"
+            answer={
+              <>
+                GPT-4-familjen kostar från <strong>1 kr (nano)</strong> till <strong>~26 kr per miljon input-tokens (GPT-4o)</strong> i SEK. <strong>GPT-4.1</strong> är OpenAI:s senaste flaggskepp för kod — 2 USD input / 8 USD output per Mtok. Vill du chatta använder du <strong>ChatGPT Plus (210 kr/mån)</strong>. För egna applikationer betalar du per token via API.
+              </>
+            }
+            bullets={[
+              "GPT-4.1 nano: 0,10 / 0,40 USD per Mtok — billigast",
+              "GPT-4.1 mini: 0,40 / 1,60 USD per Mtok",
+              "GPT-4o mini: 0,15 / 0,60 USD per Mtok — mest använd",
+              "GPT-4o: 2,50 / 10 USD per Mtok — multimodal",
+              "GPT-4.1: 2,00 / 8 USD per Mtok — bäst på kod",
+              "1 miljon tokens kontextfönster",
+            ]}
+          />
 
           <div className="prose text-gray-600 space-y-4 text-base leading-relaxed">
             <p>
@@ -179,6 +220,8 @@ export function Gpt4Pris() {
         <RelatedArticles links={relatedArticles["gpt-4-pris"]} />
 
         <LandingFAQ items={faqs} heading="Vanliga frågor om GPT-4.1-priser" />
+
+        <Sources items={openAISources} />
 
         <div className="mt-12 card bg-indigo-50 border-indigo-100">
           <p className="text-sm text-indigo-800">
