@@ -348,6 +348,107 @@ Planens kärntes: *"En sajt som visar fel priser rankar inte länge."* Här finn
 
 ---
 
+---
+
+## 🔵 Sprint G — Fullständig SEO-offensiv (2026-05-20)
+
+**Mål:** Top 10 på Google Sverige för svenska AI-sökord. Sökordsresearch, teknisk audit, nya sidor, schema-förbättringar, utökat innehåll.
+
+**Keyword research:**
+- Primärkeywords med hög intent: "vad kostar AI", "vad kostar ChatGPT", "billigaste AI", "claude pris", "gpt-4 pris", "AI kostnadskalkylator"
+- Gap-keywords identifierade: "gemini pris", "AI för företag", "gratis AI" — alla saknade, alla med hög sökvolym
+- Konkurrensanalys: teknikmagasinet.se, breakit.se, satoriml.se täcker "bästa AI" men inte prisguider med kalkylator
+
+### Teknisk SEO
+
+- [x] **hreflang="sv" på alla sidor** ✅ 2026-05-20
+  - SEO-komponenten (SEO.tsx) injecterar `<link rel="alternate" hrefLang="sv">` + `<link rel="alternate" hrefLang="x-default">` på varje sida
+  - index.html: statiska hreflang-taggar tillagda som fallback för crawlers
+  - **Varför:** Tydlig geografisk/språksignal till Google att sajten riktar sig till Sverige
+
+- [x] **Förbättrat default-title och description** ✅ 2026-05-20
+  - Nytt default: "AI Kostnadskalkylator — Räkna ut vad ChatGPT, Claude och Gemini kostar i SEK"
+  - Ny default-desc: "Gratis kalkylator för AI-kostnader i Sverige..."
+  - index.html synkat med samma värden för statiska crawlers
+  - **Varför:** Gamla titeln var svag på keywords — nu "kalkylator", "SEK", "ChatGPT", "Claude", "Gemini" i titeln
+
+- [x] **Organization-schema förbättrad** ✅ 2026-05-20
+  - Lade till `contactPoint` med `availableLanguage: "Swedish"` — stärker lokal SEO
+  - Lade till fler `knowsAbout`-värden: "AI för företag", "Gratis AI-verktyg"
+
+### Schema Markup
+
+- [x] **HowTo-schema för kalkylatorn** ✅ 2026-05-20
+  - 4-stegs HowTo: välj modell → ange volym → ange textlängd → se kostnaden
+  - Injicerat i Home.tsx (samma sida som kalkylatorn)
+  - **Varför:** Rich snippets i sök — "how to calculate AI cost" kan ge featured snippet
+
+- [x] **SearchAction på WebSite-schema** ✅ 2026-05-20
+  - `potentialAction: { "@type": "SearchAction" }` tillagd i websiteSchema
+  - **Varför:** Möjliggör Google Sitelinks-sökruta
+
+- [x] **SoftwareApplication-schema förbättrad** ✅ 2026-05-20
+  - Tillagde `operatingSystem: "Web"` och `featureList` med 5 konkreta funktioner
+
+- [x] **FAQPage-schema på /ai-for-foretag** ✅ 2026-05-20
+  - Inline JSON-LD med de 2 viktigaste frågorna formaterade som FAQPage
+  - **Varför:** FAQ-rich-snippets i SERP för "AI för företag"-sökningar
+
+### Nya SEO-sidor
+
+- [x] **`/gemini-pris` — Google Gemini pricing (900+ ord)** ✅ 2026-05-20
+  - Täcker: Gemini 2.5 Pro/Flash priser, jämförelsetabell, 3 scenario-budgetar, unika Googles fördelar (1M ctx, Workspace), gratis tier
+  - Schema: BreadcrumbList, FAQPage (5 frågor)
+  - Target keywords: "gemini pris", "vad kostar Gemini", "Google AI pris", "Gemini 2.5 pris"
+
+- [x] **`/ai-for-foretag` — AI för företag (900+ ord)** ✅ 2026-05-20
+  - Täcker: budget per företagsstorlek (solo → enterprise), verktygsval (Copilot/ChatGPT/Claude/Gemini), GDPR-checklista, 3-stegs plan, ROI-räkneexempel
+  - Schema: BreadcrumbList, FAQPage (inline JSON-LD, 2 frågor)
+  - Target keywords: "AI för företag Sverige", "bästa AI för företag", "AI kostnad per anställd"
+
+- [x] **`/gratis-ai` — Gratis AI-verktyg (900+ ord)** ✅ 2026-05-20
+  - Täcker: jämförelsetabell (ChatGPT/Claude/Gemini/DeepSeek/Mistral/Copilot), gratis API-tier, per-uppgift-rekommendationer, när betalt lönar sig
+  - Schema: BreadcrumbList
+  - Target keywords: "gratis AI", "gratis AI verktyg", "gratis AI Sverige 2026"
+
+- [x] **App.tsx uppdaterad** ✅ 2026-05-20
+  - 3 nya lazy-loadade routes: `/gemini-pris`, `/ai-for-foretag`, `/gratis-ai`
+
+### Sitemap
+
+- [x] **sitemap.xml uppdaterad** ✅ 2026-05-20
+  - 17 URL:er totalt (14 → 17)
+  - Nya sidor: `/gemini-pris`, `/ai-for-foretag`, `/gratis-ai`
+  - Alla `<lastmod>` uppdaterade till 2026-05-20
+
+### Intern länkning
+
+- [x] **relatedArticles.ts utökad** ✅ 2026-05-20
+  - 4 nya sektioner: gemini-pris, ai-for-foretag, gratis-ai, korslänkningar uppdaterade
+  - Befintliga sektioner fick uppdaterade kors-länkar till nya sidor
+
+### Meta titles förbättrade
+
+- [x] **Alla 6 befintliga SEO-sidor fick optimerade meta titles** ✅ 2026-05-20
+  - Home: "AI Kostnadskalkylator — Räkna ut vad ChatGPT, Claude och Gemini kostar i SEK"
+  - /vad-kostar-chatgpt: Lade till "i SEK 2026" + förtydligade ChatGPT Plus vs API
+  - /claude-pris: Lade till "2026" + specificerade Sonnet och Haiku i description
+  - /billigaste-ai: Lade till "i SEK" + Mistral Small i description
+  - /chatgpt-vs-claude: Reordat för "ChatGPT vs Claude 2026" + "svenska" i description
+  - /gpt-4-pris: Lade till "2026" och "i SEK" i title
+
+### Sidinnehåll
+
+- [x] **Startsidan: +600 ord SEO-text** ✅ 2026-05-20
+  - Ny sektion "Vad kostar AI i Sverige 2026?" med 5 underrubriker
+  - Keywords naturligt inbyggda: "AI-kostnaden i Sverige", "svenska tokens", "ChatGPT Plus", "Claude Pro", "Gemini Advanced"
+  - Intern länkning till /billigaste-ai, /prompt-caching, /ai-for-foretag, /gratis-ai
+  - Jämförelsetabell med de 3 stora (ChatGPT/Claude/Gemini)
+
+**Build-status:** ✅ npm run build — 0 fel, 84 moduler, 15 HTML prerenderade (inkl. 3 nya sidor)
+
+---
+
 ## Rekommenderad sprint-ordning
 
 **Sprint A (1 vecka)** — Fixa faktarisken så sajten är trovärdig:

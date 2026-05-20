@@ -40,8 +40,8 @@ export function BilligasteAi() {
   return (
     <>
       <SEO
-        title="Billigaste AI 2026 — Jämför ChatGPT mini, Claude Haiku och Gemini Flash"
-        description="Vilket AI är billigast 2026? Jämför GPT-4o mini, Claude Haiku 4.5 och Gemini 2.5 Flash. Räkna ut exakt kostnad i SEK med vår gratis kalkylator."
+        title="Billigaste AI 2026 — Jämför GPT-4o mini, Claude Haiku och Gemini Flash i SEK"
+        description="Vilket AI är billigast per token i Sverige 2026? Komplett jämförelse av GPT-4o mini, Claude Haiku 4.5, Gemini Flash och Mistral Small. Räkna ut exakt kostnad i SEK."
         canonical="/billigaste-ai"
       />
       <BreadcrumbSchema items={[

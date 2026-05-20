@@ -40,8 +40,8 @@ export function VadKostarChatGPT() {
   return (
     <>
       <SEO
-        title="Vad kostar ChatGPT? Räkna ut API-kostnaden för GPT-4o"
-        description="Räkna ut exakt vad ChatGPT (GPT-4o) kostar per månad för din svenska applikation. Gratis kalkylator med live-valutakurs i SEK."
+        title="Vad kostar ChatGPT? Räkna ut GPT-4o API-kostnad i SEK 2026"
+        description="Vad kostar ChatGPT Plus och GPT-4o API per månad i Sverige? Gratis kalkylator med live-valutakurs. Jämför GPT-4o, GPT-4o mini och priser i SEK."
         canonical="/vad-kostar-chatgpt"
       />
       <BreadcrumbSchema items={[

@@ -42,8 +42,8 @@ export function ChatGPTvsClaude() {
   return (
     <>
       <SEO
-        title="ChatGPT vs Claude — pris och prestanda jämfört 2026"
-        description="Vilken AI ska du välja? Komplett jämförelse av ChatGPT (GPT-4o) och Claude Sonnet — pris i SEK, kvalitet, svenska, prompt caching och kodning. Uppdaterat 2026."
+        title="ChatGPT vs Claude 2026 — pris, svenska och prestanda jämfört"
+        description="ChatGPT eller Claude? Komplett jämförelse av GPT-4o och Claude Sonnet 4.6 — pris i SEK, svenska språkkvalitet, kodning och GDPR. Uppdaterat maj 2026."
         canonical="/chatgpt-vs-claude"
       />
       <BreadcrumbSchema items={[

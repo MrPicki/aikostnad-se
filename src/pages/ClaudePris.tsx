@@ -40,8 +40,8 @@ export function ClaudePris() {
   return (
     <>
       <SEO
-        title="Claude Pris — vad kostar Claude Sonnet API per månad?"
-        description="Se vad Claude Sonnet 4.6 kostar per token och per månad. Jämför med ChatGPT och beräkna din AI-budget med live-kurs i SEK."
+        title="Claude Pris 2026 — vad kostar Claude Sonnet och Haiku per månad?"
+        description="Vad kostar Claude API i Sverige? Se priser för Claude Sonnet 4.6 och Haiku 4.5 per token. Jämför med ChatGPT och räkna ut din AI-budget i SEK."
         canonical="/claude-pris"
       />
       <BreadcrumbSchema items={[

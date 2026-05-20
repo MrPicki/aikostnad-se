@@ -25,7 +25,15 @@ const organizationSchema = {
     "Gemini-priser",
     "API-prissättning",
     "Tokenisering",
+    "AI för företag",
+    "Gratis AI-verktyg",
   ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: siteConfig.contactEmail,
+    contactType: "customer support",
+    availableLanguage: "Swedish",
+  },
 };
 
 export function SEOProvider({ children }: { children: React.ReactNode }) {
@@ -42,9 +50,9 @@ export function SEOProvider({ children }: { children: React.ReactNode }) {
 
 export function SEO({ title, description, canonical, children }: SEOProps) {
   const defaultTitle =
-    "AI Kostnad – Räkna ut vad AI, ChatGPT och API-användning kostar";
+    "AI Kostnad Kalkylator — Räkna ut vad ChatGPT, Claude och Gemini kostar i SEK";
   const defaultDesc =
-    "Använd Aikostnad.se för att snabbt räkna ut vad AI kostar per fråga, månad och år.";
+    "Räkna ut vad AI kostar per månad i svenska kronor. Jämför ChatGPT, Claude, Gemini och fler — gratis kalkylator med live-valutakurs.";
   const siteUrl = "https://aikostnad.se";
 
   const fullTitle = title ? `${title} | Aikostnad.se` : defaultTitle;
@@ -60,6 +68,8 @@ export function SEO({ title, description, canonical, children }: SEOProps) {
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
       <link rel="canonical" href={url} />
+      <link rel="alternate" hrefLang="sv" href={url} />
+      <link rel="alternate" hrefLang="x-default" href={url} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={desc} />
       <meta property="og:url" content={url} />
