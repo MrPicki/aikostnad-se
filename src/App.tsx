@@ -51,6 +51,15 @@ const EmbedCalculator = lazy(() =>
 const Press = lazy(() =>
   import("./pages/Press").then((m) => ({ default: m.Press }))
 );
+const GeminiPris = lazy(() =>
+  import("./pages/GeminiPris").then((m) => ({ default: m.GeminiPris }))
+);
+const AiForForetag = lazy(() =>
+  import("./pages/AiForForetag").then((m) => ({ default: m.AiForForetag }))
+);
+const GratisAi = lazy(() =>
+  import("./pages/GratisAi").then((m) => ({ default: m.GratisAi }))
+);
 
 function Shell() {
   const location = useLocation();
@@ -77,6 +86,9 @@ function Shell() {
             <Route path="/prompt-caching" element={<PromptCaching />} />
             <Route path="/embed" element={<EmbedCalculator />} />
             <Route path="/press" element={<Press />} />
+            <Route path="/gemini-pris" element={<GeminiPris />} />
+            <Route path="/ai-for-foretag" element={<AiForForetag />} />
+            <Route path="/gratis-ai" element={<GratisAi />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

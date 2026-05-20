@@ -40,8 +40,8 @@ export function Gpt4Pris() {
   return (
     <>
       <SEO
-        title="GPT-4.1 Pris — vad kostar GPT-4 API per månad?"
-        description="Räkna ut vad GPT-4.1 kostar per token och per månad. Jämför med GPT-4o och Claude med live-valutakurs i SEK."
+        title="GPT-4.1 Pris 2026 — vad kostar GPT-4 API per månad i SEK?"
+        description="Räkna ut vad GPT-4.1 och GPT-4o kostar per token och per månad. Jämför alla GPT-4-varianter med live-valutakurs i svenska kronor."
         canonical="/gpt-4-pris"
       />
       <BreadcrumbSchema items={[

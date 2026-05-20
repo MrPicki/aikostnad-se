@@ -100,6 +100,14 @@ const websiteSchema = {
   url: "https://aikostnad.se",
   description:
     "Räkna ut vad AI kostar per månad. Jämför ChatGPT, Claude och Gemini i svenska kronor.",
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://aikostnad.se/?q={search_term_string}",
+    },
+    "query-input": "required name=search_term_string",
+  },
 };
 
 const toolSchema = {
@@ -107,10 +115,52 @@ const toolSchema = {
   "@type": "SoftwareApplication",
   name: "AI Kostnadskalkylator",
   applicationCategory: "FinanceApplication",
+  operatingSystem: "Web",
   description:
     "Räkna ut vad AI kostar per fråga, dag, månad och år. Täcker ChatGPT, Claude, Gemini och fler.",
   url: "https://aikostnad.se",
   offers: { "@type": "Offer", price: "0", priceCurrency: "SEK" },
+  featureList: [
+    "Beräkning i svenska kronor (SEK)",
+    "Live-valutakurs USD/SEK",
+    "Stöd för 12+ AI-modeller",
+    "Korrekt tokenberäkning för svenska texter",
+    "Dela kalkyl via länk",
+  ],
+};
+
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "Räkna ut vad AI kostar per månad",
+  description: "Så här beräknar du din månadskostnad för AI-API i svenska kronor med Aikostnad.se",
+  step: [
+    {
+      "@type": "HowToStep",
+      name: "Välj AI-modell",
+      text: "Välj vilken AI-modell du vill använda — ChatGPT (GPT-4o), Claude Sonnet, Gemini Flash eller annan.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Ange antal förfrågningar",
+      text: "Ange hur många frågor per dag din applikation eller ditt team skickar.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Ange textlängder",
+      text: "Ange ungefärlig längd på input (din prompt) och output (modellens svar) i ord.",
+    },
+    {
+      "@type": "HowToStep",
+      name: "Se månadskostnaden",
+      text: "Kalkylatorn räknar automatiskt ut månadskostnaden i SEK med live-valutakurs och korrekt tokenisering för svenska texter.",
+    },
+  ],
+  tool: {
+    "@type": "HowToTool",
+    name: "AI Kostnadskalkylator",
+    url: "https://aikostnad.se",
+  },
 };
 
 export function Home() {
@@ -133,13 +183,14 @@ export function Home() {
   return (
     <>
       <SEO
-        title="Vad kostar AI? Kalkylator för ChatGPT, Claude och Gemini"
-        description="Räkna ut vad ChatGPT, Claude och Gemini kostar per månad i svenska kronor. Jämför abonnemang och API-priser. Gratis kalkylator."
+        title="AI Kostnadskalkylator — Räkna ut vad ChatGPT, Claude och Gemini kostar i SEK"
+        description="Gratis kalkylator för AI-kostnader i Sverige. Räkna ut vad ChatGPT, Claude Sonnet, Gemini och fler kostar per månad i svenska kronor. Jämför API-priser och abonnemang."
         canonical="/"
       />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(toolSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
       </Helmet>
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -280,6 +331,111 @@ export function Home() {
         {/* 8. FAQ */}
         <section id="faq" className="mb-10">
           <FAQ />
+        </section>
+
+        {/* 9. SEO-text — synlig informationstext om AI-kostnader i Sverige */}
+        <section className="mb-16 prose prose-gray max-w-none">
+          <h2 className="text-2xl font-bold text-gray-900">Vad kostar AI i Sverige 2026?</h2>
+          <p className="text-gray-600 leading-relaxed">
+            AI-kostnaden i Sverige varierar enormt beroende på hur du använder tekniken.
+            En privatperson som chattar med <strong>ChatGPT Plus</strong> eller{" "}
+            <strong>Claude Pro</strong> betalar ca 209 kr per månad för ett fast abonnemang.
+            En startup som bygger ett eget AI-verktyg via API kan betala allt från 20 kr till
+            5 000 kr per månad — beroende på antal användare, modellval och hur långa
+            texterna är. Den här kalkylatorn hjälper dig räkna ut det exakta beloppet.
+          </p>
+
+          <h3 className="text-xl font-bold text-gray-900 mt-8">De vanligaste AI-kostnaderna</h3>
+          <p className="text-gray-600 leading-relaxed">
+            Det finns två prismodeller för AI: <strong>abonnemang</strong> och{" "}
+            <strong>API-prissättning per token</strong>. Abonnemang passar privatpersoner
+            och team som vill ha ett färdigt verktyg utan att behöva koda. Populäraste
+            alternativen är ChatGPT Plus (209 kr/mån), Claude Pro (209 kr/mån) och
+            Gemini Advanced (199 kr/mån via Google One). De ger tillgång till respektive
+            leverantörs bästa modell, webbsökning och bildgenerering.
+          </p>
+          <p className="text-gray-600 leading-relaxed">
+            API-prissättning är för dig som bygger egna applikationer. Du betalar per token —
+            den textenhet som AI-modeller bearbetar. GPT-4o kostar $2,50 per miljon
+            input-tokens och $10 per miljon output-tokens. Claude Sonnet 4.6 kostar
+            $3/$15 per miljon tokens. De billigaste alternativen — GPT-4o mini ($0,15/$0,60)
+            och Mistral Small ($0,10/$0,30) — passar hög volym till låg kostnad.
+          </p>
+
+          <h3 className="text-xl font-bold text-gray-900 mt-8">Varför kostar svenska texter mer?</h3>
+          <p className="text-gray-600 leading-relaxed">
+            En viktig faktor för svenska användare: AI-modeller tokeniserar svenska texter
+            annorlunda än engelska. Svenska ord tokeniseras till ca{" "}
+            <strong>1,3 tokens per ord</strong> mot 0,75 på engelska — på grund av
+            sammansatta ord och tecknen å, ä, ö. Det innebär att en svenska prompt kostar
+            ca <strong>73 % mer per ord</strong> att bearbeta än en likadan på engelska.
+            Kalkylatorn ovan räknar automatiskt in detta.
+          </p>
+
+          <h3 className="text-xl font-bold text-gray-900 mt-8">Jämförelse: ChatGPT vs Claude vs Gemini</h3>
+          <p className="text-gray-600 leading-relaxed">
+            De tre stora AI-leverantörerna konkurrerar hårt om svenska kunder. OpenAI med
+            ChatGPT dominerar fortfarande marknaden men Anthropics Claude vinner mark
+            tack vare bättre svenska och GDPR-anpassning. Google Gemini 2.5 Pro och
+            Flash erbjuder ett kontextfönster på 1 miljon tokens — unikt bland storskaliga
+            modeller.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 not-prose mt-4 mb-6">
+            <div className="border border-gray-200 rounded-xl p-4 bg-white">
+              <p className="font-bold text-gray-900 text-sm mb-1">ChatGPT (OpenAI)</p>
+              <p className="text-xs text-gray-500 leading-relaxed">Bredaste ekosystem. Multimodalt (bild, ljud). GPT-4o mini är billigast av de stora modellerna. Plus-abonnemang 209 kr/mån.</p>
+            </div>
+            <div className="border border-gray-200 rounded-xl p-4 bg-white">
+              <p className="font-bold text-gray-900 text-sm mb-1">Claude (Anthropic)</p>
+              <p className="text-xs text-gray-500 leading-relaxed">Bäst på svenska. Prompt caching halverar kostnaden för chatbots. Claude Pro 209 kr/mån. Starkt GDPR-fokus.</p>
+            </div>
+            <div className="border border-gray-200 rounded-xl p-4 bg-white">
+              <p className="font-bold text-gray-900 text-sm mb-1">Gemini (Google)</p>
+              <p className="text-xs text-gray-500 leading-relaxed">1 miljon tokens kontext. Integrerat med Google Workspace. Gemini Advanced 199 kr/mån via Google One.</p>
+            </div>
+          </div>
+
+          <h3 className="text-xl font-bold text-gray-900 mt-8">AI för företag i Sverige</h3>
+          <p className="text-gray-600 leading-relaxed">
+            Svenska företag som inför AI-stöd för sina team räknar typiskt med
+            <strong> 200–500 kr per anställd och månad</strong> för individuella abonnemang.
+            Väljer de att bygga egna AI-verktyg via API kan kostnaden pressas ner till
+            50–100 kr per anställd. Nyckeln är att välja rätt modell för rätt uppgift:
+            mini-modeller för klassificering och FAQ, flaggskeppsmodeller för komplex
+            analys och kod. Se vår guide om{" "}
+            <Link to="/ai-for-foretag" className="text-indigo-600 hover:underline">AI för företag</Link>{" "}
+            för konkreta räkneexempel per bransch.
+          </p>
+
+          <h3 className="text-xl font-bold text-gray-900 mt-8">Gratis AI-alternativ 2026</h3>
+          <p className="text-gray-600 leading-relaxed">
+            Alla tre stora leverantörerna erbjuder gratis tier: ChatGPT (utan Plus),
+            Claude.ai och Gemini har alla gratis versioner med begränsad åtkomst till
+            toppmodellerna. För sporadisk användning räcker gratisversionen långt.
+            Vill du testa fler alternativ utan kostnad — se vår sammanställning av{" "}
+            <Link to="/gratis-ai" className="text-indigo-600 hover:underline">gratis AI-verktyg</Link>.
+          </p>
+
+          <h3 className="text-xl font-bold text-gray-900 mt-8">Tre tips för att hålla AI-kostnaden nere</h3>
+          <ol className="list-decimal pl-5 space-y-2 text-gray-600">
+            <li>
+              <strong>Använd rätt modell för uppgiften.</strong> GPT-4o mini och Claude Haiku
+              är 10–20× billigare än flaggskeppsmodellerna och räcker för 80 % av uppgifterna.
+              Se{" "}
+              <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">billigaste AI-modellerna 2026</Link>.
+            </li>
+            <li>
+              <strong>Begränsa output-längden.</strong> AI-modeller tar betalt 4× mer för output
+              än input. Att instruera modellen att svara kort sparar direkt pengar utan att
+              kompromissa med kvaliteten.
+            </li>
+            <li>
+              <strong>Aktivera prompt caching.</strong> Om din applikation skickar samma
+              systemprompt vid varje anrop ger Anthropic 90 % rabatt på den delen via{" "}
+              <Link to="/prompt-caching" className="text-indigo-600 hover:underline">prompt caching</Link>.
+              OpenAI erbjuder automatisk caching för prefix över 1 024 tokens.
+            </li>
+          </ol>
         </section>
       </main>
     </>
