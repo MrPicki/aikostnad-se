@@ -124,13 +124,13 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
       <button
         type="submit"
         disabled={status === "loading" || !consentGuide || !email.trim()}
-        className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors"
+        className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-semibold px-6 py-3 rounded-xl transition-colors"
       >
-        {status === "loading" ? "Skickar…" : "Skicka guiden till mig"}
+        {status === "loading" ? "Skickar…" : "Bevaka mitt pris"}
       </button>
 
       <p className="text-xs text-gray-400 text-center">
-        Inga spamutskick. Ingen kortinformation. Gratis.
+        Gratis · Avregistrera när som helst · Max 1 mail/vecka
       </p>
     </form>
   );

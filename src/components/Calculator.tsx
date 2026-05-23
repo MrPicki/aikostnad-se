@@ -330,8 +330,11 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
     <section className="card" aria-label="AI-kostnadskalkylator">
       {/* Info banners */}
       <div className="mb-6 flex flex-col sm:flex-row gap-2">
-        <div className="flex items-center gap-2 text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2 flex-1">
-          <span className="text-green-500">●</span>
+        <div
+          className="flex items-center gap-2 text-xs text-gray-500 rounded-lg px-3 py-2 flex-1"
+          style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.3)' }}
+        >
+          <span className="text-green-500 live-dot">●</span>
           {loading ? (
             <span>Hämtar valutakurs…</span>
           ) : rateError ? (
@@ -504,23 +507,47 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
 
               <div className="grid grid-cols-2 gap-3">
                 <ResultCard
+                  key={`month-${Math.round(result.monthlyCostSek)}`}
                   label="Per månad"
                   sek={result.monthlyCostSek}
                   highlight
                 />
                 <ResultCard
+                  key={`year-${Math.round(result.yearlyCostSek)}`}
                   label="Total kostnad / år"
                   sek={result.yearlyCostSek}
                 />
                 <ResultCard
+                  key={`day-${Math.round(result.dailyCostSek * 100)}`}
                   label="Per dag"
                   sek={result.dailyCostSek}
                 />
                 <ResultCard
+                  key={`req-${Math.round(result.costPerRequestSek * 10000)}`}
                   label="Per AI-svar"
                   sek={result.costPerRequestSek}
                 />
               </div>
+
+              {/* 3d Benchmark-kontext */}
+              <p className="text-xs text-gray-500">
+                {result.monthlyCostSek < 200
+                  ? "Under genomsnittet för en enkel chatbot (200–500 kr/mån)"
+                  : result.monthlyCostSek <= 1000
+                  ? "Typiskt för ett litet team eller enkel chatbot"
+                  : "Över genomsnittet — hög volym eller premium-modell"}
+              </p>
+
+              {/* 5a Modell-specifik micro-copy */}
+              {(modelId.includes("claude") || modelId.includes("gpt-4o-mini") || modelId.includes("haiku") || modelId.includes("gemini-flash")) && (
+                <p className="text-xs text-indigo-600">
+                  {modelId.includes("claude")
+                    ? "Inkl. GDPR-kompatibel API för Sverige"
+                    : modelId.includes("gpt-4o-mini") || modelId.includes("haiku")
+                    ? "Bäst pris/prestanda-förhållande 2026"
+                    : "1M tokens kontextfönster ingår"}
+                </p>
+              )}
 
               <div className="mt-4">
                 <button
@@ -573,40 +600,31 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
               />
 
               <div className="flex flex-wrap items-center gap-3 mt-1">
-                <button
-                  onClick={copyShareLink}
-                  className="text-xs text-indigo-600 hover:text-indigo-700 inline-flex items-center gap-1.5 focus:outline-none focus:underline"
-                  aria-label="Kopiera länk till denna kalkyl"
-                >
-                  {copied ? (
-                    <>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d="M20 6L9 17l-5-5" />
-                      </svg>
-                      Länk kopierad
-                    </>
-                  ) : (
-                    <>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                      </svg>
-                      Kopiera länk
-                    </>
-                  )}
-                </button>
-                <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Min AI-kalkyl visar ca ${humanSek(result.monthlyCostSek)}/mån med ${selectedModel.name}. Beräknat på aikostnad.se 🤖`)}&url=${encodeURIComponent("https://aikostnad.se")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center gap-1.5"
-                  aria-label="Dela resultatet på X (Twitter)"
-                >
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                  Dela på X
-                </a>
+                <div className="flex flex-col gap-1">
+                  <button
+                    onClick={copyShareLink}
+                    className="text-xs text-indigo-600 hover:text-indigo-700 inline-flex items-center gap-1.5 focus:outline-none focus:underline"
+                    aria-label="Kopiera länk till denna kalkyl"
+                  >
+                    {copied ? (
+                      <>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <path d="M20 6L9 17l-5-5" />
+                        </svg>
+                        Länk kopierad
+                      </>
+                    ) : (
+                      <>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                        </svg>
+                        Kopiera länk
+                      </>
+                    )}
+                  </button>
+                  <p className="text-xs text-gray-400">Inkluderar dina inställningar — dela med kollega</p>
+                </div>
                 <a
                   href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Faikostnad.se"
                   target="_blank"
@@ -619,7 +637,27 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                   </svg>
                   Dela på LinkedIn
                 </a>
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Min AI-kalkyl visar ca ${humanSek(result.monthlyCostSek)}/mån med ${selectedModel.name}. Beräknat på aikostnad.se 🤖`)}&url=${encodeURIComponent("https://aikostnad.se")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center gap-1.5"
+                  aria-label="Dela resultatet på X (Twitter)"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                  Dela på X
+                </a>
               </div>
+
+              {/* 5b Jämför med annat scenario */}
+              <button
+                onClick={() => window.open(window.location.href, '_blank')}
+                className="text-sm text-indigo-600 hover:text-indigo-700 underline mt-2"
+              >
+                Jämför med ett annat scenario →
+              </button>
             </div>
           ) : (
             <div className="flex items-center justify-center h-full min-h-40 text-gray-400 text-sm">
@@ -641,7 +679,7 @@ interface ResultCardProps {
 function ResultCard({ label, sek, highlight }: ResultCardProps) {
   return (
     <div
-      className={`rounded-xl p-3 sm:p-4 min-w-0 ${highlight ? "bg-indigo-600 text-white" : "bg-gray-50"}`}
+      className={`rounded-xl p-3 sm:p-4 min-w-0 value-pop ${highlight ? "bg-indigo-600 text-white" : "bg-gray-50"}`}
     >
       <p
         className={`text-xs font-medium mb-1 truncate ${highlight ? "text-indigo-200" : "text-gray-500"}`}
