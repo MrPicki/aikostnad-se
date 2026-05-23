@@ -9,6 +9,8 @@ import { FAQ } from "../components/FAQ";
 import { HeroSection } from "../components/HeroSection";
 import { HeroQuickFaq } from "../components/HeroQuickFaq";
 import { PathSelector, getStoredPath, type UserPath } from "../components/PathSelector";
+import { SimpleEstimator } from "../components/SimpleEstimator";
+import { EmailCaptureForm } from "../components/EmailCaptureForm";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { siteConfig } from "../config/siteConfig";
@@ -184,7 +186,7 @@ export function Home() {
     <>
       <SEO
         title="AI Kostnadskalkylator — Räkna ut vad ChatGPT, Claude och Gemini kostar i SEK"
-        description="Gratis kalkylator för AI-kostnader i Sverige. Räkna ut vad ChatGPT, Claude Sonnet, Gemini och fler kostar per månad i svenska kronor. Jämför API-priser och abonnemang."
+        description="Räkna ut exakt vad ChatGPT, Claude och Gemini kostar dig — i svenska kronor. Beskriv din idé, få svar på 5 sekunder. Gratis AI-kalkylator."
         canonical="/"
       />
       <Helmet>
@@ -198,15 +200,39 @@ export function Home() {
         {/* 1. Hero — minimal, luftig */}
         <HeroSection />
 
-        {/* 1b. Mini-FAQ — möter ovetande besökare direkt */}
+        {/* 1a. SimpleEstimator — beskriv idé, få kostnad direkt */}
+        <section className="mb-10">
+          <SimpleEstimator onUseInCalculator={handleScenario} />
+        </section>
+
+        {/* 1b. Divider till manuell kalkylator */}
+        <div className="relative my-8">
+          <div className="absolute inset-0 flex items-center" aria-hidden="true">
+            <div className="w-full border-t border-gray-200" />
+          </div>
+          <div className="relative flex justify-center">
+            <span className="bg-white px-4 text-sm text-gray-400">Eller räkna manuellt ↓</span>
+          </div>
+        </div>
+
+        {/* 1c. Mini-FAQ — möter ovetande besökare direkt */}
         <HeroQuickFaq />
 
-        {/* 1c. Två tydliga vägar — använd vs bygg */}
+        {/* 1d. Två tydliga vägar — använd vs bygg */}
         <PathSelector onPathChange={setUserPath} />
 
         {/* 2. Kalkylator — sidans primära funktion */}
         <section id="kalkylator" className="mb-24">
           <CalculatorSection initialValues={calcValues} />
+        </section>
+
+        {/* 2b. Email capture — prisvarningar */}
+        <section className="mb-24">
+          <div className="card max-w-lg mx-auto">
+            <p className="text-base font-bold text-gray-900 mb-1">Få e-post när AI-priser ändras</p>
+            <p className="text-sm text-gray-500 mb-4">Vi bevakar priserna åt dig och hör av oss när något ändras.</p>
+            <EmailCaptureForm providerId="general" source="home-price-alert" />
+          </div>
         </section>
 
         {/* 3. Scenarion — inspiration och snabbval */}

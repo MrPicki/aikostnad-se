@@ -46,6 +46,7 @@ interface FieldProps {
   min?: number;
   max?: number;
   tooltip?: string;
+  hint?: string;
 }
 
 function FieldLabel({ label, htmlFor, tooltip }: { label: string; htmlFor: string; tooltip?: string }) {
@@ -70,6 +71,7 @@ function NumberField({
   min = 1,
   max,
   tooltip,
+  hint,
 }: FieldProps) {
   return (
     <div>
@@ -84,6 +86,7 @@ function NumberField({
         className={`input-field ${error ? "border-red-400 focus:ring-red-400" : ""}`}
       />
       {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+      {hint && !error && <p className="mt-1 text-xs text-gray-400">{hint}</p>}
     </div>
   );
 }
@@ -102,6 +105,7 @@ function ChipField({
   min = 1,
   max,
   tooltip,
+  hint,
   presets,
   unit,
 }: ChipFieldProps) {
@@ -148,6 +152,7 @@ function ChipField({
         />
       </div>
       {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+      {hint && !error && <p className="mt-1 text-xs text-gray-400">{hint}</p>}
     </div>
   );
 }
@@ -433,6 +438,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             onChange={setWordsPerRequest}
             error={errors.wordsPerRequest}
             tooltip={`Vad användaren SKICKAR till AI:n — fråga, dokument, kontext. Svenska räknas med ${siteConfig.languageFactor} tokens/ord (p.g.a. å/ä/ö).`}
+            hint="100 ord ≈ kort e-post | 300 ord ≈ halvt A4 | 1 000 ord ≈ 2 sidor"
           />
           <NumberField
             label="Ord per svar (output)"
@@ -441,6 +447,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             onChange={setOutputWordsPerRequest}
             error={errors.outputWordsPerRequest}
             tooltip="Vad AI:n SVARAR med — typiskt 2-5× längre än frågan. Output är ofta 4× dyrare per token än input."
+            hint="50 ord ≈ kort svar | 200 ord ≈ detaljerat svar | 500 ord ≈ rapport"
           />
           <ChipField
             label="Antal förfrågningar per dag"
@@ -452,6 +459,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             min={1}
             max={1_000_000}
             tooltip="Hur många AI-svar du behöver per dag — t.ex. kundärenden, prompts eller automatiska analyser."
+            hint="10 = 1 person sporadisk | 100 = litet team | 1 000 = webbshop kundtjänst"
           />
           <ChipField
             label="Antal användare"
@@ -496,13 +504,13 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
 
               <div className="grid grid-cols-2 gap-3">
                 <ResultCard
-                  label="Total kostnad / år"
-                  sek={result.yearlyCostSek}
+                  label="Per månad"
+                  sek={result.monthlyCostSek}
                   highlight
                 />
                 <ResultCard
-                  label="Per månad"
-                  sek={result.monthlyCostSek}
+                  label="Total kostnad / år"
+                  sek={result.yearlyCostSek}
                 />
                 <ResultCard
                   label="Per dag"
@@ -564,28 +572,54 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 className="mt-2"
               />
 
-              <button
-                onClick={copyShareLink}
-                className="text-xs text-indigo-600 hover:text-indigo-700 inline-flex items-center gap-1.5 mt-1 focus:outline-none focus:underline"
-                aria-label="Kopiera länk till denna kalkyl"
-              >
-                {copied ? (
-                  <>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M20 6L9 17l-5-5" />
-                    </svg>
-                    Länk kopierad
-                  </>
-                ) : (
-                  <>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                    </svg>
-                    Kopiera länk till denna kalkyl
-                  </>
-                )}
-              </button>
+              <div className="flex flex-wrap items-center gap-3 mt-1">
+                <button
+                  onClick={copyShareLink}
+                  className="text-xs text-indigo-600 hover:text-indigo-700 inline-flex items-center gap-1.5 focus:outline-none focus:underline"
+                  aria-label="Kopiera länk till denna kalkyl"
+                >
+                  {copied ? (
+                    <>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                      Länk kopierad
+                    </>
+                  ) : (
+                    <>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                      </svg>
+                      Kopiera länk
+                    </>
+                  )}
+                </button>
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Min AI-kalkyl visar ca ${humanSek(result.monthlyCostSek)}/mån med ${selectedModel.name}. Beräknat på aikostnad.se 🤖`)}&url=${encodeURIComponent("https://aikostnad.se")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center gap-1.5"
+                  aria-label="Dela resultatet på X (Twitter)"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                  Dela på X
+                </a>
+                <a
+                  href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Faikostnad.se"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center gap-1.5"
+                  aria-label="Dela aikostnad.se på LinkedIn"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                  Dela på LinkedIn
+                </a>
+              </div>
             </div>
           ) : (
             <div className="flex items-center justify-center h-full min-h-40 text-gray-400 text-sm">
