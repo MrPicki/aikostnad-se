@@ -122,7 +122,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
     <section aria-label="Enkel AI-kostnadsestimering">
       {(status === "idle" || status === "error") && (
         <div className="max-w-2xl mx-auto bg-indigo-50 border border-indigo-100 rounded-3xl p-6 sm:p-8 shadow-[0_2px_20px_rgba(99,102,241,0.08)]">
-          <label htmlFor="estimate-input" className="block text-sm font-semibold text-indigo-700 mb-3 text-center tracking-wide uppercase text-xs">
+          <label htmlFor="estimate-input" className="block text-lg font-bold mb-3 text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
             Vad skulle du vilja använda AI till?
           </label>
 
@@ -156,9 +156,9 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
               <button
                 onClick={handleSubmit}
                 disabled={!text.trim()}
-                className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"
+                className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-semibold px-6 py-3 rounded-xl transition-colors"
               >
-                Beräkna →
+                Beräkna min AI-kostnad →
               </button>
             </div>
           </div>
@@ -168,7 +168,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
             </p>
           )}
           <p className="text-xs text-gray-400 text-center mt-3">
-            Ctrl+Enter för att skicka · Gratis · Ingen inloggning krävs
+            Ctrl+Enter för att skicka · Ingen inloggning · Resultaten lagras inte
           </p>
         </div>
       )}

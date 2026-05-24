@@ -22,7 +22,7 @@ export function GuideCard({ modelId, modelName, source, className = "" }: Props)
   return (
     <>
       <div
-        className={`relative rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/60 to-white p-5 sm:p-6 shadow-sm animate-fade-in-up overflow-hidden ${className}`}
+        className={`relative rounded-3xl border border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/60 to-white p-5 sm:p-6 shadow-sm animate-fade-in-up overflow-hidden hover:border-indigo-400 hover:bg-indigo-50 transition-colors ${className}`}
       >
         {/* Decorative accent */}
         <div

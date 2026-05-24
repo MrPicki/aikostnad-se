@@ -215,9 +215,6 @@ export function Home() {
           </div>
         </div>
 
-        {/* 1c. Mini-FAQ — möter ovetande besökare direkt */}
-        <HeroQuickFaq />
-
         {/* 1d. Två tydliga vägar — använd vs bygg */}
         <PathSelector onPathChange={setUserPath} />
 
@@ -225,6 +222,9 @@ export function Home() {
         <section id="kalkylator" className="mb-24">
           <CalculatorSection initialValues={calcValues} />
         </section>
+
+        {/* 3f. Mini-FAQ — flyttad efter kalkylator så den inte avleder från action */}
+        <HeroQuickFaq />
 
         {/* 2b. Email capture — prisvarningar */}
         <section className="mb-24">
@@ -241,7 +241,7 @@ export function Home() {
         </section>
 
         {/* 4. Fasta abonnemang — i grå yta för visuell rytm */}
-        <div className="bg-gray-50 rounded-2xl px-6 py-8 mb-24">
+        <div className="bg-gray-50 rounded-3xl px-6 py-10 mb-24">
           <section id="abonnemang">
             <SubscriptionTable />
           </section>
@@ -256,7 +256,7 @@ export function Home() {
         <section className="mb-24">
           <Link
             to="/token-kalkylator"
-            className="block rounded-2xl border border-indigo-100 bg-indigo-50/50 hover:bg-indigo-50 transition-all p-6 sm:p-8 group"
+            className="block rounded-3xl border border-indigo-100 bg-indigo-50/50 hover:bg-indigo-50 transition-all p-6 sm:p-8 group"
           >
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
               <div className="text-3xl">📝</div>
@@ -300,10 +300,10 @@ export function Home() {
                 <Link
                   key={g.to}
                   to={g.to}
-                  className={`card hover:shadow-sm transition-all group relative ${
+                  className={`card transition-all group relative ${
                     isMatch
-                      ? "border-indigo-200 bg-indigo-50/30 hover:border-indigo-300"
-                      : "hover:border-indigo-200"
+                      ? "border-indigo-200 bg-indigo-50/30 hover:border-indigo-400 hover:bg-indigo-50"
+                      : "border-indigo-200 hover:border-indigo-400 hover:bg-indigo-50"
                   }`}
                 >
                   {isMatch && (
