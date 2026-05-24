@@ -121,8 +121,8 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
   return (
     <section aria-label="Enkel AI-kostnadsestimering">
       {(status === "idle" || status === "error") && (
-        <div className="max-w-2xl mx-auto">
-          <label htmlFor="estimate-input" className="block text-sm font-semibold text-gray-700 mb-2 text-center">
+        <div className="max-w-2xl mx-auto bg-indigo-50 border border-indigo-100 rounded-3xl p-6 sm:p-8 shadow-[0_2px_20px_rgba(99,102,241,0.08)]">
+          <label htmlFor="estimate-input" className="block text-sm font-semibold text-indigo-700 mb-3 text-center tracking-wide uppercase text-xs">
             Vad skulle du vilja använda AI till?
           </label>
 
@@ -133,7 +133,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
                 key={chip.label}
                 type="button"
                 onClick={() => setText(chip.prompt)}
-                className="text-xs font-medium px-3 py-1.5 bg-white border border-gray-200 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 text-gray-600 rounded-full transition-all"
+                className="text-xs font-medium px-3 py-1.5 bg-white border border-indigo-200 hover:border-indigo-400 hover:bg-indigo-100 hover:text-indigo-700 text-indigo-600 rounded-full transition-all"
               >
                 {chip.label}
               </button>
@@ -147,7 +147,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
               onChange={(e) => setText(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="…eller skriv själv — t.ex. &ldquo;En chatbot för min webbshop som svarar på 500 kundfrågor per dag.&rdquo;"
-              className="w-full rounded-2xl border border-gray-200 shadow-sm bg-white px-5 pt-5 pb-16 text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+              className="w-full rounded-2xl border border-indigo-100 shadow-sm bg-white px-5 pt-5 pb-16 text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
               rows={5}
               maxLength={800}
             />
