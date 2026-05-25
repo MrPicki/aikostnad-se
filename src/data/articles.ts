@@ -20,7 +20,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Komplett guide till prompt caching för Claude, GPT-4o och Gemini. Hur det fungerar, vilka modeller stödjer det, exakta rabattnivåer och konkreta exempel i SEK.",
     publishedDate: "2026-05-16",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/prompt-caching",
   },
   "ai-chatbot-kostnad": {
@@ -29,7 +29,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Vad kostar det att bygga en AI-chatbot? Konkreta budgetexempel för hobby, småföretag och B2C — i svenska kronor. Plus hur du sänker kostnaden med rätt modellval.",
     publishedDate: "2026-05-16",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/ai-chatbot-kostnad",
   },
   "chatgpt-vs-claude": {
@@ -38,7 +38,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Vilken AI ska du välja? Komplett jämförelse av ChatGPT (GPT-4o) och Claude Sonnet — pris i SEK, kvalitet, svenska, prompt caching och kodning. Uppdaterat 2026.",
     publishedDate: "2026-05-16",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/chatgpt-vs-claude",
   },
   "vad-kostar-ai": {
@@ -47,7 +47,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Komplett guide till AI-kostnader 2026. Jämför ChatGPT Plus, Claude Pro och Gemini Advanced. Se vad AI kostar per månad för privatpersoner, team och företag i SEK.",
     publishedDate: "2026-05-14",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/vad-kostar-ai",
   },
   "vad-kostar-chatgpt": {
@@ -56,7 +56,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Räkna ut exakt vad ChatGPT (GPT-4o) kostar per månad för din svenska applikation. Gratis kalkylator med live-valutakurs i SEK.",
     publishedDate: "2026-05-14",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/vad-kostar-chatgpt",
   },
   "claude-pris": {
@@ -65,7 +65,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Vad kostar Claude API i Sverige? Se priser för Claude Sonnet 4.6 och Haiku 4.5 per token. Jämför med ChatGPT och räkna ut din AI-budget i SEK.",
     publishedDate: "2026-05-14",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/claude-pris",
   },
   "gpt-4-pris": {
@@ -74,7 +74,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Räkna ut vad GPT-4.1 kostar per token och per månad. Jämför med GPT-4o och Claude med live-valutakurs i SEK.",
     publishedDate: "2026-05-14",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/gpt-4-pris",
   },
   "gemini-pris": {
@@ -83,7 +83,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Google Gemini 2.5 Pro och Flash — priser per token och månadskostnad. Jämför med ChatGPT och Claude med live-valutakurs i SEK.",
     publishedDate: "2026-05-14",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/gemini-pris",
   },
   "billigaste-ai": {
@@ -92,7 +92,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Vilket AI är billigast 2026? Jämför GPT-4o mini, Claude Haiku 4.5 och Gemini 2.5 Flash. Räkna ut exakt kostnad i SEK med vår gratis kalkylator.",
     publishedDate: "2026-05-14",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/billigaste-ai",
   },
   "ai-for-foretag": {
@@ -101,7 +101,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Vilken AI ska svenska företag välja? Pris per anställd, enterprise-avtal, GDPR-DPA och konkreta räkneexempel i SEK. Komplett guide 2026.",
     publishedDate: "2026-05-17",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/ai-for-foretag",
   },
   "gratis-ai": {
@@ -110,7 +110,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Komplett guide till gratis AI: ChatGPT Free, Claude Free, Gemini, Copilot och fler. Vilken är bäst, vad är begränsningarna och när måste du börja betala?",
     publishedDate: "2026-05-17",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/gratis-ai",
   },
   "ai-konsult-pris": {
@@ -119,7 +119,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "AI-konsult priser i Sverige 2026: timpris, projektpris, retainer och vad du faktiskt får för pengarna. Jämför seniora och juniora AI-konsulter.",
     publishedDate: "2026-05-20",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/ai-konsult-pris",
   },
   "microsoft-copilot-pris": {
@@ -128,7 +128,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Vad kostar Microsoft 365 Copilot, Copilot Pro och GitHub Copilot i Sverige 2026? Komplett prisguide per användare och månad — i SEK.",
     publishedDate: "2026-05-20",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/microsoft-copilot-pris",
   },
   "openai-api-kostnad": {
@@ -137,7 +137,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "OpenAI API-priser i SEK 2026. Allt om GPT-4o, GPT-4o mini, o3, o3-mini, embeddings, DALL-E och Whisper. Räkna ut din månadskostnad direkt.",
     publishedDate: "2026-05-20",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/openai-api-kostnad",
   },
   "chatgpt-pro-vs-plus": {
@@ -146,7 +146,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "ChatGPT Plus (20 dollar) eller Pro (200 dollar)? Komplett jämförelse av funktioner, modeller och vem som faktiskt får valuta för Pro-priset.",
     publishedDate: "2026-05-20",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/chatgpt-pro-vs-plus",
   },
   "ai-bild-pris": {
@@ -155,7 +155,7 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Vad kostar AI-bildgenerering 2026? Midjourney, DALL-E 3, Stable Diffusion, Ideogram och Flux — priser i SEK och vilken som ger bäst kvalitet för pengarna.",
     publishedDate: "2026-05-20",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/ai-bild-pris",
   },
   "perplexity-pris": {
@@ -164,7 +164,16 @@ export const articles: Record<string, ArticleMeta> = {
     description:
       "Perplexity AI priser i Sverige: gratis tier, Pro (20 dollar/mån) och Enterprise. Vad du faktiskt får och om Perplexity Pro är värt pengarna 2026.",
     publishedDate: "2026-05-20",
-    modifiedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/perplexity-pris",
+  },
+  "ai-ordlista": {
+    slug: "ai-ordlista",
+    headline: "AI-ordlista — termer, tokens, API och prismodeller förklarade",
+    description:
+      "Komplett ordlista för AI-kostnader på svenska: tokens, prompt, embedding, API, abonnemang, fine-tuning, RAG, RLHF och mer. Begripliga definitioner.",
+    publishedDate: "2026-05-20",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/ai-ordlista",
   },
 };

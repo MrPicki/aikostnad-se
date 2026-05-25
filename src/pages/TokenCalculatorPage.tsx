@@ -2,6 +2,8 @@ import { SEO } from "../components/SEO";
 import { TokenCounter } from "../components/TokenCounter";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { RelatedArticles } from "../components/RelatedArticles";
+import { relatedArticles } from "../data/relatedArticles";
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -10,6 +12,24 @@ const breadcrumbSchema = {
     { "@type": "ListItem", position: 1, name: "Hem", item: "https://aikostnad.se" },
     { "@type": "ListItem", position: 2, name: "Tokenräknare", item: "https://aikostnad.se/token-kalkylator" },
   ],
+};
+
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Tokenräknare för AI — räkna tokens i din text",
+  description: "Klistra in din text och se hur många tokens den innehåller, vad det kostar för olika AI-modeller, och hur svenska texter skiljer sig från engelska.",
+  url: "https://aikostnad.se/token-kalkylator",
+  inLanguage: "sv-SE",
+  dateModified: "2026-05-25",
+  isPartOf: { "@type": "WebSite", url: "https://aikostnad.se" },
+  breadcrumb: {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Hem", item: "https://aikostnad.se" },
+      { "@type": "ListItem", position: 2, name: "Tokenräknare", item: "https://aikostnad.se/token-kalkylator" },
+    ],
+  },
 };
 
 export function TokenCalculatorPage() {
@@ -22,6 +42,7 @@ export function TokenCalculatorPage() {
       />
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(webPageSchema)}</script>
       </Helmet>
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -45,6 +66,19 @@ export function TokenCalculatorPage() {
         </div>
 
         <TokenCounter />
+
+        <div className="mt-8 card bg-indigo-50 border-indigo-100">
+          <p className="text-sm text-indigo-800">
+            Vet du nu hur lång din prompt är?{" "}
+            <Link
+              to="/#kalkylator"
+              className="font-semibold underline underline-offset-2 hover:text-indigo-900"
+            >
+              Använd kalkylatorn för att räkna ut månadskostnaden i SEK
+            </Link>
+            .
+          </p>
+        </div>
 
         <div className="mt-10 card">
           <h2 className="text-xl font-bold text-gray-900 mb-4">
@@ -76,6 +110,7 @@ export function TokenCalculatorPage() {
             </div>
           </div>
         </div>
+        <RelatedArticles links={relatedArticles["token-kalkylator"]} />
       </main>
     </>
   );
