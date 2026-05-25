@@ -167,4 +167,85 @@ export const articles: Record<string, ArticleMeta> = {
     modifiedDate: "2026-05-20",
     url: "https://aikostnad.se/perplexity-pris",
   },
+  "gpt-5-pris": {
+    slug: "gpt-5-pris",
+    headline: "GPT-5 pris Sverige 2026 — vad kostar det i kronor?",
+    description:
+      "GPT-5 API-priser i svenska kronor. Jämförelse mot GPT-4o och GPT-4.1 — när ska du välja GPT-5 vs billigare alternativ? Typiska månadskostnader per use case.",
+    publishedDate: "2026-05-25",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/gpt-5-pris",
+  },
+  "ai-kostnad-per-manad": {
+    slug: "ai-kostnad-per-manad",
+    headline: "AI-kostnad per månad — räkna ut vad AI kostar ditt företag",
+    description:
+      "Genomsnittliga AI-kostnader per månad för chatbot, textgenerering och analys. Skillnad abonnemang vs API, hur du budgeterar och typiska kostnader per anställd. Maj 2026.",
+    publishedDate: "2026-05-25",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/ai-kostnad-per-manad",
+  },
+  "openai-api-pris": {
+    slug: "openai-api-pris",
+    headline: "OpenAI API pris Sverige 2026 — GPT-4o, o3 och embeddings i SEK",
+    description:
+      "Komplett pristabell för alla OpenAI-modeller i SEK. GPT-4o, GPT-4o mini, GPT-4.1, o3, o4-mini, embeddings — hur du beräknar din månadskostnad.",
+    publishedDate: "2026-05-25",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/openai-api-pris",
+  },
+  "anthropic-claude-api-pris": {
+    slug: "anthropic-claude-api-pris",
+    headline: "Anthropic Claude API pris 2026 — Opus, Sonnet och Haiku i SEK",
+    description:
+      "Alla Claude-modellers priser i svenska kronor. Skillnad mellan Opus, Sonnet och Haiku. Prompt caching-besparingar, GDPR och jämförelse mot OpenAI. Maj 2026.",
+    publishedDate: "2026-05-25",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/anthropic-claude-api-pris",
+  },
+  "ai-for-smaforetag": {
+    slug: "ai-for-smaforetag",
+    headline: "AI för småföretag — kostnad, nytta och hur du börjar 2026",
+    description:
+      "Realistiska AI-kostnader för 1–10 personers företag. Vilka verktyg är gratis, när API är billigare, konkreta exempel per bransch och ROI-argument. Maj 2026.",
+    publishedDate: "2026-05-25",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/ai-for-smaforetag",
+  },
+  "jamfor-ai-modeller": {
+    slug: "jamfor-ai-modeller",
+    headline: "Jämför AI-modeller 2026 — pris och prestanda i SEK",
+    description:
+      "Stor jämförelsetabell: GPT-4o, Claude Sonnet, Gemini Flash, DeepSeek, Mistral — priser i SEK, styrkor/svagheter och rekommendation per use case. Maj 2026.",
+    publishedDate: "2026-05-25",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/jamfor-ai-modeller",
+  },
+  "ai-api-kostnad": {
+    slug: "ai-api-kostnad",
+    headline: "Vad kostar det att integrera AI i en app eller tjänst?",
+    description:
+      "Typiska AI API-kostnader för en startup som bygger med AI. Estimera kostnader, räkna cost-per-user och sänk notan med caching. Realistiska budgetar i SEK. Maj 2026.",
+    publishedDate: "2026-05-25",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/ai-api-kostnad",
+  },
+  "deepseek-pris": {
+    slug: "deepseek-pris",
+    headline: "DeepSeek pris Sverige 2026 — billigaste AI-modellen?",
+    description:
+      "DeepSeek V3 och R1 priser i SEK. Jämförelse mot GPT-4o och Claude, kvalitet, GDPR-risker med kinesisk AI och när DeepSeek är rätt val. Maj 2026.",
+    publishedDate: "2026-05-25",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/deepseek-pris",
+  },
+  "vad-kostar-ai-per-ar": {
+    slug: "vad-kostar-ai-per-ar",
+    headline: "Vad kostar AI per år? Räkna ut din AI-budget för 2026",
+    description:
+      "Årliga AI-kostnader för privatperson, frilansare, startup och SME. Abonnemang vs API per år, hur du planerar en AI-budget och vanliga misstag som kostar dig pengar.",
+    publishedDate: "2026-05-25",
+    modifiedDate: "2026-05-25",
+    url: "https://aikostnad.se/vad-kostar-ai-per-ar",
+  },
 };
