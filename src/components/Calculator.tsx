@@ -638,7 +638,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                   Dela på LinkedIn
                 </a>
                 <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Min AI-kalkyl visar ca ${humanSek(result.monthlyCostSek)}/mån med ${selectedModel.name}. Beräknat på aikostnad.se 🤖`)}&url=${encodeURIComponent("https://aikostnad.se")}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Räknade precis ut min AI-kostnad med @aikostnad — ${humanSek(result.monthlyCostSek)}/mån 🤖 Räkna din: https://aikostnad.se`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center gap-1.5"

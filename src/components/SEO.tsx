@@ -80,6 +80,8 @@ export function SEO({ title, description, canonical, children }: SEOProps) {
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content="Aikostnad.se — räkna ut vad AI kostar" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@aikostnad" />
+      <meta name="twitter:creator" content="@aikostnad" />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={ogImage} />
