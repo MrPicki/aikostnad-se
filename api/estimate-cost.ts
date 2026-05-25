@@ -145,6 +145,22 @@ function resolveCorsOrigin(req: Request): string {
   return CANONICAL_ORIGIN;
 }
 
+// In-memory IP rate limiter: 4 req/IP/day.
+// Resets per edge instance — best-effort protection for a small site.
+const ipRateMap = new Map<string, { count: number; resetAt: number }>();
+
+function checkIpRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = ipRateMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    ipRateMap.set(ip, { count: 1, resetAt: now + 86_400_000 });
+    return true;
+  }
+  if (entry.count >= 4) return false;
+  entry.count++;
+  return true;
+}
+
 export default async function handler(req: Request): Promise<Response> {
   const ALLOWED_ORIGIN = resolveCorsOrigin(req);
   const reqOrigin = req.headers.get("origin");
@@ -169,6 +185,19 @@ export default async function handler(req: Request): Promise<Response> {
       status: 403,
       headers: { "Content-Type": "application/json" },
     });
+  }
+
+  // IP-based rate limit (4 req/IP/day)
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anonymous";
+  if (!checkIpRateLimit(ip)) {
+    return new Response(
+      JSON.stringify({ error: "För många förfrågningar, försök igen senare." }),
+      {
+        status: 429,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      }
+    );
   }
 
   try {
