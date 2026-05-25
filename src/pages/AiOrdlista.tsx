@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { ArticleSchema } from "../components/ArticleSchema";
+import { RelatedArticles } from "../components/RelatedArticles";
 import { Sources } from "../components/Sources";
 import { LastUpdated } from "../components/LastUpdated";
 import { DefinedTermSchema, SpeakableSchema } from "../components/SchemaBlocks";
 import { articles } from "../data/articles";
+import { relatedArticles } from "../data/relatedArticles";
 import { officialPricingSources } from "../data/sources";
 
 interface Term {
@@ -179,9 +181,19 @@ export function AiOrdlista() {
             >
               Hör av dig så lägger vi till den
             </Link>
+            .{" "}
+            Redo att räkna på kostnader?{" "}
+            <Link
+              to="/#kalkylator"
+              className="font-semibold underline underline-offset-2 hover:text-indigo-900"
+            >
+              Använd kalkylatorn
+            </Link>
             .
           </p>
         </div>
+
+        <RelatedArticles links={relatedArticles["ai-ordlista"]} />
 
         <Sources items={officialPricingSources} />
       </main>

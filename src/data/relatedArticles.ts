@@ -117,6 +117,12 @@ export const relatedArticles: Record<string, RelatedLink[]> = {
     { to: "/token-kalkylator", title: "Tokenräknare", description: "Räkna tokens i din text — verktyget." },
     { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT?", description: "Tillämpa kunskapen på ChatGPT-priser." },
   ],
+  "token-kalkylator": [
+    { to: "/vad-kostar-chatgpt", title: "Räkna ut ChatGPT API-kostnad i SEK", description: "GPT-4o och GPT-4o mini — fyll i dina volymer." },
+    { to: "/claude-pris", title: "Claude Sonnet och Haiku — tokens och pris", description: "Anthropic-modeller per token + kalkylator." },
+    { to: "/prompt-caching", title: "Halvera token-kostnaden med caching", description: "Hur prompt caching minskar antal betalda tokens." },
+    { to: "/billigaste-ai", title: "Vilken modell kostar minst per token?", description: "Jämför mini-modellerna från OpenAI, Anthropic och Google." },
+  ],
   "gpt-5-pris": [
     { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT API?", description: "GPT-4o och GPT-4o mini — detaljguide." },
     { to: "/openai-api-pris", title: "OpenAI API priser — komplett tabell", description: "Alla OpenAI-modeller i SEK." },
