@@ -81,6 +81,33 @@ const PerplexityPris = lazy(() =>
 const AiOrdlista = lazy(() =>
   import("./pages/AiOrdlista").then((m) => ({ default: m.AiOrdlista }))
 );
+const Gpt5Pris = lazy(() =>
+  import("./pages/Gpt5Pris").then((m) => ({ default: m.Gpt5Pris }))
+);
+const AiKostnadPerManad = lazy(() =>
+  import("./pages/AiKostnadPerManad").then((m) => ({ default: m.AiKostnadPerManad }))
+);
+const OpenAiApiPris = lazy(() =>
+  import("./pages/OpenAiApiPris").then((m) => ({ default: m.OpenAiApiPris }))
+);
+const AnthropicClaudeApiPris = lazy(() =>
+  import("./pages/AnthropicClaudeApiPris").then((m) => ({ default: m.AnthropicClaudeApiPris }))
+);
+const AiForSmaforetag = lazy(() =>
+  import("./pages/AiForSmaforetag").then((m) => ({ default: m.AiForSmaforetag }))
+);
+const JamforAiModeller = lazy(() =>
+  import("./pages/JamforAiModeller").then((m) => ({ default: m.JamforAiModeller }))
+);
+const AiApiKostnad = lazy(() =>
+  import("./pages/AiApiKostnad").then((m) => ({ default: m.AiApiKostnad }))
+);
+const DeepseekPris = lazy(() =>
+  import("./pages/DeepseekPris").then((m) => ({ default: m.DeepseekPris }))
+);
+const VadKostarAiPerAr = lazy(() =>
+  import("./pages/VadKostarAiPerAr").then((m) => ({ default: m.VadKostarAiPerAr }))
+);
 
 function Shell() {
   const location = useLocation();
@@ -117,6 +144,15 @@ function Shell() {
             <Route path="/ai-bild-pris" element={<AiBildPris />} />
             <Route path="/perplexity-pris" element={<PerplexityPris />} />
             <Route path="/ai-ordlista" element={<AiOrdlista />} />
+            <Route path="/gpt-5-pris" element={<Gpt5Pris />} />
+            <Route path="/ai-kostnad-per-manad" element={<AiKostnadPerManad />} />
+            <Route path="/openai-api-pris" element={<OpenAiApiPris />} />
+            <Route path="/anthropic-claude-api-pris" element={<AnthropicClaudeApiPris />} />
+            <Route path="/ai-for-smaforetag" element={<AiForSmaforetag />} />
+            <Route path="/jamfor-ai-modeller" element={<JamforAiModeller />} />
+            <Route path="/ai-api-kostnad" element={<AiApiKostnad />} />
+            <Route path="/deepseek-pris" element={<DeepseekPris />} />
+            <Route path="/vad-kostar-ai-per-ar" element={<VadKostarAiPerAr />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

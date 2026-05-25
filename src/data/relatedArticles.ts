@@ -123,4 +123,58 @@ export const relatedArticles: Record<string, RelatedLink[]> = {
     { to: "/prompt-caching", title: "Halvera token-kostnaden med caching", description: "Hur prompt caching minskar antal betalda tokens." },
     { to: "/billigaste-ai", title: "Vilken modell kostar minst per token?", description: "Jämför mini-modellerna från OpenAI, Anthropic och Google." },
   ],
+  "gpt-5-pris": [
+    { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT API?", description: "GPT-4o och GPT-4o mini — detaljguide." },
+    { to: "/openai-api-pris", title: "OpenAI API priser — komplett tabell", description: "Alla OpenAI-modeller i SEK." },
+    { to: "/chatgpt-vs-claude", title: "GPT vs Claude — jämförelse", description: "Välj rätt modell för ditt behov." },
+    { to: "/billigaste-ai", title: "Billigaste AI 2026", description: "GPT-5 är dyrt — när passar billigare modeller?" },
+  ],
+  "ai-kostnad-per-manad": [
+    { to: "/", title: "Kalkylera din månadskostnad", description: "Räkna exakt kostnad för din volym i SEK." },
+    { to: "/ai-api-kostnad", title: "AI API-kostnad för app-builders", description: "Vad kostar det att integrera AI i en produkt?" },
+    { to: "/vad-kostar-ai-per-ar", title: "Vad kostar AI per år?", description: "Planera en realistisk AI-budget." },
+    { to: "/billigaste-ai", title: "Billigaste AI 2026", description: "Sänk din månadskostnad med rätt modell." },
+  ],
+  "openai-api-pris": [
+    { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT API?", description: "Detaljguide för GPT-4o och GPT-4o mini." },
+    { to: "/openai-api-kostnad", title: "OpenAI API-kostnad förklarad", description: "Räkna ut din faktiska månadskostnad." },
+    { to: "/chatgpt-vs-claude", title: "OpenAI vs Anthropic — jämförelse", description: "Pris och prestanda head-to-head." },
+    { to: "/gpt-5-pris", title: "GPT-5 pris — vad kostar flaggskeppet?", description: "Jämför GPT-5 mot äldre modeller." },
+  ],
+  "anthropic-claude-api-pris": [
+    { to: "/claude-pris", title: "Claude pris — abonnemang och API", description: "Komplett guide till Claude.ai och API." },
+    { to: "/chatgpt-vs-claude", title: "Claude vs ChatGPT — jämförelse", description: "Pris, prestanda och GDPR." },
+    { to: "/prompt-caching", title: "Spara 90 % med prompt caching", description: "Claudes starkaste prisfördel." },
+    { to: "/billigaste-ai", title: "Billigaste AI 2026", description: "Claude Haiku vs GPT-4o mini." },
+  ],
+  "ai-for-smaforetag": [
+    { to: "/ai-for-foretag", title: "AI för företag i Sverige", description: "Bredare guide för alla företagsstorlekar." },
+    { to: "/gratis-ai", title: "Gratis AI för småföretag", description: "Vilka verktyg är gratis och räcker de?" },
+    { to: "/ai-kostnad-per-manad", title: "Vad kostar AI per månad?", description: "Typiska månadskostnader per use case." },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Alla AI-leverantörer och abonnemang." },
+  ],
+  "jamfor-ai-modeller": [
+    { to: "/billigaste-ai", title: "Billigaste AI-modellen 2026", description: "Fokus på budget-modellerna." },
+    { to: "/chatgpt-vs-claude", title: "ChatGPT vs Claude — djupguide", description: "Detaljerad jämförelse av de två största." },
+    { to: "/", title: "Kalkylera alla modeller i SEK", description: "Fyll i din volym och se månadskostnad." },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Priser, abonnemang och API-kostnader." },
+  ],
+  "ai-api-kostnad": [
+    { to: "/openai-api-pris", title: "OpenAI API priser i SEK", description: "Prislistor för alla GPT-modeller." },
+    { to: "/anthropic-claude-api-pris", title: "Claude API priser i SEK", description: "Opus, Sonnet och Haiku — priser och val." },
+    { to: "/ai-kostnad-per-manad", title: "Månadskostnad per use case", description: "Typiska kostnader för chatbot, analys m.m." },
+    { to: "/prompt-caching", title: "Sänk API-notan med caching", description: "90 % rabatt på cachad input hos Claude." },
+  ],
+  "deepseek-pris": [
+    { to: "/billigaste-ai", title: "Billigaste AI-modeller 2026", description: "DeepSeek vs GPT-4o mini vs Mistral Small." },
+    { to: "/jamfor-ai-modeller", title: "Jämför alla AI-modeller", description: "Komplett tabell med priser i SEK." },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Alla AI-leverantörer i SEK." },
+    { to: "/chatgpt-vs-claude", title: "ChatGPT vs Claude", description: "Europeiska alternativ till DeepSeek." },
+  ],
+  "vad-kostar-ai-per-ar": [
+    { to: "/ai-kostnad-per-manad", title: "Räkna på månadsnivå", description: "Detaljerad genomgång av månadskostnader." },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Alla AI-leverantörer och planer." },
+    { to: "/ai-for-smaforetag", title: "AI för småföretag — budget", description: "Realistiska kostnader för 1–10 anst." },
+    { to: "/gratis-ai", title: "Gratis AI — hur länge räcker det?", description: "Spara på årskostnaden med gratisverktyg." },
+  ],
 };
