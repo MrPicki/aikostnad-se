@@ -177,4 +177,34 @@ export const relatedArticles: Record<string, RelatedLink[]> = {
     { to: "/ai-for-smaforetag", title: "AI för småföretag — budget", description: "Realistiska kostnader för 1–10 anst." },
     { to: "/gratis-ai", title: "Gratis AI — hur länge räcker det?", description: "Spara på årskostnaden med gratisverktyg." },
   ],
+  "ai-for-advokatbyra": [
+    { to: "/ai-for-foretag", title: "AI för företag — kostnader och verktyg", description: "Vad kostar AI per anställd i en professionell organisation?" },
+    { to: "/claude-pris", title: "Claude Sonnet — priser i SEK", description: "Anthropics modell för GDPR-kritisk juridisk data." },
+    { to: "/jamfor-ai-modeller", title: "Jämför alla AI-modeller 2026", description: "Precision, GDPR och pris — komplett tabell." },
+    { to: "/ai-chatbot-kostnad", title: "Bygga AI-chatbot — vad kostar det?", description: "Konkreta budgetar för klientkommunikation." },
+  ],
+  "ai-for-redovisning": [
+    { to: "/ai-for-smaforetag", title: "AI för småföretag — realistisk budget", description: "Kostnader och ROI för 1–10 personers firma." },
+    { to: "/billigaste-ai", title: "Billigaste AI-modeller 2026", description: "GPT-4o mini och Mistral Small för hög volym." },
+    { to: "/ai-chatbot-kostnad", title: "Bygga AI-chatbot — budgetguide", description: "Vad kostar ett automatiserat skattefrågessystem?" },
+    { to: "/ai-for-foretag", title: "AI för företag — enterprise och licenser", description: "Avtal och GDPR-DPA för redovisningsbyråer." },
+  ],
+  "ai-for-ehandel": [
+    { to: "/ai-chatbot-kostnad", title: "AI-chatbot kostnad — komplett guide", description: "Budgetera en kundtjänst-chatbot för e-handel." },
+    { to: "/ai-for-smaforetag", title: "AI för småföretag", description: "Realistiska kostnader och ROI-räkning." },
+    { to: "/billigaste-ai", title: "Billigaste AI-modeller 2026", description: "Claude Haiku och GPT-4o mini jämförda." },
+    { to: "/ai-kostnad-per-manad", title: "AI-kostnad per månad", description: "Typiska månadskostnader per use case för e-handel." },
+  ],
+  "ai-for-sjukvard": [
+    { to: "/ai-for-foretag", title: "AI för företag — GDPR och DPA", description: "Enterprise-avtal och dataskyddskrav." },
+    { to: "/claude-pris", title: "Claude Sonnet — priser och GDPR", description: "Anthropics modell för hälsodata och precision." },
+    { to: "/jamfor-ai-modeller", title: "Jämför AI-modeller — GDPR-fokus", description: "Vilken modell uppfyller hälsovårdens krav?" },
+    { to: "/prompt-caching", title: "Prompt caching — sänk jourkostnaderna", description: "Halvera kostnaden med cachad system-prompt." },
+  ],
+  "ai-for-skola": [
+    { to: "/ai-for-foretag", title: "AI för organisationer — licenser", description: "Kommunavtal och enterprise-licenser." },
+    { to: "/billigaste-ai", title: "Billigaste AI-modeller 2026", description: "GPT-4o mini för kostnadskänslig verksamhet." },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Alla leverantörer och abonnemang i SEK." },
+    { to: "/ai-chatbot-kostnad", title: "Bygga AI-chatbot — läxhjälp", description: "Vad kostar en chatbot för 200 elever?" },
+  ],
 };

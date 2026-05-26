@@ -257,4 +257,49 @@ export const articles: Record<string, ArticleMeta> = {
     modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/vad-kostar-ai-per-ar",
   },
+  "ai-for-advokatbyra": {
+    slug: "ai-for-advokatbyra",
+    headline: "AI för advokatbyråer — vad kostar det? Guide + kalkylator (2026)",
+    description:
+      "Konkreta AI-kostnader för advokatbyråer: kontraktsanalys, juridisk research och klientkommunikation. Claude Sonnet rekommenderas för GDPR och hög precision. Maj 2026.",
+    publishedDate: "2026-05-26",
+    modifiedDate: "2026-05-26",
+    url: "https://aikostnad.se/ai-for-advokatbyra",
+  },
+  "ai-for-redovisning": {
+    slug: "ai-for-redovisning",
+    headline: "AI för redovisning och bokföring — kostnader och guide (2026)",
+    description:
+      "AI-kostnader för redovisningsbyråer och bokförare: kvittoanalys, skattefrågor och rapportgenerering. GPT-4o mini för hög volym och låg kostnad. Maj 2026.",
+    publishedDate: "2026-05-26",
+    modifiedDate: "2026-05-26",
+    url: "https://aikostnad.se/ai-for-redovisning",
+  },
+  "ai-for-ehandel": {
+    slug: "ai-for-ehandel",
+    headline: "AI för e-handel — produkttexter, support och kostnad (2026)",
+    description:
+      "AI-kostnader för e-handel: produktbeskrivningar, kundtjänst-chatbot och personaliserade mejl. Claude Haiku för snabb och billig volymhantering. Maj 2026.",
+    publishedDate: "2026-05-26",
+    modifiedDate: "2026-05-26",
+    url: "https://aikostnad.se/ai-for-ehandel",
+  },
+  "ai-for-sjukvard": {
+    slug: "ai-for-sjukvard",
+    headline: "AI i sjukvården — kostnader, GDPR och guide (2026)",
+    description:
+      "AI-kostnader för sjukvård och hälsa: journalsammanfattning, patientchatbot och medicinsk dokumentation. GDPR-krav och lokal hosting. Maj 2026.",
+    publishedDate: "2026-05-26",
+    modifiedDate: "2026-05-26",
+    url: "https://aikostnad.se/ai-for-sjukvard",
+  },
+  "ai-for-skola": {
+    slug: "ai-for-skola",
+    headline: "AI i skolan — vad kostar det för kommuner och skolor? (2026)",
+    description:
+      "AI-kostnader för skolor och kommuner: läxhjälp-chatbot, bedömningsstöd och kursplaneringsassistent. GPT-4o mini för priseffektiv implementering. Maj 2026.",
+    publishedDate: "2026-05-26",
+    modifiedDate: "2026-05-26",
+    url: "https://aikostnad.se/ai-for-skola",
+  },
 };
