@@ -109,10 +109,19 @@ const DeepseekPris = lazy(() =>
 const VadKostarAiPerAr = lazy(() =>
   import("./pages/VadKostarAiPerAr").then((m) => ({ default: m.VadKostarAiPerAr }))
 );
+const O3Pris = lazy(() =>
+  import("./pages/O3Pris").then((m) => ({ default: m.O3Pris }))
+);
+const Prisandringar = lazy(() =>
+  import("./pages/Prisandringar").then((m) => ({ default: m.Prisandringar }))
+);
+const EmbedPage = lazy(() =>
+  import("./pages/EmbedPage").then((m) => ({ default: m.EmbedPage }))
+);
 
 function Shell() {
   const location = useLocation();
-  const isEmbed = location.pathname.startsWith("/embed");
+  const isEmbed = location.pathname === "/embed";
 
   return (
     <div className="min-h-screen flex flex-col w-full overflow-x-hidden bg-white">
@@ -154,6 +163,9 @@ function Shell() {
             <Route path="/ai-api-kostnad" element={<AiApiKostnad />} />
             <Route path="/deepseek-pris" element={<DeepseekPris />} />
             <Route path="/vad-kostar-ai-per-ar" element={<VadKostarAiPerAr />} />
+            <Route path="/o3-pris" element={<O3Pris />} />
+            <Route path="/prisandringar" element={<Prisandringar />} />
+            <Route path="/embed-info" element={<EmbedPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
