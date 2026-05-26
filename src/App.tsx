@@ -133,6 +133,9 @@ const AiForSjukvard = lazy(() =>
 const AiForSkola = lazy(() =>
   import("./pages/AiForSkola").then((m) => ({ default: m.AiForSkola }))
 );
+const Nyheter = lazy(() =>
+  import("./pages/Nyheter").then((m) => ({ default: m.Nyheter }))
+);
 
 function Shell() {
   const location = useLocation();
@@ -186,6 +189,7 @@ function Shell() {
             <Route path="/ai-for-ehandel" element={<AiForEhandel />} />
             <Route path="/ai-for-sjukvard" element={<AiForSjukvard />} />
             <Route path="/ai-for-skola" element={<AiForSkola />} />
+            <Route path="/nyheter" element={<Nyheter />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

@@ -127,6 +127,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link to="/nyheter" className="text-xs text-gray-500 hover:text-indigo-600">
+                  AI-nyheter
+                </Link>
+              </li>
+              <li>
                 <Link to="/om" className="text-xs text-gray-500 hover:text-indigo-600">
                   Om Aikostnad.se
                 </Link>
