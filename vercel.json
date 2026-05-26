@@ -1,5 +1,11 @@
 {
   "cleanUrls": true,
+  "crons": [
+    {
+      "path": "/api/twitter-bot",
+      "schedule": "0 7,12,18 * * *"
+    }
+  ],
   "trailingSlash": false,
   "rewrites": [
     { "source": "/googlee9c10c44083acd26.html", "destination": "/googlee9c10c44083acd26.html" }
