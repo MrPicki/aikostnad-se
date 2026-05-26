@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef } from "react";
 import { useExchangeRate } from "../hooks/useExchangeRate";
 import { formatSek } from "../utils/calculateCost";
+import { trackEvent } from "../utils/analytics";
 import type { CalcInitialValues } from "./Calculator";
 import { GuideCard } from "./GuideCard";
 
@@ -74,6 +75,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
     setStatus("loading");
     setResult(null);
     setErrorMsg("");
+    trackEvent('estimate_submitted', { prompt_length: trimmed.length });
 
     try {
       const res = await fetch("/api/estimate-cost", {
@@ -87,6 +89,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
       const data = (await res.json()) as EstimateResult;
       setResult(data);
       setStatus("result");
+      trackEvent('estimate_result_shown', { model_id: data.modelId, confidence: data.confidence });
       // Two RAFs ensure React has committed DOM + layout is settled before
       // we measure the freshly mounted element.
       requestAnimationFrame(() => requestAnimationFrame(scrollResultToTop));
@@ -213,6 +216,7 @@ function EstimateResultView({ result, sek, onReset, onUseInCalculator }: ResultP
   const conf = confidenceMap[result.confidence] ?? confidenceMap.medium;
 
   function handleUseInCalc() {
+    trackEvent('use_in_calculator_clicked');
     onUseInCalculator({
       modelId:               result.modelId,
       wordsPerRequest:       assumptions.inputWords,
@@ -342,6 +346,7 @@ function EstimateResultView({ result, sek, onReset, onUseInCalculator }: ResultP
         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Räknade precis ut min AI-kostnad med @aikostnad — ${sek(result.monthlyCostUsdRecommended)}/mån 🤖 Räkna din: https://aikostnad.se`)}`}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={() => trackEvent('share_clicked', { platform: 'twitter' })}
         className="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center gap-1.5"
         aria-label="Dela resultatet på X (Twitter)"
       >

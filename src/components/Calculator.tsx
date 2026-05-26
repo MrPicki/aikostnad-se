@@ -10,6 +10,7 @@ import {
 } from "../utils/calculateCost";
 import { useExchangeRate } from "../hooks/useExchangeRate";
 import { GuideCard } from "./GuideCard";
+import { trackEvent } from "../utils/analytics";
 
 const DEFAULTS = {
   wordsPerRequest: 100,
@@ -323,6 +324,11 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
     errors,
   ]);
 
+  useEffect(() => {
+    if (!result) return;
+    trackEvent('calculator_used', { model_id: selectedModel.id });
+  }, [result]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const commercialModels = models.filter((m) => m.category === "commercial");
   const openSourceModels = models.filter((m) => m.category === "open-source");
 
@@ -629,6 +635,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                   href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Faikostnad.se"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackEvent('share_clicked', { platform: 'linkedin' })}
                   className="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center gap-1.5"
                   aria-label="Dela aikostnad.se på LinkedIn"
                 >
@@ -641,6 +648,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Räknade precis ut min AI-kostnad med @aikostnad — ${humanSek(result.monthlyCostSek)}/mån 🤖 Räkna din: https://aikostnad.se`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackEvent('share_clicked', { platform: 'twitter' })}
                   className="text-xs text-gray-500 hover:text-gray-700 inline-flex items-center gap-1.5"
                   aria-label="Dela resultatet på X (Twitter)"
                 >

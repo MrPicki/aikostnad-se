@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { trackEvent } from "../utils/analytics";
 
 interface Props {
   providerId: string;
@@ -41,6 +42,7 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
         throw new Error(data.error || "Något gick fel");
       }
 
+      trackEvent('email_captured');
       setStatus("success");
     } catch (err) {
       setStatus("error");
