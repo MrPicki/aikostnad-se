@@ -3,6 +3,24 @@ import { Link } from "react-router-dom";
 import { marked } from "marked";
 import { SEO } from "../components/SEO";
 
+interface SavedArticle {
+  date: string;
+  slug: string;
+  title: string;
+  ingress: string;
+}
+
+function formatSwedishDate(dateStr: string): string {
+  const parts = dateStr.split("-").map(Number);
+  if (parts.length !== 3) return dateStr;
+  const [year, month, day] = parts;
+  const months = [
+    "januari", "februari", "mars", "april", "maj", "juni",
+    "juli", "augusti", "september", "oktober", "november", "december",
+  ];
+  return `${day} ${months[month - 1]} ${year}`;
+}
+
 interface RawArticle {
   title: string;
   link: string;
@@ -173,6 +191,7 @@ export function Nyheter() {
   const [digest, setDigest] = useState<DigestResult | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [savedArticles, setSavedArticles] = useState<SavedArticle[]>([]);
 
   function fetchDigest() {
     setError(false);
@@ -194,6 +213,10 @@ export function Nyheter() {
 
   useEffect(() => {
     fetchDigest();
+    fetch("/api/article?list=true")
+      .then((r) => (r.ok ? (r.json() as Promise<SavedArticle[]>) : Promise.resolve([])))
+      .then((data) => setSavedArticles(Array.isArray(data) ? data : []))
+      .catch(() => {});
   }, []);
 
   const hasDigest = digest && digest.article;
@@ -252,6 +275,35 @@ export function Nyheter() {
               </section>
             )}
           </>
+        )}
+
+        {savedArticles.length > 0 && (
+          <section className="mt-12">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">
+              Tidigare rapporter
+            </h2>
+            <div className="space-y-3">
+              {savedArticles.map((a) => (
+                <Link
+                  key={a.date}
+                  to={`/nyheter/${a.date}`}
+                  className="block bg-white border border-gray-200 rounded-xl p-5 hover:border-indigo-200 transition-colors group"
+                >
+                  <p className="text-xs text-gray-400 mb-1">
+                    {formatSwedishDate(a.date)}
+                  </p>
+                  <h3 className="text-base font-semibold text-gray-900 group-hover:text-indigo-700 transition-colors leading-snug mb-1">
+                    {a.title}
+                  </h3>
+                  {a.ingress && (
+                    <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+                      {a.ingress}
+                    </p>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </section>
         )}
       </main>
     </>

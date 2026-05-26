@@ -1,3 +1,18 @@
+// Morning digest — sends a daily AI news email at 08:00 via Vercel Cron
+//
+// Before first deploy, run in Supabase SQL Editor:
+//   create table if not exists daily_articles (
+//     id uuid default gen_random_uuid() primary key,
+//     date text unique not null,
+//     slug text unique not null,
+//     title text not null,
+//     ingress text,
+//     content text not null,
+//     x_post text,
+//     article_urls text[],
+//     created_at timestamptz default now()
+//   );
+
 import Parser from "rss-parser";
 
 const RSS_FEEDS = [
@@ -36,7 +51,68 @@ interface Digest {
   sections: DigestSection[];
   takeaway: string;
   hashtags: string[];
+  xPost?: string;
 }
+
+// ---- Supabase helpers (raw REST, same pattern as twitter-bot.ts) ----
+
+function supabaseHeaders() {
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
+  return {
+    apikey: key,
+    Authorization: `Bearer ${key}`,
+    "Content-Type": "application/json",
+  };
+}
+
+function getSupabaseUrl() {
+  return process.env.VITE_SUPABASE_URL ?? process.env.SUPABASE_URL ?? "";
+}
+
+async function fetchYesterdayArticle(): Promise<{ title: string; article_urls: string[] } | null> {
+  const base = getSupabaseUrl();
+  if (!base) return null;
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  const slug = yesterday.toISOString().split("T")[0];
+  try {
+    const res = await fetch(
+      `${base}/rest/v1/daily_articles?date=eq.${slug}&select=title,article_urls`,
+      { headers: supabaseHeaders() }
+    );
+    const rows = (await res.json()) as Array<{ title: string; article_urls: string[] }>;
+    return Array.isArray(rows) && rows.length > 0 ? rows[0] : null;
+  } catch {
+    return null;
+  }
+}
+
+async function saveArticle(data: {
+  date: string;
+  slug: string;
+  title: string;
+  ingress: string;
+  content: string;
+  x_post: string;
+  article_urls: string[];
+}): Promise<void> {
+  const base = getSupabaseUrl();
+  if (!base) return;
+  try {
+    await fetch(`${base}/rest/v1/daily_articles`, {
+      method: "POST",
+      headers: {
+        ...supabaseHeaders(),
+        Prefer: "resolution=merge-duplicates",
+      },
+      body: JSON.stringify(data),
+    });
+  } catch (e) {
+    console.error("Supabase insert failed:", e);
+  }
+}
+
+// ---- RSS ----
 
 async function fetchRecentArticles(): Promise<Article[]> {
   const parser = new Parser({
@@ -69,13 +145,25 @@ async function fetchRecentArticles(): Promise<Article[]> {
   return articles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
 }
 
-async function generateDigest(articles: Article[]): Promise<Digest | null> {
+// ---- Claude ----
+
+async function generateDigest(
+  articles: Article[],
+  todaySlug: string,
+  prevTitle?: string,
+  prevUrls?: string[]
+): Promise<Digest | null> {
   const newsSummary = articles
     .slice(0, 8)
     .map((a, i) => `${i + 1}. ${a.title}\n   ${a.summary.slice(0, 200)}`)
     .join("\n\n");
 
+  const dedupNote =
+    `\nGårdagens artikel handlade om: ${prevTitle ?? "ingen tidigare artikel"}.` +
+    `\nDessa nyhets-URL:ar användes igår och ska INTE användas igen: ${prevUrls?.join(", ") ?? "inga"}.`;
+
   const prompt = `Du är chefredaktör på aikostnad.se. Skriv dagens AI-nyhetsrapport på svenska som en professionell nyhetsjournalist för en ledande tekniksajt.
+${dedupNote}
 
 Artikeln ska:
 - Ha en stark, informativ rubrik
@@ -103,11 +191,11 @@ Returnera JSON:
   "headline": "Artikelrubrik",
   "ingress": "Ingressen (2-3 meningar)",
   "sections": [
-    { "title": "Avsnittets rubrik", "content": "Avsnittets text med HTML-länkar inbäddade" },
-    ...
+    { "title": "Avsnittets rubrik", "content": "Avsnittets text med HTML-länkar inbäddade" }
   ],
   "takeaway": "Dagens takeaway-text",
-  "hashtags": ["#AI", "#AIpriser", "#GPT", "#MachineLearning"]
+  "hashtags": ["#AI", "#AIpriser", "#GPT", "#MachineLearning"],
+  "xPost": "Ingressen (max 250 tecken) + newline + 'Hela rapporten: https://aikostnad.se/nyheter/${todaySlug}' + newline + '#AI #AIpriser'"
 }`;
 
   try {
@@ -146,7 +234,7 @@ Returnera JSON:
   }
 }
 
-function buildFallbackDigest(articles: Article[]): Digest {
+function buildFallbackDigest(articles: Article[], todaySlug: string): Digest {
   const headlines = articles
     .slice(0, 5)
     .map((a) => `<li>${a.title}</li>`)
@@ -163,18 +251,31 @@ function buildFallbackDigest(articles: Article[]): Digest {
     ],
     takeaway: "Håll koll på AI-kostnader på aikostnad.se/kalkylator",
     hashtags: ["#AI", "#AIpriser"],
+    xPost: `Här är de senaste nyheterna inom AI och AI-kostnader.\n\nHela rapporten: https://aikostnad.se/nyheter/${todaySlug}\n\n#AI #AIpriser`,
   };
 }
 
-function buildHtmlEmail(digest: Digest, dateStr: string): string {
+function buildArticleHtml(digest: Digest): string {
   const sectionsHtml = digest.sections
     .map(
-      (s) => `
-    <h2 style="font-size:18px;font-weight:700;color:#1e1b4b;margin:28px 0 8px;">${s.title}</h2>
-    <p style="font-size:15px;color:#374151;line-height:1.7;margin:0;">${s.content}</p>`
+      (s) =>
+        `<h2 style="font-size:18px;font-weight:700;color:#1e1b4b;margin:24px 0 8px;">${s.title}</h2>` +
+        `<p style="font-size:15px;color:#374151;line-height:1.7;margin:0 0 12px;">${s.content}</p>`
     )
     .join("\n");
 
+  return (
+    `<h1 style="font-size:24px;font-weight:800;color:#1e1b4b;margin:0 0 16px;line-height:1.3;">${digest.headline}</h1>\n` +
+    `<p style="font-size:16px;color:#374151;font-style:italic;border-left:4px solid #4f46e5;padding-left:16px;margin:0 0 24px;line-height:1.7;">${digest.ingress}</p>\n` +
+    sectionsHtml +
+    `\n<div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:20px 24px;margin:24px 0 0;">` +
+    `<p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#0369a1;text-transform:uppercase;letter-spacing:0.05em;">Dagens takeaway</p>` +
+    `<p style="margin:0;font-size:15px;color:#1e293b;line-height:1.6;">${digest.takeaway}</p>` +
+    `</div>`
+  );
+}
+
+function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): string {
   const hashtagsHtml = digest.hashtags
     .map((tag) => {
       const encoded = encodeURIComponent(tag);
@@ -207,21 +308,10 @@ function buildHtmlEmail(digest: Digest, dateStr: string): string {
         <!-- Body -->
         <tr>
           <td style="padding:32px;">
-
-            <h1 style="font-size:24px;font-weight:800;color:#1e1b4b;margin:0 0 16px;line-height:1.3;">${digest.headline}</h1>
-
-            <p style="font-size:16px;color:#374151;font-style:italic;border-left:4px solid #4f46e5;padding-left:16px;margin:0 0 28px;line-height:1.7;">${digest.ingress}</p>
-
-            ${sectionsHtml}
-
-            <!-- Takeaway -->
-            <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:20px 24px;margin:32px 0 24px;">
-              <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#0369a1;text-transform:uppercase;letter-spacing:0.05em;">Dagens takeaway</p>
-              <p style="margin:0;font-size:15px;color:#1e293b;line-height:1.6;">${digest.takeaway}</p>
-            </div>
+            ${articleBody}
 
             <!-- Hashtags -->
-            <div style="margin:0 0 28px;">${hashtagsHtml}</div>
+            <div style="margin:24px 0;">${hashtagsHtml}</div>
 
             <!-- CTA -->
             <div style="text-align:center;margin:32px 0;">
@@ -260,9 +350,13 @@ export default async function handler(req: any, res: any): Promise<void> {
     }
   }
 
+  const todaySlug = new Date().toISOString().split("T")[0];
   const dateStr = formatSwedishDate(new Date());
 
-  // 1. Fetch RSS
+  // 1. Fetch yesterday's article for dedup
+  const prevArticle = await fetchYesterdayArticle();
+
+  // 2. Fetch RSS
   let articles: Article[] = [];
   try {
     articles = await fetchRecentArticles();
@@ -270,17 +364,22 @@ export default async function handler(req: any, res: any): Promise<void> {
     console.error("RSS fetch failed:", e);
   }
 
-  // 2. Generate digest with Claude (fallback to raw headlines on failure)
+  // 3. Generate digest with Claude (fallback to raw headlines on failure)
   let digest: Digest;
   let claudeOk = false;
 
   if (articles.length > 0) {
-    const generated = await generateDigest(articles);
+    const generated = await generateDigest(
+      articles,
+      todaySlug,
+      prevArticle?.title,
+      prevArticle?.article_urls
+    );
     if (generated) {
       digest = generated;
       claudeOk = true;
     } else {
-      digest = buildFallbackDigest(articles);
+      digest = buildFallbackDigest(articles, todaySlug);
     }
   } else {
     digest = {
@@ -296,13 +395,26 @@ export default async function handler(req: any, res: any): Promise<void> {
       ],
       takeaway: "Håll koll på AI-kostnader på aikostnad.se",
       hashtags: ["#AI", "#AIpriser"],
+      xPost: `Inga nyheter tillgängliga idag.\n\nHela rapporten: https://aikostnad.se/nyheter/${todaySlug}\n\n#AI #AIpriser`,
     };
   }
 
-  // 3. Build HTML
-  const htmlEmail = buildHtmlEmail(digest, dateStr);
+  // 4. Build HTML
+  const htmlArticleBody = buildArticleHtml(digest);
+  const htmlEmail = buildHtmlEmail(digest, dateStr, htmlArticleBody);
 
-  // 4. Send via Resend
+  // 5. Save to Supabase before sending email
+  await saveArticle({
+    date: todaySlug,
+    slug: todaySlug,
+    title: digest.headline,
+    ingress: digest.ingress,
+    content: htmlArticleBody,
+    x_post: digest.xPost ?? "",
+    article_urls: articles.map((a) => a.url),
+  });
+
+  // 6. Send via Resend
   const resendApiKey = process.env.RESEND_API_KEY;
   if (!resendApiKey) {
     console.error("RESEND_API_KEY not set");
