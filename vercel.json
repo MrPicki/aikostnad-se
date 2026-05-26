@@ -3,7 +3,7 @@
   "crons": [
     {
       "path": "/api/twitter-bot",
-      "schedule": "0 7,12,18 * * *"
+      "schedule": "0 8 * * *"
     }
   ],
   "trailingSlash": false,
