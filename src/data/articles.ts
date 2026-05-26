@@ -257,4 +257,22 @@ export const articles: Record<string, ArticleMeta> = {
     modifiedDate: "2026-05-25",
     url: "https://aikostnad.se/vad-kostar-ai-per-ar",
   },
+  "o3-pris": {
+    slug: "o3-pris",
+    headline: "Vad kostar OpenAI o3? Priser i SEK (2026)",
+    description:
+      "OpenAI o3, o3-mini och o4-mini priser i svenska kronor. Reasoning-modeller för komplex analys — när är kostnaden motiverad och hur jämför de mot GPT-5?",
+    publishedDate: "2026-05-26",
+    modifiedDate: "2026-05-26",
+    url: "https://aikostnad.se/o3-pris",
+  },
+  "prisandringar": {
+    slug: "prisandringar",
+    headline: "AI-priser i Sverige — Historik och prisändringar 2024–2026",
+    description:
+      "Komplett historik över AI-prisändringar 2024–2026. GPT-4o, Claude, Gemini — se hur priserna sjunkit och vad det innebär för din AI-budget.",
+    publishedDate: "2026-05-26",
+    modifiedDate: "2026-05-26",
+    url: "https://aikostnad.se/prisandringar",
+  },
 };

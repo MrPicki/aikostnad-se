@@ -12,6 +12,7 @@ import { SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
 import { articles } from "../data/articles";
 import { officialPricingSources } from "../data/sources";
+import { trackEvent } from "../utils/analytics";
 
 const article = articles["deepseek-pris"];
 
@@ -307,6 +308,24 @@ export function DeepseekPris() {
             publisher: "Garante per la protezione dei dati personali",
           },
         ]} />
+
+        {/* Kom igång */}
+        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+          <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
+          <p className="text-sm text-gray-600 mb-4">
+            Nu vet du vad DeepSeek API kostar. Nästa steg är att skapa ditt konto och börja bygga.
+          </p>
+          <a
+            href="https://platform.deepseek.com/"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="btn-primary inline-block text-sm"
+            onClick={() => trackEvent('affiliate_click', { provider: 'deepseek', source: 'deepseek-pris' })}
+          >
+            Skapa ditt DeepSeek-konto gratis →
+          </a>
+          <p className="text-xs text-gray-400 mt-2">Samarbetslänk — vi kan ta emot provision vid köp.</p>
+        </div>
       </main>
     </>
   );

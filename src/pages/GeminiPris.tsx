@@ -12,6 +12,7 @@ import { PriceOfferSchema, SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
 import { articles } from "../data/articles";
 import { geminiSources } from "../data/sources";
+import { trackEvent } from "../utils/analytics";
 
 const INITIAL_VALUES = { modelId: "gemini-2.5-flash" } as const;
 
@@ -338,6 +339,24 @@ export function GeminiPris() {
               Claude Sonnet och Haiku — Anthropics priser per token i SEK.
             </p>
           </Link>
+        </div>
+
+        {/* Kom igång */}
+        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+          <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
+          <p className="text-sm text-gray-600 mb-4">
+            Nu vet du vad Gemini API kostar. Nästa steg är att skapa ditt konto och börja bygga.
+          </p>
+          <a
+            href="https://aistudio.google.com/"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="btn-primary inline-block text-sm"
+            onClick={() => trackEvent('affiliate_click', { provider: 'google', source: 'gemini-pris' })}
+          >
+            Skapa ditt Gemini-konto gratis →
+          </a>
+          <p className="text-xs text-gray-400 mt-2">Samarbetslänk — vi kan ta emot provision vid köp.</p>
         </div>
       </main>
     </>

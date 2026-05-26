@@ -12,6 +12,7 @@ import { PriceOfferSchema, SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
 import { articles } from "../data/articles";
 import { openAISources } from "../data/sources";
+import { trackEvent } from "../utils/analytics";
 
 const INITIAL_VALUES = { modelId: "gpt-4.1" } as const;
 
@@ -235,6 +236,24 @@ export function Gpt4Pris() {
             </Link>
             .
           </p>
+        </div>
+
+        {/* Kom igång */}
+        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+          <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
+          <p className="text-sm text-gray-600 mb-4">
+            Nu vet du vad GPT-4.1 kostar. Nästa steg är att skapa ditt konto och börja bygga.
+          </p>
+          <a
+            href="https://platform.openai.com/signup"
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="btn-primary inline-block text-sm"
+            onClick={() => trackEvent('affiliate_click', { provider: 'openai', source: 'gpt-4-pris' })}
+          >
+            Skapa ditt OpenAI-konto gratis →
+          </a>
+          <p className="text-xs text-gray-400 mt-2">Samarbetslänk — vi kan ta emot provision vid köp.</p>
         </div>
       </main>
     </>
