@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SEOProvider } from "./components/SEO";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { StickyEmailBar } from "./components/StickyEmailBar";
 import { Home } from "./pages/Home";
 
 const TokenCalculatorPage = lazy(() =>
@@ -158,6 +159,7 @@ function Shell() {
         </Suspense>
       </div>
       {!isEmbed && <Footer />}
+      {!isEmbed && <StickyEmailBar />}
     </div>
   );
 }

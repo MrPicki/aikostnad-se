@@ -260,6 +260,9 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
 
   const [showTokenDetails, setShowTokenDetails] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [calcEmail, setCalcEmail] = useState("");
+  const [calcEmailStatus, setCalcEmailStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [calcCaptureVisible, setCalcCaptureVisible] = useState(() => !localStorage.getItem("email_subscribed"));
   async function copyShareLink() {
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -267,6 +270,26 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
       setTimeout(() => setCopied(false), 2000);
     } catch {
       // clipboard may be unavailable (insecure context, old browser) — ignore
+    }
+  }
+
+  async function handleCalcEmailSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!calcEmail.trim()) return;
+    setCalcEmailStatus("loading");
+    try {
+      const res = await fetch("/api/send-guide", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: calcEmail.trim(), source: "calculator-result" }),
+      });
+      if (!res.ok) throw new Error();
+      trackEvent("email_captured", { source: "calculator-result" });
+      localStorage.setItem("email_subscribed", "1");
+      setCalcEmailStatus("success");
+      setTimeout(() => setCalcCaptureVisible(false), 2000);
+    } catch {
+      setCalcEmailStatus("idle");
     }
   }
 
@@ -555,6 +578,42 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 </p>
               )}
 
+              {calcCaptureVisible && (
+                <div
+                  className={`transition-all duration-300 ${calcEmailStatus === "success" ? "opacity-0" : "opacity-100"}`}
+                >
+                  {calcEmailStatus === "success" ? (
+                    <div className="rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800 text-center">
+                      ✓ Sparat! Vi skickar prisvarning när AI-priser ändras.
+                    </div>
+                  ) : (
+                    <form
+                      onSubmit={handleCalcEmailSubmit}
+                      className="flex items-center gap-2 rounded-xl border border-indigo-100 bg-indigo-50/60 px-4 py-3"
+                    >
+                      <span className="text-sm text-gray-700 whitespace-nowrap shrink-0">
+                        💾 Spara din kalkyl och få prisvarning →
+                      </span>
+                      <input
+                        type="email"
+                        required
+                        value={calcEmail}
+                        onChange={(e) => setCalcEmail(e.target.value)}
+                        placeholder="din@email.se"
+                        className="flex-1 min-w-0 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      />
+                      <button
+                        type="submit"
+                        disabled={calcEmailStatus === "loading"}
+                        className="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                      >
+                        {calcEmailStatus === "loading" ? "…" : "Spara"}
+                      </button>
+                    </form>
+                  )}
+                </div>
+              )}
+
               <div className="mt-4">
                 <button
                   onClick={() => setShowTokenDetails((v) => !v)}
@@ -645,7 +704,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                   Dela på LinkedIn
                 </a>
                 <a
-                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Räknade precis ut min AI-kostnad med @aikostnad — ${humanSek(result.monthlyCostSek)}/mån 🤖 Räkna din: https://aikostnad.se`)}`}
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Räknade precis ut att ${selectedModel.name}-API kostar ${humanSek(result.monthlyCostSek)}/mån för mitt use case 🤖 Kalkylera din: https://aikostnad.se @aikostnad`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => trackEvent('share_clicked', { platform: 'twitter' })}

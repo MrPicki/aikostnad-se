@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { trackEvent } from "../utils/analytics";
 
 interface Props {
@@ -12,14 +11,13 @@ type Status = "idle" | "loading" | "success" | "error";
 
 export function EmailCaptureForm({ providerId, modelName, source }: Props) {
   const [email, setEmail] = useState("");
-  const [consentGuide, setConsentGuide] = useState(false);
-  const [consentMarketing, setConsentMarketing] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!consentGuide || !email.trim()) return;
+    if (!consent || !email.trim()) return;
 
     setStatus("loading");
     setErrorMsg("");
@@ -33,7 +31,6 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
           providerId,
           modelName,
           source,
-          consentMarketing,
         }),
       });
 
@@ -43,6 +40,7 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
       }
 
       trackEvent('email_captured');
+      localStorage.setItem("email_subscribed", "1");
       setStatus("success");
     } catch (err) {
       setStatus("error");
@@ -84,36 +82,14 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
       <label className="flex items-start gap-2.5 cursor-pointer">
         <input
           type="checkbox"
-          checked={consentGuide}
-          onChange={(e) => setConsentGuide(e.target.checked)}
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
           className="mt-0.5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
           required
         />
         <span className="text-xs text-gray-600 leading-relaxed">
-          Jag samtycker till att Aikostnad.se sparar min e-postadress för att skicka
-          denna guide. Min data sparas säkert och delas aldrig med tredje part. Jag
-          kan när som helst be om radering via{" "}
-          <a href="mailto:hej@aikostnad.se" className="text-indigo-600 hover:underline">
-            hej@aikostnad.se
-          </a>
-          . Läs mer i vår{" "}
-          <Link to="/integritet" className="text-indigo-600 hover:underline" target="_blank">
-            integritetspolicy
-          </Link>
-          . <span className="text-red-500">*</span>
-        </span>
-      </label>
-
-      <label className="flex items-start gap-2.5 cursor-pointer">
-        <input
-          type="checkbox"
-          checked={consentMarketing}
-          onChange={(e) => setConsentMarketing(e.target.checked)}
-          className="mt-0.5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-        />
-        <span className="text-xs text-gray-600 leading-relaxed">
-          Skicka mig även enstaka uppdateringar om nya AI-priser och guider (max ~1
-          mail/månad). Du kan avsluta när som helst. (Frivilligt)
+          Jag accepterar att Aikostnad.se skickar prisvarningar när AI-priser
+          ändras. Max en gång per vecka. <span className="text-red-500">*</span>
         </span>
       </label>
 
@@ -125,7 +101,7 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
 
       <button
         type="submit"
-        disabled={status === "loading" || !consentGuide || !email.trim()}
+        disabled={status === "loading" || !consent || !email.trim()}
         className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-semibold px-6 py-3 rounded-xl transition-colors"
       >
         {status === "loading" ? "Skickar…" : "Bevaka mitt pris"}
