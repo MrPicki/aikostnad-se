@@ -118,6 +118,21 @@ const Prisandringar = lazy(() =>
 const EmbedPage = lazy(() =>
   import("./pages/EmbedPage").then((m) => ({ default: m.EmbedPage }))
 );
+const AiForAdvokatbyra = lazy(() =>
+  import("./pages/AiForAdvokatbyra").then((m) => ({ default: m.AiForAdvokatbyra }))
+);
+const AiForRedovisning = lazy(() =>
+  import("./pages/AiForRedovisning").then((m) => ({ default: m.AiForRedovisning }))
+);
+const AiForEhandel = lazy(() =>
+  import("./pages/AiForEhandel").then((m) => ({ default: m.AiForEhandel }))
+);
+const AiForSjukvard = lazy(() =>
+  import("./pages/AiForSjukvard").then((m) => ({ default: m.AiForSjukvard }))
+);
+const AiForSkola = lazy(() =>
+  import("./pages/AiForSkola").then((m) => ({ default: m.AiForSkola }))
+);
 
 function Shell() {
   const location = useLocation();
@@ -166,6 +181,11 @@ function Shell() {
             <Route path="/o3-pris" element={<O3Pris />} />
             <Route path="/prisandringar" element={<Prisandringar />} />
             <Route path="/embed-info" element={<EmbedPage />} />
+            <Route path="/ai-for-advokatbyra" element={<AiForAdvokatbyra />} />
+            <Route path="/ai-for-redovisning" element={<AiForRedovisning />} />
+            <Route path="/ai-for-ehandel" element={<AiForEhandel />} />
+            <Route path="/ai-for-sjukvard" element={<AiForSjukvard />} />
+            <Route path="/ai-for-skola" element={<AiForSkola />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

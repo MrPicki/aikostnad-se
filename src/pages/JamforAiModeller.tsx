@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { ArticleSchema } from "../components/ArticleSchema";
@@ -12,6 +13,26 @@ import { SpeakableSchema } from "../components/SchemaBlocks";
 import { relatedArticles } from "../data/relatedArticles";
 import { articles } from "../data/articles";
 import { officialPricingSources } from "../data/sources";
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Jämförelse av AI-modeller",
+  "numberOfItems": 11,
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "GPT-4.1", "url": "https://aikostnad.se/gpt-4-pris" },
+    { "@type": "ListItem", "position": 2, "name": "GPT-4o", "url": "https://aikostnad.se/vad-kostar-chatgpt" },
+    { "@type": "ListItem", "position": 3, "name": "GPT-4o mini", "url": "https://aikostnad.se/vad-kostar-chatgpt" },
+    { "@type": "ListItem", "position": 4, "name": "Claude Opus 4.7", "url": "https://aikostnad.se/claude-pris" },
+    { "@type": "ListItem", "position": 5, "name": "Claude Sonnet 4.6", "url": "https://aikostnad.se/claude-pris" },
+    { "@type": "ListItem", "position": 6, "name": "Claude Haiku 4.5", "url": "https://aikostnad.se/claude-pris" },
+    { "@type": "ListItem", "position": 7, "name": "Gemini 2.5 Pro", "url": "https://aikostnad.se/gemini-pris" },
+    { "@type": "ListItem", "position": 8, "name": "Gemini 2.5 Flash", "url": "https://aikostnad.se/gemini-pris" },
+    { "@type": "ListItem", "position": 9, "name": "DeepSeek V3", "url": "https://aikostnad.se/deepseek-pris" },
+    { "@type": "ListItem", "position": 10, "name": "Mistral Large", "url": "https://aikostnad.se/jamfor-ai-modeller" },
+    { "@type": "ListItem", "position": 11, "name": "Mistral Small", "url": "https://aikostnad.se/jamfor-ai-modeller" },
+  ],
+};
 
 const article = articles["jamfor-ai-modeller"];
 
@@ -57,6 +78,9 @@ export function JamforAiModeller() {
       ]} />
       <ArticleSchema article={article} />
       <SpeakableSchema />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(itemListSchema)}</script>
+      </Helmet>
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
