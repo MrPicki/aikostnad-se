@@ -260,32 +260,23 @@ function buildArticleHtml(digest: Digest): string {
     .map(
       (s) =>
         `<hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">` +
-        `<h2 style="font-size:18px;font-weight:700;color:#1e293b;margin:0 0 8px;">${s.title}</h2>` +
-        `<p style="font-size:15px;color:#374151;line-height:1.7;margin:0;">${s.content}</p>`
+        `<h2 style="font-size:17px;font-weight:700;color:#0f172a;margin:0 0 10px;line-height:1.4;">${s.title}</h2>` +
+        `<p style="font-size:15px;color:#334155;line-height:1.8;margin:0;">${s.content}</p>`
     )
     .join("\n");
 
   return (
-    `<h1 style="font-size:24px;font-weight:800;color:#1e293b;margin:0 0 16px;line-height:1.3;">${digest.headline}</h1>\n` +
-    `<div style="background:#f1f5f9;border-left:3px solid #4f46e5;padding:14px 18px;margin:0 0 24px;border-radius:0 6px 6px 0;">` +
-    `<p style="font-size:16px;color:#374151;font-style:italic;line-height:1.7;margin:0;">${digest.ingress}</p>` +
-    `</div>\n` +
+    `<h1 style="font-size:26px;font-weight:800;color:#0f172a;margin:0 0 16px;line-height:1.3;">${digest.headline}</h1>\n` +
+    `<p style="font-size:17px;color:#475569;font-style:italic;line-height:1.7;margin:0 0 4px;">${digest.ingress}</p>\n` +
     sectionsHtml +
     `\n<hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">` +
-    `<div style="background:#f0fdf4;border-left:3px solid #16a34a;border-radius:0 8px 8px 0;padding:20px 24px;margin:0;">` +
-    `<p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#16a34a;text-transform:uppercase;letter-spacing:0.05em;">Dagens takeaway</p>` +
-    `<p style="margin:0;font-size:15px;color:#1e293b;line-height:1.6;">${digest.takeaway}</p>` +
-    `</div>`
+    `<p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;">Slutsats</p>` +
+    `<p style="margin:0;font-size:15px;color:#0f172a;line-height:1.7;">${digest.takeaway}</p>`
   );
 }
 
 function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): string {
-  const hashtagsHtml = digest.hashtags
-    .map((tag) => {
-      const encoded = encodeURIComponent(tag);
-      return `<a href="https://twitter.com/search?q=${encoded}" style="display:inline-block;background:#dc2626;color:#fff;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:600;text-decoration:none;margin:2px 4px 2px 0;">${tag}</a>`;
-    })
-    .join("");
+  const hashtagsText = digest.hashtags.join(" ");
 
   const xPostRaw = digest.xPost ?? "";
   const xPostTruncated = xPostRaw.length > 280 ? xPostRaw.slice(0, 240) + "…" : xPostRaw;
@@ -297,20 +288,23 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>${digest.subject}</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body style="margin:0;padding:0;background:#f8fafc;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8fafc;padding:24px 0;">
   <tr>
     <td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#ffffff;">
 
         <!-- Header -->
         <tr>
-          <td style="background:linear-gradient(135deg,#4f46e5 0%,#4338ca 100%);padding:28px 32px;">
-            <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.8);font-weight:600;letter-spacing:0.05em;text-transform:uppercase;">aikostnad.se</p>
-            <h1 style="margin:6px 0 0;font-size:22px;color:#ffffff;font-weight:700;">Dagens AI-rapport</h1>
-            <p style="margin:8px 0 0;font-size:13px;color:rgba(255,255,255,0.75);">${dateStr}</p>
+          <td style="background:#ffffff;padding:22px 32px;border-bottom:1px solid #e2e8f0;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td><span style="font-size:20px;font-weight:800;color:#4f46e5;letter-spacing:-0.02em;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Aikostnad</span></td>
+                <td align="right"><span style="font-size:13px;color:#94a3b8;">${dateStr}</span></td>
+              </tr>
+            </table>
           </td>
         </tr>
 
@@ -320,18 +314,14 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
             ${articleBody}
 
             <!-- Hashtags -->
-            <div style="margin:24px 0;">${hashtagsHtml}</div>
+            <p style="margin:28px 0 16px;font-size:14px;color:#475569;line-height:1.6;">${hashtagsText}</p>
 
-            <!-- X / Twitter post -->
-            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin:24px 0;">
-              <p style="font-size:12px;text-transform:uppercase;letter-spacing:0.05em;color:#94a3b8;margin:0 0 8px;">Redo att posta?</p>
-              <p style="font-size:15px;color:#1e293b;line-height:1.6;margin:0 0 12px;white-space:pre-line;">${xPostTruncated}</p>
-              <a href="https://twitter.com/intent/tweet?text=${xPostEncoded}" style="display:inline-block;background:#000000;color:#ffffff;text-decoration:none;padding:10px 20px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;">𝕏 Twittra detta &rarr;</a>
-            </div>
+            <!-- X/Twitter button -->
+            <a href="https://twitter.com/intent/tweet?text=${xPostEncoded}" style="display:block;background:#000000;color:#ffffff;text-decoration:none;padding:15px 24px;border-radius:8px;font-weight:700;font-size:16px;text-align:center;margin:0 0 28px;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">&#x1D54F; Dela på Twitter &rarr;</a>
 
             <!-- CTA -->
-            <div style="text-align:center;margin:32px 0;">
-              <a href="https://aikostnad.se/kalkylator" style="display:inline-block;background:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:14px 32px;border-radius:8px;border:2px solid #4f46e5;text-decoration:none;">Beräkna din AI-kostnad &rarr;</a>
+            <div style="text-align:center;">
+              <a href="https://aikostnad.se/kalkylator" style="display:inline-block;background:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Räkna ut din AI-kostnad &rarr;</a>
             </div>
 
           </td>
@@ -340,8 +330,8 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
         <!-- Footer -->
         <tr>
           <td style="background:#f8fafc;padding:20px 32px;border-top:1px solid #e2e8f0;">
-            <p style="margin:0;font-size:14px;color:#94a3b8;text-align:center;">
-              <a href="https://aikostnad.se" style="color:#4f46e5;font-weight:600;text-decoration:none;">aikostnad.se</a>
+            <p style="margin:0;font-size:13px;color:#94a3b8;text-align:center;">
+              <a href="https://aikostnad.se" style="color:#94a3b8;text-decoration:none;">aikostnad.se</a>
               &nbsp;&middot;&nbsp;Du får detta mail som prenumerant
             </p>
           </td>
