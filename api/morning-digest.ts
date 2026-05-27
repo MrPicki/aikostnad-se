@@ -292,27 +292,40 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 <title>${digest.subject}</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
+/* Force light mode — Apple Mail, Outlook iOS */
 @media (prefers-color-scheme: dark) {
-  body, table, td, div, p, span { background-color: #ffffff !important; color: #1e293b !important; }
-  .email-body { background: #ffffff !important; }
+  body, .outer-wrap, .inner-wrap, .content-td, .header-td, .footer-td { background-color: #ffffff !important; color: #1e293b !important; }
+  .btn-twitter-td { background-color: #000000 !important; }
   .btn-twitter { background-color: #000000 !important; color: #ffffff !important; }
+  .btn-cta-td { background-color: #4f46e5 !important; }
   .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
 }
+/* Gmail dark mode (Android + iOS app) */
+[data-ogsc] body, [data-ogsc] .outer-wrap, [data-ogsc] .inner-wrap, [data-ogsc] .content-td, [data-ogsc] .header-td, [data-ogsc] .footer-td { background-color: #ffffff !important; color: #1e293b !important; }
+[data-ogsc] .btn-twitter-td { background-color: #000000 !important; }
+[data-ogsc] .btn-twitter { background-color: #000000 !important; color: #ffffff !important; }
+[data-ogsc] .btn-cta-td { background-color: #4f46e5 !important; }
+[data-ogsc] .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
+[data-ogsb] body, [data-ogsb] .outer-wrap, [data-ogsb] .inner-wrap, [data-ogsb] .content-td, [data-ogsb] .header-td, [data-ogsb] .footer-td { background-color: #ffffff !important; color: #1e293b !important; }
+[data-ogsb] .btn-twitter-td { background-color: #000000 !important; }
+[data-ogsb] .btn-twitter { background-color: #000000 !important; color: #ffffff !important; }
+[data-ogsb] .btn-cta-td { background-color: #4f46e5 !important; }
+[data-ogsb] .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
 </style>
 </head>
-<body style="margin:0;padding:0;background:#f8fafc;color-scheme:light;supported-color-schemes:light;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-<table class="email-body" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8fafc;padding:24px 0;">
+<body style="margin:0;padding:0;background-color:#f8fafc;color-scheme:light;supported-color-schemes:light;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<table class="outer-wrap" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f8fafc" style="background-color:#f8fafc;padding:24px 0;">
   <tr>
-    <td align="center">
-      <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#ffffff;">
+    <td align="center" bgcolor="#f8fafc" style="background-color:#f8fafc;">
+      <table class="inner-wrap" width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="max-width:600px;width:100%;background-color:#ffffff;">
 
         <!-- Header -->
         <tr>
-          <td style="background:#ffffff;padding:22px 32px;border-bottom:1px solid #e2e8f0;">
+          <td class="header-td" bgcolor="#ffffff" style="background-color:#ffffff;padding:22px 32px;border-bottom:1px solid #e2e8f0;">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr>
-                <td><span style="font-size:20px;font-weight:800;color:#4f46e5;letter-spacing:-0.02em;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Aikostnad</span></td>
-                <td align="right"><span style="font-size:13px;color:#94a3b8;">${dateStr}</span></td>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;"><span style="font-size:20px;font-weight:800;color:#4f46e5;letter-spacing:-0.02em;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Aikostnad</span></td>
+                <td align="right" bgcolor="#ffffff" style="background-color:#ffffff;"><span style="font-size:13px;color:#94a3b8;">${dateStr}</span></td>
               </tr>
             </table>
           </td>
@@ -320,38 +333,42 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 
         <!-- Body -->
         <tr>
-          <td class="email-body" style="padding:32px;background:#ffffff;">
+          <td class="content-td" bgcolor="#ffffff" style="padding:32px;background-color:#ffffff;">
             ${articleBody}
 
             <!-- Hashtags -->
-            <p style="margin:28px 0 16px;font-size:14px;color:#475569;line-height:1.6;">${hashtagsText}</p>
+            <p style="margin:28px 0 20px;font-size:14px;color:#475569;line-height:1.6;">${hashtagsText}</p>
 
             <!-- X/Twitter button -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px;">
               <tr>
-                <td bgcolor="#000000" style="border-radius:8px;">
-                  <a class="btn-twitter" href="https://twitter.com/intent/tweet?text=${xPostEncoded}" style="display:block;background:#000000;color:#ffffff;text-decoration:none;padding:15px 24px;border-radius:8px;font-weight:700;font-size:16px;text-align:center;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">X &nbsp;Dela på Twitter &rarr;</a>
+                <td class="btn-twitter-td" bgcolor="#000000" style="background-color:#000000;border-radius:8px;padding:0;">
+                  <a class="btn-twitter" href="https://twitter.com/intent/tweet?text=${xPostEncoded}" style="display:block;background-color:#000000;color:#ffffff;text-decoration:none;padding:16px 24px;border-radius:8px;font-weight:700;font-size:16px;text-align:center;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">𝕏&nbsp;&nbsp;Dela på Twitter →</a>
                 </td>
               </tr>
             </table>
 
             <!-- CTA -->
-            <div style="text-align:center;">
-              <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
-                <tr>
-                  <td bgcolor="#4f46e5" style="border-radius:8px;">
-                    <a class="btn-cta" href="https://aikostnad.se/kalkylator" style="display:inline-block;background:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Räkna ut din AI-kostnad &rarr;</a>
-                  </td>
-                </tr>
-              </table>
-            </div>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0;">
+              <tr>
+                <td align="center" bgcolor="#ffffff" style="background-color:#ffffff;">
+                  <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td class="btn-cta-td" bgcolor="#4f46e5" style="background-color:#4f46e5;border-radius:8px;">
+                        <a class="btn-cta" href="https://aikostnad.se/kalkylator" style="display:inline-block;background-color:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Räkna ut din AI-kostnad →</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
 
           </td>
         </tr>
 
         <!-- Footer -->
         <tr>
-          <td style="background:#f8fafc;padding:20px 32px;border-top:1px solid #e2e8f0;">
+          <td class="footer-td" bgcolor="#f8fafc" style="background-color:#f8fafc;padding:20px 32px;border-top:1px solid #e2e8f0;">
             <p style="margin:0;font-size:13px;color:#94a3b8;text-align:center;">
               <a href="https://aikostnad.se" style="color:#94a3b8;text-decoration:none;">aikostnad.se</a>
               &nbsp;&middot;&nbsp;Du får detta mail som prenumerant
