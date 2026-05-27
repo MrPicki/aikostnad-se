@@ -287,6 +287,10 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
     })
     .join("");
 
+  const xPostRaw = digest.xPost ?? "";
+  const xPostTruncated = xPostRaw.length > 280 ? xPostRaw.slice(0, 240) + "…" : xPostRaw;
+  const xPostEncoded = encodeURIComponent(xPostTruncated);
+
   return `<!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -317,6 +321,13 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 
             <!-- Hashtags -->
             <div style="margin:24px 0;">${hashtagsHtml}</div>
+
+            <!-- X / Twitter post -->
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin:24px 0;">
+              <p style="font-size:12px;text-transform:uppercase;letter-spacing:0.05em;color:#94a3b8;margin:0 0 8px;">Redo att posta?</p>
+              <p style="font-size:15px;color:#1e293b;line-height:1.6;margin:0 0 12px;white-space:pre-line;">${xPostTruncated}</p>
+              <a href="https://twitter.com/intent/tweet?text=${xPostEncoded}" style="display:inline-block;background:#000000;color:#ffffff;text-decoration:none;padding:10px 20px;border-radius:8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;">𝕏 Twittra detta &rarr;</a>
+            </div>
 
             <!-- CTA -->
             <div style="text-align:center;margin:32px 0;">
