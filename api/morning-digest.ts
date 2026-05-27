@@ -287,11 +287,19 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
 <title>${digest.subject}</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@media (prefers-color-scheme: dark) {
+  body, table, td, div, p, a { background-color: #ffffff !important; color: #1e293b !important; }
+  .email-body { background: #ffffff !important; }
+}
+</style>
 </head>
-<body style="margin:0;padding:0;background:#f8fafc;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8fafc;padding:24px 0;">
+<body style="margin:0;padding:0;background:#f8fafc;color-scheme:light;supported-color-schemes:light;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
+<table class="email-body" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f8fafc;padding:24px 0;">
   <tr>
     <td align="center">
       <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background:#ffffff;">
@@ -310,7 +318,7 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 
         <!-- Body -->
         <tr>
-          <td style="padding:32px;">
+          <td class="email-body" style="padding:32px;background:#ffffff;">
             ${articleBody}
 
             <!-- Hashtags -->
