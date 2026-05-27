@@ -158,6 +158,18 @@ export function Press() {
               </a>
               . Vi svarar inom 1–2 arbetsdagar.
             </p>
+            <p className="text-xs text-gray-500">
+              Följ oss på{" "}
+              <a
+                href="https://www.linkedin.com/company/aikostnad/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-600 hover:underline"
+              >
+                LinkedIn
+              </a>
+              {" "}för uppdateringar om nya modeller och prisändringar.
+            </p>
           </section>
         </article>
       </main>

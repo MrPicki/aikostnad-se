@@ -250,6 +250,15 @@ export function Om() {
                 Mer info på kontaktsidan
               </Link>{" "}
               ·{" "}
+              <a
+                href="https://www.linkedin.com/company/aikostnad/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-500 hover:underline"
+              >
+                LinkedIn
+              </a>{" "}
+              ·{" "}
               <Link to="/integritet" className="text-indigo-500 hover:underline">
                 Integritetspolicy
               </Link>
