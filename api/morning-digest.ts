@@ -293,8 +293,10 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 @media (prefers-color-scheme: dark) {
-  body, table, td, div, p, a { background-color: #ffffff !important; color: #1e293b !important; }
+  body, table, td, div, p, span { background-color: #ffffff !important; color: #1e293b !important; }
   .email-body { background: #ffffff !important; }
+  .btn-twitter { background-color: #000000 !important; color: #ffffff !important; }
+  .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
 }
 </style>
 </head>
@@ -325,11 +327,23 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
             <p style="margin:28px 0 16px;font-size:14px;color:#475569;line-height:1.6;">${hashtagsText}</p>
 
             <!-- X/Twitter button -->
-            <a href="https://twitter.com/intent/tweet?text=${xPostEncoded}" style="display:block;background:#000000;color:#ffffff;text-decoration:none;padding:15px 24px;border-radius:8px;font-weight:700;font-size:16px;text-align:center;margin:0 0 28px;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">&#x1D54F; Dela på Twitter &rarr;</a>
+            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 28px;">
+              <tr>
+                <td bgcolor="#000000" style="border-radius:8px;">
+                  <a class="btn-twitter" href="https://twitter.com/intent/tweet?text=${xPostEncoded}" style="display:block;background:#000000;color:#ffffff;text-decoration:none;padding:15px 24px;border-radius:8px;font-weight:700;font-size:16px;text-align:center;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">X &nbsp;Dela på Twitter &rarr;</a>
+                </td>
+              </tr>
+            </table>
 
             <!-- CTA -->
             <div style="text-align:center;">
-              <a href="https://aikostnad.se/kalkylator" style="display:inline-block;background:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Räkna ut din AI-kostnad &rarr;</a>
+              <table cellpadding="0" cellspacing="0" border="0" style="margin:0 auto;">
+                <tr>
+                  <td bgcolor="#4f46e5" style="border-radius:8px;">
+                    <a class="btn-cta" href="https://aikostnad.se/kalkylator" style="display:inline-block;background:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Räkna ut din AI-kostnad &rarr;</a>
+                  </td>
+                </tr>
+              </table>
             </div>
 
           </td>
