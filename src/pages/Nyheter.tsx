@@ -196,18 +196,37 @@ export function Nyheter() {
   function fetchDigest() {
     setError(false);
     setLoading(true);
-    fetch("/api/daily-digest")
-      .then((r) => {
-        if (!r.ok) throw new Error("fetch failed");
-        return r.json() as Promise<DigestResult>;
-      })
-      .then((data) => {
-        setDigest(data);
+
+    // Försök hämta dagens sparade artikel från Supabase (skriven av cronen kl 08:00)
+    const today = new Date().toISOString().slice(0, 10);
+    fetch(`/api/article?date=${today}`)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((saved: { date: string; title: string; ingress: string; content: string; x_post: string }) => {
+        setDigest({
+          title: saved.title,
+          ingress: saved.ingress ?? "",
+          article: saved.content,
+          xPost: saved.x_post ?? "",
+          generatedAt: saved.date,
+          rawArticles: [],
+        });
         setLoading(false);
       })
       .catch(() => {
-        setError(true);
-        setLoading(false);
+        // Ingen sparad artikel ännu (före 08:00 eller cron misslyckades) — generera live
+        fetch("/api/daily-digest")
+          .then((r) => {
+            if (!r.ok) throw new Error("fetch failed");
+            return r.json() as Promise<DigestResult>;
+          })
+          .then((data) => {
+            setDigest(data);
+            setLoading(false);
+          })
+          .catch(() => {
+            setError(true);
+            setLoading(false);
+          });
       });
   }
 
