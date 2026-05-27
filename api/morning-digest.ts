@@ -180,7 +180,7 @@ Inkludera dessa interna länkar naturligt i texten:
 - Gemini/Google-nyheter → https://aikostnad.se/gemini-pris
 - Prisändringar generellt → https://aikostnad.se/prisandringar
 - Jämförelser → https://aikostnad.se/jamfor-ai-modeller
-- Kalkylator → https://aikostnad.se/kalkylator
+- Kalkylator → https://aikostnad.se/token-kalkylator
 
 Dagens nyheter:
 ${newsSummary}
@@ -355,7 +355,7 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
                   <table cellpadding="0" cellspacing="0" border="0">
                     <tr>
                       <td class="btn-cta-td" bgcolor="#4f46e5" style="background-color:#4f46e5;border-radius:8px;">
-                        <a class="btn-cta" href="https://aikostnad.se/kalkylator" style="display:inline-block;background-color:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Räkna ut din AI-kostnad →</a>
+                        <a class="btn-cta" href="https://aikostnad.se/token-kalkylator" style="display:inline-block;background-color:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Räkna ut din AI-kostnad →</a>
                       </td>
                     </tr>
                   </table>
