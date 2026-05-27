@@ -105,7 +105,7 @@ function AccordionItem({ item, isOpen, onToggle, index }: AccordionItemProps) {
   return (
     <div className="border-b border-gray-200 last:border-0">
       <button
-        className="w-full text-left py-5 flex items-center justify-between gap-4 hover:text-indigo-600 transition-colors"
+        className="w-full text-left py-5 flex items-center justify-between gap-4 hover:text-indigo-700 transition-colors"
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${index}`}

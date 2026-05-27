@@ -55,7 +55,7 @@ export function AiForAdvokatbyra() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -259,7 +259,7 @@ export function AiForAdvokatbyra() {
             <p className="text-gray-700 leading-relaxed">
               Vill du se exakt vad kontraktsanalys eller juridisk research kostar med
               din volym och din valda modell?{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i antal förfrågningar, genomsnittlig dokumentlängd och jämföra
@@ -267,17 +267,17 @@ export function AiForAdvokatbyra() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/jamfor-ai-modeller" className="text-indigo-600 hover:underline">
+                <Link to="/jamfor-ai-modeller" className="text-indigo-700 hover:underline">
                   Jämför alla AI-modeller — GDPR och precision
                 </Link>
               </li>
               <li>
-                <Link to="/claude-pris" className="text-indigo-600 hover:underline">
+                <Link to="/claude-pris" className="text-indigo-700 hover:underline">
                   Claude Sonnet — alla priser i SEK
                 </Link>
               </li>
               <li>
-                <Link to="/ai-for-foretag" className="text-indigo-600 hover:underline">
+                <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">
                   AI för företag — enterprise-avtal och DPA
                 </Link>
               </li>

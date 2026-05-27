@@ -243,7 +243,7 @@ export function Home() {
         </section>
 
         {/* 4. Fasta abonnemang — i grå yta för visuell rytm */}
-        <div className="bg-gray-50 rounded-3xl px-6 py-10 mb-24">
+        <div className="bg-gray-50 rounded-xl px-6 py-10 mb-24">
           <section id="abonnemang">
             <SubscriptionTable />
           </section>
@@ -258,12 +258,12 @@ export function Home() {
         <section className="mb-24">
           <Link
             to="/token-kalkylator"
-            className="block rounded-3xl border border-indigo-100 bg-indigo-50/50 hover:bg-indigo-50 transition-all p-6 sm:p-8 group"
+            className="block rounded-xl border border-indigo-100 bg-indigo-50/50 hover:bg-indigo-50 transition-all p-6 sm:p-8 group"
           >
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
               <div className="text-3xl">📝</div>
               <div className="flex-1">
-                <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-1">
+                <p className="text-xs font-semibold text-indigo-700 uppercase tracking-wide mb-1">
                   Bonus-verktyg
                 </p>
                 <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 group-hover:text-indigo-700 transition-colors">
@@ -275,7 +275,7 @@ export function Home() {
                   du anropar API:t.
                 </p>
               </div>
-              <div className="text-indigo-600 group-hover:translate-x-1 transition-transform shrink-0 hidden sm:block">
+              <div className="text-indigo-700 group-hover:translate-x-1 transition-transform shrink-0 hidden sm:block">
                 →
               </div>
             </div>
@@ -289,7 +289,7 @@ export function Home() {
             {userPath && (
               <p className="text-xs text-gray-400">
                 Sorterade efter dig som vill{" "}
-                <span className="font-semibold text-indigo-600">
+                <span className="font-semibold text-indigo-700">
                   {userPath === "use" ? "använda AI" : "bygga med AI"}
                 </span>
               </p>
@@ -431,7 +431,7 @@ export function Home() {
             50–100 kr per anställd. Nyckeln är att välja rätt modell för rätt uppgift:
             mini-modeller för klassificering och FAQ, flaggskeppsmodeller för komplex
             analys och kod. Se vår guide om{" "}
-            <Link to="/ai-for-foretag" className="text-indigo-600 hover:underline">AI för företag</Link>{" "}
+            <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">AI för företag</Link>{" "}
             för konkreta räkneexempel per bransch.
           </p>
 
@@ -441,7 +441,7 @@ export function Home() {
             Claude.ai och Gemini har alla gratis versioner med begränsad åtkomst till
             toppmodellerna. För sporadisk användning räcker gratisversionen långt.
             Vill du testa fler alternativ utan kostnad — se vår sammanställning av{" "}
-            <Link to="/gratis-ai" className="text-indigo-600 hover:underline">gratis AI-verktyg</Link>.
+            <Link to="/gratis-ai" className="text-indigo-700 hover:underline">gratis AI-verktyg</Link>.
           </p>
 
           <h3 className="text-xl font-bold text-gray-900 mt-8">Tre tips för att hålla AI-kostnaden nere</h3>
@@ -450,7 +450,7 @@ export function Home() {
               <strong>Använd rätt modell för uppgiften.</strong> GPT-4o mini och Claude Haiku
               är 10–20× billigare än flaggskeppsmodellerna och räcker för 80 % av uppgifterna.
               Se{" "}
-              <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">billigaste AI-modellerna 2026</Link>.
+              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">billigaste AI-modellerna 2026</Link>.
             </li>
             <li>
               <strong>Begränsa output-längden.</strong> AI-modeller tar betalt 4× mer för output
@@ -460,7 +460,7 @@ export function Home() {
             <li>
               <strong>Aktivera prompt caching.</strong> Om din applikation skickar samma
               systemprompt vid varje anrop ger Anthropic 90 % rabatt på den delen via{" "}
-              <Link to="/prompt-caching" className="text-indigo-600 hover:underline">prompt caching</Link>.
+              <Link to="/prompt-caching" className="text-indigo-700 hover:underline">prompt caching</Link>.
               OpenAI erbjuder automatisk caching för prefix över 1 024 tokens.
             </li>
           </ol>

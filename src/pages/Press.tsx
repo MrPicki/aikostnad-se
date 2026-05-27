@@ -44,7 +44,7 @@ export function Press() {
         <div className="mb-8">
           <Link
             to="/"
-            className="text-sm text-indigo-600 hover:underline flex items-center gap-1"
+            className="text-sm text-indigo-700 hover:underline flex items-center gap-1"
           >
             ← Tillbaka till startsidan
           </Link>
@@ -76,7 +76,7 @@ export function Press() {
               <li className="flex items-start gap-2">
                 <span className="text-indigo-400 mt-0.5">→</span>
                 <span><strong>Av vem:</strong> {author.name} ({author.role}) på{" "}
-                  <a href={parentOrganization.url} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+                  <a href={parentOrganization.url} target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
                     {parentOrganization.name}
                   </a>.
                 </span>
@@ -141,7 +141,7 @@ export function Press() {
               hänvisning till källan så läsarna kan kolla siffrorna.
             </p>
             <p className="text-sm text-gray-700 bg-gray-50 rounded-lg px-4 py-3 font-mono leading-relaxed">
-              Källa: <a href="https://aikostnad.se" className="text-indigo-600 hover:underline">Aikostnad.se</a>
+              Källa: <a href="https://aikostnad.se" className="text-indigo-700 hover:underline">Aikostnad.se</a>
             </p>
           </section>
 
@@ -152,7 +152,7 @@ export function Press() {
               För intervjuer, citat, eller anpassade embeds:{" "}
               <a
                 href={`mailto:${author.email}`}
-                className="text-indigo-600 hover:underline font-medium"
+                className="text-indigo-700 hover:underline font-medium"
               >
                 {author.email}
               </a>
@@ -164,7 +164,7 @@ export function Press() {
                 href="https://www.linkedin.com/company/aikostnad/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-600 hover:underline"
+                className="text-indigo-700 hover:underline"
               >
                 LinkedIn
               </a>

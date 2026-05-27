@@ -59,7 +59,7 @@ export function O3Pris() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -159,7 +159,7 @@ export function O3Pris() {
             </div>
             <p className="text-xs text-gray-500">
               Priser verifierade maj 2026. Källa:{" "}
-              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
                 openai.com/api/pricing
               </a>. Växelkurs 10,50 SEK/USD.
             </p>
@@ -295,26 +295,26 @@ export function O3Pris() {
             <p className="text-gray-700 leading-relaxed">
               Tabellerna ovan visar generella scenarion. Dina faktiska kostnader beror
               på din token-volym och om du blandar modeller. Använd{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 kalkylatorn på startsidan
               </Link>{" "}
               för att fylla i dina egna siffror och jämföra o3-modellerna mot GPT och Claude.
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/openai-api-pris" className="text-indigo-600 hover:underline">
+                <Link to="/openai-api-pris" className="text-indigo-700 hover:underline">
                   Komplett pristabell för alla OpenAI-modeller
                 </Link>{" "}
                 — GPT-5, GPT-4.1, o3, embeddings i SEK
               </li>
               <li>
-                <Link to="/gpt-5-pris" className="text-indigo-600 hover:underline">
+                <Link to="/gpt-5-pris" className="text-indigo-700 hover:underline">
                   GPT-5 pris
                 </Link>{" "}
                 — när ska du betala det extra priset?
               </li>
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">
+                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
                   Billigaste AI 2026
                 </Link>{" "}
                 — jämförelse av alla budget-modeller
@@ -340,7 +340,7 @@ export function O3Pris() {
             <p className="text-xs text-gray-500 mt-4 bg-gray-50 rounded-lg px-3 py-2">
               Priser verifierade maj 2026. OpenAI uppdaterar priser löpande — kontrollera
               alltid mot{" "}
-              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
                 openai.com/api/pricing
               </a>{" "}
               inför budgetbeslut.

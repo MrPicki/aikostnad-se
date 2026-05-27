@@ -58,7 +58,7 @@ export function VadKostarAi() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -103,7 +103,7 @@ export function VadKostarAi() {
             <p>
               Nedan ser du de populäraste fasta abonnemangen. Vill du räkna på API-kostnader
               för en specifik modell hittar du en detaljkalkylator på{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 startsidan
               </Link>
               .
@@ -174,7 +174,7 @@ export function VadKostarAi() {
             Här lönar abonnemang sig fortfarande för individuell användning. Lägg till
             en intern AI-assistent via API (chatbot, dokumentassistent) och den totala
             AI-budgeten landar i spannet 1 000–2 000 kr/mån. Se vår{" "}
-            <Link to="/ai-chatbot-kostnad" className="text-indigo-600 hover:underline">chatbot-kostnadsguide</Link>{" "}
+            <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">chatbot-kostnadsguide</Link>{" "}
             för konkreta API-exempel.
           </p>
 
@@ -209,7 +209,7 @@ export function VadKostarAi() {
             <li>
               <strong>Fel modell för uppgiften.</strong> Att använda Claude Opus eller
               GPT-4.1 för att klassificera supportärenden är som att hyra Formula 1-bil
-              för pendling. Använd <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">mini-modeller</Link>{" "}
+              för pendling. Använd <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">mini-modeller</Link>{" "}
               där de räcker.
             </li>
           </ol>

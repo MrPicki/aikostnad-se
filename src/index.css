@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
 @layer base {
   html {
     -webkit-font-smoothing: antialiased;
@@ -16,9 +21,12 @@
     max-width: 100vw;
   }
 
-  /* iOS Safari auto-zooms on focus when input font-size < 16px.
-     Force 16px on all form controls below the sm breakpoint to
-     prevent the layout from jumping when the user taps a field. */
+  /* Cap body text line length for readability */
+  p, li {
+    max-width: 68ch;
+  }
+
+  /* iOS Safari auto-zooms on focus when input font-size < 16px */
   @media (max-width: 639px) {
     input,
     textarea,
@@ -28,65 +36,101 @@
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+/* All animations respect reduced-motion preference */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  to {
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes bounceDot {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+  }
+
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  /* Fixed: scale DOWN (0.97) not up — nothing swells when pressed */
+  @keyframes value-pop {
+    0% { transform: scale(1); }
+    40% { transform: scale(0.97); }
+    100% { transform: scale(1); }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.35s var(--ease-out) both;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.2s var(--ease-out) both;
+  }
+
+  .bounce-dot {
+    display: inline-block;
+    animation: bounceDot 1.2s ease-in-out infinite;
+  }
+
+  .live-dot { animation: live-pulse 2s ease-in-out infinite; }
+  .value-pop { animation: value-pop 0.3s var(--ease-out); }
+
+  /* Stagger entry delays for card grids */
+  .stagger-1 { animation-delay: 0ms; }
+  .stagger-2 { animation-delay: 60ms; }
+  .stagger-3 { animation-delay: 120ms; }
+  .stagger-4 { animation-delay: 180ms; }
+}
+
+/* Fallback for reduced-motion — static classes still exist */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in {
+    animation: none;
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+  }
+  .bounce-dot, .live-dot, .value-pop {
+    animation: none;
   }
 }
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.4s ease-out both;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.2s ease-out both;
-}
-
-@keyframes bounceDot {
-  0%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-8px); }
-}
-
-.bounce-dot {
-  display: inline-block;
-  animation: bounceDot 1.2s ease-in-out infinite;
-}
-
-@keyframes live-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-.live-dot { animation: live-pulse 2s ease-in-out infinite; }
-
-@keyframes value-pop {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.03); }
-  100% { transform: scale(1); }
-}
-.value-pop { animation: value-pop 0.3s ease-out; }
 
 @layer components {
   .card {
-    @apply bg-white rounded-3xl border border-gray-200 p-6;
-    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    @apply bg-white rounded-xl border border-gray-200 p-6;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   }
 
   .btn-primary {
-    @apply bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-lg transition-colors duration-150;
+    @apply bg-indigo-700 text-white font-semibold px-5 py-2.5 rounded-lg;
+    transition: transform 160ms var(--ease-out), background-color 150ms ease, opacity 150ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      @apply bg-indigo-800;
+    }
+  }
+
+  .btn-primary:active {
+    transform: scale(0.97);
   }
 
   .input-field {
-    @apply w-full border border-gray-300 rounded-lg px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white;
+    @apply w-full border border-gray-300 rounded-lg px-4 py-2.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent bg-white;
+    transition: border-color 150ms var(--ease-out), box-shadow 150ms var(--ease-out);
   }
 
   .label {

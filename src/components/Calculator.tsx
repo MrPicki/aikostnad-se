@@ -124,7 +124,7 @@ function ChipField({
               onClick={() => onChange(p)}
               className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
                 active
-                  ? "bg-indigo-600 text-white"
+                  ? "bg-indigo-700 text-white"
                   : "bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-700 border border-gray-200"
               }`}
               aria-pressed={active}
@@ -202,7 +202,7 @@ function SliderField({
                 className={`text-[10px] px-2 py-0.5 rounded-md transition-colors ${
                   active
                     ? "bg-indigo-100 text-indigo-700 font-semibold"
-                    : "text-gray-400 hover:text-indigo-600"
+                    : "text-gray-400 hover:text-indigo-700"
                 }`}
               >
                 {m.label}
@@ -404,7 +404,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                     onClick={() => setModelId(tier.modelId)}
                     className={`rounded-lg border px-2 py-2.5 text-center transition-all ${
                       active
-                        ? "border-indigo-600 bg-indigo-50 ring-1 ring-indigo-200"
+                        ? "border-indigo-700 bg-indigo-50 ring-1 ring-indigo-200"
                         : "border-gray-200 bg-white hover:border-indigo-300"
                     }`}
                     aria-pressed={active}
@@ -520,7 +520,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             tooltip="Aktiva dagar — 22 är typiskt arbetsmånad, 30 om verktyget används dagligen även helger."
           />
 
-          <div className="text-xs text-indigo-600 bg-indigo-50 rounded-lg px-3 py-2">
+          <div className="text-xs text-indigo-700 bg-indigo-50 rounded-lg px-3 py-2">
             Tokenuppskattning: {siteConfig.languageFactor} tokens/ord för svenska
             texter (engelska: 0.75)
           </div>
@@ -569,7 +569,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
 
               {/* 5a Modell-specifik micro-copy */}
               {(modelId.includes("claude") || modelId.includes("gpt-4o-mini") || modelId.includes("haiku") || modelId.includes("gemini-flash")) && (
-                <p className="text-xs text-indigo-600">
+                <p className="text-xs text-indigo-700">
                   {modelId.includes("claude")
                     ? "Inkl. GDPR-kompatibel API för Sverige"
                     : modelId.includes("gpt-4o-mini") || modelId.includes("haiku")
@@ -600,12 +600,12 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                         value={calcEmail}
                         onChange={(e) => setCalcEmail(e.target.value)}
                         placeholder="din@email.se"
-                        className="flex-1 min-w-0 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="flex-1 min-w-0 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-700"
                       />
                       <button
                         type="submit"
                         disabled={calcEmailStatus === "loading"}
-                        className="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                        className="shrink-0 bg-indigo-700 hover:bg-indigo-800 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
                       >
                         {calcEmailStatus === "loading" ? "…" : "Spara"}
                       </button>
@@ -668,7 +668,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 <div className="flex flex-col gap-1">
                   <button
                     onClick={copyShareLink}
-                    className="text-xs text-indigo-600 hover:text-indigo-700 inline-flex items-center gap-1.5 focus:outline-none focus:underline"
+                    className="text-xs text-indigo-700 hover:text-indigo-700 inline-flex items-center gap-1.5 focus:outline-none focus:underline"
                     aria-label="Kopiera länk till denna kalkyl"
                   >
                     {copied ? (
@@ -721,7 +721,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
               {/* 5b Jämför med annat scenario */}
               <button
                 onClick={() => window.open(window.location.href, '_blank')}
-                className="text-sm text-indigo-600 hover:text-indigo-700 underline mt-2"
+                className="text-sm text-indigo-700 hover:text-indigo-700 underline mt-2"
               >
                 Jämför med ett annat scenario →
               </button>
@@ -746,7 +746,7 @@ interface ResultCardProps {
 function ResultCard({ label, sek, highlight }: ResultCardProps) {
   return (
     <div
-      className={`rounded-xl p-3 sm:p-4 min-w-0 value-pop ${highlight ? "bg-indigo-600 text-white" : "bg-gray-50"}`}
+      className={`rounded-xl p-3 sm:p-4 min-w-0 value-pop ${highlight ? "bg-indigo-700 text-white" : "bg-gray-50"}`}
     >
       <p
         className={`text-xs font-medium mb-1 truncate ${highlight ? "text-indigo-200" : "text-gray-500"}`}

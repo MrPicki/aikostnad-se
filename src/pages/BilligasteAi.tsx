@@ -60,7 +60,7 @@ export function BilligasteAi() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -103,7 +103,7 @@ export function BilligasteAi() {
               <li>
                 <strong>GPT-4o mini</strong> — $0,15 input / $0,60 output per miljon tokens.
                 OpenAI:s lilla modell är exceptionellt billig och snabb.{" "}
-                <Link to="/vad-kostar-chatgpt" className="text-indigo-600 hover:underline">Detaljerad ChatGPT-prisguide</Link>.
+                <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">Detaljerad ChatGPT-prisguide</Link>.
               </li>
               <li>
                 <strong>Gemini 2.5 Flash</strong> — $0,30 input / $2,50 output per miljon tokens.
@@ -112,7 +112,7 @@ export function BilligasteAi() {
               <li>
                 <strong>Claude Haiku 4.5</strong> — $1,00 input / $5,00 output per miljon tokens.
                 Anthropics lilla modell är dyrare per token men ger ofta bättre svenska svar.{" "}
-                <Link to="/claude-pris" className="text-indigo-600 hover:underline">Räkna på Claude i detalj</Link>.
+                <Link to="/claude-pris" className="text-indigo-700 hover:underline">Räkna på Claude i detalj</Link>.
               </li>
             </ul>
             <p>
@@ -205,12 +205,12 @@ export function BilligasteAi() {
             <li>
               <strong>Bästa kvalitet per krona:</strong> GPT-4o mini. 8× billigare än Haiku
               med jämförbar kvalitet i de flesta uppgifter. Default-val för pris-medvetna
-              byggare — se vår <Link to="/vad-kostar-chatgpt" className="text-indigo-600 hover:underline">ChatGPT-prisguide</Link>.
+              byggare — se vår <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">ChatGPT-prisguide</Link>.
             </li>
             <li>
               <strong>Bästa svenska:</strong> Claude Haiku — dyrare men ger märkbart bättre
               svenska svar, särskilt i längre kontexter. Detaljerad analys i vår{" "}
-              <Link to="/claude-pris" className="text-indigo-600 hover:underline">Claude-prisguide</Link>.
+              <Link to="/claude-pris" className="text-indigo-700 hover:underline">Claude-prisguide</Link>.
             </li>
             <li>
               <strong>Bästa open source:</strong> DeepSeek V3.2. Konkurrenskraftig kvalitet,
@@ -249,7 +249,7 @@ export function BilligasteAi() {
             <strong>Tumregeln:</strong> börja med mini, eskalera till flaggskepp endast
             där du ser kvalitetsproblem. Det är nästan alltid billigare än att börja med
             flaggskepp och försöka spara senare. Se{" "}
-            <Link to="/chatgpt-vs-claude" className="text-indigo-600 hover:underline">vår jämförelse av ChatGPT vs Claude</Link>{" "}
+            <Link to="/chatgpt-vs-claude" className="text-indigo-700 hover:underline">vår jämförelse av ChatGPT vs Claude</Link>{" "}
             för detaljerad analys av flaggskeppen.
           </p>
         </section>

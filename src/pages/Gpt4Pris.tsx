@@ -74,7 +74,7 @@ export function Gpt4Pris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -124,7 +124,7 @@ export function Gpt4Pris() {
               och <strong>GPT-4.1 nano</strong> (extremt låg latens och kostnad för enkla
               uppgifter). Kalkylatorn nedan låter dig byta mellan dem och se hur kostnaden
               förändras. För höga volymer där priset är primärt jämför vi alla{" "}
-              <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">billigaste mini-modellerna</Link>{" "}
+              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">billigaste mini-modellerna</Link>{" "}
               sida vid sida.
             </p>
             <p>
@@ -200,7 +200,7 @@ export function Gpt4Pris() {
           <p>
             För 80 % av andra användningsfall är GPT-4o eller mini bättre val. Vill du
             jämföra GPT-4.1 mot Claude Opus 4.7 (motsvarande flaggskepp hos Anthropic)?
-            Se vår <Link to="/chatgpt-vs-claude" className="text-indigo-600 hover:underline">jämförelse mellan ChatGPT och Claude</Link>.
+            Se vår <Link to="/chatgpt-vs-claude" className="text-indigo-700 hover:underline">jämförelse mellan ChatGPT och Claude</Link>.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10">Hybrid-routing — sänk kostnaden 70 %</h2>

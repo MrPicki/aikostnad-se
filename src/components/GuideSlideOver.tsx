@@ -42,7 +42,7 @@ export function GuideSlideOver({ guide, open, onClose, modelName, source }: Prop
         className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden animate-fade-in-up"
       >
         {/* Header */}
-        <div className="bg-indigo-600 px-6 py-5">
+        <div className="bg-indigo-700 px-6 py-5">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wide mb-1">

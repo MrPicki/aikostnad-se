@@ -5,7 +5,7 @@ export function HeroSection() {
       style={{ background: 'radial-gradient(ellipse at top, rgba(99,102,241,0.06) 0%, transparent 60%)' }}
     >
       <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 tracking-[-0.03em] leading-[1.1] mb-3">
-        Räkna ut exakt vad din AI-idé kostar — <span className="text-indigo-600">i kronor</span>
+        Räkna ut exakt vad din AI-idé kostar — <span className="text-indigo-700">i kronor</span>
       </h1>
       <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
         Jämför månadsabonnemang som ChatGPT&nbsp;Plus eller räkna ut API-kostnader för

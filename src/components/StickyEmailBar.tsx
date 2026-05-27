@@ -77,12 +77,12 @@ export function StickyEmailBar() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="din@email.se"
-              className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-52"
+              className="rounded-lg border border-gray-200 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-700 w-52"
             />
             <button
               type="submit"
               disabled={status === "loading"}
-              className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-4 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+              className="bg-indigo-700 hover:bg-indigo-800 text-white text-sm font-semibold px-4 py-1.5 rounded-lg transition-colors disabled:opacity-50"
             >
               {status === "loading" ? "…" : "Bevaka"}
             </button>

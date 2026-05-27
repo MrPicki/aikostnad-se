@@ -100,7 +100,7 @@ function PathCard({
       }`}
     >
       {isLastChoice && (
-        <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-600 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide shadow-sm">
+        <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-700 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide shadow-sm">
           <span className="w-1.5 h-1.5 bg-white rounded-full" aria-hidden="true" />
           Senast vald
         </span>
@@ -108,7 +108,7 @@ function PathCard({
       <div className="flex items-start gap-3 mb-2">
         <span className="text-2xl" aria-hidden="true">{emoji}</span>
         <div className="flex-1">
-          <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-0.5">
+          <p className="text-xs font-semibold text-indigo-700 uppercase tracking-wide mb-0.5">
             {kicker}
           </p>
           <h3 className="text-base font-bold text-gray-900 group-hover:text-indigo-700 transition-colors">
@@ -117,7 +117,7 @@ function PathCard({
         </div>
       </div>
       <p className="text-sm text-gray-600 leading-relaxed pl-9">{body}</p>
-      <p className="text-xs font-semibold text-indigo-600 mt-3 pl-9 group-hover:underline">
+      <p className="text-xs font-semibold text-indigo-700 mt-3 pl-9 group-hover:underline">
         {cta}
       </p>
     </button>

@@ -61,7 +61,7 @@ export function Gpt5Pris() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -160,7 +160,7 @@ export function Gpt5Pris() {
             </div>
             <p className="text-xs text-gray-500">
               Priser verifierade maj 2026. Källa:{" "}
-              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
                 openai.com/api/pricing
               </a>. Växelkurs 10,50 SEK/USD.
             </p>
@@ -299,7 +299,7 @@ export function Gpt5Pris() {
             <p className="text-gray-700 leading-relaxed">
               GPT-5 är tillgängligt via OpenAI API för alla betalande API-kunder.
               Du behöver ett konto på{" "}
-              <a href="https://platform.openai.com" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+              <a href="https://platform.openai.com" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
                 platform.openai.com
               </a>
               , lägga in ett betalkort och sedan använda modell-ID:t{" "}
@@ -326,7 +326,7 @@ export function Gpt5Pris() {
               Tabellerna ovan visar generella scenarion. Dina faktiska kostnader beror
               på din exakta token-volym, längden på system-prompten och om du kan
               utnyttja prompt caching.{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i dina egna siffror och se månadskostnaden i SEK för
@@ -334,19 +334,19 @@ export function Gpt5Pris() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/openai-api-pris" className="text-indigo-600 hover:underline">
+                <Link to="/openai-api-pris" className="text-indigo-700 hover:underline">
                   Komplett pristabell för alla OpenAI-modeller
                 </Link>{" "}
                 — GPT-5, GPT-4.1, o3, embeddings i SEK
               </li>
               <li>
-                <Link to="/vad-kostar-chatgpt" className="text-indigo-600 hover:underline">
+                <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
                   Vad kostar ChatGPT API?
                 </Link>{" "}
                 — GPT-4o och GPT-4o mini med kalkylatorn
               </li>
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">
+                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
                   Billigaste AI 2026
                 </Link>{" "}
                 — jämförelse av alla budget-modeller

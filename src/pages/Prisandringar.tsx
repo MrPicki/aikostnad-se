@@ -117,7 +117,7 @@ export function Prisandringar() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -267,7 +267,7 @@ export function Prisandringar() {
             </ol>
             <p className="text-gray-700 leading-relaxed">
               Använd{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 kalkylatorn på startsidan
               </Link>{" "}
               för att räkna ut vad du faktiskt betalar med nuvarande priser och

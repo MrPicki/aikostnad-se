@@ -77,7 +77,7 @@ export function MicrosoftCopilotPris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -123,14 +123,14 @@ export function MicrosoftCopilotPris() {
               <strong>Utvecklare?</strong> GitHub Copilot (105 kr/mån) är en självklarhet.{" "}
               <strong>Företag på Microsoft 365?</strong> M365 Copilot (330 kr/användare/mån) ger
               integration mot er egen data — det är där Copilot på riktigt sticker ut mot{" "}
-              <Link to="/vad-kostar-chatgpt" className="text-indigo-600 hover:underline">ChatGPT</Link>{" "}
-              och <Link to="/claude-pris" className="text-indigo-600 hover:underline">Claude</Link>.
+              <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">ChatGPT</Link>{" "}
+              och <Link to="/claude-pris" className="text-indigo-700 hover:underline">Claude</Link>.
             </p>
             <p>
               För ett bolag med 50 anställda kostar M365 Copilot cirka <strong>198 000 kr/år</strong> —
               en betydande summa, men för organisationer som redan är djupt inne i Microsoft-ekosystemet
               är det ofta mer värt än att bygga motsvarande lösning från grunden. Se vår guide om{" "}
-              <Link to="/ai-for-foretag" className="text-indigo-600 hover:underline">AI för företag</Link>{" "}
+              <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">AI för företag</Link>{" "}
               för en bredare jämförelse av enterprise-AI.
             </p>
           </div>

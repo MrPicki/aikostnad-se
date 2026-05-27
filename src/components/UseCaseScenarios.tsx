@@ -103,7 +103,7 @@ export function UseCaseScenarios({ onSelect }: Props) {
               </div>
             </div>
             <p className="text-xs text-gray-500 leading-relaxed mb-2">{s.description}</p>
-            <p className="text-xs text-indigo-600 font-medium">{s.model}</p>
+            <p className="text-xs text-indigo-700 font-medium">{s.model}</p>
           </button>
         ))}
       </div>

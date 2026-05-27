@@ -68,7 +68,7 @@ function SourceCard({ article }: { article: RawArticle }) {
   return (
     <article className="bg-white border border-gray-200 rounded-lg p-4 hover:border-indigo-200 transition-colors">
       <div className="flex items-center gap-2 text-xs text-gray-500 mb-1.5">
-        <span className="font-medium text-indigo-600">{article.source}</span>
+        <span className="font-medium text-indigo-700">{article.source}</span>
         <span>·</span>
         <span>{relativeTime(article.pubDate)}</span>
       </div>
@@ -77,7 +77,7 @@ function SourceCard({ article }: { article: RawArticle }) {
           href={article.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-indigo-600 transition-colors"
+          className="hover:text-indigo-700 transition-colors"
         >
           {article.title}
         </a>
@@ -89,7 +89,7 @@ function SourceCard({ article }: { article: RawArticle }) {
       )}
       <Link
         to={path}
-        className="text-xs font-medium text-indigo-600 hover:text-indigo-800 transition-colors"
+        className="text-xs font-medium text-indigo-700 hover:text-indigo-800 transition-colors"
       >
         Se aktuella priser →
       </Link>
@@ -252,7 +252,7 @@ export function Nyheter() {
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {loading && (
           <div className="flex flex-col items-center py-24 gap-4">
-            <div className="w-8 h-8 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-2 border-indigo-700 border-t-transparent rounded-full animate-spin" />
             <p className="text-sm text-gray-500">
               Sammanställer dagens AI-rapport…
             </p>
@@ -266,7 +266,7 @@ export function Nyheter() {
             </p>
             <button
               onClick={fetchDigest}
-              className="text-sm text-indigo-600 hover:text-indigo-800 underline"
+              className="text-sm text-indigo-700 hover:text-indigo-800 underline"
             >
               Försök igen
             </button>

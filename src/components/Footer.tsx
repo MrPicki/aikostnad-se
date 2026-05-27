@@ -9,7 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
           <div className="col-span-2 md:col-span-1">
             <span className="font-bold text-gray-900 text-sm tracking-tight">
-              Aikostnad<span className="text-indigo-600">.se</span>
+              Aikostnad<span className="text-indigo-700">.se</span>
             </span>
             <p className="text-xs text-gray-500 leading-relaxed mt-2">
               Gratis kalkylator för AI-kostnader. Jämför ChatGPT, Claude,
@@ -18,32 +18,32 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">
               Priser
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/vad-kostar-chatgpt" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/vad-kostar-chatgpt" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   ChatGPT API-pris
                 </Link>
               </li>
               <li>
-                <Link to="/claude-pris" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/claude-pris" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   Claude API-pris
                 </Link>
               </li>
               <li>
-                <Link to="/gemini-pris" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/gemini-pris" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   Gemini API-pris
                 </Link>
               </li>
               <li>
-                <Link to="/openai-api-kostnad" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/openai-api-kostnad" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   OpenAI API-kostnad
                 </Link>
               </li>
               <li>
-                <Link to="/gpt-4-pris" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/gpt-4-pris" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   GPT-4.1 API-pris
                 </Link>
               </li>
@@ -51,27 +51,27 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">
               Jämförelser
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/chatgpt-vs-claude" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/chatgpt-vs-claude" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   ChatGPT vs Claude
                 </Link>
               </li>
               <li>
-                <Link to="/billigaste-ai" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/billigaste-ai" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   Billigaste AI-modellen
                 </Link>
               </li>
               <li>
-                <Link to="/chatgpt-pro-vs-plus" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/chatgpt-pro-vs-plus" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   ChatGPT Pro vs Plus
                 </Link>
               </li>
               <li>
-                <Link to="/vad-kostar-ai" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/vad-kostar-ai" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   AI-prisguide 2026
                 </Link>
               </li>
@@ -79,27 +79,27 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">
               Guider
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/ai-for-foretag" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/ai-for-foretag" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   AI för företag
                 </Link>
               </li>
               <li>
-                <Link to="/gratis-ai" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/gratis-ai" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   Gratis AI-verktyg
                 </Link>
               </li>
               <li>
-                <Link to="/prompt-caching" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/prompt-caching" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   Prompt caching-guide
                 </Link>
               </li>
               <li>
-                <Link to="/ai-chatbot-kostnad" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/ai-chatbot-kostnad" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   AI-chatbot kostnad
                 </Link>
               </li>
@@ -107,37 +107,37 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide mb-3">
+            <h3 className="text-sm font-semibold text-gray-900 mb-3">
               Verktyg
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/#kalkylator" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/#kalkylator" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   AI-kostnadskalkylator
                 </Link>
               </li>
               <li>
-                <Link to="/token-kalkylator" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/token-kalkylator" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   Tokenräknare
                 </Link>
               </li>
               <li>
-                <Link to="/ai-ordlista" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/ai-ordlista" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   AI-ordlista
                 </Link>
               </li>
               <li>
-                <Link to="/nyheter" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/nyheter" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   AI-nyheter
                 </Link>
               </li>
               <li>
-                <Link to="/om" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/om" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   Om Aikostnad.se
                 </Link>
               </li>
               <li>
-                <Link to="/kontakt" className="text-xs text-gray-500 hover:text-indigo-600">
+                <Link to="/kontakt" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   Kontakt
                 </Link>
               </li>

@@ -75,7 +75,7 @@ export function VadKostarChatGPT() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -135,7 +135,7 @@ export function VadKostarChatGPT() {
               <li>
                 <strong>Output-längd</strong> — GPT-4o:s output kostar 4× mer per token
                 än input. Kortare svar sparar direkt pengar. Behöver du ännu lägre kostnad?
-                Jämför med <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">de billigaste AI-modellerna</Link>{" "}
+                Jämför med <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">de billigaste AI-modellerna</Link>{" "}
                 som GPT-4o mini och Claude Haiku.
               </li>
             </ul>
@@ -188,7 +188,7 @@ export function VadKostarChatGPT() {
               </ul>
               <p className="text-xs text-gray-600 mt-2">
                 På den här volymen är hybrid-routing nästan alltid lönsamt — se{" "}
-                <Link to="/ai-chatbot-kostnad" className="text-indigo-600 hover:underline">vår chatbot-kostnadsguide</Link>{" "}
+                <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">vår chatbot-kostnadsguide</Link>{" "}
                 för implementationsdetaljer.
               </p>
             </div>
@@ -215,7 +215,7 @@ export function VadKostarChatGPT() {
               <strong>Aktivera automatisk caching.</strong> OpenAI cachar prefix på minst
               1 024 tokens automatiskt. Strukturera prompten med statisk del först
               (system-prompt, dokument, exempel) för att maximera cache hit rate. Läs mer
-              i vår <Link to="/prompt-caching" className="text-indigo-600 hover:underline">guide om prompt caching</Link>.
+              i vår <Link to="/prompt-caching" className="text-indigo-700 hover:underline">guide om prompt caching</Link>.
             </li>
             <li>
               <strong>Batcha icke-tidskritiska anrop.</strong> OpenAI:s Batch API ger 50 %

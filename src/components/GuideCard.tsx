@@ -22,7 +22,7 @@ export function GuideCard({ modelId, modelName, source, className = "" }: Props)
   return (
     <>
       <div
-        className={`relative rounded-3xl border border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/60 to-white p-5 sm:p-6 shadow-sm animate-fade-in-up overflow-hidden hover:border-indigo-400 hover:bg-indigo-50 transition-colors ${className}`}
+        className={`relative rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/60 to-white p-5 sm:p-6 shadow-sm animate-fade-in-up overflow-hidden hover:border-indigo-400 hover:bg-indigo-50 transition-colors ${className}`}
       >
         {/* Decorative accent */}
         <div
@@ -53,15 +53,15 @@ export function GuideCard({ modelId, modelName, source, className = "" }: Props)
           {/* Mini-checklist */}
           <ul className="space-y-1.5 mb-5">
             <li className="flex items-start gap-2 text-sm text-gray-700">
-              <span className="text-indigo-600 mt-0.5 shrink-0">✓</span>
+              <span className="text-indigo-700 mt-0.5 shrink-0">✓</span>
               <span>Steg-för-steg: konto, API-nyckel, första anropet</span>
             </li>
             <li className="flex items-start gap-2 text-sm text-gray-700">
-              <span className="text-indigo-600 mt-0.5 shrink-0">✓</span>
+              <span className="text-indigo-700 mt-0.5 shrink-0">✓</span>
               <span>Sätt utgiftsgräns så notan aldrig överraskar</span>
             </li>
             <li className="flex items-start gap-2 text-sm text-gray-700">
-              <span className="text-indigo-600 mt-0.5 shrink-0">✓</span>
+              <span className="text-indigo-700 mt-0.5 shrink-0">✓</span>
               <span>Vanliga misstag som kostar tusenlappar — undvik dem</span>
             </li>
           </ul>
@@ -69,7 +69,7 @@ export function GuideCard({ modelId, modelName, source, className = "" }: Props)
           {/* Primary CTA */}
           <button
             onClick={() => setOpen(true)}
-            className="w-full bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white text-base font-bold px-5 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg group"
+            className="w-full bg-indigo-700 hover:bg-indigo-800 active:bg-indigo-800 text-white text-base font-bold px-5 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg group"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />

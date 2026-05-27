@@ -84,7 +84,7 @@ export function JamforAiModeller() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -367,11 +367,11 @@ export function JamforAiModeller() {
             </ol>
             <p className="text-gray-700 leading-relaxed">
               Vill du räkna mer konkret? Kolla vår{" "}
-              <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">
+              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
                 guide till billigaste AI-modellerna
               </Link>{" "}
               eller vår{" "}
-              <Link to="/chatgpt-vs-claude" className="text-indigo-600 hover:underline">
+              <Link to="/chatgpt-vs-claude" className="text-indigo-700 hover:underline">
                 djupjämförelse av ChatGPT och Claude
               </Link>
               .
@@ -417,7 +417,7 @@ export function JamforAiModeller() {
             <p className="text-gray-700 leading-relaxed">
               Tabellen ovan ger en bra bild av relativa kostnader, men din faktiska
               månadskostnad beror på din specifika volym och konversationslängd.{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i exakt antal frågor och genomsnittlig längd — och ser
@@ -425,17 +425,17 @@ export function JamforAiModeller() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">
+                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
                   Djupanalys av de billigaste modellerna
                 </Link>
               </li>
               <li>
-                <Link to="/claude-pris" className="text-indigo-600 hover:underline">
+                <Link to="/claude-pris" className="text-indigo-700 hover:underline">
                   Alla Claude-modeller i detalj
                 </Link>
               </li>
               <li>
-                <Link to="/vad-kostar-chatgpt" className="text-indigo-600 hover:underline">
+                <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
                   Alla GPT-modellers priser och kostnader
                 </Link>
               </li>

@@ -55,7 +55,7 @@ export function AiForEhandel() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -227,7 +227,7 @@ export function AiForEhandel() {
             <h2 className="text-2xl font-bold text-gray-900 mt-0">Räkna på ditt e-handelsflöde</h2>
             <p className="text-gray-700 leading-relaxed">
               Fyll i din specifika volym i{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 kalkylatorn på startsidan
               </Link>{" "}
               och se exakt vad Claude Haiku eller GPT-4o mini kostar för din e-handel —
@@ -235,17 +235,17 @@ export function AiForEhandel() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/ai-chatbot-kostnad" className="text-indigo-600 hover:underline">
+                <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">
                   Fullständig guide till AI-chatbot för e-handel
                 </Link>
               </li>
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">
+                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
                   Claude Haiku vs GPT-4o mini — detaljjämförelse
                 </Link>
               </li>
               <li>
-                <Link to="/ai-kostnad-per-manad" className="text-indigo-600 hover:underline">
+                <Link to="/ai-kostnad-per-manad" className="text-indigo-700 hover:underline">
                   Typiska AI-månadskostnader per e-handelssegment
                 </Link>
               </li>

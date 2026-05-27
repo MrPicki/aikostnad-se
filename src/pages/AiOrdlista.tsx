@@ -94,7 +94,7 @@ export function AiOrdlista() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -156,7 +156,7 @@ export function AiOrdlista() {
                                 {" "}
                                 <Link
                                   to={term.link}
-                                  className="text-indigo-600 hover:underline font-medium"
+                                  className="text-indigo-700 hover:underline font-medium"
                                 >
                                   Läs mer →
                                 </Link>

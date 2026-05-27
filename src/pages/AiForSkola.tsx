@@ -55,7 +55,7 @@ export function AiForSkola() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -261,7 +261,7 @@ export function AiForSkola() {
             <h2 className="text-2xl font-bold text-gray-900 mt-0">Räkna på din skola eller kommuns AI-kostnad</h2>
             <p className="text-gray-700 leading-relaxed">
               Fyll i antal elever, frågor per dag och eventuella lärarbedömningsuppgifter i{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 kalkylatorn på startsidan
               </Link>{" "}
               och se exakt vad GPT-4o mini eller Claude Haiku kostar för er specifika skola
@@ -269,17 +269,17 @@ export function AiForSkola() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">
+                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
                   GPT-4o mini vs Claude Haiku — vilken är billigast?
                 </Link>
               </li>
               <li>
-                <Link to="/ai-chatbot-kostnad" className="text-indigo-600 hover:underline">
+                <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">
                   Bygga en AI-chatbot — komplett budgetguide
                 </Link>
               </li>
               <li>
-                <Link to="/vad-kostar-ai" className="text-indigo-600 hover:underline">
+                <Link to="/vad-kostar-ai" className="text-indigo-700 hover:underline">
                   Komplett AI-prisguide — abonnemang och API
                 </Link>
               </li>

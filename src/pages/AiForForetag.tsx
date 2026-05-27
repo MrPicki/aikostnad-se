@@ -84,7 +84,7 @@ export function AiForForetag() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -216,7 +216,7 @@ export function AiForForetag() {
             i API-prissättning per token. Bäst för: team som vill ha flexibelt verktyg
             utan teknisk integration, eller developers som bygger egna applikationer.
             Se{" "}
-            <Link to="/vad-kostar-chatgpt" className="text-indigo-600 hover:underline">
+            <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
               vad ChatGPT kostar för företag
             </Link>.
           </p>
@@ -228,7 +228,7 @@ export function AiForForetag() {
             instruktionsföljning och långa dokument. Prompt caching kan halvera kostnaden
             för chatbot-applikationer. Bäst för: företag med GDPR-krav och mycket
             textproduktion. Se{" "}
-            <Link to="/claude-pris" className="text-indigo-600 hover:underline">
+            <Link to="/claude-pris" className="text-indigo-700 hover:underline">
               vad Claude kostar för företag
             </Link>.
           </p>
@@ -239,7 +239,7 @@ export function AiForForetag() {
             Docs). Gemini Advanced (199 kr/mån via Google One) ger direkt AI-stöd i alla
             Google-appar. API-mässigt konkurrerar Gemini Flash med sina låga priser och
             unika 1-miljon-tokens kontextfönster. Se{" "}
-            <Link to="/gemini-pris" className="text-indigo-600 hover:underline">
+            <Link to="/gemini-pris" className="text-indigo-700 hover:underline">
               Gemini-priser för företag
             </Link>.
           </p>
@@ -298,7 +298,7 @@ export function AiForForetag() {
               <strong>Steg 3: Skala och optimera (månad 4+).</strong> Välj rätt modell för
               varje uppgift (mini för volym, flaggskepp för komplexa ärenden). Aktivera
               prompt caching där tillämpligt. Teckna DPA och säkerhetscertifieringar. Se vår{" "}
-              <Link to="/ai-chatbot-kostnad" className="text-indigo-600 hover:underline">
+              <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">
                 guide om AI-chatbot-kostnader
               </Link>{" "}
               för konkreta budgetexempel.

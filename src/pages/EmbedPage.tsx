@@ -35,7 +35,7 @@ export function EmbedPage() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -46,7 +46,7 @@ export function EmbedPage() {
         <p className="text-lg text-gray-600 mb-10">
           Kalkylatorn är helt gratis att bädda in. Inga annonser, ingen branding —
           vi ber bara om en länk tillbaka till{" "}
-          <Link to="/" className="text-indigo-600 hover:underline">aikostnad.se</Link>.
+          <Link to="/" className="text-indigo-700 hover:underline">aikostnad.se</Link>.
         </p>
 
         {/* How it works */}

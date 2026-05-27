@@ -18,7 +18,7 @@ export function Kontakt() {
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -36,7 +36,7 @@ export function Kontakt() {
             </h2>
             <a
               href={`mailto:${siteConfig.contactEmail}`}
-              className="text-xl font-semibold text-indigo-600 hover:text-indigo-700 transition-colors"
+              className="text-xl font-semibold text-indigo-700 hover:text-indigo-700 transition-colors"
             >
               {siteConfig.contactEmail}
             </a>

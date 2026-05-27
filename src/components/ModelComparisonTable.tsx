@@ -55,7 +55,7 @@ function Th({ label, sortKey, current, direction, onClick }: ThProps) {
   const active = current === sortKey;
   return (
     <th
-      className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide cursor-pointer select-none hover:text-indigo-600 whitespace-nowrap"
+      className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide cursor-pointer select-none hover:text-indigo-700 whitespace-nowrap"
       onClick={() => onClick(sortKey)}
       aria-sort={active ? (direction === "asc" ? "ascending" : "descending") : "none"}
     >
@@ -150,7 +150,7 @@ export function ModelComparisonTable() {
             type="checkbox"
             checked={showOpenSource}
             onChange={(e) => setShowOpenSource(e.target.checked)}
-            className="rounded border-gray-300 text-indigo-600"
+            className="rounded border-gray-300 text-indigo-700"
           />
           Visa open source
         </label>

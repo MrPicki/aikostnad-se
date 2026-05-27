@@ -10,7 +10,7 @@ export function NotFound() {
         canonical="/404"
       />
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-2">
+        <p className="text-xs font-semibold text-indigo-700 uppercase tracking-wide mb-2">
           404
         </p>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">

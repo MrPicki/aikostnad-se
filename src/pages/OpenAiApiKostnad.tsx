@@ -82,7 +82,7 @@ export function OpenAiApiKostnad() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -126,14 +126,14 @@ export function OpenAiApiKostnad() {
             </p>
             <p>
               Vill du bara räkna ut din egen kostnad direkt? Använd{" "}
-              <Link to="/" className="text-indigo-600 hover:underline">kalkylatorn på startsidan</Link> —
+              <Link to="/" className="text-indigo-700 hover:underline">kalkylatorn på startsidan</Link> —
               den har alla OpenAI-modeller inbyggda och räknar om till SEK med live-valutakurs.
             </p>
             <p>
               För en bredare jämförelse mellan OpenAI och konkurrenter, se vår guide om{" "}
-              <Link to="/chatgpt-vs-claude" className="text-indigo-600 hover:underline">ChatGPT vs Claude</Link>{" "}
+              <Link to="/chatgpt-vs-claude" className="text-indigo-700 hover:underline">ChatGPT vs Claude</Link>{" "}
               eller den kompletta{" "}
-              <Link to="/vad-kostar-ai" className="text-indigo-600 hover:underline">AI-prisguiden</Link>.
+              <Link to="/vad-kostar-ai" className="text-indigo-700 hover:underline">AI-prisguiden</Link>.
             </p>
           </div>
         </div>
@@ -301,7 +301,7 @@ export function OpenAiApiKostnad() {
             OpenAI har sedan oktober 2024 automatisk prompt caching som ger upp till <strong>50 % rabatt</strong>{" "}
             på återanvänd input (tokens som redan setts inom ~5 minuter). Kräver ingen kodändring —
             aktiveras automatiskt för prompts över 1 024 tokens. Mer i vår{" "}
-            <Link to="/prompt-caching" className="text-indigo-600 hover:underline">djupguide om prompt caching</Link>.
+            <Link to="/prompt-caching" className="text-indigo-700 hover:underline">djupguide om prompt caching</Link>.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10">Realistisk månadskostnad — tre svenska scenarier</h2>

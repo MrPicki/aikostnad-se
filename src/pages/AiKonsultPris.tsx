@@ -62,7 +62,7 @@ export function AiKonsultPris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -104,12 +104,12 @@ export function AiKonsultPris() {
             </p>
             <p>
               Den här guiden går igenom vad du faktiskt får för pengarna, när det lönar sig att anlita en
-              konsult kontra att <Link to="/ai-for-foretag" className="text-indigo-600 hover:underline">bygga AI internt</Link>,
+              konsult kontra att <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">bygga AI internt</Link>,
               vilka roller som finns och hur du undviker de vanligaste fallgroparna i AI-konsultupphandlingar.
             </p>
             <p>
               För småföretag som bara behöver komma igång med generativ AI är konsulthjälp inte alltid svaret —
-              ofta räcker en bra <Link to="/vad-kostar-ai" className="text-indigo-600 hover:underline">översikt över AI-priser och verktyg</Link>{" "}
+              ofta räcker en bra <Link to="/vad-kostar-ai" className="text-indigo-700 hover:underline">översikt över AI-priser och verktyg</Link>{" "}
               och några dagars internt experimenterande. Men för dataintensiva, säkerhetskritiska eller
               integrationstunga projekt är extern expertis nästan alltid en bra investering.
             </p>
@@ -257,7 +257,7 @@ export function AiKonsultPris() {
             <strong>Anställ internt när:</strong> AI är kärnan i er produkt, ni har minst 12 månaders
             sysselsättning, ni vill bygga långsiktig kompetens, eller datakänsligheten kräver att all kod
             stannar in-house. Mer om totalkostnad finns i vår guide om{" "}
-            <Link to="/ai-for-foretag" className="text-indigo-600 hover:underline">AI för företag i Sverige</Link>.
+            <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">AI för företag i Sverige</Link>.
           </p>
           <p>
             <strong>Hybrid (oftast bäst):</strong> konsult driver uppstart och PoC, ni anställer för

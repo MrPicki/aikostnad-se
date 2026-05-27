@@ -21,7 +21,7 @@ export function Sources({ items, heading = "Källor och referenser" }: Props) {
               href={s.url}
               rel="noopener nofollow"
               target="_blank"
-              className="text-indigo-600 hover:underline"
+              className="text-indigo-700 hover:underline"
             >
               {s.title}
             </a>

@@ -61,7 +61,7 @@ export function OpenAiApiPris() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -209,7 +209,7 @@ export function OpenAiApiPris() {
             <p className="text-xs text-gray-500">
               Embedding-priser är extremt låga. Att indexera 1 miljon ord med
               text-embedding-3-small kostar ca 0,28 SEK. Källa:{" "}
-              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
                 openai.com/api/pricing
               </a>. Maj 2026.
             </p>
@@ -420,7 +420,7 @@ export function OpenAiApiPris() {
               implementering av prompt caching i koden). Anthropics caching är mer
               kraftfull för chatbots med långa system-promptar, OpenAI:s är enklare
               att komma igång med. Läs vår guide om{" "}
-              <Link to="/prompt-caching" className="text-indigo-600 hover:underline">
+              <Link to="/prompt-caching" className="text-indigo-700 hover:underline">
                 prompt caching
               </Link>{" "}
               för en detaljerad jämförelse.
@@ -486,7 +486,7 @@ export function OpenAiApiPris() {
             <p className="text-gray-700 leading-relaxed">
               Tabellerna ger riktmärken — din faktiska kostnad beror på din volym,
               prompt-längd och hur stor del av input-tokens som cachas.{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i din exakta volym och se månadskostnaden i SEK för
@@ -494,25 +494,25 @@ export function OpenAiApiPris() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/vad-kostar-chatgpt" className="text-indigo-600 hover:underline">
+                <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
                   Vad kostar ChatGPT API?
                 </Link>{" "}
                 — djupguide för GPT-4o och GPT-4o mini
               </li>
               <li>
-                <Link to="/chatgpt-vs-claude" className="text-indigo-600 hover:underline">
+                <Link to="/chatgpt-vs-claude" className="text-indigo-700 hover:underline">
                   OpenAI vs Anthropic
                 </Link>{" "}
                 — komplett jämförelse av pris och prestanda
               </li>
               <li>
-                <Link to="/gpt-5-pris" className="text-indigo-600 hover:underline">
+                <Link to="/gpt-5-pris" className="text-indigo-700 hover:underline">
                   GPT-5 pris
                 </Link>{" "}
                 — när är flaggskeppet värt priset?
               </li>
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">
+                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
                   Billigaste AI 2026
                 </Link>{" "}
                 — jämför GPT-4o mini mot andra budget-modeller
@@ -538,7 +538,7 @@ export function OpenAiApiPris() {
             </p>
             <p className="text-xs text-gray-500 mt-4 bg-gray-50 rounded-lg px-3 py-2">
               Priser uppdateras regelbundet av OpenAI. Verifiera mot{" "}
-              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">
+              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
                 openai.com/api/pricing
               </a>{" "}
               inför budgetbeslut. Senast verifierade 2026-05-25.

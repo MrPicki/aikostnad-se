@@ -103,7 +103,7 @@ export function ChatSection() {
               <div
                 className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
                   msg.role === "user"
-                    ? "bg-indigo-600 text-white"
+                    ? "bg-indigo-700 text-white"
                     : "bg-gray-100 text-gray-800"
                 }`}
               >
@@ -143,7 +143,7 @@ export function ChatSection() {
                 ? 'Beskriv ditt AI-projekt — t.ex. "En chatbot för kundsupport med 500 frågor/dag"'
                 : "Skriv ett svar…"
             }
-            className="w-full rounded-2xl border border-gray-200 bg-white px-5 pt-4 pb-14 text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+            className="w-full rounded-2xl border border-gray-200 bg-white px-5 pt-4 pb-14 text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:border-transparent transition"
             rows={3}
             maxLength={2000}
             disabled={isStreaming}
@@ -153,7 +153,7 @@ export function ChatSection() {
             <button
               onClick={sendMessage}
               disabled={!input.trim() || isStreaming}
-              className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"
+              className="bg-indigo-700 hover:bg-indigo-800 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-semibold px-4 py-2 rounded-xl transition-colors"
             >
               {isStreaming ? "…" : messages.length === 0 ? "Fråga →" : "Skicka →"}
             </button>
@@ -190,14 +190,14 @@ export function ChatSection() {
               Har du frågor? Tveka inte att kontakta oss på{" "}
               <a
                 href="mailto:hej@aikostnad.se"
-                className="text-indigo-600 hover:underline font-medium"
+                className="text-indigo-700 hover:underline font-medium"
               >
                 hej@aikostnad.se
               </a>
             </p>
             <button
               onClick={() => setShowModal(false)}
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2.5 rounded-xl transition-colors"
+              className="w-full bg-indigo-700 hover:bg-indigo-800 text-white font-semibold px-4 py-2.5 rounded-xl transition-colors"
             >
               Stäng
             </button>

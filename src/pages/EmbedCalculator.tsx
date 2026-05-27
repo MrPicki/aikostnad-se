@@ -11,7 +11,7 @@ export function EmbedCalculator() {
             href="https://aikostnad.se?utm_source=embed&utm_medium=widget&utm_campaign=embed_attribution"
             target="_blank"
             rel="noopener"
-            className="font-semibold text-indigo-600 hover:underline"
+            className="font-semibold text-indigo-700 hover:underline"
           >
             Aikostnad.se
           </a>{" "}
@@ -21,7 +21,7 @@ export function EmbedCalculator() {
             href="https://aikostnad.se/press?utm_source=embed&utm_medium=widget&utm_campaign=embed_attribution"
             target="_blank"
             rel="noopener"
-            className="text-indigo-600 hover:underline"
+            className="text-indigo-700 hover:underline"
           >
             Bädda in själv →
           </a>

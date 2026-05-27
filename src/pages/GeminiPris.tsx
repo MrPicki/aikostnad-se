@@ -74,7 +74,7 @@ export function GeminiPris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -271,15 +271,15 @@ export function GeminiPris() {
             <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm leading-relaxed">
               <li>
                 Behöver absolut billigast per token →{" "}
-                <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">GPT-4o mini eller Mistral Small</Link>
+                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">GPT-4o mini eller Mistral Small</Link>
               </li>
               <li>
                 Skriver mycket på svenska →{" "}
-                <Link to="/claude-pris" className="text-indigo-600 hover:underline">Claude Haiku eller Sonnet</Link>
+                <Link to="/claude-pris" className="text-indigo-700 hover:underline">Claude Haiku eller Sonnet</Link>
               </li>
               <li>
                 Vill ha bäst pris på kodning →{" "}
-                <Link to="/gpt-4-pris" className="text-indigo-600 hover:underline">GPT-4.1</Link>
+                <Link to="/gpt-4-pris" className="text-indigo-700 hover:underline">GPT-4.1</Link>
               </li>
             </ul>
           </div>
@@ -296,7 +296,7 @@ export function GeminiPris() {
             Jämfört med OpenAI:s API (ingen gratis tier utöver en initial kredit) och Anthropic
             (ingen gratis API-tier) är Googles gratiserbjudande det generösaste bland de
             tre stora leverantörerna. Se vår sammanfattning av{" "}
-            <Link to="/gratis-ai" className="text-indigo-600 hover:underline">gratis AI-alternativ 2026</Link>{" "}
+            <Link to="/gratis-ai" className="text-indigo-700 hover:underline">gratis AI-alternativ 2026</Link>{" "}
             för full jämförelse.
           </p>
 
@@ -311,7 +311,7 @@ export function GeminiPris() {
           </p>
           <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2">
             Priser verifierade maj 2026. AI-priser ändras löpande — kontrollera alltid mot{" "}
-            <a href="https://ai.google.dev/pricing" target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:underline">Googles officiella prislista</a>{" "}
+            <a href="https://ai.google.dev/pricing" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">Googles officiella prislista</a>{" "}
             innan ni fattar beslut.
           </p>
         </section>

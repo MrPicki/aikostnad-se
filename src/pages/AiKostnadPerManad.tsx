@@ -60,7 +60,7 @@ export function AiKostnadPerManad() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -323,7 +323,7 @@ export function AiKostnadPerManad() {
                 och återanvänds i varje konversation — cacha den. Claude Anthropic erbjuder
                 90 % rabatt på cachad input, OpenAI har automatisk caching på vissa modeller.
                 Läs mer om{" "}
-                <Link to="/prompt-caching" className="text-indigo-600 hover:underline">
+                <Link to="/prompt-caching" className="text-indigo-700 hover:underline">
                   hur prompt caching fungerar
                 </Link>.
               </li>
@@ -351,7 +351,7 @@ export function AiKostnadPerManad() {
             <p className="text-gray-700 leading-relaxed">
               Exemplen ovan är typiska scenarion — din faktiska kostnad beror på volym,
               prompt-längd och modellval.{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i dina egna siffror och se exakt månadskostnad i SEK
@@ -359,19 +359,19 @@ export function AiKostnadPerManad() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-600 hover:underline">
+                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
                   Billigaste AI 2026
                 </Link>{" "}
                 — jämför de billigaste modellerna för att sänka din månadsnota
               </li>
               <li>
-                <Link to="/ai-api-kostnad" className="text-indigo-600 hover:underline">
+                <Link to="/ai-api-kostnad" className="text-indigo-700 hover:underline">
                   AI API-kostnad för app-builders
                 </Link>{" "}
                 — hur du integrerar AI i en produkt kostnadseffektivt
               </li>
               <li>
-                <Link to="/vad-kostar-ai-per-ar" className="text-indigo-600 hover:underline">
+                <Link to="/vad-kostar-ai-per-ar" className="text-indigo-700 hover:underline">
                   Vad kostar AI per år?
                 </Link>{" "}
                 — planera en realistisk AI-årsbudget

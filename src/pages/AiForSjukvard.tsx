@@ -55,7 +55,7 @@ export function AiForSjukvard() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -256,7 +256,7 @@ export function AiForSjukvard() {
             <h2 className="text-2xl font-bold text-gray-900 mt-0">Räkna på din sjukvårdsorganisations AI-kostnad</h2>
             <p className="text-gray-700 leading-relaxed">
               Fyll i er volym journaler, chatbotfrågor eller dokumentationsuppgifter i{" "}
-              <Link to="/" className="text-indigo-600 hover:underline font-medium">
+              <Link to="/" className="text-indigo-700 hover:underline font-medium">
                 kalkylatorn på startsidan
               </Link>{" "}
               och se exakt vad Claude Sonnet eller Haiku kostar för er specifika verksamhet
@@ -264,17 +264,17 @@ export function AiForSjukvard() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/claude-pris" className="text-indigo-600 hover:underline">
+                <Link to="/claude-pris" className="text-indigo-700 hover:underline">
                   Claude Sonnet — priser, DPA och EU-regioner
                 </Link>
               </li>
               <li>
-                <Link to="/ai-for-foretag" className="text-indigo-600 hover:underline">
+                <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">
                   AI för organisationer — enterprise och compliance
                 </Link>
               </li>
               <li>
-                <Link to="/prompt-caching" className="text-indigo-600 hover:underline">
+                <Link to="/prompt-caching" className="text-indigo-700 hover:underline">
                   Prompt caching — sänk kostnaderna med 60–90 %
                 </Link>
               </li>

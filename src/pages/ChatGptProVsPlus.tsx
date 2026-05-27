@@ -75,7 +75,7 @@ export function ChatGptProVsPlus() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-600 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -122,7 +122,7 @@ export function ChatGptProVsPlus() {
             <p>
               För svenska företag finns dessutom ett bättre alternativ för flera anställda — ChatGPT
               Team (263 kr/användare/mån) eller Business — som ger delad arbetsyta utan att betala 2 100 kr per
-              person. Se vår guide om <Link to="/ai-for-foretag" className="text-indigo-600 hover:underline">AI för svenska företag</Link>{" "}
+              person. Se vår guide om <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">AI för svenska företag</Link>{" "}
               för hela jämförelsen.
             </p>
           </div>
@@ -333,7 +333,7 @@ export function ChatGptProVsPlus() {
           </p>
           <p>
             <strong>Frilansare / konsult?</strong> Plus räcker oftast. Komplettera med{" "}
-            <Link to="/claude-pris" className="text-indigo-600 hover:underline">Claude Pro</Link> (210 kr)
+            <Link to="/claude-pris" className="text-indigo-700 hover:underline">Claude Pro</Link> (210 kr)
             för specifika styrkor — totalt 420 kr/mån ger dig bredare verktyg än bara ChatGPT Pro till
             en femtedel av priset.
           </p>

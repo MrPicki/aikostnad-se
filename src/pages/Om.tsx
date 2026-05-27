@@ -67,7 +67,7 @@ export function Om() {
         <div className="mb-8">
           <Link
             to="/"
-            className="text-sm text-indigo-600 hover:underline flex items-center gap-1"
+            className="text-sm text-indigo-700 hover:underline flex items-center gap-1"
           >
             ← Tillbaka till startsidan
           </Link>
@@ -95,7 +95,7 @@ export function Om() {
                 href={parentOrganization.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-600 hover:underline font-medium"
+                className="text-indigo-700 hover:underline font-medium"
               >
                 {parentOrganization.name}
               </a>{" "}
@@ -111,14 +111,14 @@ export function Om() {
                 href={author.linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-600 hover:underline"
+                className="text-indigo-700 hover:underline"
               >
                 LinkedIn ↗
               </a>
               {" · "}
               <a
                 href={`mailto:${author.email}`}
-                className="text-indigo-600 hover:underline"
+                className="text-indigo-700 hover:underline"
               >
                 {author.email}
               </a>
@@ -164,7 +164,7 @@ export function Om() {
                 href="https://www.frankfurter.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-600 hover:underline"
+                className="text-indigo-700 hover:underline"
               >
                 Frankfurter API
               </a>
@@ -176,7 +176,7 @@ export function Om() {
               du ett felaktigt pris?{" "}
               <a
                 href={`mailto:${siteConfig.contactEmail}`}
-                className="text-indigo-600 hover:underline"
+                className="text-indigo-700 hover:underline"
               >
                 Hör gärna av dig.
               </a>
@@ -239,7 +239,7 @@ export function Om() {
               feedback — hör av dig till{" "}
               <a
                 href={`mailto:${siteConfig.contactEmail}`}
-                className="text-indigo-600 hover:underline font-medium"
+                className="text-indigo-700 hover:underline font-medium"
               >
                 {siteConfig.contactEmail}
               </a>

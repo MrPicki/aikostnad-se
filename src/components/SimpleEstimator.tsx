@@ -124,7 +124,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
   return (
     <section aria-label="Enkel AI-kostnadsestimering">
       {(status === "idle" || status === "error") && (
-        <div className="max-w-2xl mx-auto bg-indigo-50 border border-indigo-100 rounded-3xl p-6 sm:p-8 shadow-[0_2px_20px_rgba(99,102,241,0.08)]">
+        <div className="max-w-2xl mx-auto bg-indigo-50 border border-indigo-100 rounded-xl p-6 sm:p-8 shadow-[0_2px_20px_rgba(99,102,241,0.08)]">
           <label htmlFor="estimate-input" className="block text-lg font-bold mb-3 text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
             Vad skulle du vilja använda AI till?
           </label>
@@ -136,7 +136,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
                 key={chip.label}
                 type="button"
                 onClick={() => setText(chip.prompt)}
-                className="text-xs font-medium px-3 py-1.5 bg-white border border-indigo-200 hover:border-indigo-400 hover:bg-indigo-100 hover:text-indigo-700 text-indigo-600 rounded-full transition-all"
+                className="text-xs font-medium px-3 py-1.5 bg-white border border-indigo-200 hover:border-indigo-400 hover:bg-indigo-100 hover:text-indigo-700 text-indigo-700 rounded-full transition-all"
               >
                 {chip.label}
               </button>
@@ -150,7 +150,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
               onChange={(e) => setText(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="…eller skriv själv — t.ex. &ldquo;En chatbot för min webbshop som svarar på 500 kundfrågor per dag.&rdquo;"
-              className="w-full rounded-2xl border border-indigo-100 shadow-sm bg-white px-5 pt-5 pb-16 text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition"
+              className="w-full rounded-2xl border border-indigo-100 shadow-sm bg-white px-5 pt-5 pb-16 text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:border-transparent transition"
               rows={5}
               maxLength={800}
             />
@@ -159,7 +159,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
               <button
                 onClick={handleSubmit}
                 disabled={!text.trim()}
-                className="bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-semibold px-6 py-3 rounded-xl transition-colors"
+                className="bg-indigo-700 hover:bg-indigo-800 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-semibold px-6 py-3 rounded-xl transition-colors"
               >
                 Beräkna min AI-kostnad →
               </button>
@@ -178,7 +178,7 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
 
       {status === "loading" && (
         <div className="flex flex-col items-center justify-center py-16 text-gray-500 max-w-2xl mx-auto">
-          <div className="w-8 h-8 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin mb-4" />
+          <div className="w-8 h-8 border-2 border-indigo-700 border-t-transparent rounded-full animate-spin mb-4" />
           <p className="text-sm font-medium text-gray-700">Analyserar din idé…</p>
           <p className="text-xs text-gray-400 mt-1">Brukar ta 3–5 sekunder</p>
         </div>
@@ -235,7 +235,7 @@ function EstimateResultView({ result, sek, onReset, onUseInCalculator }: ResultP
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wide mb-0.5">
+          <p className="text-xs font-semibold text-indigo-700 uppercase tracking-wide mb-0.5">
             {result.scenarioTitle}
           </p>
           <p className="text-sm text-gray-600 leading-relaxed">{result.summary}</p>
@@ -246,7 +246,7 @@ function EstimateResultView({ result, sek, onReset, onUseInCalculator }: ResultP
       </div>
 
       {/* Cost range */}
-      <div className="bg-indigo-600 rounded-xl p-5 text-white">
+      <div className="bg-indigo-700 rounded-xl p-5 text-white">
         <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wide mb-2">
           Grovt uppskattad kostnad
         </p>

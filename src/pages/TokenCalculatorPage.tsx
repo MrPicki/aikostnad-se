@@ -49,7 +49,7 @@ export function TokenCalculatorPage() {
         <div className="mb-8">
           <Link
             to="/"
-            className="text-sm text-indigo-600 hover:underline flex items-center gap-1"
+            className="text-sm text-indigo-700 hover:underline flex items-center gap-1"
           >
             ← Tillbaka till kalkylatorn
           </Link>
