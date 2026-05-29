@@ -115,30 +115,36 @@ async function saveArticle(data: {
 // ---- RSS ----
 
 async function fetchRecentArticles(): Promise<Article[]> {
+  // Per-feed timeout 5s — fetch all feeds in PARALLEL to stay well within function time budget
   const parser = new Parser({
-    timeout: 10_000,
+    timeout: 5_000,
     headers: { "User-Agent": "aikostnad-digest/1.0" },
   });
 
   const cutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+  const results = await Promise.allSettled(
+    RSS_FEEDS.map((feedUrl) => parser.parseURL(feedUrl))
+  );
+
   const articles: Article[] = [];
 
-  for (const feedUrl of RSS_FEEDS) {
-    try {
-      const feed = await parser.parseURL(feedUrl);
-      for (const item of (feed.items ?? []).slice(0, 10)) {
-        if (!item.link || !item.title) continue;
-        const pubDate = item.isoDate ?? item.pubDate ?? "";
-        if (pubDate && new Date(pubDate) < cutoff) continue;
-        articles.push({
-          title: item.title,
-          url: item.link,
-          summary: (item.contentSnippet ?? item.summary ?? "").slice(0, 400),
-          pubDate,
-        });
-      }
-    } catch (e) {
-      console.error(`RSS fetch failed for ${feedUrl}:`, e);
+  for (let i = 0; i < results.length; i++) {
+    const result = results[i];
+    if (result.status === "rejected") {
+      console.error(`RSS fetch failed for ${RSS_FEEDS[i]}:`, result.reason);
+      continue;
+    }
+    for (const item of (result.value.items ?? []).slice(0, 10)) {
+      if (!item.link || !item.title) continue;
+      const pubDate = item.isoDate ?? item.pubDate ?? "";
+      if (pubDate && new Date(pubDate) < cutoff) continue;
+      articles.push({
+        title: item.title,
+        url: item.link,
+        summary: (item.contentSnippet ?? item.summary ?? "").slice(0, 400),
+        pubDate,
+      });
     }
   }
 
@@ -208,7 +214,7 @@ Returnera JSON:
       },
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 2048,
+        max_tokens: 1024,
         messages: [{ role: "user", content: prompt }],
       }),
     });

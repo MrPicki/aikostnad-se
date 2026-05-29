@@ -1,5 +1,10 @@
 {
   "cleanUrls": true,
+  "functions": {
+    "api/morning-digest.ts": {
+      "maxDuration": 60
+    }
+  },
   "crons": [
     {
       "path": "/api/morning-digest",
