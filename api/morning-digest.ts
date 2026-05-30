@@ -168,40 +168,56 @@ async function generateDigest(
     `\nGårdagens artikel handlade om: ${prevTitle ?? "ingen tidigare artikel"}.` +
     `\nDessa nyhets-URL:ar användes igår och ska INTE användas igen: ${prevUrls?.join(", ") ?? "inga"}.`;
 
-  const prompt = `Du är chefredaktör på aikostnad.se. Skriv dagens AI-nyhetsrapport på svenska som en professionell nyhetsjournalist för en ledande tekniksajt.
+  const prompt = `Du är chefredaktör på aikostnad.se. Skriv dagens AI-nyhetsrapport på svenska.
 ${dedupNote}
 
-Artikeln ska:
-- Ha en stark, informativ rubrik
-- Börja med ett slagkraftigt ingress (2-3 meningar) som fångar det viktigaste
-- Ha 3-4 avsnitt med underrubriker, varje avsnitt 3-4 meningar
-- Varje avsnitt kopplar nyheten till AI-kostnader och vad det innebär för svenska företag
-- Avsluta med en "Dagens takeaway" — en konkret insikt
-- Professionell, analytisk ton — inte reklamspråk, inte clickbait
-- Längd: 400-550 ord
+VIKTIGT: Följ mallen EXAKT — samma struktur varje dag, bara innehållet varierar.
 
-Inkludera dessa interna länkar naturligt i texten:
-- GPT/OpenAI-nyheter → https://aikostnad.se/vad-kostar-chatgpt
-- Claude/Anthropic-nyheter → https://aikostnad.se/claude-pris
-- Gemini/Google-nyheter → https://aikostnad.se/gemini-pris
-- Prisändringar generellt → https://aikostnad.se/prisandringar
-- Jämförelser → https://aikostnad.se/jamfor-ai-modeller
-- Kalkylator → https://aikostnad.se/token-kalkylator
+━━━ FAST MALL (följ alltid) ━━━
+
+AVSNITT 1 — "Veckans stora rörelse"
+Välj den viktigaste nyheten. Förklara vad som hände, varför det spelar roll för AI-marknaden,
+och hur det påverkar prissättningen eller tillgången på AI-tjänster. (3–4 meningar)
+
+AVSNITT 2 — "Vad svenska företag bör notera"
+Konkret konsekvens för ett svenskt bolag som betalar för AI API:er.
+Lyft prisaspekten — billigare, dyrare, nytt alternativ? (3–4 meningar)
+
+AVSNITT 3 — "På radarn"
+En kortare notis om en annan nyhet från listan som är värd att bevaka.
+Ton: neutral, faktabaserad. (2–3 meningar)
+
+DAGENS TAKEAWAY — en enda konkret mening som en CFO eller CTO kan agera på direkt.
+
+━━━ REGLER ━━━
+- Professionell, analytisk ton — inga reklamfraser, inga utropstecken
+- Varje avsnitt: exakt de rubriker som anges ovan
+- Inkludera relevanta interna länkar naturligt (max 2 per avsnitt):
+    GPT/OpenAI → https://aikostnad.se/vad-kostar-chatgpt
+    Claude/Anthropic → https://aikostnad.se/claude-pris
+    Gemini/Google → https://aikostnad.se/gemini-pris
+    Prisändringar → https://aikostnad.se/prisandringar
+    Jämförelser → https://aikostnad.se/jamfor-ai-modeller
+    Kalkylator → https://aikostnad.se/token-kalkylator
+- Rubrik: informativ, max 90 tecken, inga frågor eller clickbait
+- Ämnesrad (subject): max 55 tecken, faktapåstående
 
 Dagens nyheter:
 ${newsSummary}
 
-Returnera JSON:
+Returnera ENBART giltig JSON (ingen text före eller efter):
 {
-  "subject": "Rubrik för emailets ämnesrad (max 60 tecken)",
-  "headline": "Artikelrubrik",
-  "ingress": "Ingressen (2-3 meningar)",
+  "subject": "Ämnesrad max 55 tecken",
+  "headline": "Artikelrubrik max 90 tecken",
+  "ingress": "2–3 meningar som sammanfattar det viktigaste — fångar läsaren direkt",
   "sections": [
-    { "title": "Avsnittets rubrik", "content": "Avsnittets text med HTML-länkar inbäddade" }
+    { "title": "Veckans stora rörelse", "content": "Avsnittets text med eventuella HTML-länkar" },
+    { "title": "Vad svenska företag bör notera", "content": "Avsnittets text med eventuella HTML-länkar" },
+    { "title": "På radarn", "content": "Avsnittets text med eventuell HTML-länk" }
   ],
-  "takeaway": "Dagens takeaway-text",
-  "hashtags": ["#AI", "#AIpriser", "#GPT", "#MachineLearning"],
-  "xPost": "Ingressen (max 250 tecken) + newline + 'Hela rapporten: https://aikostnad.se/nyheter/${todaySlug}' + newline + '#AI #AIpriser'"
+  "takeaway": "En konkret mening — CFO/CTO kan agera på den direkt",
+  "hashtags": ["#AI", "#AIpriser", "#Svenska företag"],
+  "xPost": "Ingress max 220 tecken\\n\\nHela rapporten: https://aikostnad.se/nyheter/${todaySlug}\\n\\n#AI #AIpriser"
 }`;
 
   try {
@@ -214,7 +230,7 @@ Returnera JSON:
       },
       body: JSON.stringify({
         model: "claude-haiku-4-5-20251001",
-        max_tokens: 1024,
+        max_tokens: 2048,
         messages: [{ role: "user", content: prompt }],
       }),
     });
@@ -241,23 +257,36 @@ Returnera JSON:
 }
 
 function buildFallbackDigest(articles: Article[], todaySlug: string): Digest {
-  const headlines = articles
-    .slice(0, 5)
-    .map((a) => `<li>${a.title}</li>`)
-    .join("\n");
+  // Strukturera fallback i samma tre avsnitt som mallen — inte bulletlista
+  const top = articles.slice(0, 3);
+  const main = top[0];
+  const second = top[1];
+  const third = top[2];
+
+  const mainContent = main
+    ? `${main.title}. ${main.summary ? main.summary.slice(0, 300) : "Läs mer på källan."} Se <a href="https://aikostnad.se/jamfor-ai-modeller">aktuella AI-modellpriser</a> för att förstå konsekvenserna.`
+    : "Inga nyheter tillgängliga just nu.";
+
+  const secondContent = second
+    ? `${second.title}. ${second.summary ? second.summary.slice(0, 250) : ""} Räkna ut kostnaden för ditt bolag på <a href="https://aikostnad.se/token-kalkylator">aikostnad.se/token-kalkylator</a>.`
+    : "Besök aikostnad.se för senaste uppdateringar.";
+
+  const thirdContent = third
+    ? `${third.title}. ${third.summary ? third.summary.slice(0, 200) : ""}`
+    : "Följ aikostnad.se för dagliga uppdateringar.";
+
   return {
-    subject: "Dagens AI-nyheter från aikostnad.se",
+    subject: "Dagens AI-nyheter — aikostnad.se",
     headline: "Dagens AI-nyheter",
-    ingress: "Här är de senaste nyheterna inom AI och AI-kostnader.",
+    ingress: "AI-rapportgeneratorn kunde inte nå AI-tjänsten idag. Här är de viktigaste nyheterna direkt från källorna.",
     sections: [
-      {
-        title: "Senaste nyheterna",
-        content: `<ul>${headlines}</ul>`,
-      },
+      { title: "Veckans stora rörelse", content: mainContent },
+      { title: "Vad svenska företag bör notera", content: secondContent },
+      { title: "På radarn", content: thirdContent },
     ],
-    takeaway: "Håll koll på AI-kostnader på aikostnad.se/kalkylator",
-    hashtags: ["#AI", "#AIpriser"],
-    xPost: `Här är de senaste nyheterna inom AI och AI-kostnader.\n\nHela rapporten: https://aikostnad.se/nyheter/${todaySlug}\n\n#AI #AIpriser`,
+    takeaway: "Håll koll på AI-kostnader och prisförändringar på aikostnad.se — uppdateras dagligen.",
+    hashtags: ["#AI", "#AIpriser", "#Svenska företag"],
+    xPost: `Dagens AI-nyheter från aikostnad.se.\n\nHela rapporten: https://aikostnad.se/nyheter/${todaySlug}\n\n#AI #AIpriser`,
   };
 }
 
