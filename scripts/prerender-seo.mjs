@@ -25,17 +25,22 @@ function escapeAttr(s) {
 function buildMetaBlock(route) {
   const title = route.title;
   const desc = route.description;
-  const fullTitle = route.path === "/" ? title : `${title} | ${SITE.name}`;
+  // Mirror the runtime <SEO> component exactly (`${title} | Aikostnad.se`) so the
+  // prerendered HTML and the hydrated React head never drift apart.
+  const fullTitle = `${title} | ${SITE.name}`;
   const canonical = `${SITE.url}${route.path === "/" ? "" : route.path}`;
 
   return `
     <title>${escapeAttr(fullTitle)}</title>
     <meta name="description" content="${escapeAttr(desc)}" />
     <link rel="canonical" href="${escapeAttr(canonical)}" />
+    <link rel="alternate" hreflang="sv-SE" href="${escapeAttr(canonical)}" />
+    <link rel="alternate" hreflang="x-default" href="${escapeAttr(canonical)}" />
     <meta property="og:title" content="${escapeAttr(fullTitle)}" />
     <meta property="og:description" content="${escapeAttr(desc)}" />
     <meta property="og:url" content="${escapeAttr(canonical)}" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="${SITE.locale}" />
     <meta property="og:site_name" content="${SITE.name}" />
     <meta property="og:image" content="${SITE.ogImage}" />
     <meta property="og:image:width" content="1200" />
@@ -69,6 +74,7 @@ function injectMeta(templateHtml, route) {
     .replace(/<title>[\s\S]*?<\/title>/g, "")
     .replace(/<meta\s+name=["']description["'][^>]*>/g, "")
     .replace(/<link\s+rel=["']canonical["'][^>]*>/g, "")
+    .replace(/<link\s+rel=["']alternate["'][^>]*>/g, "")
     .replace(/<meta\s+property=["']og:[^"']+["'][^>]*>/g, "")
     .replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/g, "");
 

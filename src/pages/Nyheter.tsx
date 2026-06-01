@@ -245,9 +245,9 @@ export function Nyheter() {
   return (
     <>
       <SEO
-        title="Dagens AI-rapport | Aikostnad.se"
+        title="Dagens AI-rapport"
         description="Daglig AI-nyhetsrapport — det viktigaste inom AI sammanfattat på svenska av aikostnad.se."
-        canonical="https://aikostnad.se/nyheter"
+        canonical="/nyheter"
       />
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

@@ -65,10 +65,12 @@ export function NyheterArtikel() {
     return (
       <>
         <SEO
-          title="Artikel hittades inte | Aikostnad.se"
-          description=""
-          canonical={`https://aikostnad.se/nyheter/${date ?? ""}`}
-        />
+          title="Artikel hittades inte"
+          description="Den här AI-rapporten kunde inte hittas."
+          canonical={`/nyheter/${date ?? ""}`}
+        >
+          <meta name="robots" content="noindex" />
+        </SEO>
         <main className="max-w-3xl mx-auto px-4 py-24 text-center">
           <p className="text-gray-500 mb-4">Artikeln hittades inte.</p>
           <Link
@@ -85,10 +87,32 @@ export function NyheterArtikel() {
   return (
     <>
       <SEO
-        title={`${article.title} | Aikostnad.se`}
+        title={article.title}
         description={article.ingress ?? ""}
-        canonical={`https://aikostnad.se/nyheter/${date}`}
-      />
+        canonical={`/nyheter/${date}`}
+      >
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "NewsArticle",
+            headline: article.title,
+            description: article.ingress ?? "",
+            datePublished: article.date,
+            dateModified: article.date,
+            inLanguage: "sv-SE",
+            mainEntityOfPage: `https://aikostnad.se/nyheter/${date}`,
+            author: { "@type": "Organization", name: "Aikostnad.se" },
+            publisher: {
+              "@type": "Organization",
+              name: "Aikostnad.se",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://aikostnad.se/og-image.png",
+              },
+            },
+          })}
+        </script>
+      </SEO>
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link

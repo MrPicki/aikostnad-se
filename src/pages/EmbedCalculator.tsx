@@ -1,8 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import { Calculator } from "../components/Calculator";
 
 export function EmbedCalculator() {
   return (
     <main className="min-h-screen bg-white px-4 sm:px-6 py-6">
+      {/* iframe target — keep it out of the index to avoid thin/duplicate content */}
+      <Helmet>
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
       <Calculator />
       <div className="max-w-5xl mx-auto mt-6 pt-4 border-t border-gray-100 text-center">
         <p className="text-xs text-gray-500 leading-relaxed">

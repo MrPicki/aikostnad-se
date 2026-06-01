@@ -32,15 +32,15 @@ Status-legend: ⬜ ej påbörjad · 🔄 pågår · ✅ klar
 
 ## Kategori 2 — SEO (start: 6/10 → mål ≥8)
 
-- ⬜ **SEO1** Synka prerendern mot alla vägar (en `ROUTES`-källa, generera sitemap, build-guard)
-- ⬜ **SEO2** SPA-fallback i `vercel.json`
-- ⬜ **SEO3** `/nyheter/:date` indexerbar (dynamisk sitemap + `NewsArticle`-schema)
-- ⬜ **SEO4** Laga dubbelprefixad canonical på nyhetssidor
-- ⬜ **SEO5** En sanningskälla för titel/beskrivning
-- ⬜ **SEO6** Generera sitemap från riktiga `modifiedDate`
-- ⬜ **SEO7** Huvudnyckelord i start-`<h1>`; `og:locale` + `hreflang`
-- ⬜ **SEO8** Self-hosta typsnitt/skjut upp scripts; `noindex` på `/embed`; städa `robots.txt`
-- ⬜ **Omtest SEO:** betyg ≥8
+- ✅ **SEO1** `ROUTES` utökad till alla 42 statiska sidor (prerender 25→43 filer); build-guard `check-seo-sync.mjs` failar bygget vid divergens
+- ✅ **SEO2** SPA-fallback-rewrite i `vercel.json` (`/((?!api/).*) → /index.html`) — inga 404 på direktnavigering/refresh
+- ✅ **SEO3** `/nyheter/:date`: dynamisk `api/sitemap-news.ts` (Supabase) + `NewsArticle`-schema; länkad från `robots.txt`
+- ✅ **SEO4** Canonical-normalisering i `SEO.tsx` (path eller absolut → exakt en URL); dubbelsuffix-bug på nyhetssidor fixad
+- ✅ **SEO5** En sanningskälla: prerender + runtime delar titel-logik (`${title} | Aikostnad.se`); guarden tvingar paritet
+- ✅ **SEO6** `generate-sitemap.mjs` genererar sitemap från `ROUTES` + riktiga `modifiedDate` i `articles.ts` (per-sida lastmod)
+- ✅ **SEO7** Start-`<h1>` → "Vad kostar AI? Räkna ut din AI-kostnad — i kronor"; `og:locale=sv_SE` + `hreflang=sv-SE`/`x-default` i prerender + runtime
+- 🟡 **SEO8** `noindex` på `/embed`; `robots.txt` städad (bort `Crawl-delay`, AI-botar tillåtna, 2 sitemaps). Self-hosta typsnitt/skjut upp scripts = valfri förstärkning, ej gjort (CWV-finlir)
+- 🔄 **Omtest SEO:** betyg ≥8
 
 ## Kategori 1 — Design / Layout (start: 6/10 → mål ≥8)
 
