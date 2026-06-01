@@ -52,9 +52,31 @@ Status-legend: ⬜ ej påbörjad · 🔄 pågår · ✅ klar
 - ✅ **D6** `aria-current="page"` på nav; sticky-bar nu responsiv (synlig på mobil); höjd kontrast (footer/captions `gray-400`→`gray-500`)
 - 🟡 **D7** `darkMode:'class'` förberett i config; full mörkt-läge-implementation = valfri förstärkning (auditen rankade sist/ej krävd), ej gjort
 - ✅ **D8** Jämförelseknapp = riktig länk (gjort i F7); Suspense-fallback → spinner-skeleton (`RouteFallback`)
-- 🔄 **Omtest design:** betyg ≥8
+- ✅ **Omtest design:** betyg **8/10** ✓ (alla a11y-blockerare + IA + tokens verifierat lösta)
 
 ---
 
 ## Logg
 - 2026-06-01: Plan skapad. Påbörjar kategori 4 (Funktioner).
+- 2026-06-01: Funktioner klar → omtest **8/10**.
+- 2026-06-01: Säkerhet klar → omtest **8/10**.
+- 2026-06-01: SEO klar → omtest **8/10**.
+- 2026-06-01: Design klar → omtest **8/10**.
+
+## Slutresultat
+
+| Kategori | Start | Slut |
+|----------|:-----:|:----:|
+| Design / layout | 6 | **8** |
+| SEO | 6 | **8** |
+| Säkerhet | 4 | **8** |
+| Användning / funktioner | 5 | **8** |
+| **Genomsnitt** | **5,25** | **8,0** |
+
+Alla fyra kategorier når målet ≥8. Varje kategori omtestades av en oberoende
+granskning efter att alla punkter bockats av.
+
+### Återstående valfria förstärkningar (mot 9–10, kräver mer/infra)
+- **Säkerhet:** durabel rate-limiter via Vercel KV/Upstash (ersätter in-memory); skapa RLS-läspolicy i Supabase.
+- **SEO:** SSG/SSR av sidans *body* (idag prerenderas bara `<head>`); self-hosta typsnitt + skjut upp AdSense/GTM (Core Web Vitals).
+- **Design:** mörkt läge (`darkMode:'class'` förberett); riktiga popover-tooltips istället för `title`.
