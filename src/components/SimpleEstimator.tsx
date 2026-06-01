@@ -124,10 +124,13 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
   return (
     <section aria-label="Enkel AI-kostnadsestimering">
       {(status === "idle" || status === "error") && (
-        <div className="max-w-2xl mx-auto bg-brand-50 border border-brand-100 rounded-xl p-6 sm:p-8 shadow-[0_2px_20px_rgba(99,102,241,0.08)]">
-          <label htmlFor="estimate-input" className="block text-lg font-bold mb-3 text-center bg-gradient-to-r from-brand-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
-            Vad skulle du vilja använda AI till?
+        <div className="max-w-2xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-card">
+          <label htmlFor="estimate-input" className="block text-lg font-bold mb-1 text-center text-gray-900">
+            Beskriv din idé
           </label>
+          <p className="text-sm text-gray-500 text-center mb-4">
+            …så räknar vi ut vad det kostar per månad i kronor.
+          </p>
 
           {/* Quick-start chips */}
           <div className="flex flex-wrap justify-center gap-2 mb-3">
