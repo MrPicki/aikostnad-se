@@ -22,12 +22,15 @@ export default async function handler(_request: Request): Promise<Response> {
       },
     });
   } catch {
+    // Honest fallback: flag it so the client can tell the user the rate is an
+    // estimate, not a live quote. Short cache so we retry the live source soon.
     return new Response(
-      JSON.stringify({ rate: 10.5, date: null }),
+      JSON.stringify({ rate: 10.5, date: null, fallback: true }),
       {
+        status: 503,
         headers: {
           "Content-Type": "application/json",
-          "Cache-Control": "public, s-maxage=3600",
+          "Cache-Control": "public, s-maxage=300",
           "Access-Control-Allow-Origin": "*",
         },
       }

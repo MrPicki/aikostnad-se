@@ -8,52 +8,89 @@ interface ExchangeRateResult {
   error: boolean;
 }
 
+// Module-level shared state. Every component that calls useExchangeRate shares
+// a single network fetch instead of triggering its own (the homepage alone
+// mounts ~5 consumers). The first caller kicks off the request; the rest
+// subscribe and receive the cached result.
+let cached: ExchangeRateResult | null = null;
+let inFlight: Promise<ExchangeRateResult> | null = null;
+const subscribers = new Set<(r: ExchangeRateResult) => void>();
+
+const FALLBACK: ExchangeRateResult = {
+  rate: siteConfig.fallbackUsdToSekRate,
+  date: null,
+  loading: true,
+  error: false,
+};
+
+async function fetchRate(): Promise<ExchangeRateResult> {
+  // Our own Edge Function first (24h cache + honest fallback flag), then the
+  // upstream API directly as a backup.
+  const sources = [
+    "/api/exchange-rate",
+    "https://api.frankfurter.app/latest?from=USD&to=SEK",
+  ];
+
+  for (const url of sources) {
+    try {
+      const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
+      if (!res.ok) continue; // our edge fn returns 503 on its fallback path
+      const data = await res.json();
+
+      // frankfurter.app: { rates: { SEK }, date } · our edge fn: { rate, date }
+      const fetchedRate = data.rate ?? data.rates?.SEK;
+      const fetchedDate = data.date ?? null;
+
+      if (typeof fetchedRate === "number" && fetchedRate > 0 && !data.fallback) {
+        return { rate: fetchedRate, date: fetchedDate, loading: false, error: false };
+      }
+    } catch {
+      // try next source
+    }
+  }
+
+  // All live sources failed — surface the fallback honestly (error: true).
+  return {
+    rate: siteConfig.fallbackUsdToSekRate,
+    date: null,
+    loading: false,
+    error: true,
+  };
+}
+
+function loadRate(): Promise<ExchangeRateResult> {
+  if (cached && !cached.loading) return Promise.resolve(cached);
+  if (inFlight) return inFlight;
+  inFlight = fetchRate().then((result) => {
+    cached = result;
+    inFlight = null;
+    subscribers.forEach((cb) => cb(result));
+    return result;
+  });
+  return inFlight;
+}
+
 export function useExchangeRate(): ExchangeRateResult {
-  const [rate, setRate] = useState<number>(siteConfig.fallbackUsdToSekRate);
-  const [date, setDate] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [state, setState] = useState<ExchangeRateResult>(cached ?? FALLBACK);
 
   useEffect(() => {
-    async function fetchRate() {
-      try {
-        // Try our own Edge Function first (with 24h cache), then direct API
-        const sources = [
-          "/api/exchange-rate",
-          "https://api.frankfurter.app/latest?from=USD&to=SEK",
-        ];
+    let active = true;
+    const cb = (r: ExchangeRateResult) => {
+      if (active) setState(r);
+    };
+    subscribers.add(cb);
 
-        for (const url of sources) {
-          try {
-            const res = await fetch(url, { signal: AbortSignal.timeout(4000) });
-            if (!res.ok) continue;
-            const data = await res.json();
-
-            // frankfurter.app format: { rates: { SEK: number }, date: string }
-            // our edge fn format: { rate: number, date: string }
-            const fetchedRate = data.rate ?? data.rates?.SEK;
-            const fetchedDate = data.date ?? null;
-
-            if (fetchedRate && typeof fetchedRate === "number") {
-              setRate(fetchedRate);
-              setDate(fetchedDate);
-              setError(false);
-              return;
-            }
-          } catch {
-            // try next source
-          }
-        }
-
-        // All sources failed — keep fallback
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
+    // If a resolved value already exists it's the initial useState value, so no
+    // synchronous setState is needed; otherwise kick off (or join) the fetch.
+    if (!cached || cached.loading) {
+      loadRate();
     }
 
-    fetchRate();
+    return () => {
+      active = false;
+      subscribers.delete(cb);
+    };
   }, []);
 
-  return { rate, date, loading, error };
+  return state;
 }

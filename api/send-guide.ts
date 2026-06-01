@@ -171,6 +171,69 @@ function buildEmailHtml(guide: EmailGuide, modelName: string | undefined): strin
 </html>`;
 }
 
+// Generic price-alert confirmation — used when no specific provider guide was
+// requested (e.g. the homepage "bevaka mitt pris" form, the sticky bar and the
+// post-calculation capture all sign up for price alerts without a providerId).
+function buildPriceAlertHtml(): string {
+  return `<!DOCTYPE html>
+<html lang="sv">
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; line-height: 1.6; color: #1f2937; max-width: 600px; margin: 0 auto; padding: 24px;">
+  <div style="border-bottom: 2px solid #4f46e5; padding-bottom: 16px; margin-bottom: 24px;">
+    <p style="font-size: 12px; color: #4f46e5; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0;">Aikostnad.se · Prisbevakning</p>
+    <h1 style="font-size: 22px; font-weight: 700; color: #111827; margin: 8px 0 0;">Du bevakar nu AI-priser ✓</h1>
+  </div>
+
+  <p>Tack! Vi hör av oss när priserna på de stora AI-modellerna (ChatGPT, Claude, Gemini m.fl.) ändras — max en gång per vecka, ofta mer sällan.</p>
+
+  <p>Under tiden — räkna ut exakt vad ditt AI-användningsfall kostar i kronor:</p>
+  <p><a href="https://aikostnad.se/" style="color: #4f46e5; font-weight: 600;">Öppna kalkylatorn på aikostnad.se →</a></p>
+
+  <h2 style="font-size: 16px; color: #111827; margin-top: 24px;">Snabbtips medan du väntar</h2>
+  <ul>
+    <li style="margin-bottom: 8px;">Börja alltid med den billigaste modellen (GPT-4o mini, Claude Haiku, Gemini Flash) — den räcker för ~80% av användningsfallen.</li>
+    <li style="margin-bottom: 8px;">Output-tokens kostar 4× mer än input. Sätt en rimlig <code>max_tokens</code>.</li>
+    <li style="margin-bottom: 8px;">Aktivera prompt caching för stora system-promtar — upp till 90% rabatt på den cachade delen.</li>
+  </ul>
+
+  <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 32px 0;" />
+  <p style="font-size: 12px; color: #6b7280;">
+    Du fick det här mailet för att du anmälde dig till prisbevakning via Aikostnad.se. Vi sparar din
+    e-postadress enligt vår <a href="https://aikostnad.se/integritet" style="color: #4f46e5;">integritetspolicy</a>.
+    Vill du bli borttagen — svara på det här mailet eller kontakta hej@aikostnad.se.
+  </p>
+</body>
+</html>`;
+}
+
+function buildPriceAlertText(): string {
+  return `Aikostnad.se — Prisbevakning
+
+Du bevakar nu AI-priser ✓
+
+Tack! Vi hör av oss när priserna på de stora AI-modellerna (ChatGPT,
+Claude, Gemini m.fl.) ändras — max en gång per vecka, ofta mer sällan.
+
+Räkna ut exakt vad ditt AI-användningsfall kostar i kronor:
+https://aikostnad.se/
+
+SNABBTIPS MEDAN DU VÄNTAR
+   1. Börja alltid med den billigaste modellen (GPT-4o mini, Claude
+      Haiku, Gemini Flash) — den räcker för ~80% av användningsfallen.
+   2. Output-tokens kostar 4x mer än input. Sätt en rimlig max_tokens.
+   3. Aktivera prompt caching för stora system-promtar — upp till 90%
+      rabatt på den cachade delen.
+
+================================================================
+
+Du fick det här mailet för att du anmälde dig till prisbevakning via
+Aikostnad.se. Vi sparar din e-postadress enligt vår integritetspolicy:
+https://aikostnad.se/integritet
+
+Avregistrera dig — svara på det här mailet med "unsubscribe" eller
+kontakta hej@aikostnad.se.
+`;
+}
+
 function buildEmailText(guide: EmailGuide, modelName: string | undefined): string {
   const safeModel = modelName ? ` (${modelName})` : "";
   return `Aikostnad.se — Steg-för-steg-guide
@@ -270,13 +333,12 @@ export default async function handler(req: Request): Promise<Response> {
     });
   }
 
-  const guide = GUIDES[providerId];
-  if (!guide) {
-    return new Response(JSON.stringify({ error: "Okänd leverantör" }), {
-      status: 400,
-      headers,
-    });
-  }
+  // A specific provider guide is optional. When providerId is missing or
+  // unknown the submission is a price-alert signup (homepage form, sticky bar,
+  // post-calculation capture) — we still save the lead and send a generic
+  // confirmation instead of rejecting the request.
+  const guide = providerId ? GUIDES[providerId] : undefined;
+  const leadType = guide ? "guide-request" : "price-alert";
 
   // 1) Save lead in Supabase (uses service role key to bypass RLS)
   const supabaseUrl = process.env.VITE_SUPABASE_URL ?? process.env.SUPABASE_URL;
@@ -294,8 +356,8 @@ export default async function handler(req: Request): Promise<Response> {
         body: JSON.stringify({
           email,
           calc_data: {
-            type: "guide-request",
-            providerId,
+            type: leadType,
+            providerId: providerId ?? null,
             modelName: modelName ?? null,
             source: source ?? "unknown",
             consentMarketing: !!consentMarketing,
@@ -323,9 +385,11 @@ export default async function handler(req: Request): Promise<Response> {
     });
   }
 
-  const html = buildEmailHtml(guide, modelName);
-  const text = buildEmailText(guide, modelName);
-  const subject = `Din ${guide.providerName}-guide från Aikostnad.se`;
+  const html = guide ? buildEmailHtml(guide, modelName) : buildPriceAlertHtml();
+  const text = guide ? buildEmailText(guide, modelName) : buildPriceAlertText();
+  const subject = guide
+    ? `Din ${guide.providerName}-guide från Aikostnad.se`
+    : "Du bevakar nu AI-priser — Aikostnad.se";
 
   try {
     const resendRes = await fetch("https://api.resend.com/emails", {

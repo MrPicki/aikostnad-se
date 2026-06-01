@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { models, defaultModelId } from "../data/modelPricing";
 import { siteConfig } from "../config/siteConfig";
 import {
@@ -261,7 +261,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
   const [showTokenDetails, setShowTokenDetails] = useState(false);
   const [copied, setCopied] = useState(false);
   const [calcEmail, setCalcEmail] = useState("");
-  const [calcEmailStatus, setCalcEmailStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [calcEmailStatus, setCalcEmailStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [calcCaptureVisible, setCalcCaptureVisible] = useState(() => !localStorage.getItem("email_subscribed"));
   async function copyShareLink() {
     try {
@@ -289,7 +289,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
       setCalcEmailStatus("success");
       setTimeout(() => setCalcCaptureVisible(false), 2000);
     } catch {
-      setCalcEmailStatus("idle");
+      setCalcEmailStatus("error");
     }
   }
 
@@ -611,6 +611,11 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                       </button>
                     </form>
                   )}
+                  {calcEmailStatus === "error" && (
+                    <p className="mt-2 text-xs text-red-600" role="alert">
+                      Kunde inte spara just nu — försök igen om en stund.
+                    </p>
+                  )}
                 </div>
               )}
 
@@ -718,13 +723,14 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 </a>
               </div>
 
-              {/* 5b Jämför med annat scenario */}
-              <button
-                onClick={() => window.open(window.location.href, '_blank')}
-                className="text-sm text-indigo-700 hover:text-indigo-700 underline mt-2"
+              {/* 5b Jämför alla modeller sida vid sida */}
+              <Link
+                to="/jamfor-ai-modeller"
+                onClick={() => trackEvent('compare_clicked', { from: 'calculator' })}
+                className="text-sm text-indigo-700 hover:text-indigo-800 underline mt-2 inline-block"
               >
-                Jämför med ett annat scenario →
-              </button>
+                Jämför alla modeller sida vid sida →
+              </Link>
             </div>
           ) : (
             <div className="flex items-center justify-center h-full min-h-40 text-gray-400 text-sm">

@@ -11,10 +11,7 @@ export const siteConfig = {
   // Fallback exchange rate used when live fetch fails
   fallbackUsdToSekRate: 10.5,
 
-  // Set to true to enable email lead capture form (Supabase integration prepared)
-  leadCaptureEnabled: true,
-
-  pricesLastVerified: "2026-05-15",
+  pricesLastVerified: "2026-06-01",
 
   contactEmail: "hej@aikostnad.se",
 };

@@ -4,7 +4,7 @@ import { trackEvent } from "../utils/analytics";
 export function StickyEmailBar() {
   const [visible, setVisible] = useState(false);
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
     if (
@@ -50,7 +50,7 @@ export function StickyEmailBar() {
       localStorage.setItem("email_subscribed", "1");
       setStatus("success");
     } catch {
-      setStatus("idle");
+      setStatus("error");
     }
   }
 
@@ -87,6 +87,11 @@ export function StickyEmailBar() {
               {status === "loading" ? "…" : "Bevaka"}
             </button>
           </form>
+          {status === "error" && (
+            <span className="text-xs text-red-600" role="alert">
+              Något gick fel — försök igen.
+            </span>
+          )}
           <button
             onClick={dismiss}
             className="text-gray-400 hover:text-gray-600 text-xl leading-none ml-1"

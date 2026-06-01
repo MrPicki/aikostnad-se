@@ -135,7 +135,7 @@ export default async function handler(_req: any, res: any): Promise<void> {
         "content-type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
+        model: "claude-haiku-4-5",
         max_tokens: 1500,
         system: SYSTEM,
         messages: [{ role: "user", content: userMessage }],

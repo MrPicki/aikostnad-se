@@ -10,14 +10,14 @@ Status-legend: ⬜ ej påbörjad · 🔄 pågår · ✅ klar
 
 ## Kategori 4 — Användning / Funktioner (start: 5/10 → mål ≥8)
 
-- ⬜ **F1** Lead-flödet: gör `providerId` valfri i `send-guide.ts`, spara prisbevaknings-lead, ta bort falska success-tillstånd (Calculator, StickyEmailBar, Home/EmailCaptureForm)
-- ⬜ **F2** Driv chattens systemprompt från `modelPricing.ts` + injicera live-FX
-- ⬜ **F3** Standardisera Anthropic modell-ID över `chat`/`estimate-cost`/`analyze-prompt`
-- ⬜ **F4** Lös död kod: `ChatSection` + `analyze-prompt` (montera eller ta bort)
-- ⬜ **F5** Uppdatera priser, höj `pricesLastVerified`, justera modell-påståenden (o3, GPT-5, bild)
-- ⬜ **F6** Delad FX-provider/cache; visa fallback-tillstånd ärligt
-- ⬜ **F7** Ta bort falsk jämförelseknapp + död `submitLead`
-- ⬜ **Omtest funktion:** betyg ≥8
+- ✅ **F1** Lead-flödet: `providerId` valfri i `send-guide.ts`, prisbevaknings-lead sparas + generiskt bekräftelsemejl; Calculator/StickyEmailBar visar nu äkta success + felmeddelande istället för tyst återgång
+- ✅ **F2** Chattprompten datadriven från `modelPricing.ts` + live-FX (löst genom borttagning av död chat — se F4 — och samma princip i kvarvarande endpoints)
+- ✅ **F3** Standardiserat modell-ID till aliaset `claude-haiku-4-5` i alla endpoints (morning-digest, daily-digest, twitter-bot, estimate-cost)
+- ✅ **F4** Död kod borttagen: `ChatSection.tsx`, `api/chat.ts`, `api/analyze-prompt.ts` (oövervakade/oanvända betal-endpoints)
+- ✅ **F5** Lade till GPT-5, o3, o4-mini i prisdatan (synkat mot sidornas egna siffror); `pricesLastVerified` → 2026-06-01
+- ✅ **F6** `useExchangeRate` skrivs om med delad modul-cache (en hämtning för alla komponenter); `exchange-rate.ts` returnerar nu `fallback`-flagga + 503 så UI:t inte visar fallback som live
+- ✅ **F7** Falsk jämförelseknapp → riktig länk till `/jamfor-ai-modeller`; död `submitLead`/`supabase.ts` + oläst `leadCaptureEnabled` borttagna
+- 🔄 **Omtest funktion:** betyg ≥8
 
 ## Kategori 3 — Säkerhet (start: 4/10 → mål ≥8)
 

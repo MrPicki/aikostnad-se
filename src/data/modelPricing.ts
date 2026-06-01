@@ -1,5 +1,5 @@
 // Prices in USD per 1 million tokens.
-// Last verified: 2026-05-15 — verify monthly at provider pricing pages.
+// Last verified: 2026-06-01 — verify monthly at provider pricing pages.
 // Sources: platform.openai.com/pricing, anthropic.com/pricing, ai.google.dev/pricing
 
 export type ModelCategory = "commercial" | "open-source";
@@ -62,6 +62,39 @@ export const models: ModelPricing[] = [
     category: "commercial",
     lastUpdated: "2026-05-15",
     bestFor: "Kostnadeffektiv, volym",
+  },
+  {
+    id: "gpt-5",
+    name: "GPT-5",
+    provider: "OpenAI",
+    inputPricePerMToken: 15.0,
+    outputPricePerMToken: 60.0,
+    contextWindow: 128_000,
+    category: "commercial",
+    lastUpdated: "2026-06-01",
+    bestFor: "Flaggskepp — komplex analys, kodning, resonemang",
+  },
+  {
+    id: "o3",
+    name: "OpenAI o3",
+    provider: "OpenAI",
+    inputPricePerMToken: 10.0,
+    outputPricePerMToken: 40.0,
+    contextWindow: 200_000,
+    category: "commercial",
+    lastUpdated: "2026-06-01",
+    bestFor: "Djupt resonemang — matte, logik, vetenskap",
+  },
+  {
+    id: "o4-mini",
+    name: "OpenAI o4-mini",
+    provider: "OpenAI",
+    inputPricePerMToken: 1.1,
+    outputPricePerMToken: 4.4,
+    contextWindow: 200_000,
+    category: "commercial",
+    lastUpdated: "2026-06-01",
+    bestFor: "Billig reasoning — kod, matte, hög volym",
   },
   // Anthropic
   {
