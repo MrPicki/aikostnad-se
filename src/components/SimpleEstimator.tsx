@@ -146,28 +146,27 @@ export function SimpleEstimator({ onUseInCalculator }: Props) {
             ))}
           </div>
 
-          <div className="relative">
-            <textarea
-              id="estimate-input"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="…eller skriv själv — t.ex. &ldquo;En chatbot för min webbshop som svarar på 500 kundfrågor per dag.&rdquo;"
-              className="w-full rounded-2xl border border-brand-100 shadow-sm bg-white px-5 pt-5 pb-16 text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-transparent transition"
-              rows={5}
-              maxLength={800}
-            />
-            <div className="absolute bottom-3 left-5 right-3 flex items-center justify-between">
-              <p className="text-xs text-gray-400">{text.length}/800</p>
-              <button
-                onClick={handleSubmit}
-                disabled={!text.trim()}
-                className="bg-brand-700 hover:bg-brand-800 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-semibold px-6 py-3 rounded-xl transition-colors"
-              >
-                Beräkna min AI-kostnad →
-              </button>
-            </div>
+          <textarea
+            id="estimate-input"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="…eller skriv själv — t.ex. &ldquo;En chatbot för min webbshop som svarar på 500 kundfrågor per dag.&rdquo;"
+            className="w-full rounded-2xl border border-gray-200 shadow-sm bg-white px-4 py-4 text-base sm:text-sm text-gray-800 placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-transparent transition"
+            rows={4}
+            maxLength={800}
+          />
+          <div className="flex justify-end mt-1.5">
+            <p className="text-xs text-gray-400">{text.length}/800</p>
           </div>
+          {/* Full-width, thumb-friendly CTA — works equally well on phones. */}
+          <button
+            onClick={handleSubmit}
+            disabled={!text.trim()}
+            className="w-full mt-2 bg-brand-700 hover:bg-brand-800 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-semibold px-6 py-3.5 rounded-xl transition-colors"
+          >
+            Beräkna min AI-kostnad →
+          </button>
           {status === "error" && (
             <p className="text-sm text-red-600 bg-red-50 rounded-xl px-4 py-3 mt-3">
               {errorMsg}

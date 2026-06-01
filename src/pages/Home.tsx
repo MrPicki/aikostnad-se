@@ -138,12 +138,12 @@ export function Home() {
         <HeroSection />
 
         {/* 2. The hero tool — describe your idea, get a number (show, don't tell) */}
-        <section aria-label="Snabb AI-kostnadsuppskattning" className="mb-16 sm:mb-20 scroll-mt-4">
+        <section aria-label="Snabb AI-kostnadsuppskattning" className="scroll-mt-4">
           <SimpleEstimator onUseInCalculator={handleScenario} />
         </section>
 
         {/* 3. Orientation — the three ways people pay for AI */}
-        <section className="mb-16 sm:mb-20">
+        <section className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-gray-100">
           <SectionHeading
             eyebrow="Grunderna"
             title="Tre sätt att betala för AI"
@@ -167,7 +167,7 @@ export function Home() {
         </section>
 
         {/* 4. Detailed calculator — clearly secondary, for those who want exact numbers */}
-        <section id="kalkylator" className="mb-16 sm:mb-20 scroll-mt-4">
+        <section id="kalkylator" className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-gray-100 scroll-mt-4">
           <SectionHeading
             eyebrow="Räkna exakt"
             title="Detaljerad kalkylator"
@@ -177,24 +177,24 @@ export function Home() {
         </section>
 
         {/* 5. Subscriptions — for the "use AI" crowd */}
-        <section className="mb-16 sm:mb-20">
+        <section className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-gray-100">
           <SectionHeading eyebrow="Abonnemang" title="Vad kostar de färdiga AI-tjänsterna?" />
           <SubscriptionTable />
         </section>
 
         {/* 6. Model comparison — for the "build" crowd */}
-        <section className="mb-16 sm:mb-20">
+        <section className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-gray-100">
           <SectionHeading eyebrow="API-priser" title="Jämför AI-modeller" sub="Pris per miljon tokens, sorterbart. Live-kurs i kronor." />
           <ModelComparisonTable />
         </section>
 
         {/* 7. FAQ */}
-        <section id="faq" className="mb-16 sm:mb-20">
+        <section id="faq" className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-gray-100">
           <FAQ />
         </section>
 
         {/* 8. Single email capture */}
-        <section className="mb-16 sm:mb-20">
+        <section className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-gray-100">
           <div className="card max-w-lg mx-auto text-center">
             <p className="text-base font-bold text-gray-900 mb-1">Få mejl när AI-priser ändras</p>
             <p className="text-sm text-gray-500 mb-4">Vi bevakar priserna åt dig — max ett mejl i veckan.</p>
@@ -203,7 +203,7 @@ export function Home() {
         </section>
 
         {/* 9. More guides — compact, calm */}
-        <section className="mb-16 sm:mb-20">
+        <section className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-gray-100">
           <SectionHeading title="Fler prisguider" />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
             {GUIDES.map((g) => (
@@ -221,7 +221,7 @@ export function Home() {
 
         {/* 10. Deep dive — kept for readers (and SEO), folded away so the page
             stays calm for newcomers. */}
-        <details className="group border-t border-gray-200 pt-6">
+        <details className="group mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-gray-200">
           <summary className="cursor-pointer list-none flex items-center gap-2 text-lg font-bold text-gray-900">
             <span className="text-brand-700 group-open:rotate-90 transition-transform inline-block">▸</span>
             Fördjupning: vad kostar AI i Sverige 2026?
