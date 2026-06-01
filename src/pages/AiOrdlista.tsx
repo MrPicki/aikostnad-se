@@ -94,7 +94,7 @@ export function AiOrdlista() {
 
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -121,7 +121,7 @@ export function AiOrdlista() {
               <a
                 key={letter}
                 href={`#letter-${letter}`}
-                className="inline-flex items-center justify-center w-8 h-8 rounded-md bg-white border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-colors"
+                className="inline-flex items-center justify-center w-8 h-8 rounded-md bg-white border border-gray-200 text-sm font-semibold text-gray-700 hover:bg-brand-50 hover:border-brand-200 hover:text-brand-700 transition-colors"
               >
                 {letter}
               </a>
@@ -137,7 +137,7 @@ export function AiOrdlista() {
               );
               return (
                 <div key={letter} id={`letter-${letter}`} className="scroll-mt-20">
-                  <h2 className="text-3xl font-bold text-indigo-700 mb-4 border-b border-gray-200 pb-2">
+                  <h2 className="text-3xl font-bold text-brand-700 mb-4 border-b border-gray-200 pb-2">
                     {letter}
                   </h2>
                   <div className="space-y-5">
@@ -156,7 +156,7 @@ export function AiOrdlista() {
                                 {" "}
                                 <Link
                                   to={term.link}
-                                  className="text-indigo-700 hover:underline font-medium"
+                                  className="text-brand-700 hover:underline font-medium"
                                 >
                                   Läs mer →
                                 </Link>
@@ -172,12 +172,12 @@ export function AiOrdlista() {
             })}
         </section>
 
-        <div className="mt-16 card bg-indigo-50 border-indigo-100 text-center">
-          <p className="text-sm text-indigo-800">
+        <div className="mt-16 card bg-brand-50 border-brand-100 text-center">
+          <p className="text-sm text-brand-800">
             Hittade du inte termen?{" "}
             <Link
               to="/kontakt"
-              className="font-semibold underline underline-offset-2 hover:text-indigo-900"
+              className="font-semibold underline underline-offset-2 hover:text-brand-900"
             >
               Hör av dig så lägger vi till den
             </Link>
@@ -185,7 +185,7 @@ export function AiOrdlista() {
             Redo att räkna på kostnader?{" "}
             <Link
               to="/#kalkylator"
-              className="font-semibold underline underline-offset-2 hover:text-indigo-900"
+              className="font-semibold underline underline-offset-2 hover:text-brand-900"
             >
               Använd kalkylatorn
             </Link>

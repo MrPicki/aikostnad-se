@@ -57,7 +57,7 @@ export function GratisAi() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -208,7 +208,7 @@ export function GratisAi() {
             affärsdata eller personuppgifter bör läggas in. För open-source-entusiasterna
             finns modellen att köra self-hosted via Hugging Face eller Ollama — då är
             ingen data extern. Se vår{" "}
-            <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
+            <Link to="/billigaste-ai" className="text-brand-700 hover:underline">
               jämförelse av billigaste AI-modellerna
             </Link>{" "}
             för full kostnadsanalys.
@@ -224,7 +224,7 @@ export function GratisAi() {
           <p>
             Mistral Small via API är dessutom det billigaste alternativet av alla
             ($0,10/$0,30 per miljon tokens) — se{" "}
-            <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
+            <Link to="/billigaste-ai" className="text-brand-700 hover:underline">
               billigaste AI-modellerna
             </Link>{" "}
             för jämförelse.
@@ -270,7 +270,7 @@ export function GratisAi() {
           <p>
             ChatGPT Plus och Claude Pro kostar 209 kr/mån — ca 7 kr per arbetsdag.
             Om AI sparar dig 30 minuter per dag är ROI:n uppenbar. Se{" "}
-            <Link to="/vad-kostar-ai" className="text-indigo-700 hover:underline">
+            <Link to="/vad-kostar-ai" className="text-brand-700 hover:underline">
               vår kompletta AI-prisguide
             </Link>{" "}
             för full jämförelse av abonnemang och API.
@@ -316,16 +316,16 @@ export function GratisAi() {
         <Sources items={officialPricingSources} />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link to="/billigaste-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
+          <Link to="/billigaste-ai" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+            <p className="font-semibold text-gray-900 group-hover:text-brand-700 mb-1 text-sm">
               Billigaste betalda AI 2026
             </p>
             <p className="text-xs text-gray-500">
               Billigare än gratis med rätt modellval? Jämför GPT-4o mini, Mistral Small med mera.
             </p>
           </Link>
-          <Link to="/vad-kostar-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
+          <Link to="/vad-kostar-ai" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+            <p className="font-semibold text-gray-900 group-hover:text-brand-700 mb-1 text-sm">
               Komplett AI-prisguide 2026
             </p>
             <p className="text-xs text-gray-500">

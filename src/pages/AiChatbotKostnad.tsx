@@ -60,7 +60,7 @@ export function AiChatbotKostnad() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -106,7 +106,7 @@ export function AiChatbotKostnad() {
             </p>
 
             <div className="space-y-4 mt-4">
-              <div className="border-l-4 border-indigo-400 pl-4">
+              <div className="border-l-4 border-brand-400 pl-4">
                 <h3 className="text-base font-bold text-gray-900 mb-1">1. Volym (frågor per dag)</h3>
                 <p className="text-gray-700 leading-relaxed text-sm">
                   Linjärt — dubbla frågor, dubbla kostnaden. 50 frågor/dag är
@@ -115,7 +115,7 @@ export function AiChatbotKostnad() {
                 </p>
               </div>
 
-              <div className="border-l-4 border-indigo-400 pl-4">
+              <div className="border-l-4 border-brand-400 pl-4">
                 <h3 className="text-base font-bold text-gray-900 mb-1">2. Modellnivå (mini vs flaggskepp)</h3>
                 <p className="text-gray-700 leading-relaxed text-sm">
                   Mini-modeller (GPT-4o mini, Claude Haiku, Gemini Flash) är{" "}
@@ -126,7 +126,7 @@ export function AiChatbotKostnad() {
                 </p>
               </div>
 
-              <div className="border-l-4 border-indigo-400 pl-4">
+              <div className="border-l-4 border-brand-400 pl-4">
                 <h3 className="text-base font-bold text-gray-900 mb-1">3. Längd på input och output</h3>
                 <p className="text-gray-700 leading-relaxed text-sm">
                   Långa kontexter och långa svar dominerar notan.{" "}
@@ -136,7 +136,7 @@ export function AiChatbotKostnad() {
                 </p>
               </div>
 
-              <div className="border-l-4 border-indigo-400 pl-4">
+              <div className="border-l-4 border-brand-400 pl-4">
                 <h3 className="text-base font-bold text-gray-900 mb-1">4. Caching av återanvänd kontext</h3>
                 <p className="text-gray-700 leading-relaxed text-sm">
                   Om din bot har en lång system-prompt eller alltid skickar
@@ -174,8 +174,8 @@ export function AiChatbotKostnad() {
               </p>
             </div>
 
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5">
-              <h3 className="text-lg font-bold text-indigo-900 mb-2">Småföretag — 500 frågor/dag</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5">
+              <h3 className="text-lg font-bold text-brand-900 mb-2">Småföretag — 500 frågor/dag</h3>
               <p className="text-gray-700 leading-relaxed text-sm mb-3">
                 Kundtjänst-bot för en webbshop eller intern AI-assistent för
                 ett team på 10 personer. 11 000 förfrågningar per månad.
@@ -226,7 +226,7 @@ export function AiChatbotKostnad() {
               <li>
                 <strong>Använd mini-modeller där det räcker.</strong> Klassi-
                 ficering, kategorisering, enkla FAQ-svar — allt det här klarar{" "}
-                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">de billigaste mini-modellerna</Link>{" "}
+                <Link to="/billigaste-ai" className="text-brand-700 hover:underline">de billigaste mini-modellerna</Link>{" "}
                 lika bra som flaggskeppen.
               </li>
               <li>
@@ -321,7 +321,7 @@ export function AiChatbotKostnad() {
             <p className="text-gray-700 leading-relaxed">
               Talen ovan är generella riktmärken. Verklig kostnad beror på din
               volym, svarslängd och hur väl du kan utnyttja caching. På{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 startsidan
               </Link>{" "}
               kan du beskriva din chatbot-idé i fri text — vi använder AI för
@@ -332,17 +332,17 @@ export function AiChatbotKostnad() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
+                <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">
                   Räkna specifikt på ChatGPT (GPT-4o och 4o mini)
                 </Link>
               </li>
               <li>
-                <Link to="/claude-pris" className="text-indigo-700 hover:underline">
+                <Link to="/claude-pris" className="text-brand-700 hover:underline">
                   Räkna specifikt på Claude Haiku och Sonnet
                 </Link>
               </li>
               <li>
-                <Link to="/chatgpt-vs-claude" className="text-indigo-700 hover:underline">
+                <Link to="/chatgpt-vs-claude" className="text-brand-700 hover:underline">
                   Jämför ChatGPT vs Claude för chatbots
                 </Link>
               </li>

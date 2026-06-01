@@ -27,7 +27,7 @@ function formatContext(n: number): string {
 
 // Recommendation badges shown in simple view
 const BADGES: Record<string, { label: string; color: string }> = {
-  "gpt-4o-mini":       { label: "Mest prisvärd",         color: "bg-indigo-50 text-indigo-700" },
+  "gpt-4o-mini":       { label: "Mest prisvärd",         color: "bg-brand-50 text-brand-700" },
   "mistral-small":     { label: "Billigast",             color: "bg-green-50 text-green-700" },
   "claude-haiku-4-5":  { label: "Bäst kundtjänst",      color: "bg-blue-50 text-blue-700" },
   "claude-sonnet-4-6": { label: "Bäst svenska",         color: "bg-purple-50 text-purple-700" },
@@ -55,14 +55,19 @@ function Th({ label, sortKey, current, direction, onClick }: ThProps) {
   const active = current === sortKey;
   return (
     <th
-      className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide cursor-pointer select-none hover:text-indigo-700 whitespace-nowrap"
-      onClick={() => onClick(sortKey)}
+      scope="col"
+      className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide whitespace-nowrap"
       aria-sort={active ? (direction === "asc" ? "ascending" : "descending") : "none"}
     >
-      <span className="flex items-center gap-1">
+      <button
+        type="button"
+        onClick={() => onClick(sortKey)}
+        className="flex items-center gap-1 uppercase tracking-wide select-none hover:text-brand-700 focus-visible:text-brand-700"
+        aria-label={`Sortera efter ${label}`}
+      >
         {label}
-        <span className="text-gray-300">{active ? (direction === "asc" ? "↑" : "↓") : "↕"}</span>
-      </span>
+        <span className="text-gray-400" aria-hidden="true">{active ? (direction === "asc" ? "↑" : "↓") : "↕"}</span>
+      </button>
     </th>
   );
 }
@@ -150,7 +155,7 @@ export function ModelComparisonTable() {
             type="checkbox"
             checked={showOpenSource}
             onChange={(e) => setShowOpenSource(e.target.checked)}
-            className="rounded border-gray-300 text-indigo-700"
+            className="rounded border-gray-300 text-brand-700"
           />
           Visa open source
         </label>
@@ -208,7 +213,7 @@ function SimpleTable({ sorted, rate }: SimpleTableProps) {
         return (
           <div
             key={model.id}
-            className={`rounded-xl border p-4 bg-white ${badge ? "border-indigo-100 shadow-sm" : "border-gray-100"}`}
+            className={`rounded-xl border p-4 bg-white ${badge ? "border-brand-100 shadow-sm" : "border-gray-100"}`}
           >
             {badge && (
               <span className={`inline-block px-2 py-0.5 text-xs font-semibold rounded-full mb-3 ${badge.color}`}>
@@ -244,7 +249,7 @@ interface AdvancedTableProps {
 
 function AdvancedTable({ sorted, rate, sortKey, sortDir, onSort }: AdvancedTableProps) {
   return (
-    <table className="w-full" role="grid">
+    <table className="w-full">
       <thead className="bg-gray-50 border-b border-gray-200">
         <tr>
           <Th label="Modell"        sortKey="name"         current={sortKey} direction={sortDir} onClick={onSort} />

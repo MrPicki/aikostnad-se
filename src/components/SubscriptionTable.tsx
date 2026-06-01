@@ -111,7 +111,7 @@ export function SubscriptionTable() {
       </div>
 
       {/* Person multiplier — live updates the prices below */}
-      <div className="mb-4 rounded-xl bg-indigo-50/60 border border-indigo-100 px-4 py-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+      <div className="mb-4 rounded-xl bg-brand-50/60 border border-brand-100 px-4 py-3 flex flex-wrap items-center gap-x-4 gap-y-2">
         <div className="flex items-center gap-2">
           <span className="text-lg" aria-hidden="true">👥</span>
           <label htmlFor="persons" className="text-sm font-semibold text-gray-800">
@@ -128,8 +128,8 @@ export function SubscriptionTable() {
                 onClick={() => setPersons(n)}
                 className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
                   active
-                    ? "bg-indigo-700 text-white"
-                    : "bg-white text-gray-600 hover:bg-indigo-100 border border-indigo-200"
+                    ? "bg-brand-700 text-white"
+                    : "bg-white text-gray-600 hover:bg-brand-100 border border-brand-200"
                 }`}
                 aria-pressed={active}
               >
@@ -147,12 +147,12 @@ export function SubscriptionTable() {
               const v = parseInt(e.target.value, 10);
               if (Number.isFinite(v) && v >= 1 && v <= 10000) setPersons(v);
             }}
-            className="ml-1 w-16 px-2 py-1 text-xs rounded-md border border-indigo-200 bg-white focus:outline-none focus:ring-1 focus:ring-indigo-400"
+            className="ml-1 w-16 px-2 py-1 text-xs rounded-md border border-brand-200 bg-white focus:outline-none focus:ring-1 focus:ring-brand-400"
             aria-label="Eget antal personer"
           />
         </div>
         {isTeam && (
-          <p className="text-xs text-indigo-700 sm:ml-auto">
+          <p className="text-xs text-brand-700 sm:ml-auto">
             Priserna nedan multipliceras med {persons}.
           </p>
         )}
@@ -185,13 +185,13 @@ export function SubscriptionTable() {
                   <tr
                     key={plan.service}
                     className={`transition-colors ${
-                      plan.popular ? "bg-indigo-50/60 hover:bg-indigo-50" : "hover:bg-gray-50"
+                      plan.popular ? "bg-brand-50/60 hover:bg-brand-50" : "hover:bg-gray-50"
                     }`}
                   >
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         {plan.popular && (
-                          <span className="inline-block px-2 py-0.5 bg-indigo-700 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide whitespace-nowrap shadow-sm">
+                          <span className="inline-block px-2 py-0.5 bg-brand-700 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide whitespace-nowrap shadow-sm">
                             Bäst för nybörjare
                           </span>
                         )}
@@ -235,10 +235,10 @@ export function SubscriptionTable() {
           return (
             <div
               key={plan.service}
-              className={`card py-4 px-4 ${plan.popular ? "border-indigo-200 bg-indigo-50/40 ring-1 ring-indigo-100" : ""}`}
+              className={`card py-4 px-4 ${plan.popular ? "border-brand-200 bg-brand-50/40 ring-1 ring-brand-100" : ""}`}
             >
               {plan.popular && (
-                <span className="inline-block px-2 py-0.5 bg-indigo-700 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide mb-2 shadow-sm">
+                <span className="inline-block px-2 py-0.5 bg-brand-700 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide mb-2 shadow-sm">
                   Bäst för nybörjare
                 </span>
               )}
@@ -270,7 +270,7 @@ export function SubscriptionTable() {
 
       <p className="mt-3 text-xs text-gray-400">
         Bygger du en app och behöver räkna per token?{" "}
-        <a href="#kalkylator" className="text-indigo-700 hover:underline">
+        <a href="#kalkylator" className="text-brand-700 hover:underline">
           Se API-kalkylatorn
         </a>{" "}
         längre ner.

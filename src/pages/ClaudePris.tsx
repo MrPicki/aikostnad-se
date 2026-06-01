@@ -75,7 +75,7 @@ export function ClaudePris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -118,7 +118,7 @@ export function ClaudePris() {
               förmåga och kostnad, och <strong>Haiku</strong> för snabba, höga volymer.
               Sonnet är standardvalet för de flesta produktionsscenarion. Letar du efter
               det allra billigaste alternativet finns Haiku med i vår{" "}
-              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">jämförelse av billigaste AI-modellerna</Link>.
+              <Link to="/billigaste-ai" className="text-brand-700 hover:underline">jämförelse av billigaste AI-modellerna</Link>.
             </p>
             <p>
               För <strong>svenska texter</strong> gäller samma tokeniseringsöverhead som för
@@ -132,7 +132,7 @@ export function ClaudePris() {
               eller dokumentation) kan du cache:a den och betala bara 10 % av normalt
               input-pris på den delen. Det kan halvera kostnaden i chatbot-scenarier — läs
               mer om hur du{" "}
-              <Link to="/vad-kostar-ai" className="text-indigo-700 hover:underline">påverkar din totala AI-kostnad</Link>.
+              <Link to="/vad-kostar-ai" className="text-brand-700 hover:underline">påverkar din totala AI-kostnad</Link>.
             </p>
             <p>
               Kalkylatorn nedan är förinställd på Claude Sonnet 4.6. Byt till Haiku eller
@@ -162,8 +162,8 @@ export function ClaudePris() {
                 prioritetslimits — lönsamt om du använder Claude dagligen.
               </p>
             </div>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
-              <h3 className="text-base font-bold text-indigo-900 mb-2">Småföretag — 500 frågor/dag</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-brand-900 mb-2">Småföretag — 500 frågor/dag</h3>
               <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
                 <li>Claude Haiku 4.5: <strong>~165 kr/mån</strong></li>
                 <li>Claude Sonnet 4.6: <strong>~496 kr/mån</strong></li>
@@ -218,7 +218,7 @@ export function ClaudePris() {
             Claude-användare som inte redan har caching aktiverat: aktivera det idag.
           </p>
           <p>
-            Se vår <Link to="/prompt-caching" className="text-indigo-700 hover:underline">djupguide om prompt caching</Link>{" "}
+            Se vår <Link to="/prompt-caching" className="text-brand-700 hover:underline">djupguide om prompt caching</Link>{" "}
             för konkreta räkneexempel, implementation-tips och jämförelse med OpenAI:s
             automatiska caching.
           </p>
@@ -230,14 +230,14 @@ export function ClaudePris() {
 
         <Sources items={claudeSources} />
 
-        <div className="mt-12 card bg-indigo-50 border-indigo-100">
-          <p className="text-sm text-indigo-800">
+        <div className="mt-12 card bg-brand-50 border-brand-100">
+          <p className="text-sm text-brand-800">
             Vill du jämföra med ChatGPT?{" "}
-            <Link to="/vad-kostar-chatgpt" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/vad-kostar-chatgpt" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               Se GPT-4o-kalkylatorn
             </Link>{" "}
             eller{" "}
-            <Link to="/" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               hela jämförelsetabellen på startsidan
             </Link>
             .
@@ -245,7 +245,7 @@ export function ClaudePris() {
         </div>
 
         {/* Kom igång */}
-        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+        <div className="card mt-6 bg-gradient-to-br from-brand-50 to-white border border-brand-100">
           <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
           <p className="text-sm text-gray-600 mb-4">
             Nu vet du vad Claude API kostar. Nästa steg är att skapa ditt konto och börja bygga.

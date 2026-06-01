@@ -1,5 +1,18 @@
 User-agent: *
 Allow: /
-Crawl-delay: 1
+
+# AI answer engines are explicitly welcome to cite our pricing data.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
 
 Sitemap: https://aikostnad.se/sitemap.xml
+Sitemap: https://aikostnad.se/sitemap-news.xml

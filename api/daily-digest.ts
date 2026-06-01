@@ -13,25 +13,13 @@ const FEEDS = [
   },
 ];
 
-const SYSTEM = `Du är chefredaktör på aikostnad.se — Sveriges ledande sajt för AI-kostnadskalkylering.
-Skriv en professionell, lättläst daglig AI-nyhetsrapport på svenska baserat på dagens nyheter.
-
-Format:
-- Rubrik: "Dagens AI-rapport — [datum]"
-- Ingress: 2-3 meningar som fångar det viktigaste (detta används som X-inlägg)
-- 2-4 nyhetsavsnitt med underrubriker
-- Varje avsnitt: 2-3 meningar som förklarar nyheten + en mening om vad det betyder för företag som använder AI
-- Avslutning: 1-2 meningar med dagens takeaway kopplat till AI-kostnader
-- Ton: kunnig analytiker, inte reklamspråk
-- Längd: 350-500 ord totalt
-
-Returnera JSON:
-{
-  "title": "Dagens AI-rapport — 26 maj 2026",
-  "ingress": "Max 250 tecken, fångar det viktigaste, används som X-teaser",
-  "article": "Hela artikeln i markdown",
-  "xPost": "Färdigt X-inlägg: ingress + newline + 'Hela rapporten: https://aikostnad.se/nyheter' + newline + '#AI #AIpriser'"
-}`;
+// NOTE: This is a PUBLIC, unauthenticated endpoint. It deliberately does NOT
+// call any paid LLM API — doing so here would let anyone burn the Anthropic
+// budget by looping the URL (cost-amplification DoS). The nicely written daily
+// article is generated once per day by the authenticated cron (morning-digest)
+// and stored in Supabase; the Nyheter page reads it via /api/article. This
+// endpoint only serves the cheap raw-RSS fallback for the brief window before
+// the cron has run (or if it failed).
 
 interface RawArticle {
   title: string;
@@ -97,86 +85,19 @@ export default async function handler(_req: any, res: any): Promise<void> {
     "Cache-Control",
     "public, s-maxage=3600, stale-while-revalidate=600"
   );
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  // Same-origin only — this endpoint is consumed by our own Nyheter page.
+  res.setHeader("Access-Control-Allow-Origin", "https://aikostnad.se");
 
-  if (recentArticles.length === 0) {
-    res.status(200).json({
-      title: "",
-      ingress: "",
-      article: "",
-      xPost: "",
-      generatedAt: new Date().toISOString(),
-      rawArticles: [],
-    } satisfies DigestResult);
-    return;
-  }
-
-  const todayStr = new Date().toLocaleDateString("sv-SE", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-
-  const articlesText = recentArticles
-    .map(
-      (a, i) =>
-        `${i + 1}. [${a.source}] ${a.title}\n   ${a.summary || "(ingen sammanfattning)"}`
-    )
-    .join("\n\n");
-
-  const userMessage = `Datum: ${todayStr}\n\nNyheter:\n${articlesText}`;
-
-  try {
-    const anthropicRes = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "x-api-key": process.env.ANTHROPIC_API_KEY ?? "",
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "claude-haiku-4-5-20251001",
-        max_tokens: 1500,
-        system: SYSTEM,
-        messages: [{ role: "user", content: userMessage }],
-      }),
-    });
-
-    if (!anthropicRes.ok) {
-      throw new Error(`Anthropic API error: ${anthropicRes.status}`);
-    }
-
-    const data = (await anthropicRes.json()) as {
-      content: Array<{ type: string; text: string }>;
-    };
-
-    const raw =
-      data.content[0]?.type === "text" ? data.content[0].text.trim() : "";
-    const text = raw
-      .replace(/^```(?:json)?\s*/i, "")
-      .replace(/\s*```$/, "")
-      .trim();
-
-    const parsed = JSON.parse(text) as DigestResult;
-
-    res.status(200).json({
-      title: parsed.title ?? "",
-      ingress: parsed.ingress ?? "",
-      article: parsed.article ?? "",
-      xPost: parsed.xPost ?? "",
-      generatedAt: new Date().toISOString(),
-      rawArticles: recentArticles,
-    } satisfies DigestResult);
-  } catch (err) {
-    console.error("daily-digest AI error:", err);
-    // Fallback: return raw articles without AI digest
-    res.status(200).json({
-      title: "",
-      ingress: "",
-      article: "",
-      xPost: "",
-      generatedAt: new Date().toISOString(),
-      rawArticles: recentArticles,
-    } satisfies DigestResult);
-  }
+  // Cheap raw-RSS response only. The client (Nyheter.tsx) renders rawArticles
+  // as a headline list when `article` is empty, so this is a complete fallback
+  // without any paid LLM call.
+  res.status(200).json({
+    title: "",
+    ingress: "",
+    article: "",
+    xPost: "",
+    generatedAt: new Date().toISOString(),
+    rawArticles: recentArticles,
+  } satisfies DigestResult);
 }
+

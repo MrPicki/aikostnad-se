@@ -71,7 +71,7 @@ export function PerplexityPris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -109,8 +109,8 @@ export function PerplexityPris() {
             </p>
             <p>
               Sedan 2025 har Perplexity byggt ett ekosystem som konkurrerar med både{" "}
-              <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">ChatGPT</Link>{" "}
-              och <Link to="/claude-pris" className="text-indigo-700 hover:underline">Claude</Link>{" "}
+              <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">ChatGPT</Link>{" "}
+              och <Link to="/claude-pris" className="text-brand-700 hover:underline">Claude</Link>{" "}
               med funktioner som Spaces (delade research-rum) och Pro File Upload (analysera filer
               upp till 50 MB). Den här guiden går igenom priser, vad du får och när det lönar sig.
             </p>
@@ -147,7 +147,7 @@ export function PerplexityPris() {
           <p>
             Om du gör under 5 djupa sökningar per dag räcker Free-versionen. Om du är heavy
             user av modellval och faktiskt kör samma modeller direkt via{" "}
-            <Link to="/openai-api-kostnad" className="text-indigo-700 hover:underline">OpenAI</Link>{" "}
+            <Link to="/openai-api-kostnad" className="text-brand-700 hover:underline">OpenAI</Link>{" "}
             eller Claude.ai kan du också skippa Perplexity. Och om du främst använder AI för
             skrivande och kodning ger ChatGPT Plus mer värde för samma pengar.
           </p>

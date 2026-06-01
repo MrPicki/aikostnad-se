@@ -22,9 +22,9 @@ export function RelatedArticles({ title = "Relaterade guider", links }: Props) {
           <Link
             key={link.to}
             to={link.to}
-            className="rounded-xl border border-gray-200 bg-white hover:border-indigo-300 hover:bg-indigo-50/30 transition-all p-4 group"
+            className="rounded-xl border border-gray-200 bg-white hover:border-brand-300 hover:bg-brand-50/30 transition-all p-4 group"
           >
-            <p className="text-sm font-semibold text-gray-900 group-hover:text-indigo-700 mb-0.5">
+            <p className="text-sm font-semibold text-gray-900 group-hover:text-brand-700 mb-0.5">
               {link.title}
             </p>
             <p className="text-xs text-gray-500 leading-relaxed">

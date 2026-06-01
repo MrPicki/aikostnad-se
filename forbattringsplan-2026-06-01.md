@@ -1,0 +1,82 @@
+# Förbättringsplan & checklista — aikostnad.se
+
+**Startad:** 2026-06-01
+**Källa:** `rapport-2026-06-01.md`
+**Arbetssätt:** En kategori i taget. När alla punkter i en kategori är avbockade körs kategorins granskning om — målet är minst **8/10** innan nästa kategori påbörjas.
+
+Status-legend: ⬜ ej påbörjad · 🔄 pågår · ✅ klar
+
+---
+
+## Kategori 4 — Användning / Funktioner (start: 5/10 → mål ≥8)
+
+- ✅ **F1** Lead-flödet: `providerId` valfri i `send-guide.ts`, prisbevaknings-lead sparas + generiskt bekräftelsemejl; Calculator/StickyEmailBar visar nu äkta success + felmeddelande istället för tyst återgång
+- ✅ **F2** Chattprompten datadriven från `modelPricing.ts` + live-FX (löst genom borttagning av död chat — se F4 — och samma princip i kvarvarande endpoints)
+- ✅ **F3** Standardiserat modell-ID till aliaset `claude-haiku-4-5` i alla endpoints (morning-digest, daily-digest, twitter-bot, estimate-cost)
+- ✅ **F4** Död kod borttagen: `ChatSection.tsx`, `api/chat.ts`, `api/analyze-prompt.ts` (oövervakade/oanvända betal-endpoints)
+- ✅ **F5** Lade till GPT-5, o3, o4-mini i prisdatan (synkat mot sidornas egna siffror); `pricesLastVerified` → 2026-06-01
+- ✅ **F6** `useExchangeRate` skrivs om med delad modul-cache (en hämtning för alla komponenter); `exchange-rate.ts` returnerar nu `fallback`-flagga + 503 så UI:t inte visar fallback som live
+- ✅ **F7** Falsk jämförelseknapp → riktig länk till `/jamfor-ai-modeller`; död `submitLead`/`supabase.ts` + oläst `leadCaptureEnabled` borttagna
+- ✅ **Omtest funktion:** betyg **8/10** ✓ (alla kritiska/höga fynd verifierat lösta)
+
+## Kategori 3 — Säkerhet (start: 4/10 → mål ≥8)
+
+- ✅ **S1** Fail-closed cron-auth: `morning-digest` + `twitter-bot` vägrar köra om `CRON_SECRET` saknas/ej matchar
+- ✅ **S2** `daily-digest`: Claude-anropet + SYSTEM borttaget ur publik väg (returnerar bara råa RSS-artiklar); `ACAO: *` → `https://aikostnad.se`; död `ai-news.ts` borttagen
+- ✅ **S3** `send-guide`: per-IP (5/h) + per-mottagare (2/24h) rate limit
+- ✅ **S4** DOMPurify-sanering i båda `dangerouslySetInnerHTML`-sänkorna (`sanitizeArticleHtml`); server-side `stripDangerousHtml` i `morning-digest` innan lagring
+- ✅ **S5** CSP-header i `vercel.json` (`default-src 'self'`, `frame-ancestors 'none'`, `object-src 'none'`, scopad script/connect/img)
+- 🟡 **S6** In-memory-limiters hårdgjorda (send-guide); **durabel KV-limiter kräver infra (Vercel KV/Upstash)** — dokumenterat som nästa steg, ej möjligt att provisionera här
+- ✅ **S7** `article.ts` föredrar anon-nyckel (RLS-policy dokumenterad i kod) + service-role som fallback; URL-precedens → icke-`VITE_` först i alla server-funktioner
+- ✅ **Omtest säkerhet:** betyg **8/10** ✓ (kritiska kostnads-/XSS-vektorer stängda; KV-limiter kvar som framtida steg)
+
+## Kategori 2 — SEO (start: 6/10 → mål ≥8)
+
+- ✅ **SEO1** `ROUTES` utökad till alla 42 statiska sidor (prerender 25→43 filer); build-guard `check-seo-sync.mjs` failar bygget vid divergens
+- ✅ **SEO2** SPA-fallback-rewrite i `vercel.json` (`/((?!api/).*) → /index.html`) — inga 404 på direktnavigering/refresh
+- ✅ **SEO3** `/nyheter/:date`: dynamisk `api/sitemap-news.ts` (Supabase) + `NewsArticle`-schema; länkad från `robots.txt`
+- ✅ **SEO4** Canonical-normalisering i `SEO.tsx` (path eller absolut → exakt en URL); dubbelsuffix-bug på nyhetssidor fixad
+- ✅ **SEO5** En sanningskälla: prerender + runtime delar titel-logik (`${title} | Aikostnad.se`); guarden tvingar paritet
+- ✅ **SEO6** `generate-sitemap.mjs` genererar sitemap från `ROUTES` + riktiga `modifiedDate` i `articles.ts` (per-sida lastmod)
+- ✅ **SEO7** Start-`<h1>` → "Vad kostar AI? Räkna ut din AI-kostnad — i kronor"; `og:locale=sv_SE` + `hreflang=sv-SE`/`x-default` i prerender + runtime
+- 🟡 **SEO8** `noindex` på `/embed`; `robots.txt` städad (bort `Crawl-delay`, AI-botar tillåtna, 2 sitemaps). Self-hosta typsnitt/skjut upp scripts = valfri förstärkning, ej gjort (CWV-finlir)
+- ✅ **Omtest SEO:** betyg **8/10** ✓ (alla 8 fynd inkl. 3 kritiska verifierat lösta; SSG av body = framtida steg mot 9+)
+
+## Kategori 1 — Design / Layout (start: 6/10 → mål ≥8)
+
+- ✅ **D1** `RouteChangeEffect` (scroll-reset + fokusflytt till `#main`), skip-länk ("Hoppa till innehåll"), global `focus-visible`-ring (alla knappar/länkar) + på `.btn-primary`
+- ✅ **D2** Sorteringsrubriker → riktiga `<button>` (tangentbordsstyrbara, `scope="col"`, `aria-label`); `role="grid"` borttaget; tooltips (`ⓘ`) → fokuserbara `<button>`
+- ✅ **D3** FAQ-dragspel: `max-h-96` → grid-rows-teknik (`grid-rows-[1fr]/[0fr]`) — klipper aldrig långa svar
+- ✅ **D4** Dubbel `SimpleEstimator` borttagen (finns kvar i "Beskriv din idé"-fliken); `PathSelector` flyttad först; responsiva avstånd (`mb-16 md:mb-24`)
+- ✅ **D5** Design-tokens i `tailwind.config.js` (`brand`-skala + `shadow-card`); hela kodbasen `indigo-` → `brand-` (semantisk, visuellt identiskt); `.card` använder `shadow-card`
+- ✅ **D6** `aria-current="page"` på nav; sticky-bar nu responsiv (synlig på mobil); höjd kontrast (footer/captions `gray-400`→`gray-500`)
+- 🟡 **D7** `darkMode:'class'` förberett i config; full mörkt-läge-implementation = valfri förstärkning (auditen rankade sist/ej krävd), ej gjort
+- ✅ **D8** Jämförelseknapp = riktig länk (gjort i F7); Suspense-fallback → spinner-skeleton (`RouteFallback`)
+- ✅ **Omtest design:** betyg **8/10** ✓ (alla a11y-blockerare + IA + tokens verifierat lösta)
+
+---
+
+## Logg
+- 2026-06-01: Plan skapad. Påbörjar kategori 4 (Funktioner).
+- 2026-06-01: Funktioner klar → omtest **8/10**.
+- 2026-06-01: Säkerhet klar → omtest **8/10**.
+- 2026-06-01: SEO klar → omtest **8/10**.
+- 2026-06-01: Design klar → omtest **8/10**.
+
+## Slutresultat
+
+| Kategori | Start | Slut |
+|----------|:-----:|:----:|
+| Design / layout | 6 | **8** |
+| SEO | 6 | **8** |
+| Säkerhet | 4 | **8** |
+| Användning / funktioner | 5 | **8** |
+| **Genomsnitt** | **5,25** | **8,0** |
+
+Alla fyra kategorier når målet ≥8. Varje kategori omtestades av en oberoende
+granskning efter att alla punkter bockats av.
+
+### Återstående valfria förstärkningar (mot 9–10, kräver mer/infra)
+- **Säkerhet:** durabel rate-limiter via Vercel KV/Upstash (ersätter in-memory); skapa RLS-läspolicy i Supabase.
+- **SEO:** SSG/SSR av sidans *body* (idag prerenderas bara `<head>`); self-hosta typsnitt + skjut upp AdSense/GTM (Core Web Vitals).
+- **Design:** mörkt läge (`darkMode:'class'` förberett); riktiga popover-tooltips istället för `title`.

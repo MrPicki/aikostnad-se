@@ -77,7 +77,7 @@ export function MicrosoftCopilotPris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -123,14 +123,14 @@ export function MicrosoftCopilotPris() {
               <strong>Utvecklare?</strong> GitHub Copilot (105 kr/mån) är en självklarhet.{" "}
               <strong>Företag på Microsoft 365?</strong> M365 Copilot (330 kr/användare/mån) ger
               integration mot er egen data — det är där Copilot på riktigt sticker ut mot{" "}
-              <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">ChatGPT</Link>{" "}
-              och <Link to="/claude-pris" className="text-indigo-700 hover:underline">Claude</Link>.
+              <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">ChatGPT</Link>{" "}
+              och <Link to="/claude-pris" className="text-brand-700 hover:underline">Claude</Link>.
             </p>
             <p>
               För ett bolag med 50 anställda kostar M365 Copilot cirka <strong>198 000 kr/år</strong> —
               en betydande summa, men för organisationer som redan är djupt inne i Microsoft-ekosystemet
               är det ofta mer värt än att bygga motsvarande lösning från grunden. Se vår guide om{" "}
-              <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">AI för företag</Link>{" "}
+              <Link to="/ai-for-foretag" className="text-brand-700 hover:underline">AI för företag</Link>{" "}
               för en bredare jämförelse av enterprise-AI.
             </p>
           </div>
@@ -239,7 +239,7 @@ export function MicrosoftCopilotPris() {
                   <td className="p-3">210 kr</td>
                   <td className="p-3 text-gray-600">GPT-4 i Word/Excel/PowerPoint/Outlook, DALL-E 3 boosts</td>
                 </tr>
-                <tr className="bg-indigo-50">
+                <tr className="bg-brand-50">
                   <td className="p-3 font-medium">M365 Copilot (företag)</td>
                   <td className="p-3 font-semibold">330 kr/användare</td>
                   <td className="p-3 text-gray-600">Allt ovan + Graph-integration mot er Microsoft-data</td>
@@ -299,14 +299,14 @@ export function MicrosoftCopilotPris() {
 
         <Sources items={officialPricingSources} />
 
-        <div className="mt-12 card bg-indigo-50 border-indigo-100">
-          <p className="text-sm text-indigo-800">
+        <div className="mt-12 card bg-brand-50 border-brand-100">
+          <p className="text-sm text-brand-800">
             Vill du jämföra Copilot mot andra AI-alternativ?{" "}
-            <Link to="/vad-kostar-ai" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/vad-kostar-ai" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               Se den kompletta AI-prisguiden
             </Link>{" "}
             eller{" "}
-            <Link to="/ai-for-foretag" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/ai-for-foretag" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               läs om AI för svenska företag
             </Link>
             .

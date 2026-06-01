@@ -105,7 +105,7 @@ function AccordionItem({ item, isOpen, onToggle, index }: AccordionItemProps) {
   return (
     <div className="border-b border-gray-200 last:border-0">
       <button
-        className="w-full text-left py-5 flex items-center justify-between gap-4 hover:text-indigo-700 transition-colors"
+        className="w-full text-left py-5 flex items-center justify-between gap-4 hover:text-brand-700 transition-colors"
         onClick={onToggle}
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${index}`}
@@ -122,9 +122,12 @@ function AccordionItem({ item, isOpen, onToggle, index }: AccordionItemProps) {
         id={`faq-answer-${index}`}
         role="region"
         aria-labelledby={`faq-question-${index}`}
-        className={`overflow-hidden transition-all ${isOpen ? "max-h-96 pb-5" : "max-h-0"}`}
+        className={`grid transition-[grid-template-rows] duration-300 ${isOpen ? "grid-rows-[1fr] pb-5" : "grid-rows-[0fr]"}`}
       >
-        <p className="text-gray-600 leading-relaxed">{item.answer}</p>
+        {/* min-h-0 + overflow-hidden lets the row collapse smoothly without
+            clipping the answer at a fixed height (old max-h-96 truncated long
+            answers on mobile). */}
+        <p className="overflow-hidden min-h-0 text-gray-600 leading-relaxed">{item.answer}</p>
       </div>
     </div>
   );

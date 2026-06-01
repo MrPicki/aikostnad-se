@@ -74,7 +74,7 @@ export function Gpt4Pris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -124,7 +124,7 @@ export function Gpt4Pris() {
               och <strong>GPT-4.1 nano</strong> (extremt låg latens och kostnad för enkla
               uppgifter). Kalkylatorn nedan låter dig byta mellan dem och se hur kostnaden
               förändras. För höga volymer där priset är primärt jämför vi alla{" "}
-              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">billigaste mini-modellerna</Link>{" "}
+              <Link to="/billigaste-ai" className="text-brand-700 hover:underline">billigaste mini-modellerna</Link>{" "}
               sida vid sida.
             </p>
             <p>
@@ -146,8 +146,8 @@ export function Gpt4Pris() {
           </p>
 
           <div className="space-y-4 not-prose">
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
-              <h3 className="text-base font-bold text-indigo-900 mb-2">GPT-4.1 — $2/$8 per Mtok, 1M kontext</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-brand-900 mb-2">GPT-4.1 — $2/$8 per Mtok, 1M kontext</h3>
               <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
                 <li>Långa kodbas-analyser (hela repon i en prompt)</li>
                 <li>Strategisk planering över många dokument</li>
@@ -200,7 +200,7 @@ export function Gpt4Pris() {
           <p>
             För 80 % av andra användningsfall är GPT-4o eller mini bättre val. Vill du
             jämföra GPT-4.1 mot Claude Opus 4.7 (motsvarande flaggskepp hos Anthropic)?
-            Se vår <Link to="/chatgpt-vs-claude" className="text-indigo-700 hover:underline">jämförelse mellan ChatGPT och Claude</Link>.
+            Se vår <Link to="/chatgpt-vs-claude" className="text-brand-700 hover:underline">jämförelse mellan ChatGPT och Claude</Link>.
           </p>
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10">Hybrid-routing — sänk kostnaden 70 %</h2>
@@ -224,14 +224,14 @@ export function Gpt4Pris() {
 
         <Sources items={openAISources} />
 
-        <div className="mt-12 card bg-indigo-50 border-indigo-100">
-          <p className="text-sm text-indigo-800">
+        <div className="mt-12 card bg-brand-50 border-brand-100">
+          <p className="text-sm text-brand-800">
             Vill du jämföra med ChatGPT (GPT-4o)?{" "}
-            <Link to="/vad-kostar-chatgpt" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/vad-kostar-chatgpt" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               Se GPT-4o-kalkylatorn
             </Link>{" "}
             eller{" "}
-            <Link to="/" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               hela jämförelsetabellen på startsidan
             </Link>
             .
@@ -239,7 +239,7 @@ export function Gpt4Pris() {
         </div>
 
         {/* Kom igång */}
-        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+        <div className="card mt-6 bg-gradient-to-br from-brand-50 to-white border border-brand-100">
           <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
           <p className="text-sm text-gray-600 mb-4">
             Nu vet du vad GPT-4.1 kostar. Nästa steg är att skapa ditt konto och börja bygga.

@@ -59,9 +59,12 @@ export function SEO({ title, description, canonical, children }: SEOProps) {
 
   const fullTitle = title ? `${title} | Aikostnad.se` : defaultTitle;
   const desc = description ?? defaultDesc;
-  // Strip any accidental query/hash from canonical to prevent duplicate-content
-  // signals — the calculator generates ?model=, ?input= etc. share links.
-  const cleanPath = canonical?.split("?")[0]?.split("#")[0];
+  // Normalise canonical: accept either a path ("/claude-pris") or a full URL
+  // and always emit exactly one absolute URL — prevents the double-prefixed
+  // "https://aikostnad.sehttps://…" canonical bug. Also strip query/hash so the
+  // calculator's ?model=/?input= share links don't create duplicate-content.
+  const rawPath = (canonical ?? "").replace(/^https?:\/\/aikostnad\.se/i, "");
+  const cleanPath = rawPath.split("?")[0].split("#")[0];
   const url = cleanPath ? `${siteUrl}${cleanPath}` : siteUrl;
   const ogImage = `${siteUrl}/og-image.png`;
 
@@ -70,10 +73,13 @@ export function SEO({ title, description, canonical, children }: SEOProps) {
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
       <link rel="canonical" href={url} />
+      <link rel="alternate" hrefLang="sv-SE" href={url} />
+      <link rel="alternate" hrefLang="x-default" href={url} />
       <meta property="og:title" content={fullTitle} />
       <meta property="og:description" content={desc} />
       <meta property="og:url" content={url} />
       <meta property="og:type" content="website" />
+      <meta property="og:locale" content="sv_SE" />
       <meta property="og:site_name" content="Aikostnad.se" />
       <meta property="og:image" content={ogImage} />
       <meta property="og:image:width" content="1200" />

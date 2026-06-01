@@ -43,7 +43,7 @@ export function CalculatorSection({ initialValues }: Props) {
           }}
           className={`px-4 py-2.5 text-sm font-semibold border-b-2 -mb-px transition-all ${
             mode === "simple"
-              ? "border-indigo-700 text-indigo-700"
+              ? "border-brand-700 text-brand-700"
               : "border-transparent text-gray-400 hover:text-gray-600"
           }`}
           aria-pressed={mode === "simple"}
@@ -57,7 +57,7 @@ export function CalculatorSection({ initialValues }: Props) {
           }}
           className={`px-4 py-2.5 text-sm font-semibold border-b-2 -mb-px transition-all ${
             mode === "advanced"
-              ? "border-indigo-700 text-indigo-700"
+              ? "border-brand-700 text-brand-700"
               : "border-transparent text-gray-400 hover:text-gray-600"
           }`}
           aria-pressed={mode === "advanced"}

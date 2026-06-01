@@ -18,7 +18,7 @@ export function Kontakt() {
 
       <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -36,7 +36,7 @@ export function Kontakt() {
             </h2>
             <a
               href={`mailto:${siteConfig.contactEmail}`}
-              className="text-xl font-semibold text-indigo-700 hover:text-indigo-700 transition-colors"
+              className="text-xl font-semibold text-brand-700 hover:text-brand-700 transition-colors"
             >
               {siteConfig.contactEmail}
             </a>
@@ -52,19 +52,19 @@ export function Kontakt() {
             </h2>
             <ul className="space-y-3 text-sm text-gray-600">
               <li className="flex items-start gap-2">
-                <span className="text-indigo-400 mt-0.5">→</span>
+                <span className="text-brand-400 mt-0.5">→</span>
                 <span><strong className="text-gray-800">Felaktiga priser</strong> — om du hittar en modellpris som stämmer fel är vi tacksamma för ett tips.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-indigo-400 mt-0.5">→</span>
+                <span className="text-brand-400 mt-0.5">→</span>
                 <span><strong className="text-gray-800">Saknade modeller</strong> — finns det en AI-modell du vill se i jämförelsetabellen?</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-indigo-400 mt-0.5">→</span>
+                <span className="text-brand-400 mt-0.5">→</span>
                 <span><strong className="text-gray-800">Samarbeten</strong> — partnerskap, gästartiklar eller länkbyten.</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-indigo-400 mt-0.5">→</span>
+                <span className="text-brand-400 mt-0.5">→</span>
                 <span><strong className="text-gray-800">Allmänna frågor</strong> — om AI-kostnader eller hur kalkylatorn fungerar.</span>
               </li>
             </ul>
@@ -73,7 +73,7 @@ export function Kontakt() {
           {/* FAQ nudge */}
           <p className="text-xs text-gray-400 text-center">
             Har du en teknisk fråga om hur kalkylatorn räknar?{" "}
-            <Link to="/#faq" className="text-indigo-500 hover:underline">
+            <Link to="/#faq" className="text-brand-500 hover:underline">
               Kolla FAQ:n
             </Link>{" "}
             — den täcker de vanligaste frågorna.

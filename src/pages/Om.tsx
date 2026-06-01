@@ -67,7 +67,7 @@ export function Om() {
         <div className="mb-8">
           <Link
             to="/"
-            className="text-sm text-indigo-700 hover:underline flex items-center gap-1"
+            className="text-sm text-brand-700 hover:underline flex items-center gap-1"
           >
             ← Tillbaka till startsidan
           </Link>
@@ -95,7 +95,7 @@ export function Om() {
                 href={parentOrganization.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-700 hover:underline font-medium"
+                className="text-brand-700 hover:underline font-medium"
               >
                 {parentOrganization.name}
               </a>{" "}
@@ -111,14 +111,14 @@ export function Om() {
                 href={author.linkedIn}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-700 hover:underline"
+                className="text-brand-700 hover:underline"
               >
                 LinkedIn ↗
               </a>
               {" · "}
               <a
                 href={`mailto:${author.email}`}
-                className="text-indigo-700 hover:underline"
+                className="text-brand-700 hover:underline"
               >
                 {author.email}
               </a>
@@ -164,7 +164,7 @@ export function Om() {
                 href="https://www.frankfurter.app/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-700 hover:underline"
+                className="text-brand-700 hover:underline"
               >
                 Frankfurter API
               </a>
@@ -176,7 +176,7 @@ export function Om() {
               du ett felaktigt pris?{" "}
               <a
                 href={`mailto:${siteConfig.contactEmail}`}
-                className="text-indigo-700 hover:underline"
+                className="text-brand-700 hover:underline"
               >
                 Hör gärna av dig.
               </a>
@@ -188,25 +188,25 @@ export function Om() {
             <h2 className="text-xl font-bold text-gray-900">Vad sajten täcker</h2>
             <ul className="text-gray-600 text-sm leading-relaxed space-y-2">
               <li className="flex items-start gap-2">
-                <span className="text-indigo-400 mt-0.5">→</span>
+                <span className="text-brand-400 mt-0.5">→</span>
                 <span>
                   <strong className="text-gray-800">14 AI-modeller</strong> — kommersiella API:er (OpenAI, Anthropic, Google, Mistral) och open-source-alternativ (DeepSeek, Llama via Groq)
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-indigo-400 mt-0.5">→</span>
+                <span className="text-brand-400 mt-0.5">→</span>
                 <span>
                   <strong className="text-gray-800">Token-baserade API-priser</strong> + fasta konsumentabonnemang (ChatGPT Plus, Claude Pro, Gemini Advanced, GitHub Copilot m.fl.)
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-indigo-400 mt-0.5">→</span>
+                <span className="text-brand-400 mt-0.5">→</span>
                 <span>
                   <strong className="text-gray-800">Korrekt tokenisering för svenska</strong> — vi räknar med 1,3 tokens per ord (engelska är 0,75) p.g.a. å/ä/ö och långa sammansatta ord
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-indigo-400 mt-0.5">→</span>
+                <span className="text-brand-400 mt-0.5">→</span>
                 <span>
                   <strong className="text-gray-800">Live USD/SEK-kurs</strong> — uppdateras dagligen
                 </span>
@@ -239,14 +239,14 @@ export function Om() {
               feedback — hör av dig till{" "}
               <a
                 href={`mailto:${siteConfig.contactEmail}`}
-                className="text-indigo-700 hover:underline font-medium"
+                className="text-brand-700 hover:underline font-medium"
               >
                 {siteConfig.contactEmail}
               </a>
               . Vi svarar normalt inom 1–2 arbetsdagar.
             </p>
             <p className="text-xs text-gray-400">
-              <Link to="/kontakt" className="text-indigo-500 hover:underline">
+              <Link to="/kontakt" className="text-brand-500 hover:underline">
                 Mer info på kontaktsidan
               </Link>{" "}
               ·{" "}
@@ -254,12 +254,12 @@ export function Om() {
                 href="https://www.linkedin.com/company/aikostnad/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-500 hover:underline"
+                className="text-brand-500 hover:underline"
               >
                 LinkedIn
               </a>{" "}
               ·{" "}
-              <Link to="/integritet" className="text-indigo-500 hover:underline">
+              <Link to="/integritet" className="text-brand-500 hover:underline">
                 Integritetspolicy
               </Link>
             </p>

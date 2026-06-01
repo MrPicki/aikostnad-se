@@ -28,7 +28,7 @@ export function Privacy() {
         <div className="mb-8">
           <Link
             to="/"
-            className="text-sm text-indigo-700 hover:underline flex items-center gap-1"
+            className="text-sm text-brand-700 hover:underline flex items-center gap-1"
           >
             ← Tillbaka till startsidan
           </Link>
@@ -49,12 +49,12 @@ export function Privacy() {
             <p className="text-gray-600 text-sm leading-relaxed">
               Aikostnad.se är en gratistjänst som drivs som ett oberoende
               initiativ från Sverige. Läs mer om sajten på{" "}
-              <Link to="/om" className="text-indigo-700 hover:underline">
+              <Link to="/om" className="text-brand-700 hover:underline">
                 Om Aikostnad.se
               </Link>
               . Har du frågor om behandlingen av dina personuppgifter, kontakta
               oss på{" "}
-              <a href={`mailto:${siteConfig.contactEmail}`} className="text-indigo-700 hover:underline">
+              <a href={`mailto:${siteConfig.contactEmail}`} className="text-brand-700 hover:underline">
                 {siteConfig.contactEmail}
               </a>.
             </p>
@@ -84,7 +84,7 @@ export function Privacy() {
                 guiden via Resend. Om du också samtycker till marknadsföring kan vi
                 skicka enstaka uppdateringar om nya AI-priser och guider (max ~1/mån).
                 Du kan när som helst begära radering genom att skriva till{" "}
-                <a href={`mailto:${siteConfig.contactEmail}`} className="text-indigo-700 hover:underline">
+                <a href={`mailto:${siteConfig.contactEmail}`} className="text-brand-700 hover:underline">
                   {siteConfig.contactEmail}
                 </a>{" "}
                 eller svara på ett av våra mail. Vi delar aldrig din adress med tredje part.
@@ -150,7 +150,7 @@ export function Privacy() {
               </p>
               <p>
                 Har du frågor — kontakta oss på{" "}
-              <a href={`mailto:${siteConfig.contactEmail}`} className="text-indigo-700 hover:underline">
+              <a href={`mailto:${siteConfig.contactEmail}`} className="text-brand-700 hover:underline">
                 {siteConfig.contactEmail}
               </a>.
               </p>

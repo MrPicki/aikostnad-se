@@ -24,7 +24,7 @@ export function ArticleByline({ article }: Props) {
           href={author.linkedIn || parentOrganization.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-700 font-medium hover:text-indigo-700 hover:underline"
+          className="text-gray-700 font-medium hover:text-brand-700 hover:underline"
         >
           {author.name}
         </a>
@@ -33,7 +33,7 @@ export function ArticleByline({ article }: Props) {
           href={parentOrganization.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-700 font-medium hover:text-indigo-700 hover:underline"
+          className="text-gray-700 font-medium hover:text-brand-700 hover:underline"
         >
           {parentOrganization.name}
         </a>

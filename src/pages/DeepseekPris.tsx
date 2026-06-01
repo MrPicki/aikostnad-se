@@ -61,7 +61,7 @@ export function DeepseekPris() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -138,7 +138,7 @@ export function DeepseekPris() {
             <p className="text-gray-700 leading-relaxed">
               Priserna gäller DeepSeeks egna API och kan skilja sig hos tredjepartshosting (Together.ai,
               Fireworks, Groq). Priser i SEK räknas om i realtid på{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">startsidans kalkylator</Link>.
+              <Link to="/" className="text-brand-700 hover:underline font-medium">startsidans kalkylator</Link>.
             </p>
           </section>
 
@@ -284,11 +284,11 @@ export function DeepseekPris() {
             <p className="text-gray-700 leading-relaxed">
               Vill du jämföra DeepSeek V3:s faktiska kostnad mot GPT-4o mini eller Claude Haiku för ditt
               use case? Använd{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">kalkylatorn på startsidan</Link>{" "}
+              <Link to="/" className="text-brand-700 hover:underline font-medium">kalkylatorn på startsidan</Link>{" "}
               — mata in dina tokens och se en direkt jämförelse i SEK. Se också vår guide om{" "}
-              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline font-medium">billigaste AI-modellerna</Link>{" "}
+              <Link to="/billigaste-ai" className="text-brand-700 hover:underline font-medium">billigaste AI-modellerna</Link>{" "}
               och{" "}
-              <Link to="/jamfor-ai-modeller" className="text-indigo-700 hover:underline font-medium">jämförelse av alla AI-modeller</Link>.
+              <Link to="/jamfor-ai-modeller" className="text-brand-700 hover:underline font-medium">jämförelse av alla AI-modeller</Link>.
             </p>
           </section>
         </article>
@@ -310,7 +310,7 @@ export function DeepseekPris() {
         ]} />
 
         {/* Kom igång */}
-        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+        <div className="card mt-6 bg-gradient-to-br from-brand-50 to-white border border-brand-100">
           <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
           <p className="text-sm text-gray-600 mb-4">
             Nu vet du vad DeepSeek API kostar. Nästa steg är att skapa ditt konto och börja bygga.

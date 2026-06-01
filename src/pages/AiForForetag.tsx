@@ -84,7 +84,7 @@ export function AiForForetag() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -146,8 +146,8 @@ export function AiForForetag() {
               </p>
             </div>
 
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5">
-              <h3 className="text-base font-bold text-indigo-900 mb-2">Litet företag (5–15 pers.) — 1 000–3 000 kr/mån</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5">
+              <h3 className="text-base font-bold text-brand-900 mb-2">Litet företag (5–15 pers.) — 1 000–3 000 kr/mån</h3>
               <p className="text-sm text-gray-700 mb-3">
                 Team som använder AI dagligen för produktivitet, kundkommunikation och analys.
               </p>
@@ -216,7 +216,7 @@ export function AiForForetag() {
             i API-prissättning per token. Bäst för: team som vill ha flexibelt verktyg
             utan teknisk integration, eller developers som bygger egna applikationer.
             Se{" "}
-            <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
+            <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">
               vad ChatGPT kostar för företag
             </Link>.
           </p>
@@ -228,7 +228,7 @@ export function AiForForetag() {
             instruktionsföljning och långa dokument. Prompt caching kan halvera kostnaden
             för chatbot-applikationer. Bäst för: företag med GDPR-krav och mycket
             textproduktion. Se{" "}
-            <Link to="/claude-pris" className="text-indigo-700 hover:underline">
+            <Link to="/claude-pris" className="text-brand-700 hover:underline">
               vad Claude kostar för företag
             </Link>.
           </p>
@@ -239,7 +239,7 @@ export function AiForForetag() {
             Docs). Gemini Advanced (199 kr/mån via Google One) ger direkt AI-stöd i alla
             Google-appar. API-mässigt konkurrerar Gemini Flash med sina låga priser och
             unika 1-miljon-tokens kontextfönster. Se{" "}
-            <Link to="/gemini-pris" className="text-indigo-700 hover:underline">
+            <Link to="/gemini-pris" className="text-brand-700 hover:underline">
               Gemini-priser för företag
             </Link>.
           </p>
@@ -298,7 +298,7 @@ export function AiForForetag() {
               <strong>Steg 3: Skala och optimera (månad 4+).</strong> Välj rätt modell för
               varje uppgift (mini för volym, flaggskepp för komplexa ärenden). Aktivera
               prompt caching där tillämpligt. Teckna DPA och säkerhetscertifieringar. Se vår{" "}
-              <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">
+              <Link to="/ai-chatbot-kostnad" className="text-brand-700 hover:underline">
                 guide om AI-chatbot-kostnader
               </Link>{" "}
               för konkreta budgetexempel.
@@ -336,16 +336,16 @@ export function AiForForetag() {
         <Sources items={officialPricingSources} />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link to="/ai-chatbot-kostnad" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
+          <Link to="/ai-chatbot-kostnad" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+            <p className="font-semibold text-gray-900 group-hover:text-brand-700 mb-1 text-sm">
               Vad kostar en AI-chatbot?
             </p>
             <p className="text-xs text-gray-500">
               Konkreta budgetexempel för hobby, småföretag och B2C i SEK.
             </p>
           </Link>
-          <Link to="/vad-kostar-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
+          <Link to="/vad-kostar-ai" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+            <p className="font-semibold text-gray-900 group-hover:text-brand-700 mb-1 text-sm">
               Komplett AI-prisguide 2026
             </p>
             <p className="text-xs text-gray-500">

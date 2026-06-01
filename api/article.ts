@@ -3,9 +3,20 @@
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function handler(req: any, res: any): Promise<void> {
+  // Prefer the server-only SUPABASE_URL (VITE_* vars are bundled into the
+  // client, so they shouldn't be the canonical server config).
   const supabaseBase =
-    process.env.VITE_SUPABASE_URL ?? process.env.SUPABASE_URL ?? "";
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
+    process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "";
+  // This is a PUBLIC read endpoint — use the anon key (which is gated by an RLS
+  // SELECT policy on `daily_articles`) rather than the RLS-bypassing service
+  // role. Falls back to the service role only if no anon key is configured yet.
+  // REQUIRED in Supabase: `create policy "public read" on daily_articles for
+  // select using (true);` plus `alter table daily_articles enable row level security;`
+  const supabaseKey =
+    process.env.SUPABASE_ANON_KEY ??
+    process.env.VITE_SUPABASE_ANON_KEY ??
+    process.env.SUPABASE_SERVICE_ROLE_KEY ??
+    "";
 
   if (!supabaseBase || !supabaseKey) {
     res.status(500).json({ error: "Supabase not configured" });

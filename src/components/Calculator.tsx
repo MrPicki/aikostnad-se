@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { models, defaultModelId } from "../data/modelPricing";
 import { siteConfig } from "../config/siteConfig";
 import {
@@ -55,9 +55,14 @@ function FieldLabel({ label, htmlFor, tooltip }: { label: string; htmlFor: strin
     <label htmlFor={htmlFor} className="label">
       {label}
       {tooltip && (
-        <span className="ml-1 text-gray-400 cursor-help" title={tooltip} aria-label={tooltip}>
+        <button
+          type="button"
+          className="ml-1 text-gray-400 cursor-help align-middle rounded-full"
+          title={tooltip}
+          aria-label={tooltip}
+        >
           ⓘ
-        </span>
+        </button>
       )}
     </label>
   );
@@ -124,8 +129,8 @@ function ChipField({
               onClick={() => onChange(p)}
               className={`px-2.5 py-1 text-xs font-semibold rounded-md transition-colors ${
                 active
-                  ? "bg-indigo-700 text-white"
-                  : "bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-700 border border-gray-200"
+                  ? "bg-brand-700 text-white"
+                  : "bg-gray-50 text-gray-600 hover:bg-brand-50 hover:text-brand-700 border border-gray-200"
               }`}
               aria-pressed={active}
             >
@@ -146,8 +151,8 @@ function ChipField({
           }}
           className={`w-20 px-2 py-1 text-xs rounded-md border bg-white focus:outline-none focus:ring-1 ${
             isPreset
-              ? "border-gray-200 text-gray-400 focus:ring-indigo-400"
-              : "border-indigo-300 text-gray-900 ring-1 ring-indigo-100 focus:ring-indigo-400"
+              ? "border-gray-200 text-gray-400 focus:ring-brand-400"
+              : "border-brand-300 text-gray-900 ring-1 ring-brand-100 focus:ring-brand-400"
           } ${error ? "border-red-400 focus:ring-red-400" : ""}`}
           aria-label={`Egen ${label.toLowerCase()}`}
         />
@@ -184,7 +189,7 @@ function SliderField({
           max={max}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
+          className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-600"
         />
         <span className="text-sm font-semibold text-gray-900 min-w-[2.5rem] text-right tabular-nums">
           {value}
@@ -201,8 +206,8 @@ function SliderField({
                 onClick={() => onChange(m.value)}
                 className={`text-[10px] px-2 py-0.5 rounded-md transition-colors ${
                   active
-                    ? "bg-indigo-100 text-indigo-700 font-semibold"
-                    : "text-gray-400 hover:text-indigo-700"
+                    ? "bg-brand-100 text-brand-700 font-semibold"
+                    : "text-gray-400 hover:text-brand-700"
                 }`}
               >
                 {m.label}
@@ -261,7 +266,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
   const [showTokenDetails, setShowTokenDetails] = useState(false);
   const [copied, setCopied] = useState(false);
   const [calcEmail, setCalcEmail] = useState("");
-  const [calcEmailStatus, setCalcEmailStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [calcEmailStatus, setCalcEmailStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [calcCaptureVisible, setCalcCaptureVisible] = useState(() => !localStorage.getItem("email_subscribed"));
   async function copyShareLink() {
     try {
@@ -289,7 +294,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
       setCalcEmailStatus("success");
       setTimeout(() => setCalcCaptureVisible(false), 2000);
     } catch {
-      setCalcEmailStatus("idle");
+      setCalcEmailStatus("error");
     }
   }
 
@@ -404,13 +409,13 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                     onClick={() => setModelId(tier.modelId)}
                     className={`rounded-lg border px-2 py-2.5 text-center transition-all ${
                       active
-                        ? "border-indigo-700 bg-indigo-50 ring-1 ring-indigo-200"
-                        : "border-gray-200 bg-white hover:border-indigo-300"
+                        ? "border-brand-700 bg-brand-50 ring-1 ring-brand-200"
+                        : "border-gray-200 bg-white hover:border-brand-300"
                     }`}
                     aria-pressed={active}
                   >
                     <div className="text-base leading-none mb-1">{tier.emoji}</div>
-                    <p className={`text-xs font-semibold ${active ? "text-indigo-700" : "text-gray-800"}`}>
+                    <p className={`text-xs font-semibold ${active ? "text-brand-700" : "text-gray-800"}`}>
                       {tier.label}
                     </p>
                     <p className="text-[10px] text-gray-400 mt-0.5 leading-tight">{tier.hint}</p>
@@ -452,13 +457,14 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 <span className="font-medium text-gray-600">{selectedModel.name}</span> — ${selectedModel.inputPricePerMToken}/Mtok in ·{" "}
                 ${selectedModel.outputPricePerMToken}/Mtok out ·{" "}
                 {selectedModel.bestFor}
-                <span
-                  className="ml-1.5 text-gray-300 cursor-help"
+                <button
+                  type="button"
+                  className="ml-1.5 text-gray-400 cursor-help rounded-full align-middle"
                   title="Mtok = pris per 1 miljon tokens. Ett token är ~0,75 svenska ord. Input = vad du skickar, output = vad AI:n svarar."
                   aria-label="Mtok = pris per 1 miljon tokens. Ett token är ~0,75 svenska ord."
                 >
                   ⓘ
-                </span>
+                </button>
               </p>
             )}
           </div>
@@ -520,7 +526,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
             tooltip="Aktiva dagar — 22 är typiskt arbetsmånad, 30 om verktyget används dagligen även helger."
           />
 
-          <div className="text-xs text-indigo-700 bg-indigo-50 rounded-lg px-3 py-2">
+          <div className="text-xs text-brand-700 bg-brand-50 rounded-lg px-3 py-2">
             Tokenuppskattning: {siteConfig.languageFactor} tokens/ord för svenska
             texter (engelska: 0.75)
           </div>
@@ -569,7 +575,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
 
               {/* 5a Modell-specifik micro-copy */}
               {(modelId.includes("claude") || modelId.includes("gpt-4o-mini") || modelId.includes("haiku") || modelId.includes("gemini-flash")) && (
-                <p className="text-xs text-indigo-700">
+                <p className="text-xs text-brand-700">
                   {modelId.includes("claude")
                     ? "Inkl. GDPR-kompatibel API för Sverige"
                     : modelId.includes("gpt-4o-mini") || modelId.includes("haiku")
@@ -589,7 +595,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                   ) : (
                     <form
                       onSubmit={handleCalcEmailSubmit}
-                      className="flex items-center gap-2 rounded-xl border border-indigo-100 bg-indigo-50/60 px-4 py-3"
+                      className="flex items-center gap-2 rounded-xl border border-brand-100 bg-brand-50/60 px-4 py-3"
                     >
                       <span className="text-sm text-gray-700 whitespace-nowrap shrink-0">
                         💾 Spara din kalkyl och få prisvarning →
@@ -600,16 +606,21 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                         value={calcEmail}
                         onChange={(e) => setCalcEmail(e.target.value)}
                         placeholder="din@email.se"
-                        className="flex-1 min-w-0 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-700"
+                        className="flex-1 min-w-0 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-700"
                       />
                       <button
                         type="submit"
                         disabled={calcEmailStatus === "loading"}
-                        className="shrink-0 bg-indigo-700 hover:bg-indigo-800 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
+                        className="shrink-0 bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50"
                       >
                         {calcEmailStatus === "loading" ? "…" : "Spara"}
                       </button>
                     </form>
+                  )}
+                  {calcEmailStatus === "error" && (
+                    <p className="mt-2 text-xs text-red-600" role="alert">
+                      Kunde inte spara just nu — försök igen om en stund.
+                    </p>
                   )}
                 </div>
               )}
@@ -668,7 +679,7 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 <div className="flex flex-col gap-1">
                   <button
                     onClick={copyShareLink}
-                    className="text-xs text-indigo-700 hover:text-indigo-700 inline-flex items-center gap-1.5 focus:outline-none focus:underline"
+                    className="text-xs text-brand-700 hover:text-brand-700 inline-flex items-center gap-1.5 focus:outline-none focus:underline"
                     aria-label="Kopiera länk till denna kalkyl"
                   >
                     {copied ? (
@@ -718,13 +729,14 @@ export function Calculator({ initialValues }: { initialValues?: CalcInitialValue
                 </a>
               </div>
 
-              {/* 5b Jämför med annat scenario */}
-              <button
-                onClick={() => window.open(window.location.href, '_blank')}
-                className="text-sm text-indigo-700 hover:text-indigo-700 underline mt-2"
+              {/* 5b Jämför alla modeller sida vid sida */}
+              <Link
+                to="/jamfor-ai-modeller"
+                onClick={() => trackEvent('compare_clicked', { from: 'calculator' })}
+                className="text-sm text-brand-700 hover:text-brand-800 underline mt-2 inline-block"
               >
-                Jämför med ett annat scenario →
-              </button>
+                Jämför alla modeller sida vid sida →
+              </Link>
             </div>
           ) : (
             <div className="flex items-center justify-center h-full min-h-40 text-gray-400 text-sm">
@@ -746,10 +758,10 @@ interface ResultCardProps {
 function ResultCard({ label, sek, highlight }: ResultCardProps) {
   return (
     <div
-      className={`rounded-xl p-3 sm:p-4 min-w-0 value-pop ${highlight ? "bg-indigo-700 text-white" : "bg-gray-50"}`}
+      className={`rounded-xl p-3 sm:p-4 min-w-0 value-pop ${highlight ? "bg-brand-700 text-white" : "bg-gray-50"}`}
     >
       <p
-        className={`text-xs font-medium mb-1 truncate ${highlight ? "text-indigo-200" : "text-gray-500"}`}
+        className={`text-xs font-medium mb-1 truncate ${highlight ? "text-brand-200" : "text-gray-500"}`}
       >
         {label}
       </p>
