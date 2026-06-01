@@ -17,7 +17,7 @@ Status-legend: ⬜ ej påbörjad · 🔄 pågår · ✅ klar
 - ✅ **F5** Lade till GPT-5, o3, o4-mini i prisdatan (synkat mot sidornas egna siffror); `pricesLastVerified` → 2026-06-01
 - ✅ **F6** `useExchangeRate` skrivs om med delad modul-cache (en hämtning för alla komponenter); `exchange-rate.ts` returnerar nu `fallback`-flagga + 503 så UI:t inte visar fallback som live
 - ✅ **F7** Falsk jämförelseknapp → riktig länk till `/jamfor-ai-modeller`; död `submitLead`/`supabase.ts` + oläst `leadCaptureEnabled` borttagna
-- 🔄 **Omtest funktion:** betyg ≥8
+- ✅ **Omtest funktion:** betyg **8/10** ✓ (alla kritiska/höga fynd verifierat lösta)
 
 ## Kategori 3 — Säkerhet (start: 4/10 → mål ≥8)
 

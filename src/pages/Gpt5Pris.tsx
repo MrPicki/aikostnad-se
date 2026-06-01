@@ -184,7 +184,7 @@ export function Gpt5Pris() {
 
             <h3 className="text-lg font-bold text-gray-900 mt-6">GPT-5 vs o3 — vilket ska du välja?</h3>
             <p className="text-gray-700 leading-relaxed">
-              OpenAI:s o3 ($10/$30 per Mtok, 105/315 SEK) är specialiserat på
+              OpenAI:s o3 ($10/$40 per Mtok, 105/420 SEK) är specialiserat på
               komplex logisk resonering — matematik, vetenskap, kodning med långa
               kedjor av steg. GPT-5 är mer allroundat och presterar bättre på
               naturligt språk, instruktionsföljning och kreativa uppgifter. o3 är
