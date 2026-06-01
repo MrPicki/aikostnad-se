@@ -300,6 +300,30 @@ interface SendGuidePayload {
   consentMarketing?: boolean;
 }
 
+// Best-effort abuse protection. In-memory per edge instance (resets on cold
+// start, not shared across instances) — not a hard guarantee, but it stops a
+// single client from email-bombing arbitrary recipients or flooding Supabase.
+// A durable limiter (Vercel KV) would be the next step if abuse appears.
+const ipBucket = new Map<string, { count: number; resetAt: number }>();
+const emailBucket = new Map<string, { count: number; resetAt: number }>();
+
+function hitLimit(
+  map: Map<string, { count: number; resetAt: number }>,
+  key: string,
+  limit: number,
+  windowMs: number
+): boolean {
+  const now = Date.now();
+  const entry = map.get(key);
+  if (!entry || now > entry.resetAt) {
+    map.set(key, { count: 1, resetAt: now + windowMs });
+    return false;
+  }
+  if (entry.count >= limit) return true;
+  entry.count++;
+  return false;
+}
+
 export default async function handler(req: Request): Promise<Response> {
   const origin = req.headers.get("origin");
   const headers = {
@@ -315,6 +339,16 @@ export default async function handler(req: Request): Promise<Response> {
       status: 405,
       headers,
     });
+  }
+
+  // Per-IP throttle: max 5 submissions/hour.
+  const ip =
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anonymous";
+  if (hitLimit(ipBucket, ip, 5, 3_600_000)) {
+    return new Response(
+      JSON.stringify({ error: "För många förfrågningar — försök igen om en stund." }),
+      { status: 429, headers }
+    );
   }
 
   let payload: SendGuidePayload;
@@ -333,6 +367,15 @@ export default async function handler(req: Request): Promise<Response> {
     });
   }
 
+  // Per-recipient throttle: max 2 mails/24h to the same address — prevents using
+  // this endpoint to bomb a third-party inbox.
+  if (hitLimit(emailBucket, email.toLowerCase(), 2, 86_400_000)) {
+    return new Response(
+      JSON.stringify({ error: "Den här adressen har redan fått guider nyligen." }),
+      { status: 429, headers }
+    );
+  }
+
   // A specific provider guide is optional. When providerId is missing or
   // unknown the submission is a price-alert signup (homepage form, sticky bar,
   // post-calculation capture) — we still save the lead and send a generic
@@ -341,7 +384,7 @@ export default async function handler(req: Request): Promise<Response> {
   const leadType = guide ? "guide-request" : "price-alert";
 
   // 1) Save lead in Supabase (uses service role key to bypass RLS)
-  const supabaseUrl = process.env.VITE_SUPABASE_URL ?? process.env.SUPABASE_URL;
+  const supabaseUrl = process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
   const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (supabaseUrl && supabaseServiceKey) {
     try {

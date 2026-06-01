@@ -66,7 +66,7 @@ function supabaseHeaders() {
 }
 
 function getSupabaseUrl() {
-  return process.env.VITE_SUPABASE_URL ?? process.env.SUPABASE_URL ?? "";
+  return process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "";
 }
 
 async function fetchYesterdayArticle(): Promise<{ title: string; article_urls: string[] } | null> {
@@ -290,19 +290,34 @@ function buildFallbackDigest(articles: Article[], todaySlug: string): Digest {
   };
 }
 
+// Defense-in-depth: the digest text comes from an LLM fed third-party RSS, so
+// strip anything that could become stored XSS before it is persisted/emailed.
+// (The client also DOMPurifies on render — this is the second layer, edge-safe
+// without a DOM.)
+function stripDangerousHtml(input: string): string {
+  return String(input ?? "")
+    // remove whole script/style/iframe/object/embed blocks
+    .replace(/<(script|style|iframe|object|embed)\b[\s\S]*?<\/\1>/gi, "")
+    .replace(/<(script|style|iframe|object|embed)\b[^>]*>/gi, "")
+    // strip inline event handlers: on...="..." / on...='...' / on...=value
+    .replace(/\son\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi, "")
+    // neutralise javascript:/data: URIs
+    .replace(/(href|src)\s*=\s*("|')?\s*(javascript|data):/gi, '$1=$2#');
+}
+
 function buildArticleHtml(digest: Digest): string {
   const sectionsHtml = digest.sections
     .map(
       (s) =>
         `<hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">` +
-        `<h2 style="font-size:17px;font-weight:700;color:#0f172a;margin:0 0 10px;line-height:1.4;">${s.title}</h2>` +
-        `<p style="font-size:15px;color:#334155;line-height:1.8;margin:0;">${s.content}</p>`
+        `<h2 style="font-size:17px;font-weight:700;color:#0f172a;margin:0 0 10px;line-height:1.4;">${stripDangerousHtml(s.title)}</h2>` +
+        `<p style="font-size:15px;color:#334155;line-height:1.8;margin:0;">${stripDangerousHtml(s.content)}</p>`
     )
     .join("\n");
 
   return (
-    `<h1 style="font-size:26px;font-weight:800;color:#0f172a;margin:0 0 16px;line-height:1.3;">${digest.headline}</h1>\n` +
-    `<p style="font-size:17px;color:#475569;font-style:italic;line-height:1.7;margin:0 0 4px;">${digest.ingress}</p>\n` +
+    `<h1 style="font-size:26px;font-weight:800;color:#0f172a;margin:0 0 16px;line-height:1.3;">${stripDangerousHtml(digest.headline)}</h1>\n` +
+    `<p style="font-size:17px;color:#475569;font-style:italic;line-height:1.7;margin:0 0 4px;">${stripDangerousHtml(digest.ingress)}</p>\n` +
     sectionsHtml +
     `\n<hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">` +
     `<p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;">Slutsats</p>` +
@@ -425,13 +440,14 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function handler(req: any, res: any): Promise<void> {
+  // Fail closed: this endpoint sends real email (Resend), writes to Supabase
+  // and calls a paid LLM. A missing CRON_SECRET must NOT open it to the public,
+  // so we refuse to run unless the secret is configured AND matches.
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret) {
-    const auth = (req.headers["authorization"] as string) ?? "";
-    if (auth !== `Bearer ${cronSecret}`) {
-      res.status(401).json({ error: "Unauthorized" });
-      return;
-    }
+  const auth = (req.headers["authorization"] as string) ?? "";
+  if (!cronSecret || auth !== `Bearer ${cronSecret}`) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
   }
 
   const todaySlug = new Date().toISOString().split("T")[0];

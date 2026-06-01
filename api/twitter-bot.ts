@@ -171,18 +171,18 @@ Regler:
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function handler(req: any, res: any): Promise<void> {
-  // Vercel Cron sends Authorization: Bearer {CRON_SECRET}
+  // Vercel Cron sends Authorization: Bearer {CRON_SECRET}.
+  // Fail closed: posting to X and calling a paid LLM must never be reachable
+  // without the secret, so a missing CRON_SECRET refuses the request.
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret) {
-    const auth = (req.headers["authorization"] as string) ?? "";
-    if (auth !== `Bearer ${cronSecret}`) {
-      res.status(401).json({ error: "Unauthorized" });
-      return;
-    }
+  const auth = (req.headers["authorization"] as string) ?? "";
+  if (!cronSecret || auth !== `Bearer ${cronSecret}`) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
   }
 
   const supabaseUrl =
-    process.env.VITE_SUPABASE_URL ?? process.env.SUPABASE_URL ?? "";
+    process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "";
   const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
 
   // Guard: don't exceed X API Basic tier limit

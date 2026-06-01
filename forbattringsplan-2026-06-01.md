@@ -21,14 +21,14 @@ Status-legend: ⬜ ej påbörjad · 🔄 pågår · ✅ klar
 
 ## Kategori 3 — Säkerhet (start: 4/10 → mål ≥8)
 
-- ⬜ **S1** Fail-closed cron-auth (`morning-digest`, `twitter-bot`)
-- ⬜ **S2** Stäng `daily-digest` (CRON_SECRET + metod) eller ta bort live-LLM; ta bort `ACAO: *`
-- ⬜ **S3** Strypa `send-guide` (rate limit per IP + per mottagare)
-- ⬜ **S4** Sanera LLM/RSS-HTML (DOMPurify klient + server); stäng av rå HTML i `marked`
-- ⬜ **S5** Lägg till CSP i `vercel.json`
-- ⬜ **S6** Förbättra rate limiting (delad/hållbar spärr)
-- ⬜ **S7** `article.ts` anon-nyckel + RLS; sluta använda `VITE_` server-side; logga endast status
-- ⬜ **Omtest säkerhet:** betyg ≥8
+- ✅ **S1** Fail-closed cron-auth: `morning-digest` + `twitter-bot` vägrar köra om `CRON_SECRET` saknas/ej matchar
+- ✅ **S2** `daily-digest`: Claude-anropet + SYSTEM borttaget ur publik väg (returnerar bara råa RSS-artiklar); `ACAO: *` → `https://aikostnad.se`; död `ai-news.ts` borttagen
+- ✅ **S3** `send-guide`: per-IP (5/h) + per-mottagare (2/24h) rate limit
+- ✅ **S4** DOMPurify-sanering i båda `dangerouslySetInnerHTML`-sänkorna (`sanitizeArticleHtml`); server-side `stripDangerousHtml` i `morning-digest` innan lagring
+- ✅ **S5** CSP-header i `vercel.json` (`default-src 'self'`, `frame-ancestors 'none'`, `object-src 'none'`, scopad script/connect/img)
+- 🟡 **S6** In-memory-limiters hårdgjorda (send-guide); **durabel KV-limiter kräver infra (Vercel KV/Upstash)** — dokumenterat som nästa steg, ej möjligt att provisionera här
+- ✅ **S7** `article.ts` föredrar anon-nyckel (RLS-policy dokumenterad i kod) + service-role som fallback; URL-precedens → icke-`VITE_` först i alla server-funktioner
+- 🔄 **Omtest säkerhet:** betyg ≥8
 
 ## Kategori 2 — SEO (start: 6/10 → mål ≥8)
 

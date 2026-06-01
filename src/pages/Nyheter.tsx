@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { marked } from "marked";
 import { SEO } from "../components/SEO";
+import { sanitizeArticleHtml } from "../utils/sanitizeHtml";
 
 interface SavedArticle {
   date: string;
@@ -102,7 +103,7 @@ function DigestView({ digest }: { digest: DigestResult }) {
 
   const articleHtml =
     digest.article
-      ? (marked.parse(digest.article) as string)
+      ? sanitizeArticleHtml(marked.parse(digest.article) as string)
       : "";
 
   const generatedDate = digest.generatedAt
