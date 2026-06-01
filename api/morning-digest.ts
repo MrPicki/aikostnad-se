@@ -321,7 +321,7 @@ function buildArticleHtml(digest: Digest): string {
     sectionsHtml +
     `\n<hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">` +
     `<p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;">Slutsats</p>` +
-    `<p style="margin:0;font-size:15px;color:#0f172a;line-height:1.7;">${digest.takeaway}</p>`
+    `<p style="margin:0;font-size:15px;color:#0f172a;line-height:1.7;">${stripDangerousHtml(digest.takeaway)}</p>`
   );
 }
 
