@@ -61,7 +61,7 @@ export function AnthropicClaudeApiPris() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -126,7 +126,7 @@ export function AnthropicClaudeApiPris() {
                     <td className="px-3 py-2">200 000 tokens</td>
                     <td className="px-3 py-2">Komplexa agenter, avancerad kod</td>
                   </tr>
-                  <tr className="bg-indigo-50">
+                  <tr className="bg-brand-50">
                     <td className="px-3 py-2 font-medium">Claude Sonnet 4.6</td>
                     <td className="px-3 py-2 text-right">31,50</td>
                     <td className="px-3 py-2 text-right">157,50</td>
@@ -149,7 +149,7 @@ export function AnthropicClaudeApiPris() {
               Priser baserade på Anthropics officiella prislista maj 2026. 1 USD = 10,50 SEK.
               Caching write-pris (Sonnet): 39,38 SEK/Mtok. Cachad read: 3,15 SEK/Mtok (90 % rabatt).
               Verifiera alltid mot{" "}
-              <a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
+              <a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">
                 anthropic.com/pricing
               </a>{" "}
               innan du ingår avtal.
@@ -203,8 +203,8 @@ export function AnthropicClaudeApiPris() {
               produktionsapplikationer har inte behov av Opus.
             </p>
 
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Beslutsguide</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Beslutsguide</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
                 <li><strong>Enkel chatbot, hög volym, kostnadskänslig:</strong> Haiku 4.5</li>
                 <li><strong>Produktion, svenska, dokumentanalys, chatbot med systemprompt:</strong> Sonnet 4.6</li>
@@ -241,7 +241,7 @@ export function AnthropicClaudeApiPris() {
             </p>
             <p className="text-gray-700 leading-relaxed">
               Läs mer i vår{" "}
-              <Link to="/prompt-caching" className="text-indigo-700 hover:underline">
+              <Link to="/prompt-caching" className="text-brand-700 hover:underline">
                 djupguide om prompt caching
               </Link>
               .
@@ -272,7 +272,7 @@ export function AnthropicClaudeApiPris() {
                     <td className="px-3 py-2">Sonnet och Haiku med dagliga gränser</td>
                     <td className="px-3 py-2">Testanvändning, hobby</td>
                   </tr>
-                  <tr className="bg-indigo-50">
+                  <tr className="bg-brand-50">
                     <td className="px-3 py-2 font-medium">Pro</td>
                     <td className="px-3 py-2 text-right">ca 209 kr/mån</td>
                     <td className="px-3 py-2">Obegränsat Sonnet/Haiku, 5× Opus</td>
@@ -314,7 +314,7 @@ export function AnthropicClaudeApiPris() {
               data inom EU, men detta kräver konfiguration och Enterprise-avtal. Om du
               hanterar känsliga personuppgifter och inte kan ingå ett Enterprise-avtal
               bör du överväga europeisk AI som{" "}
-              <a href="https://mistral.ai" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
+              <a href="https://mistral.ai" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">
                 Mistral Large
               </a>{" "}
               (franska servrar, inbyggd EU-kompatibilitet).
@@ -347,11 +347,11 @@ export function AnthropicClaudeApiPris() {
             </ul>
             <p className="text-gray-700 leading-relaxed">
               Läs vår fullständiga jämförelse i{" "}
-              <Link to="/chatgpt-vs-claude" className="text-indigo-700 hover:underline">
+              <Link to="/chatgpt-vs-claude" className="text-brand-700 hover:underline">
                 ChatGPT vs Claude
               </Link>{" "}
               eller se vår{" "}
-              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
+              <Link to="/billigaste-ai" className="text-brand-700 hover:underline">
                 guide till billigaste AI-modellerna
               </Link>
               .
@@ -365,7 +365,7 @@ export function AnthropicClaudeApiPris() {
               Tabellerna ovan visar priser per token, men din faktiska månadskostnad beror
               på volymen, hur lång din systemprompt är och hur mycket du kan utnyttja
               prompt caching.{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i din exakta volym och se månadskostnad i SEK för varje
@@ -373,17 +373,17 @@ export function AnthropicClaudeApiPris() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/claude-pris" className="text-indigo-700 hover:underline">
+                <Link to="/claude-pris" className="text-brand-700 hover:underline">
                   Se Claude-priser med abonnemangsjämförelse
                 </Link>
               </li>
               <li>
-                <Link to="/prompt-caching" className="text-indigo-700 hover:underline">
+                <Link to="/prompt-caching" className="text-brand-700 hover:underline">
                   Räkna på prompt caching-besparingar
                 </Link>
               </li>
               <li>
-                <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
+                <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">
                   Jämför med OpenAI API-priser
                 </Link>
               </li>
@@ -413,7 +413,7 @@ export function AnthropicClaudeApiPris() {
         <Sources items={officialPricingSources} />
 
         {/* Kom igång */}
-        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+        <div className="card mt-6 bg-gradient-to-br from-brand-50 to-white border border-brand-100">
           <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
           <p className="text-sm text-gray-600 mb-4">
             Nu vet du vad Claude API kostar. Nästa steg är att skapa ditt konto och börja bygga.

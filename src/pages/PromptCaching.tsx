@@ -87,7 +87,7 @@ export function PromptCaching() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -260,9 +260,9 @@ export function PromptCaching() {
 
             <p className="text-xs text-gray-500">
               Källor:{" "}
-              <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">Anthropic Prompt Caching</a>{" "}
+              <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">Anthropic Prompt Caching</a>{" "}
               ·{" "}
-              <a href="https://platform.openai.com/docs/guides/prompt-caching" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">OpenAI Prompt Caching</a>
+              <a href="https://platform.openai.com/docs/guides/prompt-caching" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">OpenAI Prompt Caching</a>
               . Verifierade maj 2026.
             </p>
 
@@ -363,19 +363,19 @@ export function PromptCaching() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/" className="text-indigo-700 hover:underline">
+                <Link to="/" className="text-brand-700 hover:underline">
                   Använd kalkylatorn på startsidan
                 </Link>{" "}
                 — räkna utan caching och estimera 40–60 % lägre med caching
               </li>
               <li>
-                <Link to="/claude-pris" className="text-indigo-700 hover:underline">
+                <Link to="/claude-pris" className="text-brand-700 hover:underline">
                   Räkna specifikt på Claude
                 </Link>{" "}
                 — Anthropic ger bäst cache-rabatt
               </li>
               <li>
-                <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">
+                <Link to="/ai-chatbot-kostnad" className="text-brand-700 hover:underline">
                   Komplett chatbot-kostnadsguide
                 </Link>{" "}
                 — där caching är ett av fyra knep

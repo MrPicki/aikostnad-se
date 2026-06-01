@@ -60,7 +60,7 @@ export function ChatGPTvsClaude() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -169,9 +169,9 @@ export function ChatGPTvsClaude() {
             <p className="text-xs text-gray-500">
               Priser i USD per miljon tokens (input/output). Källor: officiella
               prislistor från{" "}
-              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">OpenAI</a>{" "}
+              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">OpenAI</a>{" "}
               och{" "}
-              <a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">Anthropic</a>.
+              <a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">Anthropic</a>.
               Verifierade maj 2026.
             </p>
             <p className="text-gray-700 leading-relaxed">
@@ -236,7 +236,7 @@ export function ChatGPTvsClaude() {
               dramatisk — 8 gånger billigare. Men Haiku ger ofta bättre svenska
               svar, så för svenskspråkig kundtjänst kan det vara värt
               prisskillnaden. Vill du räkna på dina egna siffror?{" "}
-              <Link to="/" className="text-indigo-700 hover:underline">
+              <Link to="/" className="text-brand-700 hover:underline">
                 Använd kalkylatorn på startsidan
               </Link>{" "}
               — fyll i din volym och se månadskostnaden i SEK för varje modell.
@@ -303,8 +303,8 @@ export function ChatGPTvsClaude() {
           <section className="space-y-4 mb-12">
             <h2 className="text-2xl font-bold text-gray-900">Vilken ska du välja?</h2>
 
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Välj Claude om du…</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Välj Claude om du…</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed text-sm">
                 <li>Skriver mycket på svenska (artiklar, rapporter, kundkommunikation)</li>
                 <li>Bygger chatbots med lång system-prompt (prompt caching halverar din nota)</li>
@@ -347,7 +347,7 @@ export function ChatGPTvsClaude() {
               Generella tabeller visar storleksordning. Verklig kostnad beror på
               din volym, längd på input och output, och hur mycket du kan
               utnyttja prompt caching.{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i dina egna siffror och få månadskostnaden i SEK
@@ -358,18 +358,18 @@ export function ChatGPTvsClaude() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
+                <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">
                   Räkna specifikt på ChatGPT API-kostnader
                 </Link>{" "}
                 (GPT-4o och 4o mini)
               </li>
               <li>
-                <Link to="/claude-pris" className="text-indigo-700 hover:underline">
+                <Link to="/claude-pris" className="text-brand-700 hover:underline">
                   Räkna specifikt på Claude Sonnet och Haiku
                 </Link>
               </li>
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
+                <Link to="/billigaste-ai" className="text-brand-700 hover:underline">
                   Jämför mot de billigaste AI-modellerna
                 </Link>{" "}
                 totalt sett

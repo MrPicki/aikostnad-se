@@ -74,7 +74,7 @@ export function GeminiPris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -192,8 +192,8 @@ export function GeminiPris() {
                 vill ha integrationen med Google Workspace.
               </p>
             </div>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
-              <h3 className="text-base font-bold text-indigo-900 mb-2">Småföretag — 500 frågor/dag</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-brand-900 mb-2">Småföretag — 500 frågor/dag</h3>
               <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
                 <li>Gemini 2.5 Flash: <strong>~189 kr/mån</strong></li>
                 <li>Gemini 2.5 Pro: <strong>~790 kr/mån</strong></li>
@@ -271,15 +271,15 @@ export function GeminiPris() {
             <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm leading-relaxed">
               <li>
                 Behöver absolut billigast per token →{" "}
-                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">GPT-4o mini eller Mistral Small</Link>
+                <Link to="/billigaste-ai" className="text-brand-700 hover:underline">GPT-4o mini eller Mistral Small</Link>
               </li>
               <li>
                 Skriver mycket på svenska →{" "}
-                <Link to="/claude-pris" className="text-indigo-700 hover:underline">Claude Haiku eller Sonnet</Link>
+                <Link to="/claude-pris" className="text-brand-700 hover:underline">Claude Haiku eller Sonnet</Link>
               </li>
               <li>
                 Vill ha bäst pris på kodning →{" "}
-                <Link to="/gpt-4-pris" className="text-indigo-700 hover:underline">GPT-4.1</Link>
+                <Link to="/gpt-4-pris" className="text-brand-700 hover:underline">GPT-4.1</Link>
               </li>
             </ul>
           </div>
@@ -296,7 +296,7 @@ export function GeminiPris() {
             Jämfört med OpenAI:s API (ingen gratis tier utöver en initial kredit) och Anthropic
             (ingen gratis API-tier) är Googles gratiserbjudande det generösaste bland de
             tre stora leverantörerna. Se vår sammanfattning av{" "}
-            <Link to="/gratis-ai" className="text-indigo-700 hover:underline">gratis AI-alternativ 2026</Link>{" "}
+            <Link to="/gratis-ai" className="text-brand-700 hover:underline">gratis AI-alternativ 2026</Link>{" "}
             för full jämförelse.
           </p>
 
@@ -311,7 +311,7 @@ export function GeminiPris() {
           </p>
           <p className="text-xs text-gray-500 bg-gray-50 rounded-lg px-3 py-2">
             Priser verifierade maj 2026. AI-priser ändras löpande — kontrollera alltid mot{" "}
-            <a href="https://ai.google.dev/pricing" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">Googles officiella prislista</a>{" "}
+            <a href="https://ai.google.dev/pricing" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">Googles officiella prislista</a>{" "}
             innan ni fattar beslut.
           </p>
         </section>
@@ -323,16 +323,16 @@ export function GeminiPris() {
         <Sources items={geminiSources} />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
+          <Link to="/vad-kostar-chatgpt" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+            <p className="font-semibold text-gray-900 group-hover:text-brand-700 mb-1 text-sm">
               Vad kostar ChatGPT?
             </p>
             <p className="text-xs text-gray-500">
               GPT-4o och GPT-4o mini — räkna ut din månadskostnad i SEK.
             </p>
           </Link>
-          <Link to="/claude-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
+          <Link to="/claude-pris" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+            <p className="font-semibold text-gray-900 group-hover:text-brand-700 mb-1 text-sm">
               Vad kostar Claude?
             </p>
             <p className="text-xs text-gray-500">
@@ -342,7 +342,7 @@ export function GeminiPris() {
         </div>
 
         {/* Kom igång */}
-        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+        <div className="card mt-6 bg-gradient-to-br from-brand-50 to-white border border-brand-100">
           <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
           <p className="text-sm text-gray-600 mb-4">
             Nu vet du vad Gemini API kostar. Nästa steg är att skapa ditt konto och börja bygga.

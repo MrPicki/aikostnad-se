@@ -29,7 +29,7 @@ export function LandingFAQ({ items, heading = "Vanliga frågor" }: { items: FAQI
         {items.map((item, i) => (
           <div key={i} className="border-b border-gray-200 last:border-0">
             <button
-              className="w-full text-left py-5 flex items-center justify-between gap-4 hover:text-indigo-700 transition-colors"
+              className="w-full text-left py-5 flex items-center justify-between gap-4 hover:text-brand-700 transition-colors"
               onClick={() => setOpenIndex(openIndex === i ? null : i)}
               aria-expanded={openIndex === i}
               aria-controls={`landing-faq-answer-${i}`}

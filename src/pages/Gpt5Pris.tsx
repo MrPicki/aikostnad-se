@@ -61,7 +61,7 @@ export function Gpt5Pris() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -160,7 +160,7 @@ export function Gpt5Pris() {
             </div>
             <p className="text-xs text-gray-500">
               Priser verifierade maj 2026. Källa:{" "}
-              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
+              <a href="https://openai.com/api/pricing/" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">
                 openai.com/api/pricing
               </a>. Växelkurs 10,50 SEK/USD.
             </p>
@@ -262,8 +262,8 @@ export function Gpt5Pris() {
           <section className="space-y-4 mb-12">
             <h2 className="text-2xl font-bold text-gray-900">När väljer du GPT-5 — och när räcker billigare?</h2>
 
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Välj GPT-5 om du…</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Välj GPT-5 om du…</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 leading-relaxed text-sm">
                 <li>Hanterar juridiska kontrakt, medicinska frågor eller regulatorisk compliance</li>
                 <li>Bygger kod-agenter som löser komplexa multi-steg-uppgifter autonomt</li>
@@ -299,7 +299,7 @@ export function Gpt5Pris() {
             <p className="text-gray-700 leading-relaxed">
               GPT-5 är tillgängligt via OpenAI API för alla betalande API-kunder.
               Du behöver ett konto på{" "}
-              <a href="https://platform.openai.com" target="_blank" rel="noopener noreferrer" className="text-indigo-700 hover:underline">
+              <a href="https://platform.openai.com" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">
                 platform.openai.com
               </a>
               , lägga in ett betalkort och sedan använda modell-ID:t{" "}
@@ -326,7 +326,7 @@ export function Gpt5Pris() {
               Tabellerna ovan visar generella scenarion. Dina faktiska kostnader beror
               på din exakta token-volym, längden på system-prompten och om du kan
               utnyttja prompt caching.{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i dina egna siffror och se månadskostnaden i SEK för
@@ -334,19 +334,19 @@ export function Gpt5Pris() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/openai-api-pris" className="text-indigo-700 hover:underline">
+                <Link to="/openai-api-pris" className="text-brand-700 hover:underline">
                   Komplett pristabell för alla OpenAI-modeller
                 </Link>{" "}
                 — GPT-5, GPT-4.1, o3, embeddings i SEK
               </li>
               <li>
-                <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
+                <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">
                   Vad kostar ChatGPT API?
                 </Link>{" "}
                 — GPT-4o och GPT-4o mini med kalkylatorn
               </li>
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
+                <Link to="/billigaste-ai" className="text-brand-700 hover:underline">
                   Billigaste AI 2026
                 </Link>{" "}
                 — jämförelse av alla budget-modeller
@@ -385,7 +385,7 @@ export function Gpt5Pris() {
         <Sources items={officialPricingSources} />
 
         {/* Kom igång */}
-        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+        <div className="card mt-6 bg-gradient-to-br from-brand-50 to-white border border-brand-100">
           <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
           <p className="text-sm text-gray-600 mb-4">
             Nu vet du vad GPT-5 kostar. Nästa steg är att skapa ditt konto och börja bygga.

@@ -60,7 +60,7 @@ export function AiApiKostnad() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -182,8 +182,8 @@ export function AiApiKostnad() {
               (MAU), där varje user ställer i genomsnitt 50 frågor per månad och varje fråga genererar
               300 tokens (input + output sammanlagt).
             </p>
-            <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-5 not-prose space-y-3">
-              <h3 className="text-base font-bold text-indigo-900">Räkneexempel: 1 000 MAU</h3>
+            <div className="bg-brand-50 border border-brand-200 rounded-xl p-5 not-prose space-y-3">
+              <h3 className="text-base font-bold text-brand-900">Räkneexempel: 1 000 MAU</h3>
               <ul className="text-sm space-y-1 text-gray-700">
                 <li>Volym: 1 000 users × 50 frågor × 300 tokens = <strong>15 000 000 tokens/mån</strong> (15 Mtok)</li>
                 <li>GPT-4o mini input: 15 × 1,58 kr = 23,7 kr</li>
@@ -192,7 +192,7 @@ export function AiApiKostnad() {
               </ul>
               <p className="text-xs text-gray-500 mt-2">
                 Vill du räkna med din exakta volym?{" "}
-                <Link to="/" className="text-indigo-700 hover:underline">Använd kalkylatorn på startsidan.</Link>
+                <Link to="/" className="text-brand-700 hover:underline">Använd kalkylatorn på startsidan.</Link>
               </p>
             </div>
             <p className="text-gray-700 leading-relaxed">
@@ -217,7 +217,7 @@ export function AiApiKostnad() {
             <p className="text-gray-700 leading-relaxed">
               Om din system-prompt är 2 000 tokens lång och du gör 100 000 API-anrop per månad betalar du
               normalt för 200 miljoner tokens i system-prompt-input. Med{" "}
-              <Link to="/prompt-caching" className="text-indigo-700 hover:underline font-medium">prompt caching</Link>{" "}
+              <Link to="/prompt-caching" className="text-brand-700 hover:underline font-medium">prompt caching</Link>{" "}
               (90 % rabatt hos Claude, 50 % hos OpenAI) sänker du det till 20–100 miljoner tokens. Det är
               vanligtvis den billigaste optimeringen räknat i implementationstid per sparad krona.
             </p>
@@ -308,12 +308,12 @@ export function AiApiKostnad() {
             <p className="text-gray-700 leading-relaxed">
               Alla siffror i den här guiden är uppskattningar baserade på typiska scenarios. Din produkt är
               unik. Använd{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">kalkylatorn på startsidan</Link>{" "}
+              <Link to="/" className="text-brand-700 hover:underline font-medium">kalkylatorn på startsidan</Link>{" "}
               för att mata in dina faktiska tokens per fråga, förväntad volym och val av modell — och se
               exakt vad det kostar per månad i SEK med live-valutakurs. Jämför också gärna{" "}
-              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline font-medium">billigaste AI-modellerna</Link>{" "}
+              <Link to="/billigaste-ai" className="text-brand-700 hover:underline font-medium">billigaste AI-modellerna</Link>{" "}
               och{" "}
-              <Link to="/prompt-caching" className="text-indigo-700 hover:underline font-medium">vår guide om prompt caching</Link>{" "}
+              <Link to="/prompt-caching" className="text-brand-700 hover:underline font-medium">vår guide om prompt caching</Link>{" "}
               för att maximera besparingarna.
             </p>
           </section>

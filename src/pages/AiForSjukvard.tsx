@@ -55,7 +55,7 @@ export function AiForSjukvard() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -184,7 +184,7 @@ export function AiForSjukvard() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                  <tr className="bg-indigo-50">
+                  <tr className="bg-brand-50">
                     <td className="px-3 py-2 font-medium">Journalsammanfattning</td>
                     <td className="px-3 py-2">50/dag</td>
                     <td className="px-3 py-2 text-right font-bold">~139 SEK</td>
@@ -196,7 +196,7 @@ export function AiForSjukvard() {
                     <td className="px-3 py-2 text-right font-bold">~53 SEK</td>
                     <td className="px-3 py-2">Claude Haiku 4.5</td>
                   </tr>
-                  <tr className="bg-indigo-50">
+                  <tr className="bg-brand-50">
                     <td className="px-3 py-2 font-medium">Medicinsk dokumentation</td>
                     <td className="px-3 py-2">30/dag</td>
                     <td className="px-3 py-2 text-right font-bold">~114 SEK</td>
@@ -256,7 +256,7 @@ export function AiForSjukvard() {
             <h2 className="text-2xl font-bold text-gray-900 mt-0">Räkna på din sjukvårdsorganisations AI-kostnad</h2>
             <p className="text-gray-700 leading-relaxed">
               Fyll i er volym journaler, chatbotfrågor eller dokumentationsuppgifter i{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 kalkylatorn på startsidan
               </Link>{" "}
               och se exakt vad Claude Sonnet eller Haiku kostar för er specifika verksamhet
@@ -264,17 +264,17 @@ export function AiForSjukvard() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/claude-pris" className="text-indigo-700 hover:underline">
+                <Link to="/claude-pris" className="text-brand-700 hover:underline">
                   Claude Sonnet — priser, DPA och EU-regioner
                 </Link>
               </li>
               <li>
-                <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">
+                <Link to="/ai-for-foretag" className="text-brand-700 hover:underline">
                   AI för organisationer — enterprise och compliance
                 </Link>
               </li>
               <li>
-                <Link to="/prompt-caching" className="text-indigo-700 hover:underline">
+                <Link to="/prompt-caching" className="text-brand-700 hover:underline">
                   Prompt caching — sänk kostnaderna med 60–90 %
                 </Link>
               </li>

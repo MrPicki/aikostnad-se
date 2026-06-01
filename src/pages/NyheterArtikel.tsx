@@ -56,7 +56,7 @@ export function NyheterArtikel() {
   if (loading) {
     return (
       <main className="max-w-3xl mx-auto px-4 py-24 flex justify-center">
-        <div className="w-8 h-8 border-2 border-indigo-700 border-t-transparent rounded-full animate-spin" />
+        <div className="w-8 h-8 border-2 border-brand-700 border-t-transparent rounded-full animate-spin" />
       </main>
     );
   }
@@ -75,7 +75,7 @@ export function NyheterArtikel() {
           <p className="text-gray-500 mb-4">Artikeln hittades inte.</p>
           <Link
             to="/nyheter"
-            className="text-sm text-indigo-700 hover:text-indigo-800 underline"
+            className="text-sm text-brand-700 hover:text-brand-800 underline"
           >
             ← Alla nyheter
           </Link>
@@ -117,7 +117,7 @@ export function NyheterArtikel() {
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link
           to="/nyheter"
-          className="text-sm text-indigo-700 hover:text-indigo-800 transition-colors mb-8 inline-block"
+          className="text-sm text-brand-700 hover:text-brand-800 transition-colors mb-8 inline-block"
         >
           ← Alla nyheter
         </Link>
@@ -132,7 +132,7 @@ export function NyheterArtikel() {
           </h1>
 
           {article.ingress && (
-            <p className="text-lg text-gray-600 italic border-l-4 border-indigo-300 pl-4 mb-8 leading-relaxed">
+            <p className="text-lg text-gray-600 italic border-l-4 border-brand-300 pl-4 mb-8 leading-relaxed">
               {article.ingress}
             </p>
           )}
@@ -142,7 +142,7 @@ export function NyheterArtikel() {
               prose-headings:text-gray-900 prose-headings:font-semibold
               prose-h2:text-xl prose-h2:mt-8
               prose-p:leading-relaxed
-              prose-a:text-indigo-700 prose-a:no-underline hover:prose-a:underline"
+              prose-a:text-brand-700 prose-a:no-underline hover:prose-a:underline"
             // LLM-generated from third-party RSS — sanitized before render.
             // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{ __html: sanitizeArticleHtml(article.content) }}
@@ -158,7 +158,7 @@ export function NyheterArtikel() {
           </Link>
           <Link
             to="/token-kalkylator"
-            className="inline-block bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-800 transition-colors text-sm"
+            className="inline-block bg-brand-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-brand-800 transition-colors text-sm"
           >
             Räkna ut din AI-kostnad →
           </Link>

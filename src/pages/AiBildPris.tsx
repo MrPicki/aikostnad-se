@@ -74,7 +74,7 @@ export function AiBildPris() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -114,8 +114,8 @@ export function AiBildPris() {
             <p>
               Det här guiden går igenom alla aktuella priser i svenska kronor, vad du faktiskt
               får för pengarna och vilken plattform som passar olika användningsfall. Vill du
-              istället räkna på <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">ChatGPT-API-kostnaden</Link>{" "}
-              eller jämföra med <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">billigaste AI-text-modellerna</Link>?
+              istället räkna på <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">ChatGPT-API-kostnaden</Link>{" "}
+              eller jämföra med <Link to="/billigaste-ai" className="text-brand-700 hover:underline">billigaste AI-text-modellerna</Link>?
             </p>
           </div>
         </div>
@@ -139,7 +139,7 @@ export function AiBildPris() {
 
           <h2 className="text-2xl font-bold text-gray-900 mt-10">DALL-E 3 — integrerat med ChatGPT</h2>
           <p>
-            DALL-E 3 ingår i <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">ChatGPT Plus (210 kr/mån)</Link>{" "}
+            DALL-E 3 ingår i <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">ChatGPT Plus (210 kr/mån)</Link>{" "}
             och uppåt, eller direkt via OpenAI API för <strong>0,04 USD per standard 1024×1024-bild</strong>{" "}
             (HD-versionen kostar 0,08 USD). DALL-E 3:s största styrka är följsamhet — den
             tolkar långa, detaljerade prompts bättre än någon konkurrent.

@@ -42,10 +42,10 @@ export function GuideSlideOver({ guide, open, onClose, modelName, source }: Prop
         className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden animate-fade-in-up"
       >
         {/* Header */}
-        <div className="bg-indigo-700 px-6 py-5">
+        <div className="bg-brand-700 px-6 py-5">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-semibold text-indigo-200 uppercase tracking-wide mb-1">
+              <p className="text-xs font-semibold text-brand-200 uppercase tracking-wide mb-1">
                 Steg-för-steg-guide — gratis
               </p>
               <h2 id="guide-modal-title" className="text-lg font-bold text-white leading-tight">
@@ -54,7 +54,7 @@ export function GuideSlideOver({ guide, open, onClose, modelName, source }: Prop
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-indigo-300 hover:text-white hover:bg-indigo-500 transition-colors shrink-0"
+              className="p-1.5 rounded-lg text-brand-300 hover:text-white hover:bg-brand-500 transition-colors shrink-0"
               aria-label="Stäng"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -72,7 +72,7 @@ export function GuideSlideOver({ guide, open, onClose, modelName, source }: Prop
           <ul className="space-y-2 mb-5">
             {guide.whatYouLearn.slice(0, 4).map((item, i) => (
               <li key={i} className="flex items-start gap-2.5 text-sm text-gray-700">
-                <span className="text-indigo-500 mt-0.5 shrink-0">✓</span>
+                <span className="text-brand-500 mt-0.5 shrink-0">✓</span>
                 <span className="leading-snug">{item}</span>
               </li>
             ))}

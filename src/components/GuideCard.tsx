@@ -22,19 +22,19 @@ export function GuideCard({ modelId, modelName, source, className = "" }: Props)
   return (
     <>
       <div
-        className={`relative rounded-xl border border-indigo-200 bg-gradient-to-br from-indigo-50 via-indigo-50/60 to-white p-5 sm:p-6 shadow-sm animate-fade-in-up overflow-hidden hover:border-indigo-400 hover:bg-indigo-50 transition-colors ${className}`}
+        className={`relative rounded-xl border border-brand-200 bg-gradient-to-br from-brand-50 via-brand-50/60 to-white p-5 sm:p-6 shadow-sm animate-fade-in-up overflow-hidden hover:border-brand-400 hover:bg-brand-50 transition-colors ${className}`}
       >
         {/* Decorative accent */}
         <div
           aria-hidden="true"
-          className="absolute -top-12 -right-12 w-40 h-40 bg-indigo-200/30 rounded-full blur-3xl"
+          className="absolute -top-12 -right-12 w-40 h-40 bg-brand-200/30 rounded-full blur-3xl"
         />
 
         <div className="relative">
           {/* Badge */}
-          <div className="inline-flex items-center gap-1.5 bg-white border border-indigo-200 rounded-full px-2.5 py-1 mb-3 shadow-sm">
+          <div className="inline-flex items-center gap-1.5 bg-white border border-brand-200 rounded-full px-2.5 py-1 mb-3 shadow-sm">
             <span className="text-xs">📘</span>
-            <span className="text-[10px] font-bold text-indigo-700 uppercase tracking-wider">
+            <span className="text-[10px] font-bold text-brand-700 uppercase tracking-wider">
               Gratis startguide
             </span>
           </div>
@@ -53,15 +53,15 @@ export function GuideCard({ modelId, modelName, source, className = "" }: Props)
           {/* Mini-checklist */}
           <ul className="space-y-1.5 mb-5">
             <li className="flex items-start gap-2 text-sm text-gray-700">
-              <span className="text-indigo-700 mt-0.5 shrink-0">✓</span>
+              <span className="text-brand-700 mt-0.5 shrink-0">✓</span>
               <span>Steg-för-steg: konto, API-nyckel, första anropet</span>
             </li>
             <li className="flex items-start gap-2 text-sm text-gray-700">
-              <span className="text-indigo-700 mt-0.5 shrink-0">✓</span>
+              <span className="text-brand-700 mt-0.5 shrink-0">✓</span>
               <span>Sätt utgiftsgräns så notan aldrig överraskar</span>
             </li>
             <li className="flex items-start gap-2 text-sm text-gray-700">
-              <span className="text-indigo-700 mt-0.5 shrink-0">✓</span>
+              <span className="text-brand-700 mt-0.5 shrink-0">✓</span>
               <span>Vanliga misstag som kostar tusenlappar — undvik dem</span>
             </li>
           </ul>
@@ -69,7 +69,7 @@ export function GuideCard({ modelId, modelName, source, className = "" }: Props)
           {/* Primary CTA */}
           <button
             onClick={() => setOpen(true)}
-            className="w-full bg-indigo-700 hover:bg-indigo-800 active:bg-indigo-800 text-white text-base font-bold px-5 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg group"
+            className="w-full bg-brand-700 hover:bg-brand-800 active:bg-brand-800 text-white text-base font-bold px-5 py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg group"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -85,10 +85,10 @@ export function GuideCard({ modelId, modelName, source, className = "" }: Props)
           </p>
 
           {/* Secondary path — much smaller */}
-          <div className="mt-4 pt-4 border-t border-indigo-100/70 text-center">
+          <div className="mt-4 pt-4 border-t border-brand-100/70 text-center">
             <button
               onClick={scrollToSubscriptions}
-              className="text-xs text-gray-500 hover:text-indigo-700 inline-flex items-center gap-1 transition-colors"
+              className="text-xs text-gray-500 hover:text-brand-700 inline-flex items-center gap-1 transition-colors"
             >
               Vill du bara prenumerera istället?{" "}
               <span className="font-semibold underline-offset-2 hover:underline">

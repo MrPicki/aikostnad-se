@@ -75,7 +75,7 @@ export function VadKostarChatGPT() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -135,7 +135,7 @@ export function VadKostarChatGPT() {
               <li>
                 <strong>Output-längd</strong> — GPT-4o:s output kostar 4× mer per token
                 än input. Kortare svar sparar direkt pengar. Behöver du ännu lägre kostnad?
-                Jämför med <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">de billigaste AI-modellerna</Link>{" "}
+                Jämför med <Link to="/billigaste-ai" className="text-brand-700 hover:underline">de billigaste AI-modellerna</Link>{" "}
                 som GPT-4o mini och Claude Haiku.
               </li>
             </ul>
@@ -168,8 +168,8 @@ export function VadKostarChatGPT() {
                 också webbsökning, bildgenerering och Custom GPTs.
               </p>
             </div>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
-              <h3 className="text-base font-bold text-indigo-900 mb-2">Småföretag — 500 frågor/dag</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-brand-900 mb-2">Småföretag — 500 frågor/dag</h3>
               <ul className="text-sm space-y-1 text-gray-700 list-disc pl-5">
                 <li>GPT-4o API: <strong>~338 kr/mån</strong></li>
                 <li>GPT-4o mini API: <strong>~20 kr/mån</strong></li>
@@ -188,7 +188,7 @@ export function VadKostarChatGPT() {
               </ul>
               <p className="text-xs text-gray-600 mt-2">
                 På den här volymen är hybrid-routing nästan alltid lönsamt — se{" "}
-                <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">vår chatbot-kostnadsguide</Link>{" "}
+                <Link to="/ai-chatbot-kostnad" className="text-brand-700 hover:underline">vår chatbot-kostnadsguide</Link>{" "}
                 för implementationsdetaljer.
               </p>
             </div>
@@ -215,7 +215,7 @@ export function VadKostarChatGPT() {
               <strong>Aktivera automatisk caching.</strong> OpenAI cachar prefix på minst
               1 024 tokens automatiskt. Strukturera prompten med statisk del först
               (system-prompt, dokument, exempel) för att maximera cache hit rate. Läs mer
-              i vår <Link to="/prompt-caching" className="text-indigo-700 hover:underline">guide om prompt caching</Link>.
+              i vår <Link to="/prompt-caching" className="text-brand-700 hover:underline">guide om prompt caching</Link>.
             </li>
             <li>
               <strong>Batcha icke-tidskritiska anrop.</strong> OpenAI:s Batch API ger 50 %
@@ -231,14 +231,14 @@ export function VadKostarChatGPT() {
 
         <Sources items={openAISources} />
 
-        <div className="mt-12 card bg-indigo-50 border-indigo-100">
-          <p className="text-sm text-indigo-800">
+        <div className="mt-12 card bg-brand-50 border-brand-100">
+          <p className="text-sm text-brand-800">
             Vill du jämföra med andra modeller?{" "}
-            <Link to="/" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               Se hela jämförelsetabellen på startsidan
             </Link>{" "}
             eller kolla{" "}
-            <Link to="/claude-pris" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/claude-pris" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               vad Claude kostar
             </Link>
             .
@@ -246,7 +246,7 @@ export function VadKostarChatGPT() {
         </div>
 
         {/* Kom igång */}
-        <div className="card mt-6 bg-gradient-to-br from-indigo-50 to-white border border-indigo-100">
+        <div className="card mt-6 bg-gradient-to-br from-brand-50 to-white border border-brand-100">
           <h2 className="text-lg font-bold text-gray-900 mb-2">Redo att komma igång?</h2>
           <p className="text-sm text-gray-600 mb-4">
             Nu vet du vad ChatGPT (GPT-4o) kostar. Nästa steg är att skapa ditt konto och börja bygga.

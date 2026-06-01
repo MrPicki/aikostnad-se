@@ -55,7 +55,7 @@ export function AiForRedovisning() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -199,12 +199,12 @@ export function AiForRedovisning() {
                     <td className="px-3 py-2 font-medium">GPT-4o mini</td>
                     <td className="px-3 py-2">Strukturerad data, väldefinierad uppgift</td>
                   </tr>
-                  <tr className="bg-indigo-50">
+                  <tr className="bg-brand-50">
                     <td className="px-3 py-2">Komplex skattefråga</td>
                     <td className="px-3 py-2 font-medium">Claude Sonnet 4.6</td>
                     <td className="px-3 py-2">Kräver nyansering, längre resonemang</td>
                   </tr>
-                  <tr className="bg-indigo-50">
+                  <tr className="bg-brand-50">
                     <td className="px-3 py-2">Årsredovisningskommentar</td>
                     <td className="px-3 py-2 font-medium">Claude Sonnet 4.6</td>
                     <td className="px-3 py-2">Formell svenska, koherens viktig</td>
@@ -226,8 +226,8 @@ export function AiForRedovisning() {
               personuppgifter, löner, ekonomiska transaktioner. Innan ni skickar klientdata
               till ett AI-API behöver ni ha ett Data Processing Agreement (DPA) med leverantören.
             </p>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Praktiska GDPR-steg</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Praktiska GDPR-steg</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
                 <li>Teckna DPA med OpenAI Enterprise eller Anthropic Enterprise</li>
                 <li>Anonymisera personnummer och klientnamn i kvitton och fakturor innan AI-bearbetning om möjligt</li>
@@ -242,7 +242,7 @@ export function AiForRedovisning() {
             <h2 className="text-2xl font-bold text-gray-900 mt-0">Räkna på din redovisningsbyrå</h2>
             <p className="text-gray-700 leading-relaxed">
               Fyll i din volym i{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 kalkylatorn på startsidan
               </Link>{" "}
               och se exakt vad GPT-4o mini eller Claude Sonnet kostar för ditt specifika
@@ -250,17 +250,17 @@ export function AiForRedovisning() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
+                <Link to="/billigaste-ai" className="text-brand-700 hover:underline">
                   Djupanalys av GPT-4o mini och Claude Haiku
                 </Link>
               </li>
               <li>
-                <Link to="/ai-for-smaforetag" className="text-indigo-700 hover:underline">
+                <Link to="/ai-for-smaforetag" className="text-brand-700 hover:underline">
                   AI för småföretag — ROI-kalkyl och steg för steg
                 </Link>
               </li>
               <li>
-                <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">
+                <Link to="/ai-chatbot-kostnad" className="text-brand-700 hover:underline">
                   Bygga en AI-chatbot — komplett budgetguide
                 </Link>
               </li>

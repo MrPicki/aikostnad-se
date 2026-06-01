@@ -9,10 +9,10 @@ interface TLDRProps {
 export function TLDR({ question, answer, bullets }: TLDRProps) {
   return (
     <aside
-      className="tldr not-prose mb-8 rounded-2xl border-l-4 border-indigo-500 bg-indigo-50/70 p-5 sm:p-6 speakable"
+      className="tldr not-prose mb-8 rounded-2xl border-l-4 border-brand-500 bg-brand-50/70 p-5 sm:p-6 speakable"
       aria-label="Snabbt svar"
     >
-      <p className="text-xs font-semibold uppercase tracking-wider text-indigo-700 mb-2">
+      <p className="text-xs font-semibold uppercase tracking-wider text-brand-700 mb-2">
         Snabbt svar
       </p>
       <p className="text-base font-bold text-gray-900 mb-2">{question}</p>

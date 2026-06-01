@@ -49,7 +49,7 @@ export function TokenCalculatorPage() {
         <div className="mb-8">
           <Link
             to="/"
-            className="text-sm text-indigo-700 hover:underline flex items-center gap-1"
+            className="text-sm text-brand-700 hover:underline flex items-center gap-1"
           >
             ← Tillbaka till kalkylatorn
           </Link>
@@ -67,12 +67,12 @@ export function TokenCalculatorPage() {
 
         <TokenCounter />
 
-        <div className="mt-8 card bg-indigo-50 border-indigo-100">
-          <p className="text-sm text-indigo-800">
+        <div className="mt-8 card bg-brand-50 border-brand-100">
+          <p className="text-sm text-brand-800">
             Vet du nu hur lång din prompt är?{" "}
             <Link
               to="/#kalkylator"
-              className="font-semibold underline underline-offset-2 hover:text-indigo-900"
+              className="font-semibold underline underline-offset-2 hover:text-brand-900"
             >
               Använd kalkylatorn för att räkna ut månadskostnaden i SEK
             </Link>

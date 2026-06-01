@@ -74,7 +74,7 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="namn@exempel.se"
-          className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:border-transparent"
+          className="w-full rounded-lg border border-gray-200 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-700 focus:border-transparent"
           autoComplete="email"
         />
       </div>
@@ -84,7 +84,7 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
           type="checkbox"
           checked={consent}
           onChange={(e) => setConsent(e.target.checked)}
-          className="mt-0.5 rounded border-gray-300 text-indigo-700 focus:ring-indigo-700"
+          className="mt-0.5 rounded border-gray-300 text-brand-700 focus:ring-brand-700"
           required
         />
         <span className="text-xs text-gray-600 leading-relaxed">
@@ -102,12 +102,12 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
       <button
         type="submit"
         disabled={status === "loading" || !consent || !email.trim()}
-        className="w-full bg-indigo-700 hover:bg-indigo-800 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-semibold px-6 py-3 rounded-xl transition-colors"
+        className="w-full bg-brand-700 hover:bg-brand-800 disabled:opacity-40 disabled:cursor-not-allowed text-white text-base font-semibold px-6 py-3 rounded-xl transition-colors"
       >
         {status === "loading" ? "Skickar…" : "Bevaka mitt pris"}
       </button>
 
-      <p className="text-xs text-gray-400 text-center">
+      <p className="text-xs text-gray-500 text-center">
         Gratis · Avregistrera när som helst · Max 1 mail/vecka
       </p>
     </form>

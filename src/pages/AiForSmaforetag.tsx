@@ -60,7 +60,7 @@ export function AiForSmaforetag() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -127,7 +127,7 @@ export function AiForSmaforetag() {
             </ul>
             <p className="text-gray-700 leading-relaxed">
               Läs mer i vår{" "}
-              <Link to="/gratis-ai" className="text-indigo-700 hover:underline">
+              <Link to="/gratis-ai" className="text-brand-700 hover:underline">
                 fullständiga guide till gratis AI-verktyg
               </Link>
               .
@@ -281,8 +281,8 @@ export function AiForSmaforetag() {
               av längre fikapauser är vinsten lägre. Var ärlig med er usage-data.
             </p>
 
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Hur du mäter faktisk ROI</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Hur du mäter faktisk ROI</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
                 <li>Mät konkret: be varje anställd logga AI-tid och sparad tid en vecka</li>
                 <li>Räkna på faktisk timkostnad (lön + sociala avgifter = ca 1,42× bruttolön)</li>
@@ -326,7 +326,7 @@ export function AiForSmaforetag() {
             <h2 className="text-2xl font-bold text-gray-900 mt-0">Räkna på just din användning</h2>
             <p className="text-gray-700 leading-relaxed">
               Undrar du vad ett specifikt API-flöde kostar för just din volym?{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i antal frågor per dag, genomsnittlig längd och se
@@ -334,17 +334,17 @@ export function AiForSmaforetag() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">
+                <Link to="/ai-for-foretag" className="text-brand-700 hover:underline">
                   Läs mer om AI för större företag (10+ anst.)
                 </Link>
               </li>
               <li>
-                <Link to="/gratis-ai" className="text-indigo-700 hover:underline">
+                <Link to="/gratis-ai" className="text-brand-700 hover:underline">
                   Jämförelse av alla gratis AI-verktyg
                 </Link>
               </li>
               <li>
-                <Link to="/ai-kostnad-per-manad" className="text-indigo-700 hover:underline">
+                <Link to="/ai-kostnad-per-manad" className="text-brand-700 hover:underline">
                   Typiska AI-månadskostnader per use case
                 </Link>
               </li>

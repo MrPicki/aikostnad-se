@@ -89,10 +89,10 @@ export function UseCaseScenarios({ onSelect }: Props) {
           <button
             key={s.title}
             onClick={() => onSelect(s.values)}
-            className="card text-left hover:border-indigo-200 hover:shadow-sm transition-all group focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1"
+            className="card text-left hover:border-brand-200 hover:shadow-sm transition-all group focus:outline-none focus:ring-2 focus:ring-brand-400 focus:ring-offset-1"
           >
             <div className="flex items-start justify-between gap-3 mb-2">
-              <p className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm leading-snug">
+              <p className="font-semibold text-gray-900 group-hover:text-brand-700 text-sm leading-snug">
                 {s.title}
               </p>
               <div className="text-right shrink-0">
@@ -103,7 +103,7 @@ export function UseCaseScenarios({ onSelect }: Props) {
               </div>
             </div>
             <p className="text-xs text-gray-500 leading-relaxed mb-2">{s.description}</p>
-            <p className="text-xs text-indigo-700 font-medium">{s.model}</p>
+            <p className="text-xs text-brand-700 font-medium">{s.model}</p>
           </button>
         ))}
       </div>

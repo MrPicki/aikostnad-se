@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { SEOProvider } from "./components/SEO";
@@ -140,15 +140,46 @@ const NyheterArtikel = lazy(() =>
   import("./pages/NyheterArtikel").then((m) => ({ default: m.NyheterArtikel }))
 );
 
+// On every route change: reset scroll to top and move keyboard/screen-reader
+// focus into the main content region. Without this an SPA leaves focus on the
+// (now-unmounted) link and keeps the previous scroll position.
+function RouteChangeEffect({ mainRef }: { mainRef: React.RefObject<HTMLDivElement | null> }) {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    mainRef.current?.focus();
+  }, [pathname, mainRef]);
+  return null;
+}
+
+function RouteFallback() {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4" role="status" aria-live="polite">
+      <div className="w-8 h-8 border-2 border-brand-700 border-t-transparent rounded-full animate-spin" />
+      <p className="text-sm text-gray-500">Laddar…</p>
+    </div>
+  );
+}
+
 function Shell() {
   const location = useLocation();
   const isEmbed = location.pathname === "/embed";
+  const mainRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className="min-h-screen flex flex-col w-full overflow-x-hidden bg-white">
+      <RouteChangeEffect mainRef={mainRef} />
+      {!isEmbed && (
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-3 focus:left-3 focus:bg-brand-700 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold"
+        >
+          Hoppa till innehåll
+        </a>
+      )}
       {!isEmbed && <Header />}
-      <div className="flex-1">
-        <Suspense fallback={<div className="flex-1 min-h-[60vh]" />}>
+      <div id="main" ref={mainRef} tabIndex={-1} className="flex-1 outline-none">
+        <Suspense fallback={<RouteFallback />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/token-kalkylator" element={<TokenCalculatorPage />} />

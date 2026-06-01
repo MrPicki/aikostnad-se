@@ -9,7 +9,6 @@ import { FAQ } from "../components/FAQ";
 import { HeroSection } from "../components/HeroSection";
 import { HeroQuickFaq } from "../components/HeroQuickFaq";
 import { PathSelector, getStoredPath, type UserPath } from "../components/PathSelector";
-import { SimpleEstimator } from "../components/SimpleEstimator";
 import { EmailCaptureForm } from "../components/EmailCaptureForm";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -202,26 +201,12 @@ export function Home() {
         {/* 1. Hero — minimal, luftig */}
         <HeroSection />
 
-        {/* 1a. SimpleEstimator — beskriv idé, få kostnad direkt */}
-        <section className="mb-10">
-          <SimpleEstimator onUseInCalculator={handleScenario} />
-        </section>
-
-        {/* 1b. Divider till manuell kalkylator */}
-        <div className="relative my-8">
-          <div className="absolute inset-0 flex items-center" aria-hidden="true">
-            <div className="w-full border-t border-gray-200" />
-          </div>
-          <div className="relative flex justify-center">
-            <span className="bg-white px-4 text-sm text-gray-400">Eller räkna manuellt ↓</span>
-          </div>
-        </div>
-
-        {/* 1d. Två tydliga vägar — använd vs bygg */}
+        {/* 1b. Två tydliga vägar — använd vs bygg. Första valet, innan verktyget. */}
         <PathSelector onPathChange={setUserPath} />
 
-        {/* 2. Kalkylator — sidans primära funktion */}
-        <section id="kalkylator" className="mb-24">
+        {/* 2. Kalkylator — sidans primära funktion. "Beskriv din idé"-fliken
+            innehåller SimpleEstimator (tidigare dubbelrenderad ovanför hero). */}
+        <section id="kalkylator" className="mt-10 mb-16 md:mb-24">
           <CalculatorSection initialValues={calcValues} />
         </section>
 
@@ -229,7 +214,7 @@ export function Home() {
         <HeroQuickFaq />
 
         {/* 2b. Email capture — prisvarningar */}
-        <section className="mb-24">
+        <section className="mb-16 md:mb-24">
           <div className="card max-w-lg mx-auto">
             <p className="text-base font-bold text-gray-900 mb-1">Få e-post när AI-priser ändras</p>
             <p className="text-sm text-gray-500 mb-4">Vi bevakar priserna åt dig och hör av oss när något ändras.</p>
@@ -238,35 +223,35 @@ export function Home() {
         </section>
 
         {/* 3. Scenarion — inspiration och snabbval */}
-        <section id="scenarion" className="mb-24">
+        <section id="scenarion" className="mb-16 md:mb-24">
           <UseCaseScenarios onSelect={handleScenario} />
         </section>
 
         {/* 4. Fasta abonnemang — i grå yta för visuell rytm */}
-        <div className="bg-gray-50 rounded-xl px-6 py-10 mb-24">
+        <div className="bg-gray-50 rounded-xl px-6 py-10 mb-16 md:mb-24">
           <section id="abonnemang">
             <SubscriptionTable />
           </section>
         </div>
 
         {/* 5. Modell-jämförelse */}
-        <section id="jamforelse" className="mb-24">
+        <section id="jamforelse" className="mb-16 md:mb-24">
           <ModelComparisonTable />
         </section>
 
         {/* 5b. Tokenräknare-CTA */}
-        <section className="mb-24">
+        <section className="mb-16 md:mb-24">
           <Link
             to="/token-kalkylator"
-            className="block rounded-xl border border-indigo-100 bg-indigo-50/50 hover:bg-indigo-50 transition-all p-6 sm:p-8 group"
+            className="block rounded-xl border border-brand-100 bg-brand-50/50 hover:bg-brand-50 transition-all p-6 sm:p-8 group"
           >
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
               <div className="text-3xl">📝</div>
               <div className="flex-1">
-                <p className="text-xs font-semibold text-indigo-700 uppercase tracking-wide mb-1">
+                <p className="text-xs font-semibold text-brand-700 uppercase tracking-wide mb-1">
                   Bonus-verktyg
                 </p>
-                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 group-hover:text-indigo-700 transition-colors">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 group-hover:text-brand-700 transition-colors">
                   Klistra in din text — räkna tokens exakt
                 </h2>
                 <p className="text-sm text-gray-600 leading-relaxed">
@@ -275,7 +260,7 @@ export function Home() {
                   du anropar API:t.
                 </p>
               </div>
-              <div className="text-indigo-700 group-hover:translate-x-1 transition-transform shrink-0 hidden sm:block">
+              <div className="text-brand-700 group-hover:translate-x-1 transition-transform shrink-0 hidden sm:block">
                 →
               </div>
             </div>
@@ -283,13 +268,13 @@ export function Home() {
         </section>
 
         {/* 6. Fler guider — sorterade efter användarens väg */}
-        <section className="mb-24">
+        <section className="mb-16 md:mb-24">
           <div className="flex items-baseline justify-between mb-4 gap-3 flex-wrap">
             <h2 className="text-xl font-bold text-gray-900">Fler prisguider</h2>
             {userPath && (
               <p className="text-xs text-gray-400">
                 Sorterade efter dig som vill{" "}
-                <span className="font-semibold text-indigo-700">
+                <span className="font-semibold text-brand-700">
                   {userPath === "use" ? "använda AI" : "bygga med AI"}
                 </span>
               </p>
@@ -304,16 +289,16 @@ export function Home() {
                   to={g.to}
                   className={`card transition-all group relative ${
                     isMatch
-                      ? "border-indigo-200 bg-indigo-50/30 hover:border-indigo-400 hover:bg-indigo-50"
-                      : "border-indigo-200 hover:border-indigo-400 hover:bg-indigo-50"
+                      ? "border-brand-200 bg-brand-50/30 hover:border-brand-400 hover:bg-brand-50"
+                      : "border-brand-200 hover:border-brand-400 hover:bg-brand-50"
                   }`}
                 >
                   {isMatch && (
-                    <span className="absolute top-3 right-3 inline-block px-2 py-0.5 bg-indigo-100 text-indigo-700 text-[10px] rounded-full font-semibold uppercase tracking-wide">
+                    <span className="absolute top-3 right-3 inline-block px-2 py-0.5 bg-brand-100 text-brand-700 text-[10px] rounded-full font-semibold uppercase tracking-wide">
                       Passar dig
                     </span>
                   )}
-                  <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 pr-20">
+                  <p className="font-semibold text-gray-900 group-hover:text-brand-700 mb-1 pr-20">
                     {g.title}
                   </p>
                   <p className="text-sm text-gray-500">{g.body}</p>
@@ -324,7 +309,7 @@ export function Home() {
         </section>
 
         {/* 7. Hur kalkylatorn räknar — kollapsad */}
-        <details className="mb-20 group">
+        <details className="mb-12 md:mb-20 group">
           <summary className="cursor-pointer text-sm font-semibold text-gray-400 hover:text-gray-600 transition-colors list-none flex items-center gap-2">
             <span className="group-open:rotate-90 transition-transform inline-block">▶</span>
             Hur kalkylatorn räknar
@@ -431,7 +416,7 @@ export function Home() {
             50–100 kr per anställd. Nyckeln är att välja rätt modell för rätt uppgift:
             mini-modeller för klassificering och FAQ, flaggskeppsmodeller för komplex
             analys och kod. Se vår guide om{" "}
-            <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">AI för företag</Link>{" "}
+            <Link to="/ai-for-foretag" className="text-brand-700 hover:underline">AI för företag</Link>{" "}
             för konkreta räkneexempel per bransch.
           </p>
 
@@ -441,7 +426,7 @@ export function Home() {
             Claude.ai och Gemini har alla gratis versioner med begränsad åtkomst till
             toppmodellerna. För sporadisk användning räcker gratisversionen långt.
             Vill du testa fler alternativ utan kostnad — se vår sammanställning av{" "}
-            <Link to="/gratis-ai" className="text-indigo-700 hover:underline">gratis AI-verktyg</Link>.
+            <Link to="/gratis-ai" className="text-brand-700 hover:underline">gratis AI-verktyg</Link>.
           </p>
 
           <h3 className="text-xl font-bold text-gray-900 mt-8">Tre tips för att hålla AI-kostnaden nere</h3>
@@ -450,7 +435,7 @@ export function Home() {
               <strong>Använd rätt modell för uppgiften.</strong> GPT-4o mini och Claude Haiku
               är 10–20× billigare än flaggskeppsmodellerna och räcker för 80 % av uppgifterna.
               Se{" "}
-              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">billigaste AI-modellerna 2026</Link>.
+              <Link to="/billigaste-ai" className="text-brand-700 hover:underline">billigaste AI-modellerna 2026</Link>.
             </li>
             <li>
               <strong>Begränsa output-längden.</strong> AI-modeller tar betalt 4× mer för output
@@ -460,7 +445,7 @@ export function Home() {
             <li>
               <strong>Aktivera prompt caching.</strong> Om din applikation skickar samma
               systemprompt vid varje anrop ger Anthropic 90 % rabatt på den delen via{" "}
-              <Link to="/prompt-caching" className="text-indigo-700 hover:underline">prompt caching</Link>.
+              <Link to="/prompt-caching" className="text-brand-700 hover:underline">prompt caching</Link>.
               OpenAI erbjuder automatisk caching för prefix över 1 024 tokens.
             </li>
           </ol>

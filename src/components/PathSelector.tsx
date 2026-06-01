@@ -95,12 +95,12 @@ function PathCard({
       onClick={onClick}
       className={`relative text-left bg-white rounded-2xl p-5 transition-all group ${
         isLastChoice
-          ? "border-2 border-indigo-300 shadow-sm ring-1 ring-indigo-100"
-          : "border border-gray-200 hover:border-indigo-300 hover:shadow-sm"
+          ? "border-2 border-brand-300 shadow-sm ring-1 ring-brand-100"
+          : "border border-gray-200 hover:border-brand-300 hover:shadow-sm"
       }`}
     >
       {isLastChoice && (
-        <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-700 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide shadow-sm">
+        <span className="absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 bg-brand-700 text-white text-[10px] rounded-full font-semibold uppercase tracking-wide shadow-sm">
           <span className="w-1.5 h-1.5 bg-white rounded-full" aria-hidden="true" />
           Senast vald
         </span>
@@ -108,16 +108,16 @@ function PathCard({
       <div className="flex items-start gap-3 mb-2">
         <span className="text-2xl" aria-hidden="true">{emoji}</span>
         <div className="flex-1">
-          <p className="text-xs font-semibold text-indigo-700 uppercase tracking-wide mb-0.5">
+          <p className="text-xs font-semibold text-brand-700 uppercase tracking-wide mb-0.5">
             {kicker}
           </p>
-          <h3 className="text-base font-bold text-gray-900 group-hover:text-indigo-700 transition-colors">
+          <h3 className="text-base font-bold text-gray-900 group-hover:text-brand-700 transition-colors">
             {title}
           </h3>
         </div>
       </div>
       <p className="text-sm text-gray-600 leading-relaxed pl-9">{body}</p>
-      <p className="text-xs font-semibold text-indigo-700 mt-3 pl-9 group-hover:underline">
+      <p className="text-xs font-semibold text-brand-700 mt-3 pl-9 group-hover:underline">
         {cta}
       </p>
     </button>

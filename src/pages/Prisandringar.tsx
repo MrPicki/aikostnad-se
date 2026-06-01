@@ -117,7 +117,7 @@ export function Prisandringar() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -267,7 +267,7 @@ export function Prisandringar() {
             </ol>
             <p className="text-gray-700 leading-relaxed">
               Använd{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 kalkylatorn på startsidan
               </Link>{" "}
               för att räkna ut vad du faktiskt betalar med nuvarande priser och
@@ -279,20 +279,20 @@ export function Prisandringar() {
           <section className="space-y-2 mb-12 not-prose">
             <h2 className="text-xl font-bold text-gray-900 mb-3">Aktuella prissidor</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-                <p className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">ChatGPT API-priser</p>
+              <Link to="/vad-kostar-chatgpt" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+                <p className="font-semibold text-gray-900 group-hover:text-brand-700 text-sm">ChatGPT API-priser</p>
                 <p className="text-xs text-gray-500 mt-0.5">GPT-4o och GPT-4o mini med kalkylator</p>
               </Link>
-              <Link to="/claude-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-                <p className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">Claude API-priser</p>
+              <Link to="/claude-pris" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+                <p className="font-semibold text-gray-900 group-hover:text-brand-700 text-sm">Claude API-priser</p>
                 <p className="text-xs text-gray-500 mt-0.5">Sonnet, Haiku och Opus i SEK</p>
               </Link>
-              <Link to="/gemini-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-                <p className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">Gemini API-priser</p>
+              <Link to="/gemini-pris" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+                <p className="font-semibold text-gray-900 group-hover:text-brand-700 text-sm">Gemini API-priser</p>
                 <p className="text-xs text-gray-500 mt-0.5">Gemini 2.5 Pro och Flash i SEK</p>
               </Link>
-              <Link to="/deepseek-pris" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-                <p className="font-semibold text-gray-900 group-hover:text-indigo-700 text-sm">DeepSeek-priser</p>
+              <Link to="/deepseek-pris" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+                <p className="font-semibold text-gray-900 group-hover:text-brand-700 text-sm">DeepSeek-priser</p>
                 <p className="text-xs text-gray-500 mt-0.5">Billigaste mainstream-modellen?</p>
               </Link>
             </div>

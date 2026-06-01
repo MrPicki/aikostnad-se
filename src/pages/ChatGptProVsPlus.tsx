@@ -75,7 +75,7 @@ export function ChatGptProVsPlus() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -122,7 +122,7 @@ export function ChatGptProVsPlus() {
             <p>
               För svenska företag finns dessutom ett bättre alternativ för flera anställda — ChatGPT
               Team (263 kr/användare/mån) eller Business — som ger delad arbetsyta utan att betala 2 100 kr per
-              person. Se vår guide om <Link to="/ai-for-foretag" className="text-indigo-700 hover:underline">AI för svenska företag</Link>{" "}
+              person. Se vår guide om <Link to="/ai-for-foretag" className="text-brand-700 hover:underline">AI för svenska företag</Link>{" "}
               för hela jämförelsen.
             </p>
           </div>
@@ -154,7 +154,7 @@ export function ChatGptProVsPlus() {
                   <td className="p-3">~210 kr</td>
                   <td className="p-3">~2 520 kr</td>
                 </tr>
-                <tr className="bg-indigo-50">
+                <tr className="bg-brand-50">
                   <td className="p-3 font-medium">Pro</td>
                   <td className="p-3">200 USD</td>
                   <td className="p-3 font-semibold">~2 100 kr</td>
@@ -199,12 +199,12 @@ export function ChatGptProVsPlus() {
                   <td className="p-3 text-green-700">Ja</td>
                   <td className="p-3 text-green-700">Ja (högre limits)</td>
                 </tr>
-                <tr className="bg-indigo-50">
+                <tr className="bg-brand-50">
                   <td className="p-3 font-medium">o3 (full reasoning)</td>
                   <td className="p-3 text-gray-400">Nej</td>
                   <td className="p-3 text-green-700 font-semibold">Ja, obegränsat</td>
                 </tr>
-                <tr className="bg-indigo-50">
+                <tr className="bg-brand-50">
                   <td className="p-3 font-medium">o3 pro mode</td>
                   <td className="p-3 text-gray-400">Nej</td>
                   <td className="p-3 text-green-700 font-semibold">Ja</td>
@@ -214,7 +214,7 @@ export function ChatGptProVsPlus() {
                   <td className="p-3 text-green-700">Ja (limits)</td>
                   <td className="p-3 text-green-700">Ja (högre)</td>
                 </tr>
-                <tr className="bg-indigo-50">
+                <tr className="bg-brand-50">
                   <td className="p-3 font-medium">Sora (videogenerering)</td>
                   <td className="p-3 text-gray-600">50 videos/mån</td>
                   <td className="p-3 text-green-700 font-semibold">Obegränsat</td>
@@ -309,8 +309,8 @@ export function ChatGptProVsPlus() {
                 inga träningsdatautlämning. Vår rekommendation för de flesta små företag.
               </p>
             </div>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4">
-              <h3 className="text-base font-bold text-indigo-900 mb-2">ChatGPT Business (630 kr/användare/mån)</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-4">
+              <h3 className="text-base font-bold text-brand-900 mb-2">ChatGPT Business (630 kr/användare/mån)</h3>
               <p className="text-sm text-gray-700">
                 Lägger till SSO, audit logs, central admin och avancerad användarhantering. För
                 medelstora företag med IT-funktion.
@@ -333,7 +333,7 @@ export function ChatGptProVsPlus() {
           </p>
           <p>
             <strong>Frilansare / konsult?</strong> Plus räcker oftast. Komplettera med{" "}
-            <Link to="/claude-pris" className="text-indigo-700 hover:underline">Claude Pro</Link> (210 kr)
+            <Link to="/claude-pris" className="text-brand-700 hover:underline">Claude Pro</Link> (210 kr)
             för specifika styrkor — totalt 420 kr/mån ger dig bredare verktyg än bara ChatGPT Pro till
             en femtedel av priset.
           </p>
@@ -349,14 +349,14 @@ export function ChatGptProVsPlus() {
 
         <Sources items={openAISources} />
 
-        <div className="mt-12 card bg-indigo-50 border-indigo-100">
-          <p className="text-sm text-indigo-800">
+        <div className="mt-12 card bg-brand-50 border-brand-100">
+          <p className="text-sm text-brand-800">
             Räkna ut vad du faktiskt skulle använda i tokens:{" "}
-            <Link to="/vad-kostar-chatgpt" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/vad-kostar-chatgpt" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               ChatGPT API-kalkylator
             </Link>{" "}
             eller{" "}
-            <Link to="/chatgpt-vs-claude" className="font-semibold underline underline-offset-2 hover:text-indigo-900">
+            <Link to="/chatgpt-vs-claude" className="font-semibold underline underline-offset-2 hover:text-brand-900">
               jämför ChatGPT mot Claude
             </Link>
             .

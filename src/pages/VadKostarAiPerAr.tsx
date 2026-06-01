@@ -60,7 +60,7 @@ export function VadKostarAiPerAr() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -171,7 +171,7 @@ export function VadKostarAiPerAr() {
                     <td className="px-3 py-2 font-bold">1 260 kr</td>
                     <td className="px-3 py-2">Kodkomplettering, chatt i IDE</td>
                   </tr>
-                  <tr className="bg-indigo-50">
+                  <tr className="bg-brand-50">
                     <td className="px-3 py-2 font-medium">ChatGPT Plus + Copilot</td>
                     <td className="px-3 py-2">315 kr</td>
                     <td className="px-3 py-2 font-bold">3 780 kr</td>
@@ -285,7 +285,7 @@ export function VadKostarAiPerAr() {
               <div className="border border-gray-200 rounded-xl p-4">
                 <h3 className="text-sm font-bold text-gray-900 mb-1">Steg 3: Estimera volym och välj modell</h3>
                 <p className="text-sm text-gray-600">Använd{" "}
-                  <Link to="/" className="text-indigo-700 hover:underline">kalkylatorn på startsidan</Link>{" "}
+                  <Link to="/" className="text-brand-700 hover:underline">kalkylatorn på startsidan</Link>{" "}
                   för att estimera API-kostnader baserat på tokens och volym. Räkna på GPT-4o mini som bas och GPT-4o för 20 % av komplexa frågor.</p>
               </div>
               <div className="border border-gray-200 rounded-xl p-4">
@@ -355,11 +355,11 @@ export function VadKostarAiPerAr() {
             <p className="text-gray-700 leading-relaxed">
               Siffrorna ovan är riktmärken — din faktiska kostnad beror på volym, modellval och
               användningsmönster. Använd{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">kalkylatorn på startsidan</Link>{" "}
+              <Link to="/" className="text-brand-700 hover:underline font-medium">kalkylatorn på startsidan</Link>{" "}
               för att räkna ut din exakta månads- och årskostnad i SEK. Se också{" "}
-              <Link to="/ai-kostnad-per-manad" className="text-indigo-700 hover:underline font-medium">vad AI kostar per månad</Link>{" "}
+              <Link to="/ai-kostnad-per-manad" className="text-brand-700 hover:underline font-medium">vad AI kostar per månad</Link>{" "}
               och{" "}
-              <Link to="/vad-kostar-ai" className="text-indigo-700 hover:underline font-medium">komplett AI-prisguide 2026</Link>{" "}
+              <Link to="/vad-kostar-ai" className="text-brand-700 hover:underline font-medium">komplett AI-prisguide 2026</Link>{" "}
               för en full överblick.
             </p>
           </section>

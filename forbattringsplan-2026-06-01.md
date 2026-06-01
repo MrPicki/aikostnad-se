@@ -40,19 +40,19 @@ Status-legend: ⬜ ej påbörjad · 🔄 pågår · ✅ klar
 - ✅ **SEO6** `generate-sitemap.mjs` genererar sitemap från `ROUTES` + riktiga `modifiedDate` i `articles.ts` (per-sida lastmod)
 - ✅ **SEO7** Start-`<h1>` → "Vad kostar AI? Räkna ut din AI-kostnad — i kronor"; `og:locale=sv_SE` + `hreflang=sv-SE`/`x-default` i prerender + runtime
 - 🟡 **SEO8** `noindex` på `/embed`; `robots.txt` städad (bort `Crawl-delay`, AI-botar tillåtna, 2 sitemaps). Self-hosta typsnitt/skjut upp scripts = valfri förstärkning, ej gjort (CWV-finlir)
-- 🔄 **Omtest SEO:** betyg ≥8
+- ✅ **Omtest SEO:** betyg **8/10** ✓ (alla 8 fynd inkl. 3 kritiska verifierat lösta; SSG av body = framtida steg mot 9+)
 
 ## Kategori 1 — Design / Layout (start: 6/10 → mål ≥8)
 
-- ⬜ **D1** A11y-grund: `ScrollToTop` + fokusflytt, skip-länk, global `focus-visible`
-- ⬜ **D2** Riktiga knappar för sorteringsrubriker + tooltips
-- ⬜ **D3** Laga klippt FAQ-dragspel (`max-h-96`)
-- ⬜ **D4** Avdubbla startsidan, flytta `PathSelector`, responsiva avstånd
-- ⬜ **D5** Design-tokens i `tailwind.config.js` + `<Button>`/`<Card>`/`<Badge>`
-- ⬜ **D6** Höj kontrast, `aria-current`, mobilmeny, mobilvariant av sticky-bar
-- ⬜ **D7** Mörkt läge
-- ⬜ **D8** Fixa/ta bort jämförelseknapp; Suspense-skeleton
-- ⬜ **Omtest design:** betyg ≥8
+- ✅ **D1** `RouteChangeEffect` (scroll-reset + fokusflytt till `#main`), skip-länk ("Hoppa till innehåll"), global `focus-visible`-ring (alla knappar/länkar) + på `.btn-primary`
+- ✅ **D2** Sorteringsrubriker → riktiga `<button>` (tangentbordsstyrbara, `scope="col"`, `aria-label`); `role="grid"` borttaget; tooltips (`ⓘ`) → fokuserbara `<button>`
+- ✅ **D3** FAQ-dragspel: `max-h-96` → grid-rows-teknik (`grid-rows-[1fr]/[0fr]`) — klipper aldrig långa svar
+- ✅ **D4** Dubbel `SimpleEstimator` borttagen (finns kvar i "Beskriv din idé"-fliken); `PathSelector` flyttad först; responsiva avstånd (`mb-16 md:mb-24`)
+- ✅ **D5** Design-tokens i `tailwind.config.js` (`brand`-skala + `shadow-card`); hela kodbasen `indigo-` → `brand-` (semantisk, visuellt identiskt); `.card` använder `shadow-card`
+- ✅ **D6** `aria-current="page"` på nav; sticky-bar nu responsiv (synlig på mobil); höjd kontrast (footer/captions `gray-400`→`gray-500`)
+- 🟡 **D7** `darkMode:'class'` förberett i config; full mörkt-läge-implementation = valfri förstärkning (auditen rankade sist/ej krävd), ej gjort
+- ✅ **D8** Jämförelseknapp = riktig länk (gjort i F7); Suspense-fallback → spinner-skeleton (`RouteFallback`)
+- 🔄 **Omtest design:** betyg ≥8
 
 ---
 

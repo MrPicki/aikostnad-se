@@ -84,7 +84,7 @@ export function JamforAiModeller() {
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till startsidan
           </Link>
         </div>
@@ -174,7 +174,7 @@ export function JamforAiModeller() {
                     <td className="px-3 py-2">200K tokens</td>
                     <td className="px-3 py-2">Komplexa agenter, avancerad kod</td>
                   </tr>
-                  <tr className="bg-indigo-50">
+                  <tr className="bg-brand-50">
                     <td className="px-3 py-2 font-medium">Claude Sonnet 4.6</td>
                     <td className="px-3 py-2">Anthropic</td>
                     <td className="px-3 py-2 text-right">31,50</td>
@@ -252,8 +252,8 @@ export function JamforAiModeller() {
             <p className="text-gray-700 leading-relaxed">
               Prioritet: låg kostnad per svar, snabb responstid, acceptabel svenska.
             </p>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Rekommendation: kundtjänst-chatbot</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Rekommendation: kundtjänst-chatbot</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
                 <li><strong>Bäst balans:</strong> Claude Haiku 4.5 — naturlig svenska, 10,50 SEK/Mtok</li>
                 <li><strong>Lägst kostnad:</strong> GPT-4o mini — 1,58 SEK/Mtok, men sämre svenska</li>
@@ -266,8 +266,8 @@ export function JamforAiModeller() {
             <p className="text-gray-700 leading-relaxed">
               Prioritet: hög precision, förstår komplex kod, ger välmotiverade förslag.
             </p>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Rekommendation: kodassistent</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Rekommendation: kodassistent</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
                 <li><strong>Toppalternativ:</strong> Claude Sonnet 4.6 eller GPT-4.1 — jämbördiga på SWE-bench</li>
                 <li><strong>Budget-alternativ:</strong> Claude Haiku 4.5 — bra för enkel kod, review, testning</li>
@@ -280,8 +280,8 @@ export function JamforAiModeller() {
             <p className="text-gray-700 leading-relaxed">
               Prioritet: stort kontextfönster, koherens i analys av hela dokumentet, korrekt extraktion.
             </p>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Rekommendation: dokumentanalys</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Rekommendation: dokumentanalys</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
                 <li><strong>Riktigt långa (bok, hel kodbas):</strong> Gemini 2.5 Pro (1M tokens) eller GPT-4.1</li>
                 <li><strong>Medellånga (avtal, rapporter, 100–300 sidor):</strong> Claude Sonnet 4.6 (200K, stark koherens)</li>
@@ -294,8 +294,8 @@ export function JamforAiModeller() {
             <p className="text-gray-700 leading-relaxed">
               Prioritet: naturlig svenska, konsekvent ton, kreativt men kontrollerat.
             </p>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Rekommendation: svensk textgenerering</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Rekommendation: svensk textgenerering</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
                 <li><strong>Bäst på svenska:</strong> Claude Sonnet 4.6 — naturligast, håller ton längst</li>
                 <li><strong>Nära andraval:</strong> GPT-4o — stark, men något mer oversatt-känsla</li>
@@ -308,8 +308,8 @@ export function JamforAiModeller() {
             <p className="text-gray-700 leading-relaxed">
               Prioritet: lägsta kostnad per token, tillräcklig (inte bäst) kvalitet.
             </p>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Rekommendation: hög volym / lågpris</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Rekommendation: hög volym / lågpris</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
                 <li><strong>Billigast GDPR-säker:</strong> GPT-4o mini (1,58 SEK/Mtok) — stark modell för priset</li>
                 <li><strong>Europeisk billigast:</strong> Mistral Small (1,05 SEK/Mtok) — franska servrar</li>
@@ -322,8 +322,8 @@ export function JamforAiModeller() {
             <p className="text-gray-700 leading-relaxed">
               Prioritet: EU-dataresidens eller robust GDPR DPA, transparent datahantering.
             </p>
-            <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-5 space-y-2">
-              <h3 className="text-base font-bold text-indigo-900">Rekommendation: GDPR-kritiskt</h3>
+            <div className="bg-brand-50 border border-brand-100 rounded-xl p-5 space-y-2">
+              <h3 className="text-base font-bold text-brand-900">Rekommendation: GDPR-kritiskt</h3>
               <ul className="list-disc pl-6 space-y-1 text-gray-700 text-sm">
                 <li><strong>Bäst:</strong> Mistral Large — franska servrar, EU-nativt, inget DPA-förhandling krävs</li>
                 <li><strong>Alternativ:</strong> OpenAI Enterprise eller Anthropic Enterprise med GDPR DPA och EU-regioner</li>
@@ -367,11 +367,11 @@ export function JamforAiModeller() {
             </ol>
             <p className="text-gray-700 leading-relaxed">
               Vill du räkna mer konkret? Kolla vår{" "}
-              <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
+              <Link to="/billigaste-ai" className="text-brand-700 hover:underline">
                 guide till billigaste AI-modellerna
               </Link>{" "}
               eller vår{" "}
-              <Link to="/chatgpt-vs-claude" className="text-indigo-700 hover:underline">
+              <Link to="/chatgpt-vs-claude" className="text-brand-700 hover:underline">
                 djupjämförelse av ChatGPT och Claude
               </Link>
               .
@@ -417,7 +417,7 @@ export function JamforAiModeller() {
             <p className="text-gray-700 leading-relaxed">
               Tabellen ovan ger en bra bild av relativa kostnader, men din faktiska
               månadskostnad beror på din specifika volym och konversationslängd.{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 Kalkylatorn på startsidan
               </Link>{" "}
               låter dig fylla i exakt antal frågor och genomsnittlig längd — och ser
@@ -425,17 +425,17 @@ export function JamforAiModeller() {
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm">
               <li>
-                <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">
+                <Link to="/billigaste-ai" className="text-brand-700 hover:underline">
                   Djupanalys av de billigaste modellerna
                 </Link>
               </li>
               <li>
-                <Link to="/claude-pris" className="text-indigo-700 hover:underline">
+                <Link to="/claude-pris" className="text-brand-700 hover:underline">
                   Alla Claude-modeller i detalj
                 </Link>
               </li>
               <li>
-                <Link to="/vad-kostar-chatgpt" className="text-indigo-700 hover:underline">
+                <Link to="/vad-kostar-chatgpt" className="text-brand-700 hover:underline">
                   Alla GPT-modellers priser och kostnader
                 </Link>
               </li>

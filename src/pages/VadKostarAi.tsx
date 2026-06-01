@@ -58,7 +58,7 @@ export function VadKostarAi() {
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <Link to="/" className="text-sm text-indigo-700 hover:underline flex items-center gap-1">
+          <Link to="/" className="text-sm text-brand-700 hover:underline flex items-center gap-1">
             ← Tillbaka till kalkylatorn
           </Link>
         </div>
@@ -103,7 +103,7 @@ export function VadKostarAi() {
             <p>
               Nedan ser du de populäraste fasta abonnemangen. Vill du räkna på API-kostnader
               för en specifik modell hittar du en detaljkalkylator på{" "}
-              <Link to="/" className="text-indigo-700 hover:underline font-medium">
+              <Link to="/" className="text-brand-700 hover:underline font-medium">
                 startsidan
               </Link>
               .
@@ -174,7 +174,7 @@ export function VadKostarAi() {
             Här lönar abonnemang sig fortfarande för individuell användning. Lägg till
             en intern AI-assistent via API (chatbot, dokumentassistent) och den totala
             AI-budgeten landar i spannet 1 000–2 000 kr/mån. Se vår{" "}
-            <Link to="/ai-chatbot-kostnad" className="text-indigo-700 hover:underline">chatbot-kostnadsguide</Link>{" "}
+            <Link to="/ai-chatbot-kostnad" className="text-brand-700 hover:underline">chatbot-kostnadsguide</Link>{" "}
             för konkreta API-exempel.
           </p>
 
@@ -209,7 +209,7 @@ export function VadKostarAi() {
             <li>
               <strong>Fel modell för uppgiften.</strong> Att använda Claude Opus eller
               GPT-4.1 för att klassificera supportärenden är som att hyra Formula 1-bil
-              för pendling. Använd <Link to="/billigaste-ai" className="text-indigo-700 hover:underline">mini-modeller</Link>{" "}
+              för pendling. Använd <Link to="/billigaste-ai" className="text-brand-700 hover:underline">mini-modeller</Link>{" "}
               där de räcker.
             </li>
           </ol>
@@ -222,16 +222,16 @@ export function VadKostarAi() {
         <Sources items={officialPricingSources} />
 
         <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Link to="/billigaste-ai" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
+          <Link to="/billigaste-ai" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+            <p className="font-semibold text-gray-900 group-hover:text-brand-700 mb-1 text-sm">
               Billigaste AI 2026
             </p>
             <p className="text-xs text-gray-500">
               Vilket AI-verktyg ger mest för pengarna? Jämförelse per användningsfall.
             </p>
           </Link>
-          <Link to="/vad-kostar-chatgpt" className="card hover:border-indigo-200 hover:shadow-sm transition-all group">
-            <p className="font-semibold text-gray-900 group-hover:text-indigo-700 mb-1 text-sm">
+          <Link to="/vad-kostar-chatgpt" className="card hover:border-brand-200 hover:shadow-sm transition-all group">
+            <p className="font-semibold text-gray-900 group-hover:text-brand-700 mb-1 text-sm">
               Vad kostar ChatGPT?
             </p>
             <p className="text-xs text-gray-500">

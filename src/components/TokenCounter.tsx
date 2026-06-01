@@ -101,11 +101,11 @@ interface StatBoxProps {
 function StatBox({ label, value, sub, highlight }: StatBoxProps) {
   return (
     <div
-      className={`rounded-xl p-4 text-center ${highlight ? "bg-indigo-50 border border-indigo-100" : "bg-gray-50"}`}
+      className={`rounded-xl p-4 text-center ${highlight ? "bg-brand-50 border border-brand-100" : "bg-gray-50"}`}
     >
       <p className="text-xs text-gray-500 mb-1">{label}</p>
       <p
-        className={`text-lg font-bold ${highlight ? "text-indigo-700" : "text-gray-900"}`}
+        className={`text-lg font-bold ${highlight ? "text-brand-700" : "text-gray-900"}`}
       >
         {value}
       </p>
