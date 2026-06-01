@@ -356,11 +356,15 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 
         <!-- Header -->
         <tr>
-          <td class="header-td" bgcolor="#ffffff" style="background-color:#ffffff;padding:22px 32px;border-bottom:1px solid #e2e8f0;">
+          <td class="header-td" bgcolor="#ffffff" style="background-color:#ffffff;padding:20px 32px;border-bottom:1px solid #e2e8f0;">
             <table width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr>
-                <td bgcolor="#ffffff" style="background-color:#ffffff;"><span style="font-size:20px;font-weight:800;color:#4f46e5;letter-spacing:-0.02em;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Aikostnad</span></td>
-                <td align="right" bgcolor="#ffffff" style="background-color:#ffffff;"><span style="font-size:13px;color:#94a3b8;">${dateStr}</span></td>
+                <td bgcolor="#ffffff" style="background-color:#ffffff;vertical-align:middle;">
+                  <a href="https://aikostnad.se" style="text-decoration:none;display:inline-block;">
+                    <img src="https://aikostnad.se/email-logo.png" alt="Aikostnad.se" width="167" height="22" style="display:block;border:0;outline:none;max-width:167px;height:auto;" />
+                  </a>
+                </td>
+                <td align="right" bgcolor="#ffffff" style="background-color:#ffffff;vertical-align:middle;"><span style="font-size:13px;color:#94a3b8;">${dateStr}</span></td>
               </tr>
             </table>
           </td>
@@ -510,7 +514,7 @@ export default async function handler(req: any, res: any): Promise<void> {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "hej@aikostnad.se",
+        from: "Dagens AI-nyheter <hej@aikostnad.se>",
         to: "christoffer.nolet@gmail.com",
         subject: digest.subject,
         html: htmlEmail,
