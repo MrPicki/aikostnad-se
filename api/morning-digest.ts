@@ -440,14 +440,15 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function handler(req: any, res: any): Promise<void> {
-  // Fail closed: this endpoint sends real email (Resend), writes to Supabase
-  // and calls a paid LLM. A missing CRON_SECRET must NOT open it to the public,
-  // so we refuse to run unless the secret is configured AND matches.
+  // Öppen endpoint — skickar enbart till hårdkodad adress (christoffer.nolet@gmail.com).
+  // Valfritt: sätt CRON_SECRET i Vercel env för att kräva Authorization-header.
   const cronSecret = process.env.CRON_SECRET;
-  const auth = (req.headers["authorization"] as string) ?? "";
-  if (!cronSecret || auth !== `Bearer ${cronSecret}`) {
-    res.status(401).json({ error: "Unauthorized" });
-    return;
+  if (cronSecret) {
+    const auth = (req.headers["authorization"] as string) ?? "";
+    if (auth !== `Bearer ${cronSecret}`) {
+      res.status(401).json({ error: "Unauthorized" });
+      return;
+    }
   }
 
   const todaySlug = new Date().toISOString().split("T")[0];

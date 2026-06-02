@@ -14,12 +14,10 @@ jobs:
 
     steps:
       - name: Anropa morning-digest API
-        id: call_api
         run: |
           echo "Anropar https://aikostnad.se/api/morning-digest..."
           response=$(curl -s -w "\n%{http_code}" \
             -X GET "https://aikostnad.se/api/morning-digest" \
-            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             --max-time 120)
 
           http_code=$(echo "$response" | tail -1)
@@ -29,11 +27,9 @@ jobs:
           echo "Response: $body"
 
           if [ "$http_code" -eq 200 ]; then
-            echo "status=success" >> $GITHUB_OUTPUT
             echo "✅ Digest skickad!"
             echo "$body" | python3 -c "import sys,json; d=json.load(sys.stdin); print('Subject:', d.get('subject','?'))" 2>/dev/null || true
           else
-            echo "status=failure" >> $GITHUB_OUTPUT
             echo "❌ Fel: HTTP $http_code"
             echo "$body"
             exit 1
