@@ -1,5 +1,18 @@
 export const config = { runtime: "edge" };
 
+import {
+  emailShell,
+  escapeHtml,
+  footer as emailFooter,
+  h1,
+  ingress,
+  link,
+  p,
+  primaryButton,
+  section,
+  ul,
+} from "./_email";
+
 // Reuse the guide content for email rendering. We can't import from src/ in
 // the edge runtime (different tsconfig + browser-only modules), so the guide
 // data is duplicated below as a slim email-friendly map.
@@ -125,190 +138,53 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254;
 }
 
-// Shared email chrome — mirrors the daily newsletter (api/morning-digest.ts) so
-// every mail we send (guides + price alerts) looks identical: Plus Jakarta Sans,
-// off-white outer frame around a 600px white card, logo header with a label on
-// the right, indigo CTA, centred footer, and forced light mode on dark clients.
-const EMAIL_FONT =
-  "'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif";
-
-function emailShell(opts: {
-  subject: string;
-  headerLabel: string;
-  bodyHtml: string;
-  footerHtml: string;
-}): string {
-  const { subject, headerLabel, bodyHtml, footerHtml } = opts;
-  return `<!DOCTYPE html>
-<html lang="sv">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="color-scheme" content="light">
-<meta name="supported-color-schemes" content="light">
-<title>${escapeHtml(subject)}</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-/* Force light mode — Apple Mail, Outlook iOS */
-@media (prefers-color-scheme: dark) {
-  body, .outer-wrap, .inner-wrap, .content-td, .header-td, .footer-td { background-color: #ffffff !important; color: #1e293b !important; }
-  .btn-cta-td { background-color: #4f46e5 !important; }
-  .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
-}
-/* Gmail dark mode (Android + iOS app) */
-[data-ogsc] body, [data-ogsc] .outer-wrap, [data-ogsc] .inner-wrap, [data-ogsc] .content-td, [data-ogsc] .header-td, [data-ogsc] .footer-td { background-color: #ffffff !important; color: #1e293b !important; }
-[data-ogsc] .btn-cta-td { background-color: #4f46e5 !important; }
-[data-ogsc] .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
-[data-ogsb] body, [data-ogsb] .outer-wrap, [data-ogsb] .inner-wrap, [data-ogsb] .content-td, [data-ogsb] .header-td, [data-ogsb] .footer-td { background-color: #ffffff !important; color: #1e293b !important; }
-[data-ogsb] .btn-cta-td { background-color: #4f46e5 !important; }
-[data-ogsb] .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
-</style>
-</head>
-<body style="margin:0;padding:0;background-color:#f8fafc;color-scheme:light;supported-color-schemes:light;font-family:${EMAIL_FONT};">
-<table class="outer-wrap" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f8fafc" style="background-color:#f8fafc;padding:24px 0;">
-  <tr>
-    <td align="center" bgcolor="#f8fafc" style="background-color:#f8fafc;">
-      <table class="inner-wrap" width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="max-width:600px;width:100%;background-color:#ffffff;">
-
-        <!-- Header -->
-        <tr>
-          <td class="header-td" bgcolor="#ffffff" style="background-color:#ffffff;padding:20px 32px;border-bottom:1px solid #e2e8f0;">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td bgcolor="#ffffff" style="background-color:#ffffff;vertical-align:middle;">
-                  <a href="https://aikostnad.se" style="text-decoration:none;display:inline-block;">
-                    <img src="https://aikostnad.se/email-logo.png" alt="Aikostnad.se" width="167" height="22" style="display:block;border:0;outline:none;max-width:167px;height:auto;" />
-                  </a>
-                </td>
-                <td align="right" bgcolor="#ffffff" style="background-color:#ffffff;vertical-align:middle;"><span style="font-size:13px;color:#94a3b8;">${escapeHtml(headerLabel)}</span></td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- Body -->
-        <tr>
-          <td class="content-td" bgcolor="#ffffff" style="padding:32px;background-color:#ffffff;">
-            ${bodyHtml}
-
-            <!-- CTA -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0 0;">
-              <tr>
-                <td align="center" bgcolor="#ffffff" style="background-color:#ffffff;">
-                  <table cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td class="btn-cta-td" bgcolor="#4f46e5" style="background-color:#4f46e5;border-radius:8px;">
-                        <a class="btn-cta" href="https://aikostnad.se/token-kalkylator" style="display:inline-block;background-color:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-family:${EMAIL_FONT};">Räkna ut din AI-kostnad →</a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-
-          </td>
-        </tr>
-
-        <!-- Footer -->
-        <tr>
-          <td class="footer-td" bgcolor="#f8fafc" style="background-color:#f8fafc;padding:20px 32px;border-top:1px solid #e2e8f0;">
-            ${footerHtml}
-          </td>
-        </tr>
-
-      </table>
-    </td>
-  </tr>
-</table>
-</body>
-</html>`;
-}
-
-// Body typography helpers — same scale as the newsletter article body.
-function emailH1(text: string): string {
-  return `<h1 style="font-size:26px;font-weight:800;color:#0f172a;margin:0 0 16px;line-height:1.3;">${text}</h1>`;
-}
-
-function emailIngress(text: string): string {
-  return `<p style="font-size:17px;color:#475569;font-style:italic;line-height:1.7;margin:0 0 4px;">${text}</p>`;
-}
-
-function emailSection(title: string, bodyHtml: string): string {
-  return (
-    `<hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">` +
-    `<h2 style="font-size:17px;font-weight:700;color:#0f172a;margin:0 0 10px;line-height:1.4;">${title}</h2>` +
-    bodyHtml
-  );
-}
-
-function emailP(text: string): string {
-  return `<p style="font-size:15px;color:#334155;line-height:1.8;margin:0 0 10px;">${text}</p>`;
-}
-
-function emailLink(href: string, label: string): string {
-  return `<a href="${escapeAttr(href)}" style="color:#4f46e5;font-weight:600;text-decoration:none;">${escapeHtml(label)}</a>`;
-}
-
-function emailFooter(reason: string): string {
-  return (
-    `<p style="margin:0 0 6px;font-size:13px;color:#94a3b8;text-align:center;line-height:1.6;">${reason}</p>` +
-    `<p style="margin:0;font-size:13px;color:#94a3b8;text-align:center;line-height:1.6;">` +
-    `<a href="https://aikostnad.se" style="color:#94a3b8;text-decoration:none;">aikostnad.se</a>` +
-    `&nbsp;&middot;&nbsp;Hantera dina uppgifter enligt vår <a href="https://aikostnad.se/integritet" style="color:#94a3b8;text-decoration:underline;">integritetspolicy</a>` +
-    `&nbsp;&middot;&nbsp;Avregistrera: svara på mailet eller maila hej@aikostnad.se` +
-    `</p>`
-  );
-}
-
 function buildEmailHtml(guide: EmailGuide, modelName: string | undefined): string {
   const safeModel = modelName ? ` (${escapeHtml(modelName)})` : "";
 
-  const body =
-    emailH1(`${escapeHtml(guide.providerName)}${safeModel}`) +
-    emailIngress(
+  const content =
+    h1(`${escapeHtml(guide.providerName)}${safeModel}`) +
+    ingress(
       "Här är din steg-för-steg-guide för att komma igång — från konto till ditt första anrop, plus tre tips som sänker din kostnad direkt."
     ) +
-    emailSection(
+    section(
       "1. Skapa konto",
-      emailP(escapeHtml(guide.signupSummary)) +
-        emailP(emailLink(guide.signupUrl, guide.signupUrl))
+      p(escapeHtml(guide.signupSummary)) + p(link(guide.signupUrl, guide.signupUrl))
     ) +
-    emailSection(
+    section(
       "2. Skapa API-nyckel",
-      emailP(
+      p(
         'Logga in i dashboarden, gå till "API Keys", skapa en ny nyckel. Kopiera och spara säkert — du ser nyckeln bara en gång.'
-      ) + emailP(emailLink(guide.apiKeyUrl, guide.apiKeyUrl))
+      ) + p(link(guide.apiKeyUrl, guide.apiKeyUrl))
     ) +
-    emailSection(
+    section(
       "3. Ladda saldo + sätt utgiftsgräns",
-      emailP(
+      p(
         "Lägg in betalningsmetod och ladda saldo (de flesta leverantörer använder prepaid). <strong>Sätt alltid en månadsgräns</strong> — det är ditt säkerhetsnät mot buggar som genererar tusentals onödiga anrop."
       )
     ) +
-    emailSection("4. Ditt första anrop", emailP(escapeHtml(guide.firstAnrop))) +
-    emailSection(
+    section("4. Ditt första anrop", p(escapeHtml(guide.firstAnrop))) +
+    section(
       "5. Tre tips för att spara pengar",
-      `<ul style="margin:0;padding-left:20px;">${guide.threeTopTips
-        .map(
-          (t) =>
-            `<li style="font-size:15px;color:#334155;line-height:1.8;margin-bottom:8px;">${escapeHtml(t)}</li>`
-        )
-        .join("")}</ul>`
+      ul(guide.threeTopTips.map((t) => escapeHtml(t)))
     ) +
-    emailSection(
+    section(
       "Officiella resurser",
-      emailP(
-        `${emailLink(guide.pricingUrl, "Prislista")} &middot; ${emailLink(
+      p(
+        `${link(guide.pricingUrl, "Prislista")} &middot; ${link(
           guide.docsUrl,
           "API-dokumentation"
-        )} &middot; ${emailLink("https://aikostnad.se/", "Räkna på din egen volym")}`
+        )} &middot; ${link("https://aikostnad.se/", "Räkna på din egen volym")}`
       )
-    );
+    ) +
+    `<div style="margin-top:28px;text-align:center;">${primaryButton(
+      "https://aikostnad.se/token-kalkylator",
+      "Räkna ut din AI-kostnad →"
+    )}</div>`;
 
   return emailShell({
     subject: `Din ${guide.providerName}-guide från Aikostnad.se`,
     headerLabel: "Steg-för-steg-guide",
-    bodyHtml: body,
+    contentHtml: content,
     footerHtml: emailFooter("Du får detta mail för att du bad om en guide via aikostnad.se"),
   });
 }
@@ -317,31 +193,33 @@ function buildEmailHtml(guide: EmailGuide, modelName: string | undefined): strin
 // requested (e.g. the homepage "bevaka mitt pris" form, the sticky bar and the
 // post-calculation capture all sign up for price alerts without a providerId).
 function buildPriceAlertHtml(): string {
-  const body =
-    emailH1("Du bevakar nu AI-priser ✓") +
-    emailIngress(
+  const content =
+    h1("Du bevakar nu AI-priser ✓") +
+    ingress(
       "Tack! Vi hör av oss när priserna på de stora AI-modellerna (ChatGPT, Claude, Gemini m.fl.) ändras — max en gång per vecka, ofta mer sällan."
     ) +
-    emailSection(
+    section(
       "Räkna medan du väntar",
-      emailP(
-        "Räkna ut exakt vad ditt AI-användningsfall kostar i kronor:"
-      ) +
-        emailP(emailLink("https://aikostnad.se/token-kalkylator", "Öppna kalkylatorn på aikostnad.se →"))
+      p("Räkna ut exakt vad ditt AI-användningsfall kostar i kronor:") +
+        p(link("https://aikostnad.se/token-kalkylator", "Öppna kalkylatorn på aikostnad.se →"))
     ) +
-    emailSection(
+    section(
       "Snabbtips medan du väntar",
-      `<ul style="margin:0;padding-left:20px;">
-        <li style="font-size:15px;color:#334155;line-height:1.8;margin-bottom:8px;">Börja alltid med den billigaste modellen (GPT-4o mini, Claude Haiku, Gemini Flash) — den räcker för ~80% av användningsfallen.</li>
-        <li style="font-size:15px;color:#334155;line-height:1.8;margin-bottom:8px;">Output-tokens kostar 4&times; mer än input. Sätt en rimlig <code>max_tokens</code>.</li>
-        <li style="font-size:15px;color:#334155;line-height:1.8;margin-bottom:8px;">Aktivera prompt caching för stora system-promtar — upp till 90% rabatt på den cachade delen.</li>
-      </ul>`
-    );
+      ul([
+        "Börja alltid med den billigaste modellen (GPT-4o mini, Claude Haiku, Gemini Flash) — den räcker för ~80% av användningsfallen.",
+        "Output-tokens kostar 4&times; mer än input. Sätt en rimlig <code>max_tokens</code>.",
+        "Aktivera prompt caching för stora system-promtar — upp till 90% rabatt på den cachade delen.",
+      ])
+    ) +
+    `<div style="margin-top:28px;text-align:center;">${primaryButton(
+      "https://aikostnad.se/token-kalkylator",
+      "Räkna ut din AI-kostnad →"
+    )}</div>`;
 
   return emailShell({
     subject: "Du bevakar nu AI-priser — Aikostnad.se",
     headerLabel: "Prisbevakning",
-    bodyHtml: body,
+    contentHtml: content,
     footerHtml: emailFooter("Du får detta mail för att du anmälde dig till prisbevakning via aikostnad.se"),
   });
 }
@@ -418,19 +296,6 @@ https://aikostnad.se/integritet
 Avregistrera dig — svara på det här mailet med "unsubscribe" eller
 kontakta hej@aikostnad.se.
 `;
-}
-
-function escapeHtml(s: string): string {
-  return s
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function escapeAttr(s: string): string {
-  return s.replace(/"/g, "&quot;");
 }
 
 interface SendGuidePayload {

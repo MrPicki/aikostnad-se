@@ -14,6 +14,19 @@
 //   );
 
 import Parser from "rss-parser";
+import {
+  COLORS,
+  emailShell,
+  eyebrow,
+  footer as emailFooter,
+  h1,
+  hr,
+  ingress,
+  p,
+  primaryButton,
+  section,
+  shareButtonX,
+} from "./_email";
 
 const RSS_FEEDS = [
   "https://openai.com/news/rss.xml",
@@ -306,136 +319,43 @@ function stripDangerousHtml(input: string): string {
 }
 
 function buildArticleHtml(digest: Digest): string {
+  // digest.* is LLM-generated HTML (with intentional <a> links), so it is
+  // sanitised with stripDangerousHtml rather than escaped. The typography
+  // helpers come from the shared design system (api/_email.ts).
   const sectionsHtml = digest.sections
-    .map(
-      (s) =>
-        `<hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">` +
-        `<h2 style="font-size:17px;font-weight:700;color:#0f172a;margin:0 0 10px;line-height:1.4;">${stripDangerousHtml(s.title)}</h2>` +
-        `<p style="font-size:15px;color:#334155;line-height:1.8;margin:0;">${stripDangerousHtml(s.content)}</p>`
+    .map((s) =>
+      section(stripDangerousHtml(s.title), p(stripDangerousHtml(s.content)))
     )
     .join("\n");
 
   return (
-    `<h1 style="font-size:26px;font-weight:800;color:#0f172a;margin:0 0 16px;line-height:1.3;">${stripDangerousHtml(digest.headline)}</h1>\n` +
-    `<p style="font-size:17px;color:#475569;font-style:italic;line-height:1.7;margin:0 0 4px;">${stripDangerousHtml(digest.ingress)}</p>\n` +
+    h1(stripDangerousHtml(digest.headline)) +
+    ingress(stripDangerousHtml(digest.ingress)) +
     sectionsHtml +
-    `\n<hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">` +
-    `<p style="margin:0 0 6px;font-size:11px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;">Slutsats</p>` +
-    `<p style="margin:0;font-size:15px;color:#0f172a;line-height:1.7;">${stripDangerousHtml(digest.takeaway)}</p>`
+    hr() +
+    eyebrow("Slutsats") +
+    p(stripDangerousHtml(digest.takeaway))
   );
 }
 
 function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): string {
   const hashtagsText = digest.hashtags.join(" ");
 
-  const xPostRaw = digest.xPost ?? "";
-  const xPostTruncated = xPostRaw.length > 280 ? xPostRaw.slice(0, 240) + "…" : xPostRaw;
-  const xPostEncoded = encodeURIComponent(xPostTruncated);
+  const content =
+    articleBody +
+    `<p style="margin:28px 0 18px;font-size:14px;color:${COLORS.muted};line-height:1.6;">${hashtagsText}</p>` +
+    `<div style="text-align:center;margin:0 0 14px;">${shareButtonX(digest.xPost ?? "")}</div>` +
+    `<div style="text-align:center;">${primaryButton(
+      "https://aikostnad.se/token-kalkylator",
+      "Räkna ut din AI-kostnad →"
+    )}</div>`;
 
-  return `<!DOCTYPE html>
-<html lang="sv">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="color-scheme" content="light">
-<meta name="supported-color-schemes" content="light">
-<title>${digest.subject}</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-/* Force light mode — Apple Mail, Outlook iOS */
-@media (prefers-color-scheme: dark) {
-  body, .outer-wrap, .inner-wrap, .content-td, .header-td, .footer-td { background-color: #ffffff !important; color: #1e293b !important; }
-  .btn-twitter-td { background-color: #000000 !important; }
-  .btn-twitter { background-color: #000000 !important; color: #ffffff !important; }
-  .btn-cta-td { background-color: #4f46e5 !important; }
-  .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
-}
-/* Gmail dark mode (Android + iOS app) */
-[data-ogsc] body, [data-ogsc] .outer-wrap, [data-ogsc] .inner-wrap, [data-ogsc] .content-td, [data-ogsc] .header-td, [data-ogsc] .footer-td { background-color: #ffffff !important; color: #1e293b !important; }
-[data-ogsc] .btn-twitter-td { background-color: #000000 !important; }
-[data-ogsc] .btn-twitter { background-color: #000000 !important; color: #ffffff !important; }
-[data-ogsc] .btn-cta-td { background-color: #4f46e5 !important; }
-[data-ogsc] .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
-[data-ogsb] body, [data-ogsb] .outer-wrap, [data-ogsb] .inner-wrap, [data-ogsb] .content-td, [data-ogsb] .header-td, [data-ogsb] .footer-td { background-color: #ffffff !important; color: #1e293b !important; }
-[data-ogsb] .btn-twitter-td { background-color: #000000 !important; }
-[data-ogsb] .btn-twitter { background-color: #000000 !important; color: #ffffff !important; }
-[data-ogsb] .btn-cta-td { background-color: #4f46e5 !important; }
-[data-ogsb] .btn-cta { background-color: #4f46e5 !important; color: #ffffff !important; }
-</style>
-</head>
-<body style="margin:0;padding:0;background-color:#f8fafc;color-scheme:light;supported-color-schemes:light;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-<table class="outer-wrap" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f8fafc" style="background-color:#f8fafc;padding:24px 0;">
-  <tr>
-    <td align="center" bgcolor="#f8fafc" style="background-color:#f8fafc;">
-      <table class="inner-wrap" width="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="max-width:600px;width:100%;background-color:#ffffff;">
-
-        <!-- Header -->
-        <tr>
-          <td class="header-td" bgcolor="#ffffff" style="background-color:#ffffff;padding:20px 32px;border-bottom:1px solid #e2e8f0;">
-            <table width="100%" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td bgcolor="#ffffff" style="background-color:#ffffff;vertical-align:middle;">
-                  <a href="https://aikostnad.se" style="text-decoration:none;display:inline-block;">
-                    <img src="https://aikostnad.se/email-logo.png" alt="Aikostnad.se" width="167" height="22" style="display:block;border:0;outline:none;max-width:167px;height:auto;" />
-                  </a>
-                </td>
-                <td align="right" bgcolor="#ffffff" style="background-color:#ffffff;vertical-align:middle;"><span style="font-size:13px;color:#94a3b8;">${dateStr}</span></td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- Body -->
-        <tr>
-          <td class="content-td" bgcolor="#ffffff" style="padding:32px;background-color:#ffffff;">
-            ${articleBody}
-
-            <!-- Hashtags -->
-            <p style="margin:28px 0 20px;font-size:14px;color:#475569;line-height:1.6;">${hashtagsText}</p>
-
-            <!-- X/Twitter button -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 20px;">
-              <tr>
-                <td class="btn-twitter-td" bgcolor="#000000" style="background-color:#000000;border-radius:8px;padding:0;">
-                  <a class="btn-twitter" href="https://twitter.com/intent/tweet?text=${xPostEncoded}" style="display:block;background-color:#000000;color:#ffffff;text-decoration:none;padding:16px 24px;border-radius:8px;font-weight:700;font-size:16px;text-align:center;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">𝕏&nbsp;&nbsp;Dela på Twitter →</a>
-                </td>
-              </tr>
-            </table>
-
-            <!-- CTA -->
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0;">
-              <tr>
-                <td align="center" bgcolor="#ffffff" style="background-color:#ffffff;">
-                  <table cellpadding="0" cellspacing="0" border="0">
-                    <tr>
-                      <td class="btn-cta-td" bgcolor="#4f46e5" style="background-color:#4f46e5;border-radius:8px;">
-                        <a class="btn-cta" href="https://aikostnad.se/token-kalkylator" style="display:inline-block;background-color:#4f46e5;color:#ffffff;font-size:15px;font-weight:600;padding:13px 28px;border-radius:8px;text-decoration:none;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">Räkna ut din AI-kostnad →</a>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-
-          </td>
-        </tr>
-
-        <!-- Footer -->
-        <tr>
-          <td class="footer-td" bgcolor="#f8fafc" style="background-color:#f8fafc;padding:20px 32px;border-top:1px solid #e2e8f0;">
-            <p style="margin:0;font-size:13px;color:#94a3b8;text-align:center;">
-              <a href="https://aikostnad.se" style="color:#94a3b8;text-decoration:none;">aikostnad.se</a>
-              &nbsp;&middot;&nbsp;Du får detta mail som prenumerant
-            </p>
-          </td>
-        </tr>
-
-      </table>
-    </td>
-  </tr>
-</table>
-</body>
-</html>`;
+  return emailShell({
+    subject: digest.subject,
+    headerLabel: dateStr,
+    contentHtml: content,
+    footerHtml: emailFooter("Du får detta mail som prenumerant på aikostnad.se"),
+  });
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
