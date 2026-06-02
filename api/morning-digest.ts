@@ -69,6 +69,21 @@ function getSupabaseUrl() {
   return process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "";
 }
 
+async function checkAlreadySentToday(slug: string): Promise<boolean> {
+  const base = getSupabaseUrl();
+  if (!base) return false;
+  try {
+    const res = await fetch(
+      `${base}/rest/v1/daily_articles?slug=eq.${slug}&select=id`,
+      { headers: supabaseHeaders() }
+    );
+    const rows = (await res.json()) as Array<{ id: string }>;
+    return Array.isArray(rows) && rows.length > 0;
+  } catch {
+    return false;
+  }
+}
+
 async function fetchYesterdayArticle(): Promise<{ title: string; article_urls: string[] } | null> {
   const base = getSupabaseUrl();
   if (!base) return null;
@@ -376,7 +391,7 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
               <tr>
                 <td bgcolor="#ffffff" style="background-color:#ffffff;vertical-align:middle;">
                   <a href="https://aikostnad.se" style="text-decoration:none;display:inline-block;">
-                    <img src="https://aikostnad.se/email-logo.png" alt="Aikostnad.se" width="167" height="22" style="display:block;border:0;outline:none;max-width:167px;height:auto;" />
+                    <img src="https://aikostnad.se/email-logo.png" alt="Aikostnad.se" width="167" height="22" style="display:block;border:0;outline:none;max-width:167px;height:auto;background-color:#ffffff;" />
                   </a>
                 </td>
                 <td align="right" bgcolor="#ffffff" style="background-color:#ffffff;vertical-align:middle;"><span style="font-size:13px;color:#94a3b8;">${dateStr}</span></td>
@@ -445,6 +460,15 @@ export default async function handler(req: any, res: any): Promise<void> {
 
   const todaySlug = new Date().toISOString().split("T")[0];
   const dateStr = formatSwedishDate(new Date());
+
+  // 0. Idempotency guard — if we've already sent today's digest, bail out immediately.
+  //    This prevents duplicate emails from GitHub Actions retries or concurrent cron triggers.
+  const alreadySent = await checkAlreadySentToday(todaySlug);
+  if (alreadySent) {
+    console.log(`Morning digest already sent for ${todaySlug} — skipping.`);
+    res.status(200).json({ success: true, skipped: true, reason: "already sent today" });
+    return;
+  }
 
   // 1. Fetch yesterday's article for dedup
   const prevArticle = await fetchYesterdayArticle();

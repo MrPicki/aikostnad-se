@@ -38,6 +38,8 @@ export function Header() {
             {navLink("/", "Kalkylator")}
             {navLink("/token-kalkylator", "Tokenräknare")}
             {navLink("/nyheter", "Nyheter")}
+            {navLink("/om", "Om")}
+            {navLink("/kontakt", "Kontakt")}
           </nav>
         </div>
       </div>
