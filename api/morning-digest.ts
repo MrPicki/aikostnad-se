@@ -520,18 +520,9 @@ export default async function handler(req: any, res: any): Promise<void> {
   const htmlArticleBody = buildArticleHtml(digest);
   const htmlEmail = buildHtmlEmail(digest, dateStr, htmlArticleBody);
 
-  // 5. Save to Supabase before sending email
-  await saveArticle({
-    date: todaySlug,
-    slug: todaySlug,
-    title: digest.headline,
-    ingress: digest.ingress,
-    content: htmlArticleBody,
-    x_post: digest.xPost ?? "",
-    article_urls: articles.map((a) => a.url),
-  });
-
-  // 6. Send via Resend
+  // 5. Send via Resend FIRST — only save to Supabase after confirmed delivery.
+  //    (Saving before send caused a bug: if the function timed out after save but
+  //    before send, the idempotency guard would permanently block future retries.)
   const resendApiKey = process.env.RESEND_API_KEY;
   if (!resendApiKey) {
     console.error("RESEND_API_KEY not set");
@@ -560,6 +551,17 @@ export default async function handler(req: any, res: any): Promise<void> {
       res.status(500).json({ success: false, emailSent: false, error: `Resend ${resendRes.status}` });
       return;
     }
+
+    // 6. Email confirmed — now persist to Supabase so the idempotency guard works correctly.
+    await saveArticle({
+      date: todaySlug,
+      slug: todaySlug,
+      title: digest.headline,
+      ingress: digest.ingress,
+      content: htmlArticleBody,
+      x_post: digest.xPost ?? "",
+      article_urls: articles.map((a) => a.url),
+    });
 
     console.log(`Morning digest sent: ${digest.subject}`);
     res.status(200).json({ success: true, emailSent: true, claudeOk, subject: digest.subject });
