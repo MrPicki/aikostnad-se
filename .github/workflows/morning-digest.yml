@@ -1,9 +1,12 @@
-name: Daglig AI-rapport (08:00 CEST)
+name: Daglig AI-rapport (backup-trigger 06:00 CEST)
 
 on:
   schedule:
-    # 06:00 UTC = 08:00 CEST (sommartid) / 07:00 CET (vintertid)
-    - cron: "0 6 * * *"
+    # 04:00 UTC = 06:00 CEST — körs som backup om Vercel Cron missar.
+    # GitHub Actions scheduled workflows kan drabbas av upp till 2h fördröjning,
+    # därför körs detta 2h före målklockan (08:00 CEST). Idempotency-guard i
+    # morning-digest.ts säkerställer att mailen bara skickas en gång per dag.
+    - cron: "0 4 * * *"
   workflow_dispatch: # Tillåter manuell körning från GitHub UI
 
 jobs:
