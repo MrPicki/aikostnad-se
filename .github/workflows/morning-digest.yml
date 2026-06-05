@@ -9,6 +9,10 @@ on:
     - cron: "0 8 * * *"
   workflow_dispatch: # Tillåter manuell körning från GitHub UI
 
+concurrency:
+  group: morning-digest
+  cancel-in-progress: false  # vänta ut pågående run istället för att avbryta
+
 jobs:
   send-digest:
     name: Generera och skicka daglig rapport

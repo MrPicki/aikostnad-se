@@ -74,7 +74,7 @@ function getSupabaseUrl() {
 // Det här är race-condition-säkert: två simultana anrop kan aldrig båda få "true".
 async function claimTodaySlot(slug: string): Promise<boolean> {
   const base = getSupabaseUrl();
-  if (!base) return false; // ingen DB → kör ändå (ingen idempotency)
+  if (!base) return false; // ingen DB-URL → skippa (idempotency okonfigurerad)
   try {
     const res = await fetch(`${base}/rest/v1/daily_articles`, {
       method: "POST",
@@ -96,10 +96,10 @@ async function claimTodaySlot(slug: string): Promise<boolean> {
     // Tom array = conflict = en annan process har redan clamat dagens slot.
     return Array.isArray(rows) && rows.length > 0;
   } catch {
-    // Nätverksfel mot Supabase — fail open (skicka mailen) för att undvika
-    // att ett DB-avbrott blockerar mejlet permanent. Accepterar risken för
-    // duplikat i det extremt ovanliga fallet att DB är nere men ej flappy.
-    return true;
+    // Nätverksfel mot Supabase — fail safe (skippa) för att undvika duplikat.
+    // Om DB är nere blockeras mejlet den dagen — acceptabelt jämfört med
+    // dubbelsändning. Vercel Cron + GH Actions backup ökar ändå täckningen.
+    return false;
   }
 }
 

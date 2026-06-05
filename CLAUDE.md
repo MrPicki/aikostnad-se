@@ -19,18 +19,26 @@ Läs detta **innan du ändrar något** i morning-digest-systemet.
 accepterades av Vercel utan fel. Vercel Hobby tillåter max 2 cron-jobb á max 1×/dag.
 Commit `7a55a40` som påstod "kräver Pro-plan" var **FELAKTIG** — ignorera den.
 
-### Idempotency är atomic (race-condition-säker)
+### Idempotency är atomic — MEN catch-blocket måste vara fail-safe
 
 `claimTodaySlot()` i `api/morning-digest.ts` gör ett atomärt INSERT med
 `resolution=ignore-duplicates`. Supabase unique constraint på `slug` garanterar att
 exakt EN process kan skicka mejlet per dag. **Ändra inte tillbaka till SELECT→INSERT-mönstret**
-— det orsakade race conditions och dubbletter (bevisat juni 2 och juni 5 2026).
+— det orsakade race conditions och dubbletter (bevisat juni 2 2026).
 
-### GitHub Actions är backup, inte primärtrigger
+**KRITISKT:** catch-blocket i `claimTodaySlot()` ska returnera `false` (fail-safe),
+**INTE** `return true` (fail-open). Med fail-open + GitHub Actions dubbla instanser
+→ båda requests timeout på Supabase → båda returnerar true → dubbelsändning.
+Bevisat 2026-06-05: 2 mejl skickades med 5,8s mellanrum. Fixat med fail-safe + GH concurrency.
+
+### GitHub Actions är backup, inte primärtrigger — och MÅSTE ha concurrency-kontroll
 
 `.github/workflows/morning-digest.yml` kör `0 8 * * *` (08:00 UTC) som backup.
 GitHub Actions delayed workflows med 2–7h på inaktiva repos — det är därför de
 **inte** kan vara primärtrigger. Vercel Cron kör på exakt schemalagd tid.
+
+**KRITISKT:** Workflowen MÅSTE ha `concurrency: group: morning-digest` — annars kan
+GH Actions starta dubbla instanser av samma jobb (bevisat 2026-06-05). Redan fixat.
 
 ---
 
