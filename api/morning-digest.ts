@@ -69,18 +69,37 @@ function getSupabaseUrl() {
   return process.env.SUPABASE_URL ?? process.env.VITE_SUPABASE_URL ?? "";
 }
 
-async function checkAlreadySentToday(slug: string): Promise<boolean> {
+// Atomärt claim — försöker INSERT raden med slug direkt (unique constraint).
+// Supabase returnerar den insatta raden om INSERT lyckades, tom array om conflict.
+// Det här är race-condition-säkert: två simultana anrop kan aldrig båda få "true".
+async function claimTodaySlot(slug: string): Promise<boolean> {
   const base = getSupabaseUrl();
-  if (!base) return false;
+  if (!base) return false; // ingen DB → kör ändå (ingen idempotency)
   try {
-    const res = await fetch(
-      `${base}/rest/v1/daily_articles?slug=eq.${slug}&select=id`,
-      { headers: supabaseHeaders() }
-    );
+    const res = await fetch(`${base}/rest/v1/daily_articles`, {
+      method: "POST",
+      headers: {
+        ...supabaseHeaders(),
+        "Content-Type": "application/json",
+        // ignore-duplicates → om slug redan finns returneras 200 + tom array (ej error)
+        "Prefer": "resolution=ignore-duplicates,return=representation",
+      },
+      body: JSON.stringify({
+        date: slug,
+        slug: slug,
+        title: "__RESERVED__",
+        content: "__RESERVED__",
+      }),
+    });
     const rows = (await res.json()) as Array<{ id: string }>;
+    // Fick vi en rad tillbaka = vi ägde INSERT:en = vi skickar mailet.
+    // Tom array = conflict = en annan process har redan clamat dagens slot.
     return Array.isArray(rows) && rows.length > 0;
   } catch {
-    return false;
+    // Nätverksfel mot Supabase — fail open (skicka mailen) för att undvika
+    // att ett DB-avbrott blockerar mejlet permanent. Accepterar risken för
+    // duplikat i det extremt ovanliga fallet att DB är nere men ej flappy.
+    return true;
   }
 }
 
@@ -114,16 +133,25 @@ async function saveArticle(data: {
   const base = getSupabaseUrl();
   if (!base) return;
   try {
-    await fetch(`${base}/rest/v1/daily_articles`, {
-      method: "POST",
+    // PATCH (uppdatera) den rad som claimTodaySlot() redan insertat med slug=eq.
+    // På så vis behåller vi det atomära claim:et men fyller i riktig data efteråt.
+    await fetch(`${base}/rest/v1/daily_articles?slug=eq.${data.slug}`, {
+      method: "PATCH",
       headers: {
         ...supabaseHeaders(),
-        Prefer: "resolution=merge-duplicates",
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        title: data.title,
+        ingress: data.ingress,
+        content: data.content,
+        x_post: data.x_post,
+        article_urls: data.article_urls,
+      }),
     });
   } catch (e) {
-    console.error("Supabase insert failed:", e);
+    console.error("Supabase update failed:", e);
   }
 }
 
@@ -461,11 +489,12 @@ export default async function handler(req: any, res: any): Promise<void> {
   const todaySlug = new Date().toISOString().split("T")[0];
   const dateStr = formatSwedishDate(new Date());
 
-  // 0. Idempotency guard — if we've already sent today's digest, bail out immediately.
-  //    This prevents duplicate emails from GitHub Actions retries or concurrent cron triggers.
-  const alreadySent = await checkAlreadySentToday(todaySlug);
-  if (alreadySent) {
-    console.log(`Morning digest already sent for ${todaySlug} — skipping.`);
+  // 0. Atomärt idempotency-claim — INSERT med unique constraint.
+  //    Race-condition-säkert: bara en process kan lyckas med INSERT per dag.
+  //    Den som lyckas med INSERT äger dagens mejl. Alla andra ser tom array → skip.
+  const claimed = await claimTodaySlot(todaySlug);
+  if (!claimed) {
+    console.log(`Morning digest already claimed for ${todaySlug} — skipping.`);
     res.status(200).json({ success: true, skipped: true, reason: "already sent today" });
     return;
   }
