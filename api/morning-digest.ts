@@ -488,21 +488,14 @@ export default async function handler(req: any, res: any): Promise<void> {
 
   const todaySlug = new Date().toISOString().split("T")[0];
   const dateStr = formatSwedishDate(new Date());
-  const forceResend = req.query?.force === "true" || req.query?.force === "1";
-
   // 0. Atomärt idempotency-claim — INSERT med unique constraint.
   //    Race-condition-säkert: bara en process kan lyckas med INSERT per dag.
   //    Den som lyckas med INSERT äger dagens mejl. Alla andra ser tom array → skip.
-  //    force=true: bypassa checken (används vid manuell omtrigger efter fallback-mail).
-  if (!forceResend) {
-    const claimed = await claimTodaySlot(todaySlug);
-    if (!claimed) {
-      console.log(`Morning digest already claimed for ${todaySlug} — skipping.`);
-      res.status(200).json({ success: true, skipped: true, reason: "already sent today" });
-      return;
-    }
-  } else {
-    console.log(`force=true — bypassing idempotency check for ${todaySlug}`);
+  const claimed = await claimTodaySlot(todaySlug);
+  if (!claimed) {
+    console.log(`Morning digest already claimed for ${todaySlug} — skipping.`);
+    res.status(200).json({ success: true, skipped: true, reason: "already sent today" });
+    return;
   }
 
   // 1. Fetch yesterday's article for dedup
