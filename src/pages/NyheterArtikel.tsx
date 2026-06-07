@@ -91,6 +91,9 @@ export function NyheterArtikel() {
         description={article.ingress ?? ""}
         canonical={`/nyheter/${date}`}
       >
+        <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={`${article.date}T08:00:00+02:00`} />
+        <meta property="article:author" content="Aikostnad.se" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
