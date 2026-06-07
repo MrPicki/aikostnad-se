@@ -572,7 +572,7 @@ export default async function handler(req: any, res: any): Promise<void> {
       },
       body: JSON.stringify({
         from: "Dagens AI-nyheter <hej@aikostnad.se>",
-        to: "christoffer.nolet@gmail.com",
+        to: process.env.DIGEST_TO_EMAIL ?? "christoffer.nolet@gmail.com",
         subject: digest.subject,
         html: htmlEmail,
         headers: {
