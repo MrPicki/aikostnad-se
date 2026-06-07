@@ -5,7 +5,7 @@ import { SEOProvider } from "./components/SEO";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { StickyEmailBar } from "./components/StickyEmailBar";
-import { Home } from "./pages/Home";
+const Home = lazy(() => import("./pages/Home").then((m) => ({ default: m.Home })));
 
 const TokenCalculatorPage = lazy(() =>
   import("./pages/TokenCalculatorPage").then((m) => ({ default: m.TokenCalculatorPage }))
