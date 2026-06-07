@@ -72,7 +72,7 @@ const toolSchema = {
   description:
     "Räkna ut vad AI kostar per fråga, dag, månad och år. Täcker ChatGPT, Claude, Gemini och fler.",
   url: "https://aikostnad.se",
-  dateModified: "2026-06-01",
+  dateModified: siteConfig.pricesLastVerified,
   offers: { "@type": "Offer", price: "0", priceCurrency: "SEK" },
   featureList: [
     "Beräkning i svenska kronor (SEK)",
