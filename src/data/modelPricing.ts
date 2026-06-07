@@ -98,7 +98,7 @@ export const models: ModelPricing[] = [
   },
   // Anthropic
   {
-    id: "claude-opus-4-7",
+    id: "claude-opus-4-6",
     name: "Claude Opus 4.7",
     provider: "Anthropic",
     inputPricePerMToken: 5.0,

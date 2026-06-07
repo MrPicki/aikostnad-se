@@ -19,7 +19,7 @@ export const MODEL_TO_PROVIDER: Record<string, Guide["providerId"]> = {
   "gpt-4.1": "openai",
   "gpt-4.1-mini": "openai",
   "claude-sonnet-4-6": "anthropic",
-  "claude-opus-4-7": "anthropic",
+  "claude-opus-4-6": "anthropic",
   "claude-haiku-4-5": "anthropic",
   "gemini-2.5-flash": "google",
   "gemini-2.5-pro": "google",

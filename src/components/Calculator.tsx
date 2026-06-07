@@ -23,7 +23,7 @@ const DEFAULTS = {
 const TIERS: { id: string; emoji: string; label: string; hint: string; modelId: string }[] = [
   { id: "cheap",   emoji: "💰", label: "Billig OK",  hint: "Räcker för det mesta", modelId: "gpt-4o-mini" },
   { id: "balanced", emoji: "⚖️", label: "Bra balans", hint: "Standard-val",         modelId: "gpt-4o" },
-  { id: "premium", emoji: "✨", label: "Premium",    hint: "Bäst kvalitet",         modelId: "claude-opus-4-7" },
+  { id: "premium", emoji: "✨", label: "Premium",    hint: "Bäst kvalitet",         modelId: "claude-opus-4-6" },
 ];
 
 function clampInt(raw: string | null, fallback: number, min: number, max: number): number {

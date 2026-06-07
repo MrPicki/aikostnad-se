@@ -14,7 +14,7 @@ const MODEL_PRICES: Record<string, { input: number; output: number; name: string
   "mistral-large":     { input: 2.00, output: 6.00,  name: "Mistral Large" },
   "gpt-4.1":           { input: 2.00, output: 8.00,  name: "GPT-4.1" },
   "claude-sonnet-4-6": { input: 3.00, output: 15.00, name: "Claude Sonnet 4.6" },
-  "claude-opus-4-7":   { input: 5.00, output: 25.00, name: "Claude Opus 4.7" },
+  "claude-opus-4-6":   { input: 5.00, output: 25.00, name: "Claude Opus 4.7" },
 };
 
 const VALID_MODEL_IDS = new Set(Object.keys(MODEL_PRICES));
@@ -54,7 +54,7 @@ TILLGÄNGLIGA MODELLER (använd exakt dessa id-strängar):
 - "mistral-large"      $2.00/$6.00  — europeisk AI, GDPR + komplex
 - "gpt-4.1"            $2.00/$8.00  — stark kodning, teknisk analys
 - "claude-sonnet-4-6"  $3.00/$15.00 — hög kvalitet svenska, avtalsanalys
-- "claude-opus-4-7"    $5.00/$25.00 — flaggskepp, forskning, djup analys
+- "claude-opus-4-6"    $5.00/$25.00 — flaggskepp, forskning, djup analys
 
 MODELLVAL-LOGIK:
 - Enkel chatbot/FAQ/kundtjänst → "gpt-4o-mini" eller "claude-haiku-4-5"
@@ -63,7 +63,7 @@ MODELLVAL-LOGIK:
 - Dokumentanalys (<50 sidor) → "claude-sonnet-4-6"
 - Dokumentanalys (50+ sidor) → "gemini-2.5-pro"
 - GDPR-känslig data → "mistral-small" eller "mistral-large"
-- Komplex analys, forskning → "claude-opus-4-7"
+- Komplex analys, forskning → "claude-opus-4-6"
 - Kostnadskritisk / hög volym → "gpt-4o-mini" eller "gemini-2.5-flash"
 
 ANTAGANDEN NÄR INTE EXPLICIT ANGIVET:
