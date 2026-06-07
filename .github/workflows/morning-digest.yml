@@ -25,6 +25,7 @@ jobs:
           echo "Anropar https://aikostnad.se/api/morning-digest..."
           response=$(curl -s -w "\n%{http_code}" \
             -X GET "https://aikostnad.se/api/morning-digest" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
             --max-time 120)
 
           http_code=$(echo "$response" | tail -1)

@@ -483,8 +483,12 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function handler(req: any, res: any): Promise<void> {
-  // Endpoint är öppen — skickar enbart till hårdkodad adress (christoffer.nolet@gmail.com).
-  // Anropas dagligen av GitHub Actions (se .github/workflows/morning-digest.yml).
+  const cronSecret = process.env.CRON_SECRET;
+  const auth = (req.headers["authorization"] as string) ?? "";
+  if (!cronSecret || auth !== `Bearer ${cronSecret}`) {
+    res.status(401).json({ error: "Unauthorized" });
+    return;
+  }
 
   const todaySlug = new Date().toISOString().split("T")[0];
   const dateStr = formatSwedishDate(new Date());
