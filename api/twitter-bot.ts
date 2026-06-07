@@ -59,7 +59,9 @@ async function fetchRssArticles(): Promise<Article[]> {
   }
 
   return articles.sort(
-    (a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
+    (a, b) =>
+      (new Date(b.pubDate || 0).getTime() || 0) -
+      (new Date(a.pubDate || 0).getTime() || 0)
   );
 }
 
