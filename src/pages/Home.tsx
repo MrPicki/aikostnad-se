@@ -52,7 +52,7 @@ const websiteSchema = {
   url: "https://aikostnad.se",
   description:
     "Räkna ut vad AI kostar per månad. Jämför ChatGPT, Claude och Gemini i svenska kronor.",
-  dateModified: "2026-06-01",
+  dateModified: siteConfig.pricesLastVerified,
   potentialAction: {
     "@type": "SearchAction",
     target: {
