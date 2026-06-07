@@ -1,48 +1,20 @@
-name: Daglig AI-rapport (GitHub Actions backup-trigger)
+name: Morning Digest Backup
 
 on:
   schedule:
-    # Primärtrigger: Vercel Cron i vercel.json kör 06:00 UTC (08:00 CEST) exakt.
-    # GitHub Actions backup: körs 08:00 UTC (10:00 CEST) — kan drabbas av upp till
-    # 2–4h GitHub-fördröjning på inaktiva repos, men idempotency-guard ser till
-    # att mailen bara skickas EN gång per dag oavsett hur många triggers som ger.
-    - cron: "0 8 * * *"
-  workflow_dispatch: # Tillåter manuell körning från GitHub UI
+    - cron: '0 8 * * *'
+  workflow_dispatch:
 
 concurrency:
   group: morning-digest
-  cancel-in-progress: false  # vänta ut pågående run istället för att avbryta
+  cancel-in-progress: false
 
 jobs:
-  send-digest:
-    name: Generera och skicka daglig rapport
+  trigger:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
     steps:
-      - name: Anropa morning-digest API
+      - name: Trigger morning digest
         run: |
-          echo "Anropar https://aikostnad.se/api/morning-digest..."
-          response=$(curl -s -w "\n%{http_code}" \
-            -X GET "https://aikostnad.se/api/morning-digest" \
+          curl -s -X GET https://aikostnad.se/api/morning-digest \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            --max-time 120)
-
-          http_code=$(echo "$response" | tail -1)
-          body=$(echo "$response" | sed '$d')
-
-          echo "HTTP status: $http_code"
-          echo "Response: $body"
-
-          if [ "$http_code" -eq 200 ]; then
-            echo "✅ Digest skickad!"
-            echo "$body" | python3 -c "import sys,json; d=json.load(sys.stdin); print('Subject:', d.get('subject','?'))" 2>/dev/null || true
-          else
-            echo "❌ Fel: HTTP $http_code"
-            echo "$body"
-            exit 1
-          fi
-
-      - name: Rapport klar
-        if: success()
-        run: echo "Daglig AI-rapport skickad kl $(date +'%H:%M %Z')"
+            --max-time 120
