@@ -22,14 +22,15 @@ const RSS_FEEDS = [
   "https://feeds.feedburner.com/venturebeat/SZYF",
 ];
 
-const SWEDISH_DAYS = ["Söndag", "Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag"];
-const SWEDISH_MONTHS = [
-  "januari", "februari", "mars", "april", "maj", "juni",
-  "juli", "augusti", "september", "oktober", "november", "december",
-];
-
 function formatSwedishDate(date: Date): string {
-  return `${SWEDISH_DAYS[date.getDay()]} ${date.getDate()} ${SWEDISH_MONTHS[date.getMonth()]} ${date.getFullYear()}`;
+  const formatted = new Intl.DateTimeFormat("sv-SE", {
+    timeZone: "Europe/Stockholm",
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 }
 
 interface Article {
