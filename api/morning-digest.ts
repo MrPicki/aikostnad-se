@@ -469,6 +469,7 @@ function buildHtmlEmail(digest: Digest, dateStr: string, articleBody: string): s
             <p style="margin:0;font-size:13px;color:#94a3b8;text-align:center;">
               <a href="https://aikostnad.se" style="color:#94a3b8;text-decoration:none;">aikostnad.se</a>
               &nbsp;&middot;&nbsp;Du får detta mail som prenumerant
+              &nbsp;&middot;&nbsp;<a href="mailto:hej@aikostnad.se?subject=unsubscribe" style="color:#94a3b8;text-decoration:none;">Avregistrera dig</a>
             </p>
           </td>
         </tr>
@@ -574,6 +575,10 @@ export default async function handler(req: any, res: any): Promise<void> {
         to: "christoffer.nolet@gmail.com",
         subject: digest.subject,
         html: htmlEmail,
+        headers: {
+          "List-Unsubscribe": "<mailto:hej@aikostnad.se?subject=unsubscribe>",
+          "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+        },
       }),
     });
 
