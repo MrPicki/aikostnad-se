@@ -49,22 +49,26 @@ export default async function handler(_req: any, res: any): Promise<void> {
   const now = Date.now();
   const oneDayAgo = now - 86_400_000;
 
-  for (const feed of FEEDS) {
-    try {
-      const parsed = await parser.parseURL(feed.url);
-      for (const item of (parsed.items ?? []).slice(0, 10)) {
-        if (item.link && item.title) {
-          allArticles.push({
-            title: item.title,
-            link: item.link,
-            pubDate: item.isoDate ?? item.pubDate ?? "",
-            summary: (item.contentSnippet ?? item.summary ?? "").slice(0, 400),
-            source: feed.source,
-          });
-        }
+  const results = await Promise.allSettled(
+    FEEDS.map((f) => parser.parseURL(f.url).then((feed) => ({ feed, source: f.source, url: f.url })))
+  );
+
+  for (const result of results) {
+    if (result.status === "rejected") {
+      console.error(`RSS fetch failed:`, result.reason);
+      continue;
+    }
+    const { feed, source } = result.value;
+    for (const item of (feed.items ?? []).slice(0, 10)) {
+      if (item.link && item.title) {
+        allArticles.push({
+          title: item.title,
+          link: item.link,
+          pubDate: item.isoDate ?? item.pubDate ?? "",
+          summary: (item.contentSnippet ?? item.summary ?? "").slice(0, 400),
+          source,
+        });
       }
-    } catch (e) {
-      console.error(`RSS fetch failed for ${feed.url}:`, e);
     }
   }
 
