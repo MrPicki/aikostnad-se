@@ -39,7 +39,7 @@ export function EmailCaptureForm({ providerId, modelName, source }: Props) {
         throw new Error(data.error || "Något gick fel");
       }
 
-      trackEvent('email_captured');
+      trackEvent('email_captured', { source });
       localStorage.setItem("email_subscribed", "1");
       setStatus("success");
     } catch (err) {
