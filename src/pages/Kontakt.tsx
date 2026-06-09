@@ -70,6 +70,21 @@ export function Kontakt() {
             </ul>
           </div>
 
+          {/* Company info */}
+          <p className="text-xs text-gray-400 text-center">
+            Aikostnad.se drivs av Ncom (enskild firma). Fullständiga
+            företagsuppgifter finns på{" "}
+            <a
+              href="https://ncom.se"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-500 hover:underline"
+            >
+              ncom.se
+            </a>
+            .
+          </p>
+
           {/* FAQ nudge */}
           <p className="text-xs text-gray-400 text-center">
             Har du en teknisk fråga om hur kalkylatorn räknar?{" "}

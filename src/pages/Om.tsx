@@ -123,6 +123,19 @@ export function Om() {
                 {author.email}
               </a>
             </p>
+            <p className="text-xs text-gray-400">
+              Aikostnad.se drivs av Ncom (enskild firma). Fullständiga
+              företagsuppgifter finns på{" "}
+              <a
+                href={parentOrganization.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-500 hover:underline"
+              >
+                ncom.se
+              </a>
+              .
+            </p>
           </section>
 
           {/* Mission */}
