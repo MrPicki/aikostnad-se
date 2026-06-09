@@ -39,7 +39,7 @@ export function Privacy() {
             Integritetspolicy
           </h1>
           <p className="text-gray-500 text-sm">
-            Senast uppdaterad: 2026-05-16
+            Senast uppdaterad: 2026-06-09
           </p>
 
           <section className="card space-y-4">
@@ -71,10 +71,17 @@ export function Privacy() {
                 till någon server. Inga beräkningar sparas.
               </p>
               <p>
-                <strong>Webbanalys (Vercel Analytics):</strong> Vi kan använda
-                Vercel Analytics för att förstå sidtrafik. Detta samlar
-                aggregerad, anonym data om besök — inga cookies sätts, inga
-                personuppgifter lagras.
+                <strong>Webbanalys (Google Analytics 4):</strong> Med ditt
+                samtycke använder vi Google Analytics 4 för att förstå hur
+                besökare använder sajten (sidor, trafikkällor, sessioner). GA4
+                sätter cookies (_ga, _gid) och skickar data till Google LLC
+                (USA). Utan samtycke skickas ingen analysdata.
+              </p>
+              <p>
+                <strong>Annonser (Google AdSense):</strong> Med ditt samtycke
+                visar vi annonser via Google AdSense som kan använda cookies för
+                att visa relevanta annonser. Utan samtycke kan icke-personaliserade
+                annonser visas utan cookies.
               </p>
               <p>
                 <strong>E-postadresser (guide-utskick):</strong> Om du väljer att
@@ -94,13 +101,51 @@ export function Privacy() {
 
           <section className="card space-y-4">
             <h2 className="text-xl font-bold text-gray-900">
-              3. Cookies
+              3. Cookies och samtycke
             </h2>
             <div className="text-gray-600 text-sm leading-relaxed space-y-3">
               <p>
-                Aikostnad.se i sin nuvarande form använder inga spårningscookies
-                eller tredjepartscookies.
+                Vi använder Google Consent Mode v2. Alla analyticscookies och
+                annonscookies är blockerade som standard och aktiveras{" "}
+                <strong>endast om du aktivt godkänner</strong> via cookiebannern.
+                Du kan när som helst återkalla ditt samtycke genom att rensa
+                din webbläsares localStorage (nyckel: <code className="bg-gray-100 px-1 rounded text-xs">cookie_consent_v1</code>).
               </p>
+              <p>
+                <strong>Rättslig grund:</strong> Samtycke enligt GDPR art. 6(1)(a).
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50">
+                      <th className="text-left p-2 border border-gray-200 font-semibold text-gray-700">Cookie</th>
+                      <th className="text-left p-2 border border-gray-200 font-semibold text-gray-700">Ändamål</th>
+                      <th className="text-left p-2 border border-gray-200 font-semibold text-gray-700">Lagringstid</th>
+                      <th className="text-left p-2 border border-gray-200 font-semibold text-gray-700">Part</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="p-2 border border-gray-200">_ga, _ga_*</td>
+                      <td className="p-2 border border-gray-200">Webbanalys (Google Analytics 4)</td>
+                      <td className="p-2 border border-gray-200">2 år</td>
+                      <td className="p-2 border border-gray-200">Google LLC</td>
+                    </tr>
+                    <tr className="bg-gray-50">
+                      <td className="p-2 border border-gray-200">_gid</td>
+                      <td className="p-2 border border-gray-200">Sessionsanalys (GA4)</td>
+                      <td className="p-2 border border-gray-200">24 timmar</td>
+                      <td className="p-2 border border-gray-200">Google LLC</td>
+                    </tr>
+                    <tr>
+                      <td className="p-2 border border-gray-200">AdSense-cookies</td>
+                      <td className="p-2 border border-gray-200">Personaliserade annonser</td>
+                      <td className="p-2 border border-gray-200">Upp till 13 månader</td>
+                      <td className="p-2 border border-gray-200">Google LLC</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
               <p>
                 Valutakursen cachas tillfälligt via Vercel&apos;s edge network —
                 detta är en teknisk cache, inte en användar-cookie.
@@ -113,6 +158,24 @@ export function Privacy() {
               4. Tredjeparter
             </h2>
             <div className="text-gray-600 text-sm leading-relaxed space-y-3">
+              <p>
+                <strong>Google Analytics 4 (Google LLC, USA):</strong> Med ditt
+                samtycke skickas anonymiserad användningsdata till Google.
+                Google är personuppgiftsbiträde. Dataöverföring till USA sker
+                under EU-godkänt ramverk (EU-U.S. Data Privacy Framework).
+                Googles integritetspolicy:{" "}
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">
+                  policies.google.com/privacy
+                </a>.
+              </p>
+              <p>
+                <strong>Google AdSense (Google LLC, USA):</strong> Med ditt
+                samtycke kan Google visa personaliserade annonser. Utan samtycke
+                kan icke-personaliserade annonser visas. Googles annonspolicy:{" "}
+                <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">
+                  policies.google.com/technologies/ads
+                </a>.
+              </p>
               <p>
                 <strong>Frankfurter API (frankfurter.app):</strong> Vi hämtar
                 live-valutakurs (USD/SEK) från Frankfurter API. Det är en öppen
@@ -142,17 +205,23 @@ export function Privacy() {
               5. Dina rättigheter (GDPR)
             </h2>
             <div className="text-gray-600 text-sm leading-relaxed space-y-3">
-              <p>
-                Enligt GDPR har du rätt att begära information om, rättelse av
-                och radering av dina personuppgifter. Om du lämnat din
-                e-postadress i guide-formuläret kan du när som helst begära att
-                vi raderar den.
-              </p>
+              <p>Enligt GDPR har du följande rättigheter:</p>
+              <ul className="list-disc list-inside space-y-1.5 ml-1">
+                <li><strong>Tillgång</strong> — rätt att få veta vilka uppgifter vi behandlar om dig</li>
+                <li><strong>Rättelse</strong> — rätt att få felaktiga uppgifter rättade</li>
+                <li><strong>Radering</strong> — rätt att begära att dina uppgifter raderas</li>
+                <li><strong>Invändning</strong> — rätt att invända mot behandling</li>
+                <li><strong>Återkalla samtycke</strong> — du kan när som helst återkalla ditt cookie-samtycke
+                  utan att det påverkar lagligheten av behandling som skett dessförinnan</li>
+                <li><strong>Klagomål</strong> — rätt att inge klagomål till Integritetsskyddsmyndigheten (IMY)
+                  på <a href="https://www.imy.se" target="_blank" rel="noopener noreferrer" className="text-brand-700 hover:underline">imy.se</a>
+                </li>
+              </ul>
               <p>
                 Har du frågor — kontakta oss på{" "}
-              <a href={`mailto:${siteConfig.contactEmail}`} className="text-brand-700 hover:underline">
-                {siteConfig.contactEmail}
-              </a>.
+                <a href={`mailto:${siteConfig.contactEmail}`} className="text-brand-700 hover:underline">
+                  {siteConfig.contactEmail}
+                </a>.
               </p>
             </div>
           </section>
