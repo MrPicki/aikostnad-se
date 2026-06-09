@@ -5,6 +5,7 @@ import { SEOProvider } from "./components/SEO";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { StickyEmailBar } from "./components/StickyEmailBar";
+import { CookieBanner } from "./components/CookieBanner";
 const Home = lazy(() => import("./pages/Home").then((m) => ({ default: m.Home })));
 
 const TokenCalculatorPage = lazy(() =>
@@ -231,6 +232,7 @@ function Shell() {
       </div>
       {!isEmbed && <Footer />}
       {!isEmbed && <StickyEmailBar />}
+      {!isEmbed && <CookieBanner />}
     </div>
   );
 }
