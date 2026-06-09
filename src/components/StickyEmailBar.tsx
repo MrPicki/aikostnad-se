@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { trackEvent } from "../utils/analytics";
 
 export function StickyEmailBar() {
@@ -67,9 +68,15 @@ export function StickyEmailBar() {
         </p>
       ) : (
         <>
-          <span className="hidden sm:inline text-sm text-gray-700 whitespace-nowrap select-none">
-            📬 Prisvarning när AI-priserna ändras →
-          </span>
+          <div className="hidden sm:flex flex-col gap-0.5">
+            <span className="text-sm text-gray-700 whitespace-nowrap select-none">
+              📬 Prisvarning när AI-priserna ändras →
+            </span>
+            <span className="text-xs text-gray-400">
+              Gratis · Avregistrera när som helst ·{" "}
+              <Link to="/integritet" className="underline hover:text-gray-600">Integritetspolicy</Link>
+            </span>
+          </div>
           <form onSubmit={handleSubmit} className="flex items-center gap-2 flex-1 sm:flex-none min-w-0">
             <input
               type="email"
