@@ -37,6 +37,7 @@ export const relatedArticles: Record<string, RelatedLink[]> = {
     { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Översikt över alla AI-leverantörer i SEK." },
     { to: "/vad-kostar-chatgpt", title: "GPT-4o mini — räkna på din volym", description: "Mest populära billig-modellen." },
     { to: "/gemini-pris", title: "Gemini Flash — Googles billiga modell", description: "Gemini 2.5 Flash-priser i SEK." },
+    { to: "/mistral-pris", title: "Mistral Small — prisledaren från EU", description: "1,05 kr/Mtok input och GDPR-vänlig." },
     { to: "/gratis-ai", title: "Gratis AI — hur långt räcker det?", description: "Gratisversioner av ChatGPT, Claude och Gemini." },
   ],
   "chatgpt-vs-claude": [
@@ -102,7 +103,7 @@ export const relatedArticles: Record<string, RelatedLink[]> = {
   "ai-bild-pris": [
     { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT?", description: "DALL-E 3 ingår i ChatGPT Plus." },
     { to: "/openai-api-kostnad", title: "OpenAI API — inkl. DALL-E", description: "Bygger du in bildgenerering i app?" },
-    { to: "/billigaste-ai", title: "Billigaste AI 2026", description: "Vill du ha både text och bild?" },
+    { to: "/ai-video-pris", title: "AI-video pris — Sora, Veo, Runway", description: "Nästa steg efter bild: vad kostar AI-video?" },
     { to: "/ai-ordlista", title: "AI-ordlista", description: "Vad är diffusion, LoRA, ControlNet?" },
   ],
   "perplexity-pris": [
@@ -156,7 +157,8 @@ export const relatedArticles: Record<string, RelatedLink[]> = {
   "jamfor-ai-modeller": [
     { to: "/billigaste-ai", title: "Billigaste AI-modellen 2026", description: "Fokus på budget-modellerna." },
     { to: "/chatgpt-vs-claude", title: "ChatGPT vs Claude — djupguide", description: "Detaljerad jämförelse av de två största." },
-    { to: "/", title: "Kalkylera alla modeller i SEK", description: "Fyll i din volym och se månadskostnad." },
+    { to: "/grok-pris", title: "Grok — vad kostar Musks AI?", description: "SuperGrok, X Premium+ och API-priser i SEK." },
+    { to: "/mistral-pris", title: "Mistral — Europas AI-alternativ", description: "GDPR-vänliga priser per token i SEK." },
     { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Priser, abonnemang och API-kostnader." },
   ],
   "ai-api-kostnad": [
@@ -169,7 +171,7 @@ export const relatedArticles: Record<string, RelatedLink[]> = {
     { to: "/billigaste-ai", title: "Billigaste AI-modeller 2026", description: "DeepSeek vs GPT-4o mini vs Mistral Small." },
     { to: "/jamfor-ai-modeller", title: "Jämför alla AI-modeller", description: "Komplett tabell med priser i SEK." },
     { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Alla AI-leverantörer i SEK." },
-    { to: "/chatgpt-vs-claude", title: "ChatGPT vs Claude", description: "Europeiska alternativ till DeepSeek." },
+    { to: "/mistral-pris", title: "Mistral — billig OCH GDPR-vänlig", description: "Det europeiska alternativet till DeepSeek." },
   ],
   "vad-kostar-ai-per-ar": [
     { to: "/ai-kostnad-per-manad", title: "Räkna på månadsnivå", description: "Detaljerad genomgång av månadskostnader." },
@@ -206,5 +208,23 @@ export const relatedArticles: Record<string, RelatedLink[]> = {
     { to: "/billigaste-ai", title: "Billigaste AI-modeller 2026", description: "GPT-4o mini för kostnadskänslig verksamhet." },
     { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Alla leverantörer och abonnemang i SEK." },
     { to: "/ai-chatbot-kostnad", title: "Bygga AI-chatbot — läxhjälp", description: "Vad kostar en chatbot för 200 elever?" },
+  ],
+  "grok-pris": [
+    { to: "/vad-kostar-chatgpt", title: "ChatGPT Plus vs SuperGrok", description: "Jämför abonnemangspriserna — Plus är 50 % billigare." },
+    { to: "/chatgpt-vs-claude", title: "ChatGPT vs Claude — djupguide", description: "De två största alternativen till Grok jämförda." },
+    { to: "/jamfor-ai-modeller", title: "Jämför alla AI-modeller 2026", description: "Komplett tabell med priser i SEK." },
+    { to: "/billigaste-ai", title: "Billigaste AI-modellerna", description: "Grok 4 Fast mot GPT-4o mini och Gemini Flash." },
+  ],
+  "ai-video-pris": [
+    { to: "/ai-bild-pris", title: "AI-bild pris — Midjourney, DALL-E, Flux", description: "Stillbilder är 100× billigare än video." },
+    { to: "/vad-kostar-chatgpt", title: "Vad kostar ChatGPT Plus?", description: "Sora ingår i ChatGPT-abonnemangen." },
+    { to: "/openai-api-kostnad", title: "OpenAI API — alla priser", description: "GPT, DALL-E, Whisper och Sora i samma guide." },
+    { to: "/vad-kostar-ai", title: "Komplett AI-prisguide 2026", description: "Text, bild och video — hela kostnadsbilden." },
+  ],
+  "mistral-pris": [
+    { to: "/billigaste-ai", title: "Billigaste AI-modellerna 2026", description: "Mistral Small mot GPT-4o mini och DeepSeek." },
+    { to: "/deepseek-pris", title: "DeepSeek — billig men GDPR-risk", description: "Kontrasten till Mistrals EU-datahantering." },
+    { to: "/ai-for-foretag", title: "AI för företag — GDPR-guide", description: "Dataskyddskrav och DPA för svenska företag." },
+    { to: "/jamfor-ai-modeller", title: "Jämför alla AI-modeller 2026", description: "Komplett tabell med priser i SEK." },
   ],
 };
