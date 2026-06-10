@@ -47,6 +47,16 @@ export function Footer() {
                   GPT-4.1 API-pris
                 </Link>
               </li>
+              <li>
+                <Link to="/mistral-pris" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
+                  Mistral AI-pris
+                </Link>
+              </li>
+              <li>
+                <Link to="/grok-pris" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
+                  Grok pris
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -73,6 +83,11 @@ export function Footer() {
               <li>
                 <Link to="/vad-kostar-ai" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
                   AI-prisguide 2026
+                </Link>
+              </li>
+              <li>
+                <Link to="/ai-video-pris" className="text-xs text-gray-500 hover:text-gray-900 transition-colors duration-150">
+                  AI-video priser
                 </Link>
               </li>
             </ul>
@@ -181,6 +196,12 @@ export function Footer() {
               className="text-xs text-gray-500 hover:text-gray-600"
             >
               Sitemap
+            </a>
+            <a
+              href="https://aikostnad.se/rss.xml"
+              className="text-xs text-gray-500 hover:text-gray-600"
+            >
+              RSS
             </a>
             <p className="text-xs text-gray-500">
               Priser i USD konverterade till SEK.

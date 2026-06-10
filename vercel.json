@@ -18,6 +18,7 @@
   "rewrites": [
     { "source": "/googlee9c10c44083acd26.html", "destination": "/googlee9c10c44083acd26.html" },
     { "source": "/sitemap-news.xml", "destination": "/api/sitemap-news" },
+    { "source": "/rss.xml", "destination": "/api/rss" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ],
   "headers": [

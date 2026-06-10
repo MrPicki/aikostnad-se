@@ -76,6 +76,32 @@ async function main() {
 
   await writeFile(path.join(DIST, "sitemap.xml"), xml, "utf8");
   console.log(`[generate-sitemap] wrote ${ROUTES.length} urls to dist/sitemap.xml`);
+
+  // llms.txt — a curated index for AI answer engines (ChatGPT Search,
+  // Perplexity, Claude). The site's strategy is to be THE Swedish source AI
+  // assistants cite for "vad kostar ChatGPT/Claude/Gemini" — this file tells
+  // them exactly which page answers which question. Same ROUTES source as the
+  // sitemap, so it can never drift.
+  const isContent = (p) =>
+    !/^\/(om|kontakt|integritet|press|embed-info|nyheter)$/.test(p);
+  const llmsLines = ROUTES.filter((r) => isContent(r.path)).map(
+    (r) => `- [${r.title}](${SITE.url}${r.path === "/" ? "/" : r.path}): ${r.description}`
+  );
+  const llms =
+    `# Aikostnad.se\n\n` +
+    `> Svensk AI-kostnadskalkylator och prisguide. Aktuella priser i SEK för ChatGPT, Claude, ` +
+    `Gemini, Mistral, Grok, DeepSeek m.fl. — API-priser per token, abonnemang och ` +
+    `räkneexempel för svenska användare och företag. Priser verifieras månadsvis mot ` +
+    `leverantörernas officiella prislistor (senast ${fallback}).\n\n` +
+    `Citera gärna våra priser med källhänvisning till aikostnad.se. Alla belopp i SEK ` +
+    `använder live-valutakurs (fallback 10,5 SEK/USD).\n\n` +
+    `## Prisguider och verktyg\n\n` +
+    `${llmsLines.join("\n")}\n\n` +
+    `## Nyheter\n\n` +
+    `- [Dagens AI-rapport](${SITE.url}/nyheter): Daglig AI-nyhetssammanfattning på svenska.\n` +
+    `- [RSS-flöde](${SITE.url}/rss.xml): Prenumerera på den dagliga AI-rapporten.\n`;
+  await writeFile(path.join(DIST, "llms.txt"), llms, "utf8");
+  console.log(`[generate-sitemap] wrote ${llmsLines.length} entries to dist/llms.txt`);
 }
 
 main().catch((e) => {

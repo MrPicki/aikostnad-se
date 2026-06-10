@@ -320,4 +320,31 @@ export const articles: Record<string, ArticleMeta> = {
     modifiedDate: "2026-05-26",
     url: "https://aikostnad.se/ai-for-skola",
   },
+  "grok-pris": {
+    slug: "grok-pris",
+    headline: "Grok pris 2026 — vad kostar Grok AI och SuperGrok i SEK?",
+    description:
+      "Vad kostar Grok 2026? SuperGrok, X Premium+ och Grok 4 API-priser i svenska kronor. Jämförelse mot ChatGPT och Claude — och när Grok är värt pengarna.",
+    publishedDate: "2026-06-10",
+    modifiedDate: "2026-06-10",
+    url: "https://aikostnad.se/grok-pris",
+  },
+  "ai-video-pris": {
+    slug: "ai-video-pris",
+    headline: "AI-video pris 2026 — vad kostar Sora, Veo och Runway i SEK?",
+    description:
+      "Vad kostar AI-genererad video 2026? Sora 2, Google Veo 3.1, Runway och Kling jämförda i svenska kronor — per sekund, per abonnemang och per färdig video.",
+    publishedDate: "2026-06-10",
+    modifiedDate: "2026-06-10",
+    url: "https://aikostnad.se/ai-video-pris",
+  },
+  "mistral-pris": {
+    slug: "mistral-pris",
+    headline: "Mistral AI pris 2026 — vad kostar Europas AI i SEK?",
+    description:
+      "Mistral AI priser 2026: Mistral Large och Small per token i SEK, Le Chat gratis och Pro. Det GDPR-vänliga EU-alternativet till ChatGPT — komplett prisguide.",
+    publishedDate: "2026-06-10",
+    modifiedDate: "2026-06-10",
+    url: "https://aikostnad.se/mistral-pris",
+  },
 };

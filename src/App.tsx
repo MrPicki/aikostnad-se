@@ -134,6 +134,15 @@ const AiForSjukvard = lazy(() =>
 const AiForSkola = lazy(() =>
   import("./pages/AiForSkola").then((m) => ({ default: m.AiForSkola }))
 );
+const GrokPris = lazy(() =>
+  import("./pages/GrokPris").then((m) => ({ default: m.GrokPris }))
+);
+const AiVideoPris = lazy(() =>
+  import("./pages/AiVideoPris").then((m) => ({ default: m.AiVideoPris }))
+);
+const MistralPris = lazy(() =>
+  import("./pages/MistralPris").then((m) => ({ default: m.MistralPris }))
+);
 const Nyheter = lazy(() =>
   import("./pages/Nyheter").then((m) => ({ default: m.Nyheter }))
 );
@@ -224,6 +233,9 @@ function Shell() {
             <Route path="/ai-for-ehandel" element={<AiForEhandel />} />
             <Route path="/ai-for-sjukvard" element={<AiForSjukvard />} />
             <Route path="/ai-for-skola" element={<AiForSkola />} />
+            <Route path="/grok-pris" element={<GrokPris />} />
+            <Route path="/ai-video-pris" element={<AiVideoPris />} />
+            <Route path="/mistral-pris" element={<MistralPris />} />
             <Route path="/nyheter" element={<Nyheter />} />
             <Route path="/nyheter/:date" element={<NyheterArtikel />} />
             <Route path="*" element={<NotFound />} />

@@ -30,6 +30,11 @@ export const ROUTES = [
     description: "Vad kostar AI-bildgenerering 2026? Midjourney, DALL-E 3, Stable Diffusion, Ideogram och Flux — priser i SEK och vilken som ger bäst kvalitet för pengarna.",
   },
   {
+    path: "/ai-video-pris",
+    title: "AI-video pris 2026 — vad kostar Sora, Veo och Runway i SEK?",
+    description: "Vad kostar AI-genererad video 2026? Sora 2, Google Veo 3.1, Runway och Kling jämförda i svenska kronor — per sekund, per abonnemang och per färdig video.",
+  },
+  {
     path: "/ai-chatbot-kostnad",
     title: "Vad kostar en AI-chatbot? Komplett guide 2026",
     description: "Vad kostar det att bygga en AI-chatbot? Konkreta budgetexempel för hobby, småföretag och B2C — i svenska kronor. Plus hur du sänker kostnaden med rätt modellval.",
@@ -140,6 +145,11 @@ export const ROUTES = [
     description: "Vilka AI-verktyg är gratis 2026? Jämförelse av ChatGPT, Claude, Gemini och fler gratis AI-tjänster. Se begränsningar, gratis API-tier och alternativ utan kostnad.",
   },
   {
+    path: "/grok-pris",
+    title: "Grok pris 2026 — vad kostar Grok AI och SuperGrok i SEK?",
+    description: "Vad kostar Grok 2026? SuperGrok, X Premium+ och Grok 4 API-priser i svenska kronor. Jämförelse mot ChatGPT och Claude — och när Grok är värt pengarna.",
+  },
+  {
     path: "/integritet",
     title: "Integritetspolicy",
     description: "Läs om hur Aikostnad.se hanterar dina personuppgifter enligt GDPR.",
@@ -158,6 +168,11 @@ export const ROUTES = [
     path: "/microsoft-copilot-pris",
     title: "Microsoft Copilot pris 2026 — M365 Copilot, Copilot Pro, GitHub Copilot",
     description: "Vad kostar Microsoft Copilot 2026? Komplett guide till alla varianter — Copilot Free, Pro, Microsoft 365 Copilot, GitHub Copilot och Copilot Studio i SEK.",
+  },
+  {
+    path: "/mistral-pris",
+    title: "Mistral AI pris 2026 — vad kostar Europas AI i SEK?",
+    description: "Mistral AI priser 2026: Mistral Large och Small per token i SEK, Le Chat gratis och Pro. Det GDPR-vänliga EU-alternativet till ChatGPT — komplett prisguide.",
   },
   {
     path: "/nyheter",
