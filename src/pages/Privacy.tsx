@@ -39,7 +39,7 @@ export function Privacy() {
             Integritetspolicy
           </h1>
           <p className="text-gray-500 text-sm">
-            Senast uppdaterad: 2026-06-09
+            Senast uppdaterad: 2026-06-11
           </p>
 
           <section className="card space-y-4">
@@ -96,6 +96,11 @@ export function Privacy() {
                 </a>{" "}
                 eller svara på ett av våra mail. Vi delar aldrig din adress med tredje part.
               </p>
+              <p>
+                <strong>Lagringstid:</strong> Din e-postadress sparas tills du begär
+                radering, dock längst 24 månader efter att den samlades in. Därefter
+                gallras den automatiskt.
+              </p>
             </div>
           </section>
 
@@ -108,8 +113,11 @@ export function Privacy() {
                 Vi använder Google Consent Mode v2. Alla analyticscookies och
                 annonscookies är blockerade som standard och aktiveras{" "}
                 <strong>endast om du aktivt godkänner</strong> via cookiebannern.
-                Du kan när som helst återkalla ditt samtycke genom att rensa
-                din webbläsares localStorage (nyckel: <code className="bg-gray-100 px-1 rounded text-xs">cookie_consent_v1</code>).
+                Du kan när som helst återkalla eller ändra ditt samtycke via
+                länken <strong>"Cookie-inställningar"</strong> i sidfoten på alla
+                sidor — det är lika enkelt som att ge samtycket. Du kan också
+                rensa din webbläsares localStorage (nyckel:{" "}
+                <code className="bg-gray-100 px-1 rounded text-xs">cookie_consent_v1</code>).
               </p>
               <p>
                 <strong>Rättslig grund:</strong> Samtycke enligt GDPR art. 6(1)(a).
@@ -186,6 +194,12 @@ export function Privacy() {
                 <strong>Vercel:</strong> Webbplatsen hostas på Vercel (USA).
                 Vercel kan logga teknisk information om förfrågningar (IP,
                 user-agent) som en del av normal serverloggning.
+              </p>
+              <p>
+                <strong>Vercel Analytics:</strong> Vi använder Vercel Analytics
+                för aggregerad besöksstatistik. Tjänsten är cookiefri och sparar
+                inga identifierare i din webbläsare — besök räknas via en
+                anonymiserad hash som inte kan kopplas till dig som person.
               </p>
               <p>
                 <strong>Supabase:</strong> Vi använder Supabase (EU-region) för att

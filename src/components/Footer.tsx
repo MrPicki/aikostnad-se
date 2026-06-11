@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { siteConfig } from "../config/siteConfig";
+import { openCookieSettings } from "./CookieBanner";
 
 
 export function Footer() {
@@ -194,6 +195,13 @@ export function Footer() {
             <Link to="/villkor" className="text-xs text-gray-500 hover:text-gray-600">
               Användarvillkor
             </Link>
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="text-xs text-gray-500 hover:text-gray-600"
+            >
+              Cookie-inställningar
+            </button>
             <Link to="/kontakt" className="text-xs text-gray-500 hover:text-gray-600">
               Kontakt
             </Link>

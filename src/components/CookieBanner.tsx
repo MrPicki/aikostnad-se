@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const CONSENT_KEY = 'cookie_consent_v1';
+const OPEN_EVENT = 'open-cookie-settings';
+
+// GDPR: withdrawing consent must be as easy as giving it — the footer button
+// dispatches this event to reopen the banner at any time.
+export function openCookieSettings() {
+  window.dispatchEvent(new Event(OPEN_EVENT));
+}
 
 function updateGtagConsent(granted: boolean) {
   if (typeof window !== 'undefined' && (window as any).gtag) {
@@ -25,6 +32,10 @@ export function CookieBanner() {
     } else {
       updateGtagConsent(stored === 'granted');
     }
+
+    const reopen = () => setVisible(true);
+    window.addEventListener(OPEN_EVENT, reopen);
+    return () => window.removeEventListener(OPEN_EVENT, reopen);
   }, []);
 
   const handleAccept = () => {
