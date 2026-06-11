@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PriceDisclaimer } from "../components/PriceDisclaimer";
 import { SEO } from "../components/SEO";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { ArticleSchema } from "../components/ArticleSchema";
@@ -156,6 +157,7 @@ export function PerplexityPris() {
         <RelatedArticles links={relatedArticles["perplexity-pris"] ?? []} />
         <LandingFAQ items={faqs} heading="Vanliga frågor om Perplexity-priser" />
         <Sources items={officialPricingSources} />
+        <PriceDisclaimer />
       </main>
     </>
   );

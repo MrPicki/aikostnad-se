@@ -14,6 +14,9 @@ const TokenCalculatorPage = lazy(() =>
 const Privacy = lazy(() =>
   import("./pages/Privacy").then((m) => ({ default: m.Privacy }))
 );
+const Villkor = lazy(() =>
+  import("./pages/Villkor").then((m) => ({ default: m.Villkor }))
+);
 const VadKostarChatGPT = lazy(() =>
   import("./pages/VadKostarChatGPT").then((m) => ({ default: m.VadKostarChatGPT }))
 );
@@ -194,6 +197,7 @@ function Shell() {
             <Route path="/" element={<Home />} />
             <Route path="/token-kalkylator" element={<TokenCalculatorPage />} />
             <Route path="/integritet" element={<Privacy />} />
+            <Route path="/villkor" element={<Villkor />} />
             <Route path="/vad-kostar-chatgpt" element={<VadKostarChatGPT />} />
             <Route path="/claude-pris" element={<ClaudePris />} />
             <Route path="/gpt-4-pris" element={<Gpt4Pris />} />

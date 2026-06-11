@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { SEO } from "../components/SEO";
+import { PriceDisclaimer } from "../components/PriceDisclaimer";
 import { BreadcrumbSchema } from "../components/BreadcrumbSchema";
 import { ArticleSchema } from "../components/ArticleSchema";
 import { Calculator } from "../components/Calculator";
@@ -261,6 +262,7 @@ export function ClaudePris() {
           </a>
           <p className="text-xs text-gray-400 mt-2">Samarbetslänk — vi kan ta emot provision vid köp.</p>
         </div>
+        <PriceDisclaimer />
       </main>
     </>
   );

@@ -191,6 +191,12 @@ export function Footer() {
             <Link to="/integritet" className="text-xs text-gray-500 hover:text-gray-600">
               Integritetspolicy
             </Link>
+            <Link to="/villkor" className="text-xs text-gray-500 hover:text-gray-600">
+              Användarvillkor
+            </Link>
+            <Link to="/kontakt" className="text-xs text-gray-500 hover:text-gray-600">
+              Kontakt
+            </Link>
             <a
               href="https://aikostnad.se/sitemap.xml"
               className="text-xs text-gray-500 hover:text-gray-600"
