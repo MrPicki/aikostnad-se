@@ -162,7 +162,7 @@ export const ROUTES = [
   {
     path: "/kontakt",
     title: "Kontakta oss — Aikostnad.se",
-    description: "Frågor om AI-priser, felaktiga modellpriser eller samarbeten? Hör av dig till oss på hej@aikostnad.se.",
+    description: "Frågor om AI-priser, felaktiga modellpriser eller samarbeten? Hör av dig till oss på hej@aikostnad.se. Vi svarar inom 1–2 arbetsdagar.",
   },
   {
     path: "/microsoft-copilot-pris",
@@ -238,5 +238,10 @@ export const ROUTES = [
     path: "/vad-kostar-chatgpt",
     title: "Vad kostar ChatGPT? Räkna ut GPT-4o API-kostnad i SEK 2026",
     description: "Vad kostar ChatGPT Plus och GPT-4o API per månad i Sverige? Gratis kalkylator med live-valutakurs. Jämför GPT-4o, GPT-4o mini och priser i SEK.",
+  },
+  {
+    path: "/villkor",
+    title: "Användarvillkor — Aikostnad.se",
+    description: "Läs användarvillkoren för Aikostnad.se — vad tjänsten är, ansvarsbegränsningar för priser, immateriella rättigheter och kontaktuppgifter.",
   },
 ];

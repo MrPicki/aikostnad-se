@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { SEO } from "../components/SEO";
-import { siteConfig } from "../config/siteConfig";
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
