@@ -142,6 +142,35 @@ export function Home() {
           <SimpleEstimator onUseInCalculator={handleScenario} />
         </section>
 
+        {/* 2b. Editorial context — why AI pricing is hard to grasp */}
+        <section className="mt-8">
+          <div className="card">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">
+              Varför AI-kostnader är svåra att förstå
+            </h2>
+            <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
+              <p>
+                API-priser anges i dollar per miljon tokens — en enhet som är svår att
+                koppla till verklig användning. Vad kostar det att driva en chatbot med
+                1 000 meddelanden om dagen? Hur mycket dyrare är GPT-4o jämfört med
+                Claude Haiku? Utan en kalkylator är det nästan omöjligt att jämföra.
+              </p>
+              <p>
+                Dessutom kostar svenska texter mer än engelska. AI-modeller är tränade
+                primärt på engelska och tokeniserar svenska sämre: ett genomsnittligt
+                svenskt ord ger <strong>1,3 tokens</strong> mot 0,75 på engelska. Det
+                innebär att en svensk prompt kostar ungefär <strong>73 % mer</strong>{" "}
+                per ord att bearbeta — något som inte syns i de officiella prislistorna.
+              </p>
+              <p>
+                Aikostnad.se översätter dollar-per-miljon-tokens till kronor per månad,
+                räknar in det svenska tokenövertaget och låter dig se vad din specifika
+                användning faktiskt kostar — innan du betalar.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* 3. Orientation — the three ways people pay for AI */}
         <section className="mt-12 sm:mt-16 pt-10 sm:pt-12 border-t border-gray-100">
           <SectionHeading
