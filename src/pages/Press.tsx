@@ -32,7 +32,9 @@ export function Press() {
         title="Press & embed — använd Aikostnad.se i din artikel"
         description="Press-info för svenska journalister och bloggare. Embed-kod för AI-kostnadskalkylatorn, bilder och kontaktinfo."
         canonical="/press"
-      />
+      >
+        <meta name="robots" content="noindex, follow" />
+      </SEO>
       <BreadcrumbSchema
         items={[
           { name: "Hem", url: "https://aikostnad.se/" },

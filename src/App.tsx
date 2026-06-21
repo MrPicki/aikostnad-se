@@ -152,6 +152,15 @@ const Nyheter = lazy(() =>
 const NyheterArtikel = lazy(() =>
   import("./pages/NyheterArtikel").then((m) => ({ default: m.NyheterArtikel }))
 );
+const AiGdprSverige = lazy(() =>
+  import("./pages/AiGdprSverige").then((m) => ({ default: m.AiGdprSverige }))
+);
+const AiKostnadsoptimering = lazy(() =>
+  import("./pages/AiKostnadsoptimering").then((m) => ({ default: m.AiKostnadsoptimering }))
+);
+const AiForHr = lazy(() =>
+  import("./pages/AiForHr").then((m) => ({ default: m.AiForHr }))
+);
 
 // On every route change: reset scroll to top and move keyboard/screen-reader
 // focus into the main content region. Without this an SPA leaves focus on the
@@ -242,6 +251,9 @@ function Shell() {
             <Route path="/mistral-pris" element={<MistralPris />} />
             <Route path="/nyheter" element={<Nyheter />} />
             <Route path="/nyheter/:date" element={<NyheterArtikel />} />
+            <Route path="/ai-gdpr-sverige" element={<AiGdprSverige />} />
+            <Route path="/ai-kostnadsoptimering" element={<AiKostnadsoptimering />} />
+            <Route path="/ai-for-hr" element={<AiForHr />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

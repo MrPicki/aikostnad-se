@@ -123,6 +123,7 @@ export const ROUTES = [
     path: "/embed-info",
     title: "Bädda in AI-kostnadskalkylatorn på din sajt — gratis embed",
     description: "Gratis embed av Aikostnad.se:s AI-kostnadskalkylator. Kopiera iframe-koden och bädda in direkt på din sajt. Inga annonser, kräver bara en länk tillbaka.",
+    noindex: true,
   },
   {
     path: "/gemini-pris",
@@ -178,6 +179,7 @@ export const ROUTES = [
     path: "/nyheter",
     title: "Dagens AI-rapport",
     description: "Daglig AI-nyhetsrapport — det viktigaste inom AI sammanfattat på svenska av aikostnad.se.",
+    noindex: true,
   },
   {
     path: "/o3-pris",
@@ -208,6 +210,7 @@ export const ROUTES = [
     path: "/press",
     title: "Press & embed — använd Aikostnad.se i din artikel",
     description: "Press-info för svenska journalister och bloggare. Embed-kod för AI-kostnadskalkylatorn, bilder och kontaktinfo.",
+    noindex: true,
   },
   {
     path: "/prisandringar",
@@ -243,5 +246,20 @@ export const ROUTES = [
     path: "/villkor",
     title: "Användarvillkor — Aikostnad.se",
     description: "Läs användarvillkoren för Aikostnad.se — vad tjänsten är, ansvarsbegränsningar för priser, immateriella rättigheter och kontaktuppgifter.",
+  },
+  {
+    path: "/ai-gdpr-sverige",
+    title: "AI och GDPR för svenska företag 2026 — komplett guide",
+    description: "Vad gäller för GDPR när ni använder ChatGPT, Claude eller Gemini i Sverige? DPA, datatransfer, integritetspolicy och rättslig grund — komplett guide 2026.",
+  },
+  {
+    path: "/ai-kostnadsoptimering",
+    title: "Sänk din AI-kostnad: 7 konkreta sätt att optimera 2026",
+    description: "Hur sänker man AI-kostnader i en app eller verksamhet? Model routing, prompt caching, Batch API, output-trimning och mer — beräknat i SEK med verkliga exempel.",
+  },
+  {
+    path: "/ai-for-hr",
+    title: "AI för HR och rekrytering 2026 — kostnader, verktyg och GDPR",
+    description: "Vad kostar AI för HR? Rekrytering, lönekartläggning, onboarding och medarbetarundersökningar — kostnader i SEK, GDPR-krav och vilka uppgifter som lönar sig att automatisera.",
   },
 ];

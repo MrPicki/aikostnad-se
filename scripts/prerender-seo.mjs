@@ -49,7 +49,7 @@ function buildMetaBlock(route) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeAttr(fullTitle)}" />
     <meta name="twitter:description" content="${escapeAttr(desc)}" />
-    <meta name="twitter:image" content="${SITE.ogImage}" />`.trim();
+    <meta name="twitter:image" content="${SITE.ogImage}" />${route.noindex ? '\n    <meta name="robots" content="noindex, follow" />' : ''}`.trim();
 }
 
 // The Vite-built index.html contains a default <title>, <meta name="description">,

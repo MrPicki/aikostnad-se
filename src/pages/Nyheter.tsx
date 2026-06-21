@@ -248,7 +248,9 @@ export function Nyheter() {
         title="Dagens AI-rapport"
         description="Daglig AI-nyhetsrapport — det viktigaste inom AI sammanfattat på svenska av aikostnad.se."
         canonical="/nyheter"
-      />
+      >
+        <meta name="robots" content="noindex, follow" />
+      </SEO>
 
       <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {loading && (

@@ -218,8 +218,8 @@ export function Kontakt() {
                 </h3>
                 <p className="text-sm text-gray-600 leading-relaxed">
                   Du hittar vår integritetspolicy på sidan{" "}
-                  <Link to="/integritetspolicy" className="text-brand-700 hover:underline">
-                    /integritetspolicy
+                  <Link to="/integritet" className="text-brand-700 hover:underline">
+                    /integritet
                   </Link>
                   . Läs också gärna vår{" "}
                   <Link to="/om" className="text-brand-700 hover:underline">
@@ -256,7 +256,7 @@ export function Kontakt() {
               </p>
             </Link>
             <Link
-              to="/integritetspolicy"
+              to="/integritet"
               className="card hover:border-brand-300 border border-gray-200 transition-colors block"
             >
               <p className="text-sm font-semibold text-gray-800 mb-1">Integritetspolicy →</p>

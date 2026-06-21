@@ -27,7 +27,9 @@ export function EmbedPage() {
         title="Bädda in AI-kostnadskalkylatorn på din sajt — gratis embed"
         description="Gratis embed av Aikostnad.se:s AI-kostnadskalkylator. Kopiera iframe-koden och bädda in direkt på din sajt. Inga annonser, kräver bara en länk tillbaka."
         canonical="/embed-info"
-      />
+      >
+        <meta name="robots" content="noindex, follow" />
+      </SEO>
       <BreadcrumbSchema items={[
         { name: "Hem", url: "https://aikostnad.se/" },
         { name: "Bädda in kalkylatorn", url: "https://aikostnad.se/embed-info" },
